@@ -15,7 +15,7 @@ public class LibaryManagement extends Application {
 
         Scene scene = new Scene(root);
 
-        stage.setTitle("Libary Management");
+        stage.setTitle("LibaryManagement");
 
         stage.setScene(scene);
 

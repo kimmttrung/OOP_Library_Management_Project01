@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/DataBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/userlogin.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/loginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibaryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibaryManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" afterDir="false" />
     </list>
@@ -19,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -42,6 +45,9 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2mvbD3S73i5FvIHkw3x29psejs2" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -53,7 +59,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "ThePhapp",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/phapo/AppData/Local/SceneBuilder/SceneBuilder.exe",
+    "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01/src/main/resources/image",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -62,6 +68,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\image" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -83,7 +94,7 @@
       <workItem from="1727960017328" duration="307000" />
       <workItem from="1727960519394" duration="17000" />
       <workItem from="1728036166100" duration="21000" />
-      <workItem from="1728114156076" duration="2328000" />
+      <workItem from="1728114156076" duration="7146000" />
     </task>
     <servers />
   </component>
