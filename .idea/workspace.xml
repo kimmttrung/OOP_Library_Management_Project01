@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibaryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibaryManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +23,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -48,9 +51,9 @@
     "Application.HelloApplication.executor": "Run",
     "Application.LibaryManagement.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "ThePhapp",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01",
+    "last_opened_file_path": "C:/Users/phapo/AppData/Local/SceneBuilder/SceneBuilder.exe",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -78,6 +81,9 @@
       <workItem from="1727959875625" duration="1000" />
       <workItem from="1727959905586" duration="28000" />
       <workItem from="1727960017328" duration="307000" />
+      <workItem from="1727960519394" duration="17000" />
+      <workItem from="1728036166100" duration="21000" />
+      <workItem from="1728114156076" duration="2328000" />
     </task>
     <servers />
   </component>
