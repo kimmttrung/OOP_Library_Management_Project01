@@ -8,14 +8,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LibaryManagement extends Application {
+public class LibraryManagement extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
 
         Scene scene = new Scene(root);
 
-        stage.setTitle("LibaryManagement");
+        stage.setTitle("LibraryManagement");
 
         stage.setScene(scene);
 

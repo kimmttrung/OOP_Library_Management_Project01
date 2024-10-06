@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="722.0" styleClass="login-from" stylesheets="@../css/designLogin.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="722.0" styleClass="login-from" stylesheets="@../css/designLogin.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="management.libarymanagement.loginController">
    <children>
       <AnchorPane layoutX="105.0" layoutY="50.0" prefHeight="379.0" prefWidth="511.0" styleClass="card-from" stylesheets="@../css/designLogin.css">
          <children>
@@ -19,9 +19,9 @@
                   <Font name="Berlin Sans FB" size="30.0" />
                </font>
             </Label>
-            <TextField layoutX="141.0" layoutY="154.0" prefHeight="35.0" prefWidth="253.0" promptText="Username" styleClass="textField" stylesheets="@../css/designLogin.css" />
-            <PasswordField layoutX="141.0" layoutY="197.0" prefHeight="35.0" prefWidth="253.0" promptText="Password" styleClass="textField" />
-            <Button layoutX="224.0" layoutY="256.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="87.0" styleClass="login-btn" stylesheets="@../css/designLogin.css" text="Login" textFill="#100202">
+            <TextField fx:id="userName" layoutX="141.0" layoutY="154.0" prefHeight="35.0" prefWidth="253.0" promptText="Username" styleClass="textField" stylesheets="@../css/designLogin.css" />
+            <PasswordField fx:id="passWord" layoutX="141.0" layoutY="197.0" prefHeight="35.0" prefWidth="253.0" promptText="Password" styleClass="textField" />
+            <Button fx:id="login_Btn" layoutX="224.0" layoutY="256.0" mnemonicParsing="false" onAction="#login" prefHeight="47.0" prefWidth="87.0" styleClass="login-btn" stylesheets="@../css/designLogin.css" text="Login" textFill="#100202">
                <font>
                   <Font size="14.0" />
                </font>
