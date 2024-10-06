@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="722.0" styleClass="login-from" stylesheets="@../css/designLogin.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="management.libarymanagement.loginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" styleClass="login-from" stylesheets="@../css/designLogin.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="management.libarymanagement.loginController">
    <children>
-      <AnchorPane layoutX="105.0" layoutY="50.0" prefHeight="379.0" prefWidth="511.0" styleClass="card-from" stylesheets="@../css/designLogin.css">
+      <AnchorPane layoutX="112.0" layoutY="80.0" prefHeight="390.0" prefWidth="527.0" styleClass="card-from" stylesheets="@../css/designLogin.css">
          <children>
             <Label layoutX="232.0" layoutY="110.0" prefHeight="36.0" prefWidth="72.0" text="Login" textFill="WHITE">
                <font>
@@ -29,13 +29,28 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <ImageView fitHeight="90.0" fitWidth="105.0" layoutX="220.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="27.0">
+            <ImageView fitHeight="89.0" fitWidth="106.0" layoutX="224.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="18.0">
                <image>
-                  <Image url="@../image/userlogin.png" />
+                  <Image url="@../image/logo.png" />
                </image>
             </ImageView>
 
          </children>
       </AnchorPane>
+      <Button fx:id="exitBtn" layoutX="676.0" layoutY="15.0" mnemonicParsing="false" onAction="#exit" prefHeight="32.0" prefWidth="32.0" styleClass="exit-btn" stylesheets="@../css/designLogin.css" text="X" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="14.0" layoutY="17.0" prefHeight="35.0" prefWidth="223.0" text="Library Management" textFill="#fff200" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="Berlin Sans FB" size="25.0" />
+         </font>
+      </Label>
+      <Button fx:id="minimizeBtn" layoutX="681.0" layoutY="3.0" mnemonicParsing="false" onAction="#minimize" prefHeight="32.0" prefWidth="32.0" styleClass="exit-btn" text="-" AnchorPane.topAnchor="3.0">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

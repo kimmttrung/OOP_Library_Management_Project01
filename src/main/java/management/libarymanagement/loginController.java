@@ -14,14 +14,22 @@ public class loginController {
     private Button login_Btn;
 
     @FXML
+    private TextField userName;
+
+    @FXML
     private PasswordField passWord;
 
     @FXML
-    private TextField userName;
+    private Button minimizeBtn;
+
+    @FXML
+    private Button exitBtn;
+
 
     private final String username = "admin";
     private final String password = "123";
 
+    @FXML
     public void login() {
         String enteredUsername = userName.getText();
         String enteredPassword = passWord.getText();
@@ -42,15 +50,12 @@ public class loginController {
             alert.showAndWait();
         } else {
             try {
-                // Load the main library view
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainLibrary.fxml"));
                 Parent root = loader.load();
 
-                // Close the login window
                 Stage currentStage = (Stage) login_Btn.getScene().getWindow();
                 currentStage.close();
 
-                // Open the main library stage
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
@@ -64,5 +69,17 @@ public class loginController {
                 alert.showAndWait();
             }
         }
+    }
+
+    @FXML
+    void minimize() {
+        Stage stage = (Stage)minimizeBtn.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    @FXML
+    public void exit() {
+        Stage stage = (Stage) exitBtn.getScene().getWindow();
+        stage.close();
     }
 }

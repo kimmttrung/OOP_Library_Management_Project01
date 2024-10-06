@@ -23,6 +23,19 @@
     -fx-text-fill:#fff;
     -fx-font-size:15px;
 }
+
 .login-btn:hover{
     -fx-background-color:#559bc9;
+}
+
+.exit-btn{
+    -fx-background-color: #468ec2;
+    -fx-background-radius:15px;
+    -fx-cursor:hand;
+    -fx-text-fill:#fff;
+    -fx-font-size:15px;
+}
+
+.exit-btn:hover{
+    -fx-background-color:#FF0000;
 }
