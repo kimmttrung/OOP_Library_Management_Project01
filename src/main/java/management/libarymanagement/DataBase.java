@@ -8,9 +8,9 @@ import java.sql.Statement;
 
 public class DataBase {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/lIBRARYMANAGEMENT";
-    private static final String USER = "root";
-    private static final String PASS = "1104205tP";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/library_management";
+    private static final String USER = "library_management";
+    private static final String PASS = "1111";
 
     public static Connection getConnection() {
         try {

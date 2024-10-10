@@ -55,7 +55,7 @@ public class loginController {
                 alert.showAndWait();
             } else {
                 if (resultSet.next()) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainLibrary.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test.fxml"));
                     Parent root = loader.load();
 
                     Stage currentStage = (Stage) login_Btn.getScene().getWindow();
