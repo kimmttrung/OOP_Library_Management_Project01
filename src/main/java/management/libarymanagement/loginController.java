@@ -36,7 +36,7 @@ public class loginController {
 
     @FXML
     public void login() {
-        String sql = "SELECT * FROM account WHERE username = ? AND password= ?";
+        String sql = "SELECT * FROM accounts WHERE username = ? AND password= ?";
         connect = DataBase.getConnection();
 
         try {

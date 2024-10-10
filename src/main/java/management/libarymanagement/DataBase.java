@@ -8,13 +8,11 @@ import java.sql.Statement;
 
 public class DataBase {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/library_management";
-    private static final String USER = "library_management";
-    private static final String PASS = "1111";
+    private static final String jdbcURL = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\sqlite\\library.db";
 
     public static Connection getConnection() {
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            Connection connection = DriverManager.getConnection(jdbcURL);
             return connection;
         } catch (Exception e) {
             e.printStackTrace();
