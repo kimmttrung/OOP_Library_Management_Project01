@@ -7,10 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataBase {
-
-<<<<<<< HEAD
-  
-=======
+    
     private static final String jdbcURL = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\sqlite\\library.db";
 
     public static Connection getConnection() {
@@ -22,6 +19,5 @@ public class DataBase {
         }
         return null;
     }
->>>>>>> ThePhapp
 }
 
