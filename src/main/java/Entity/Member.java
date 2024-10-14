@@ -1,4 +1,4 @@
-package management.libarymanagement;
+package Entity;
 
 import java.sql.Date;
 
@@ -6,12 +6,17 @@ public class Member {
     private String id;
     private String name;
     private String phoneNumber;
+    private String email;
     private Date registrationDate;
 
-    public Member(String id, String name, String phoneNumber, Date registrationDate) {
+    public Member() {
+    }
+
+    public Member(String id, String name, String phoneNumber,String email, Date registrationDate) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.email = email;
         this.registrationDate = registrationDate;
     }
 
@@ -37,6 +42,14 @@ public class Member {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getRegistrationDate() {
