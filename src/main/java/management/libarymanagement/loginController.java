@@ -8,6 +8,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class loginController {
     @FXML
@@ -25,49 +29,52 @@ public class loginController {
     @FXML
     private Button exitBtn;
 
-
-    private final String username = "admin";
-    private final String password = "123";
+    private Connection connect;
+    private PreparedStatement prepare;
+    private Statement statement;
+    private ResultSet resultSet;
 
     @FXML
     public void login() {
-        String enteredUsername = userName.getText();
-        String enteredPassword = passWord.getText();
+        String sql = "SELECT * FROM accounts WHERE username = ? AND password= ?";
+        connect = DataBase.getConnection();
 
-        Alert alert;
+        try {
+            prepare = connect.prepareStatement(sql);
+            prepare.setString(1, userName.getText());
+            prepare.setString(2, passWord.getText());
+            resultSet = prepare.executeQuery();
 
-        if (enteredUsername.isEmpty() || enteredPassword.isEmpty()) {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Admin Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Please enter your username and password.");
-            alert.showAndWait();
-        } else if (!enteredUsername.equals(username) || !enteredPassword.equals(password)) {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Admin Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Incorrect username or password.");
-            alert.showAndWait();
-        } else {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainLibrary.fxml"));
-                Parent root = loader.load();
+            Alert alert;
 
-                Stage currentStage = (Stage) login_Btn.getScene().getWindow();
-                currentStage.close();
-
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-            } catch (IOException e) {
+            if (userName.getText().isEmpty() || passWord.getText().isEmpty()) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
-                alert.setContentText("Unable to load the main library interface.");
+                alert.setContentText("Please enter all the fields");
                 alert.showAndWait();
+            } else {
+                if (resultSet.next()) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test.fxml"));
+                    Parent root = loader.load();
+
+                    Stage currentStage = (Stage) login_Btn.getScene().getWindow();
+                    currentStage.close();
+
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Username or Password is Incorrect");
+                    alert.showAndWait();
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
