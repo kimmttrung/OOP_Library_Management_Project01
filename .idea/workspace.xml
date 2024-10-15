@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/Book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/Member.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/BookDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/Book.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/Member.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/loginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +131,7 @@
       <workItem from="1728822360796" duration="1482000" />
       <workItem from="1728892491198" duration="765000" />
       <workItem from="1728908041969" duration="949000" />
+      <workItem from="1728983254804" duration="8277000" />
     </task>
     <servers />
   </component>

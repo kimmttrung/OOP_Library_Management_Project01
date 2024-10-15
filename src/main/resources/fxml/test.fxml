@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane style="-fx-background-color: #f0f0f0;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="management.libarymanagement.loginController">
+<AnchorPane style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="management.libarymanagement.loginController">
     <children>
         <!-- Header -->
         <VBox alignment="CENTER" prefHeight="155.0" prefWidth="814.0" spacing="10" style="-fx-background-color: #4A90E2; -fx-padding: 15;">
@@ -28,7 +28,7 @@
                         <TextField fx:id="bookAuthorField" promptText="Tác giả" style="-fx-padding: 5;" />
                         <TextField fx:id="bookPublisherField" promptText="Nhà xuất bản" style="-fx-padding: 5;" />
                         <TextField fx:id="bookYearField" promptText="Năm xuất bản" style="-fx-padding: 5;" />
-                        <Button style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Thêm Sách" />
+                        <Button onAction="#addUserTest" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Thêm User" />
                     </HBox>
                     <ListView fx:id="bookList" prefHeight="350.0" style="-fx-background-color: white; -fx-border-color: #d1d1d1;" />
                 </VBox>
