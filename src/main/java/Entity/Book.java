@@ -1,19 +1,25 @@
 package Entity;
 
-import java.sql.Date;
-
 public class Book {
     private int bookID;
     private String name;
     private String author;
     private String publisher;
-    private Date publishedDate;
+    private String publishedDate;
     private String image;
 
     public Book() {
     }
 
-    public Book(int bookID, String name, String author,String publisher, Date publishedDate, String image) {
+    public Book(String name, String author,String publisher, String publishedDate, String image) {
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+        this.publishedDate = publishedDate;
+        this.image = image;
+    }
+
+    public Book(int bookID, String name, String author,String publisher, String publishedDate, String image) {
         this.bookID = bookID;
         this.name = name;
         this.author = author;
@@ -54,7 +60,7 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Date getPublishedDate() {
+    public String getPublishedDate() {
         return publishedDate;
     }
 

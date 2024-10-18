@@ -1,5 +1,7 @@
 package management.libarymanagement;
 
+import Entity.Book;
+import Entity.BookDAO;
 import Entity.User;
 import Entity.UserDAO;
 import javafx.fxml.FXML;

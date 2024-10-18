@@ -121,7 +121,7 @@ public class UserDAO {
         return user;
     }
 
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         String sql = "INSERT INTO user(username, phoneNumber, registrationDate) VALUES(?,?,?)";
 
         try {
@@ -130,14 +130,15 @@ public class UserDAO {
             pst.setString(1, user.getUserName());
             pst.setString(2, user.getPhoneNumber());
             pst.setString(3, user.getRegistrationDate());
-            pst.executeUpdate();
+
+            int affectedRows = pst.executeUpdate();
+            if (affectedRows > 0) {
+                return true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
                 if (pst != null) {
                     pst.close();
                 }
@@ -148,19 +149,25 @@ public class UserDAO {
                 e.printStackTrace();
             }
         }
+        return false;
     }
 
-    public void deleteUser(String username) {
-        String sql = "DELETE FROM user WHERE username = ?";
+    public boolean deleteUser(int id) {
+        String sql = "DELETE FROM user WHERE id = ?";
 
         try {
             connect = DataBase.getConnection();
             pst = connect.prepareStatement(sql);
-            pst.setString(1, username);
-            pst.executeUpdate();
+            pst.setInt(1, id);
+
+            int affectedRows = pst.executeUpdate();
+            if (affectedRows > 0) {
+                return true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public void updateUser(User user) {
@@ -176,9 +183,6 @@ public class UserDAO {
             e.printStackTrace();
         } finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
                 if (pst != null) {
                     pst.close();
                 }

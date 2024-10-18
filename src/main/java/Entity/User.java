@@ -8,25 +8,21 @@ public class User {
     private String userName;
     private String phoneNumber;
     private String registrationDate;
-    private String avt;
 
     public User() {
         this.registrationDate = getCurrentDate();
     }
 
-    public User(String userName, String phoneNumber, String avt) {
+    public User(String userName, String phoneNumber) {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.registrationDate = getCurrentDate();
-        this.avt = avt;
     }
 
-    public User(String userName, String phoneNumber, String registrationDate, String avt) {
-        this.id = id;
+    public User(String userName, String phoneNumber, String registrationDate) {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.registrationDate = registrationDate;
-        this.avt = avt;
     }
 
     public int getId() {
@@ -65,13 +61,5 @@ public class User {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date = LocalDate.now();
         return date.format(formatter);
-    }
-
-    public String getAvt() {
-        return avt;
-    }
-
-    public void setAvt(String avt) {
-        this.avt = avt;
     }
 }

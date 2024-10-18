@@ -10,10 +10,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="management.libarymanagement.loginController">
+<AnchorPane style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookController">
     <children>
         <!-- Header -->
-        <VBox alignment="CENTER" prefHeight="155.0" prefWidth="814.0" spacing="10" style="-fx-background-color: #4A90E2; -fx-padding: 15;">
+        <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #4A90E2; -fx-padding: 15;">
             <Label style="-fx-font-size: 30; -fx-text-fill: white; -fx-font-weight: bold;" text="QUẢN LÝ THƯ VIỆN" />
             <TextField fx:id="searchField" promptText="Tìm kiếm sách hoặc thành viên..." style="-fx-padding: 5; -fx-font-size: 16; -fx-background-radius: 5;" />
             <Button style="-fx-background-color: #ffffff; -fx-text-fill: #4A90E2; -fx-font-weight: bold;" text="Tìm kiếm" />
@@ -28,7 +28,7 @@
                         <TextField fx:id="bookAuthorField" promptText="Tác giả" style="-fx-padding: 5;" />
                         <TextField fx:id="bookPublisherField" promptText="Nhà xuất bản" style="-fx-padding: 5;" />
                         <TextField fx:id="bookYearField" promptText="Năm xuất bản" style="-fx-padding: 5;" />
-                        <Button onAction="#addUserTest" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Thêm User" />
+                        <Button onAction="#updateBook" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Thêm Sách" />
                     </HBox>
                     <ListView fx:id="bookList" prefHeight="350.0" style="-fx-background-color: white; -fx-border-color: #d1d1d1;" />
                 </VBox>
@@ -37,9 +37,9 @@
             <Tab text="Quản lý Thành viên">
                 <VBox spacing="10" style="-fx-padding: 15;">
                     <HBox spacing="10">
-                        <TextField fx:id="memberNameField" promptText="Tên thành viên" style="-fx-padding: 5;" />
-                        <TextField fx:id="memberIdField" promptText="ID thành viên" style="-fx-padding: 5;" />
-                        <Button style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Thêm Thành viên" />
+                        <TextField fx:id="bookIDField" promptText="Tên thành viên" style="-fx-padding: 5;" />
+                        <TextField fx:id="phoneNumberField" promptText="PhoneNumber" style="-fx-padding: 5;" />
+                        <Button fx:id="deleteBook" onAction="#deleteBook" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Thêm Thành viên" />
                     </HBox>
                     <ListView fx:id="memberList" prefHeight="350.0" style="-fx-background-color: white; -fx-border-color: #d1d1d1;" />
                 </VBox>
