@@ -55,6 +55,13 @@ public class loginController {
                 alert.showAndWait();
             } else {
                 if (resultSet.next()) {
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("admin Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Successfully Login");
+                    alert.showAndWait();
+
+
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test.fxml"));
                     Parent root = loader.load();
 
