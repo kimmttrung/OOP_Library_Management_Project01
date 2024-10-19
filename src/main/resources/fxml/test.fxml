@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -16,7 +18,7 @@
         <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #4A90E2; -fx-padding: 15;">
             <Label style="-fx-font-size: 30; -fx-text-fill: white; -fx-font-weight: bold;" text="QUẢN LÝ THƯ VIỆN" />
             <TextField fx:id="searchField" promptText="Tìm kiếm sách hoặc thành viên..." style="-fx-padding: 5; -fx-font-size: 16; -fx-background-radius: 5;" />
-            <Button style="-fx-background-color: #ffffff; -fx-text-fill: #4A90E2; -fx-font-weight: bold;" text="Tìm kiếm" />
+            <Button onAction="#searchBook" style="-fx-background-color: #ffffff; -fx-text-fill: #4A90E2; -fx-font-weight: bold;" text="Tìm kiếm" />
         </VBox>
 
         <!-- Tabs for managing books and members -->
@@ -30,7 +32,16 @@
                         <TextField fx:id="bookYearField" promptText="Năm xuất bản" style="-fx-padding: 5;" />
                         <Button onAction="#updateBook" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Thêm Sách" />
                     </HBox>
-                    <ListView fx:id="bookList" prefHeight="350.0" style="-fx-background-color: white; -fx-border-color: #d1d1d1;" />
+               <TableView fx:id="bookTable" prefHeight="606.0" prefWidth="770.0">
+                 <columns>
+                   <TableColumn fx:id="idColumn" prefWidth="75.0" text="C1" />
+                   <TableColumn fx:id="titleColumn" prefWidth="300.0" text="C2" />
+                     <TableColumn fx:id="authorColumn" prefWidth="123.0" text="Column X" />
+                     <TableColumn fx:id="publisherColumn" prefWidth="119.0" text="Column X" />
+                     <TableColumn fx:id="publishedDateColumn" prefWidth="152.0" text="Column X" />
+                 </columns>
+               </TableView>
+                    <ListView prefHeight="350.0" style="-fx-background-color: white; -fx-border-color: #d1d1d1;" />
                 </VBox>
             </Tab>
 
@@ -39,7 +50,7 @@
                     <HBox spacing="10">
                         <TextField fx:id="bookIDField" promptText="Tên thành viên" style="-fx-padding: 5;" />
                         <TextField fx:id="phoneNumberField" promptText="PhoneNumber" style="-fx-padding: 5;" />
-                        <Button fx:id="deleteBook" onAction="#deleteBook" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Thêm Thành viên" />
+<!--                        <Button fx:id="deleteBook" onAction="#deleteBook" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Thêm Thành viên" />-->
                     </HBox>
                     <ListView fx:id="memberList" prefHeight="350.0" style="-fx-background-color: white; -fx-border-color: #d1d1d1;" />
                 </VBox>

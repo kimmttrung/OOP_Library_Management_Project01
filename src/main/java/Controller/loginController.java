@@ -1,15 +1,16 @@
-package management.libarymanagement;
+package Controller;
 
 import Entity.Book;
-import Entity.BookDAO;
+import DataAccessObject.BookDAO;
 import Entity.User;
-import Entity.UserDAO;
+import DataAccessObject.UserDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import management.libarymanagement.DataBase;
 
 import java.io.IOException;
 import java.sql.*;
@@ -66,6 +67,7 @@ public class loginController {
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show();
+
                 } else {
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
@@ -94,7 +96,7 @@ public class loginController {
     }
 
     @FXML
-    void minimize() {
+    public void minimize() {
         Stage stage = (Stage) minimizeBtn.getScene().getWindow();
         stage.setIconified(true);
     }
