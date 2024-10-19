@@ -58,10 +58,13 @@
      -fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);
      -fx-background-radius:5px;
 }
-.sign-out-btn{
+.logout-btn{
+    -fx-background-color:#366d9d;
+    -fx-background-radius:10px;
     -fx-cursor:hand;
 }
-.sign-out-btn:hover{
+.logout-btn:hover{
     -fx-font-size:20px;
     -fx-background-color:red;
+    -fx-background-radius:10px;
 }
