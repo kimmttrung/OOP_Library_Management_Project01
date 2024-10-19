@@ -6,7 +6,7 @@ module management.libarymanagement {
     requires java.desktop;
 
     opens management.libarymanagement to javafx.fxml;
+    opens Controller to javafx.fxml;
     exports management.libarymanagement;
     exports Controller;
-    opens Controller to javafx.fxml;
 }

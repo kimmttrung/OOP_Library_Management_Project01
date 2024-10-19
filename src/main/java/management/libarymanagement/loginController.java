@@ -1,5 +1,9 @@
 package management.libarymanagement;
 
+import Entity.Book;
+import Entity.BookDAO;
+import Entity.User;
+import Entity.UserDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,10 +12,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.io.IOException;
+import java.sql.*;
 
 public class loginController {
     @FXML
@@ -30,7 +32,7 @@ public class loginController {
     private Button exitBtn;
 
     private Connection connect;
-    private PreparedStatement prepare;
+    private PreparedStatement pst;
     private Statement statement;
     private ResultSet resultSet;
 
@@ -40,13 +42,13 @@ public class loginController {
     @FXML
     public void login() {
         String sql = "SELECT * FROM accounts WHERE username = ? AND password= ?";
-        connect = DataBase.getConnection();
 
         try {
-            prepare = connect.prepareStatement(sql);
-            prepare.setString(1, userName.getText());
-            prepare.setString(2, passWord.getText());
-            resultSet = prepare.executeQuery();
+            connect = DataBase.getConnection();
+            pst = connect.prepareStatement(sql);
+            pst.setString(1, userName.getText());
+            pst.setString(2, passWord.getText());
+            resultSet = pst.executeQuery();
 
             Alert alert;
 
@@ -66,9 +68,9 @@ public class loginController {
 
                     login_Btn.getScene().getWindow().hide();
 
-                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test.fxml"));
+//                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test.fxml"));
 //                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainLibrary.fxml"));
-//                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashbord.fxml"));
+                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashbord.fxml"));
 
 
 //                    Parent root = FXMLLoader.load(getClass().getResource("dashbord.fxml"));
@@ -106,12 +108,26 @@ public class loginController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (Exception e) {
+                ;
+            }
         }
     }
 
     @FXML
     void minimize() {
-        Stage stage = (Stage)minimizeBtn.getScene().getWindow();
+        Stage stage = (Stage) minimizeBtn.getScene().getWindow();
         stage.setIconified(true);
     }
 
@@ -119,5 +135,15 @@ public class loginController {
     public void exit() {
         Stage stage = (Stage) exitBtn.getScene().getWindow();
         stage.close();
+    }
+
+    public void addUserTest() {
+        User user = new User();
+        user.setUserName("thephap");
+        user.setPhoneNumber("09009");
+
+        UserDAO userDAO = new UserDAO();
+        userDAO.addUser(user);
+        System.out.println("addSuccess");
     }
 }
