@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="dashbord part1" />
+    <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="dashbord part1">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/DasdBordContrller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/dashbordDesign1.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashbordControler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DocumentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dashbordDesign.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dashbordDesign.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
