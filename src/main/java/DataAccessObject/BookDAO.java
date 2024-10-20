@@ -69,7 +69,7 @@ public class BookDAO {
                         rs.getString(5), rs.getString(6));
                 listBook.add(book);
             }
-        }  catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
@@ -248,16 +248,5 @@ public class BookDAO {
             }
         }
         return false;
-    }
-
-    public void deleteALlBooks() {
-        String sql = "DELETE FROM books";
-        try{
-            conn = DataBase.getConnection();
-            pst = conn.prepareStatement(sql);
-            pst.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

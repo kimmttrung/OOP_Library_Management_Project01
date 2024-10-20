@@ -34,7 +34,6 @@ public class Book {
         this.author = author;
         this.publisher = publisher;
         this.publishedDate = publishedDate;
-        this.image = image;
     }
 
     public int getBookID() {

@@ -1,6 +1,7 @@
 package Controller;
 
 import API.GoogleBooksAPI;
+import DataAccessObject.SearchBooks;
 import Entity.Book;
 import DataAccessObject.BookDAO;
 import com.google.gson.JsonArray;
@@ -11,50 +12,43 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.Optional;
 
 public class BookController {
 
     @FXML
-    private TextField bookIDField;
-
+    protected TextField bookIDField;
     @FXML
-    private TextField bookAuthorField;
-
+    protected TextField bookAuthorField;
     @FXML
-    private TextField bookPublisherField;
-
+    protected TextField bookPublisherField;
     @FXML
-    private TextField bookTitleField;
-
+    protected TextField bookTitleField;
     @FXML
-    private TextField bookYearField;
-
+    protected TextField bookYearField;
     @FXML
-    private TableView<Book> bookTable;
-
+    protected TableView<Book> bookTable;
     @FXML
-    private TableColumn<Book, Integer> idColumn;
-
+    protected TableColumn<Book, Integer> idColumn;
     @FXML
-    private TableColumn<Book, String> titleColumn;
-
+    protected TableColumn<Book, String> titleColumn;
     @FXML
-    private TableColumn<Book, String> authorColumn;
-
+    protected TableColumn<Book, String> authorColumn;
     @FXML
-    private TableColumn<Book, String> publisherColumn;
-
+    protected TableColumn<Book, String> publisherColumn;
     @FXML
-    private TableColumn<Book, String> publishedDateColumn;
-
+    protected TableColumn<Book, String> publishedDateColumn;
     @FXML
-    private TextField searchField;
+    private ImageView bookImageView;
+    @FXML
+    protected TextField searchField;
 
-    private ObservableList<Book> bookList = FXCollections.observableArrayList();
-    private BookDAO bookDAO = new BookDAO();
-
+    protected ObservableList<Book> bookList = FXCollections.observableArrayList();
+    protected BookDAO bookDAO = new BookDAO();
+    SearchBooks searchBooks = new SearchBooks();
 
     @FXML
     public void initialize() {
@@ -63,7 +57,18 @@ public class BookController {
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
-
+        bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                String imageLink = newSelection.getImage();
+                if (imageLink != null && !imageLink.isEmpty()) {
+                    Image image = new Image(imageLink);
+                    bookImageView.setImage(image);
+                } else {
+                    Image defaultImage = new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
+                    bookImageView.setImage(defaultImage);
+                }
+            }
+        });
         loadBooks();
     }
 
@@ -76,7 +81,6 @@ public class BookController {
     private void searchBook() {
         String needBook = searchField.getText();
         GoogleBooksAPI googleBooksAPI = new GoogleBooksAPI();
-
         try {
             // Lấy dữ liệu từ Google Books API
             String jsonData = googleBooksAPI.fetchBooksData(needBook);
@@ -84,6 +88,7 @@ public class BookController {
             // Phân tích JSON
             JsonObject jsonObject = JsonParser.parseString(jsonData).getAsJsonObject();
             JsonArray items = jsonObject.getAsJsonArray("items");
+            searchBooks.deleteSearchedBook();
 
             for (int i = 0; i < items.size(); i++) {
                 JsonObject volumeInfo = items.get(i).getAsJsonObject().getAsJsonObject("volumeInfo");
@@ -91,13 +96,21 @@ public class BookController {
                 String authors = volumeInfo.has("authors") ? volumeInfo.getAsJsonArray("authors").get(0).getAsString() : "Unknown";
                 String publisher = volumeInfo.has("publisher") ? volumeInfo.get("publisher").getAsString() : "Unknown";
                 String publishedDate = volumeInfo.has("publishedDate") ? volumeInfo.get("publishedDate").getAsString() : "Unknown";
+                String imageLink = volumeInfo.has("imageLinks") ?
+                        volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString() : null;
 
-                Book book = new Book(title, authors, publisher, publishedDate, null);
-                bookDAO.insertBook(book);
+                Book book = new Book(title, authors, publisher, publishedDate, imageLink);
+                searchBooks.insertBook(book);
+                loadSearchBooks();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void loadSearchBooks() {
+        bookList = FXCollections.observableArrayList(searchBooks.getSearchedBooks());
+        bookTable.setItems(bookList);
     }
 
     public void updateBook() {
@@ -178,5 +191,4 @@ public class BookController {
             }
         }
     }
-
 }

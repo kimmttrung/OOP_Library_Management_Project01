@@ -5,22 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/API/GoogleBooksAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/loginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/GoogleBooksToDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/BookSearchController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/dashBordController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/SearchBooks.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/dashbordDesign.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/test1.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/defaultBook.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/loginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/BookDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/UserDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/loginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
     </list>
@@ -78,7 +74,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "ThePhapp",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01",
+    "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01/src/main/resources/image",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -150,7 +146,8 @@
       <workItem from="1729253787916" duration="7011000" />
       <workItem from="1729266190301" duration="5470000" />
       <workItem from="1729272805388" duration="837000" />
-      <workItem from="1729309191088" duration="9505000" />
+      <workItem from="1729309191088" duration="16920000" />
+      <workItem from="1729358078816" duration="5004000" />
     </task>
     <servers />
   </component>
