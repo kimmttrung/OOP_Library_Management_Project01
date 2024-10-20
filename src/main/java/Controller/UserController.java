@@ -1,9 +1,7 @@
 package Controller;
 
-import Entity.Book;
-import Entity.BookDAO;
 import Entity.User;
-import Entity.UserDAO;
+import DataAccessObject.UserDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

@@ -16,8 +16,8 @@
     -fx-background-color:#f13f57;
 }
 .minimize-btn{
-     -fx-background-color: transparent;
-     -fx-cursor: hand;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
 }
 .minimize-btn:hover{
     -fx-background-color: #ddddddd;
@@ -58,8 +58,8 @@
     -fx-font-size: 15px;
 }
 .nav-btn:hover{
-     -fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);
-     -fx-background-radius:5px;
+    -fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);
+    -fx-background-radius:5px;
 }
 .logout-btn{
     -fx-background-color:#366d9d;
@@ -108,11 +108,11 @@
     -fx-background-color:#b356bb;
 }
 .find_btn{
-     -fx-background-color:#b31b1b;
-     -fx-background-radius:5px;
-     -fx-font-size:15px;
-     -fx-cursor:hand;
-     -fx-text-fill:#fff;
+    -fx-background-color:#b31b1b;
+    -fx-background-radius:5px;
+    -fx-font-size:15px;
+    -fx-cursor:hand;
+    -fx-text-fill:#fff;
 }
 .find_btn:hover{
     -fx-background-color:#ed5c5c;

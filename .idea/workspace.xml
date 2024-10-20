@@ -4,18 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65af0eab-5ec0-4412-91a3-8cc6422a5233" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/BookController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/BookDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/UserDAO.java" afterDir="false" />
+    <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/BookSearchController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/dashBordController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/SearchBooks.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/dashbordDesign.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/test1.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/defaultBook.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/loginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Member.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/loginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
     </list>
@@ -29,16 +30,10 @@
       <list>
         <option value="FxmlFile" />
         <option value="Class" />
-        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="MaiTrung" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -51,7 +46,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/kimmttrung/OOP_Library_Management_Project01.git&quot;,
-    &quot;accountId&quot;: &quot;20d4a28f-ec06-4c74-8526-5cf1ad8a2292&quot;
+    &quot;accountId&quot;: &quot;ec4ca4ad-fa99-4f13-b6e8-042d4199200e&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -66,35 +61,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.DataBase.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GoogleBooksAPI.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.LibaryManagement.executor&quot;: &quot;Run&quot;,
-    &quot;Application.LibraryApp.executor&quot;: &quot;Run&quot;,
-    &quot;Application.LibraryManagement.executor&quot;: &quot;Run&quot;,
-    &quot;Application.pLibraryManagement.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ThePhapp&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/New folder&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.DataBase.executor": "Run",
+    "Application.GoogleBooksAPI.executor": "Run",
+    "Application.GoogleBooksToDB.executor": "Run",
+    "Application.HelloApplication.executor": "Run",
+    "Application.LibaryManagement.executor": "Run",
+    "Application.LibraryApp.executor": "Run",
+    "Application.LibraryManagement.executor": "Run",
+    "Application.pLibraryManagement.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "ThePhapp",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01/src/main/resources/image",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   }
-}]&gt;</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\image" />
     </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -140,14 +144,14 @@
       <workItem from="1729050115692" duration="3364000" />
       <workItem from="1729093289520" duration="1278000" />
       <workItem from="1729253787916" duration="7011000" />
+      <workItem from="1729266190301" duration="5470000" />
+      <workItem from="1729272805388" duration="837000" />
+      <workItem from="1729309191088" duration="16920000" />
+      <workItem from="1729358078816" duration="5004000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="dashbord part1" />
-    <option name="LAST_COMMIT_MESSAGE" value="dashbord part1" />
   </component>
 </project>

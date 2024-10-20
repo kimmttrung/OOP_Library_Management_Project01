@@ -1,5 +1,8 @@
-package Entity;
+package DataAccessObject;
 
+import Entity.Book;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import management.libarymanagement.DataBase;
 
 import java.sql.Connection;
@@ -14,20 +17,22 @@ public class BookDAO {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    public Map<Integer, Book> getMapBook() {
-        Map<Integer, Book> mapBook = new HashMap<>();
-        String sql = "SELECT * FROM book";
+    public ObservableList<Book> getAllBooks() {
+        ObservableList<Book> books = FXCollections.observableArrayList();
+        String sql = "SELECT bookID, name, author, publisher, publishedDate FROM books";
 
         try {
             conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
-                Book book = new Book(
-                        rs.getInt(1), rs.getString(2),
-                        rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getString(6));
-                mapBook.put(book.getBookID(), book);
+                books.add(new Book(
+                        rs.getInt("bookID"),
+                        rs.getString("name"),
+                        rs.getString("author"),
+                        rs.getString("publisher"),
+                        rs.getString("publishedDate")
+                ));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,12 +51,12 @@ public class BookDAO {
                 e.printStackTrace();
             }
         }
-        return mapBook;
+        return books;
     }
 
     public ArrayList<Book> getListBook() {
         ArrayList<Book> listBook = new ArrayList<>();
-        String sql = "SELECT * FROM book";
+        String sql = "SELECT * FROM books";
 
         try {
             conn = DataBase.getConnection();
@@ -64,7 +69,7 @@ public class BookDAO {
                         rs.getString(5), rs.getString(6));
                 listBook.add(book);
             }
-        }  catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
@@ -86,7 +91,7 @@ public class BookDAO {
 
     public ArrayList<Book> getBookByName(String name) {
         ArrayList<Book> listBook = getListBook();
-        String sql = "SELECT * FROM book WHERE name LIKE '%" + name + "%'";
+        String sql = "SELECT * FROM books WHERE name LIKE '%" + name + "%'";
 
         try {
             conn = DataBase.getConnection();
@@ -121,7 +126,7 @@ public class BookDAO {
 
     public Book getBookByID(int bookID) {
         Book book = null;
-        String sql = "SELECT * FROM book WHERE bookID = " + bookID;
+        String sql = "SELECT * FROM books WHERE bookID = " + bookID;
 
         try {
             conn = DataBase.getConnection();
@@ -157,7 +162,7 @@ public class BookDAO {
     }
 
     public void updateBook(Book book) {
-        String sql = "UPDATE book SET name = ?, author = ?, publisher = ?, publishedDate = ? WHERE bookID = ?";
+        String sql = "UPDATE books SET name = ?, author = ?, publisher = ?, publishedDate = ? WHERE bookID = ?";
 
         try {
             conn = DataBase.getConnection();
@@ -185,7 +190,7 @@ public class BookDAO {
     }
 
     public boolean insertBook(Book book) {
-        String sql = "INSERT INTO book (name, author, publisher, publishedDate, image) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO books (name, author, publisher, publishedDate, image) VALUES (?, ?, ?, ?, ?)";
 
         try {
             conn = DataBase.getConnection();
@@ -218,7 +223,7 @@ public class BookDAO {
     }
 
     public boolean deleteBook(int bookID) {
-        String sql = "DELETE FROM book WHERE bookID = " + bookID;
+        String sql = "DELETE FROM books WHERE bookID = " + bookID;
 
         try {
             conn = DataBase.getConnection();
