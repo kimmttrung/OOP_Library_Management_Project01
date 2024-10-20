@@ -4,7 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="dashbord part1" />
+    <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/API/GoogleBooksAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/BookController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/SearchBooks.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/GoogleBooksToDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/test1.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/image/defaultBook.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Member.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/loginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dashbordDesign.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dashbordDesign.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,8 +37,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -31,7 +55,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/kimmttrung/OOP_Library_Management_Project01.git&quot;,
-    &quot;accountId&quot;: &quot;20d4a28f-ec06-4c74-8526-5cf1ad8a2292&quot;
+    &quot;accountId&quot;: &quot;ec4ca4ad-fa99-4f13-b6e8-042d4199200e&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -50,17 +74,16 @@
   "keyToString": {
     "Application.DataBase.executor": "Run",
     "Application.GoogleBooksAPI.executor": "Run",
+    "Application.GoogleBooksToDB.executor": "Run",
     "Application.HelloApplication.executor": "Run",
     "Application.LibaryManagement.executor": "Run",
     "Application.LibraryApp.executor": "Run",
     "Application.LibraryManagement.executor": "Run",
     "Application.pLibraryManagement.executor": "Run",
-    "Maven.LibaryManagement [package].executor": "Run",
-    "Maven.LibaryManagement [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "MaiTrung",
+    "git-widget-placeholder": "Merging MaiTrung",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/New folder",
+    "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01/src/main/resources/image",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -69,7 +92,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -117,6 +140,15 @@
       <workItem from="1728822360796" duration="1482000" />
       <workItem from="1728892491198" duration="765000" />
       <workItem from="1728908041969" duration="949000" />
+      <workItem from="1728983254804" duration="8277000" />
+      <workItem from="1729006793314" duration="1124000" />
+      <workItem from="1729050115692" duration="3364000" />
+      <workItem from="1729093289520" duration="1278000" />
+      <workItem from="1729253787916" duration="7011000" />
+      <workItem from="1729266190301" duration="5470000" />
+      <workItem from="1729272805388" duration="837000" />
+      <workItem from="1729309191088" duration="16920000" />
+      <workItem from="1729358078816" duration="5004000" />
     </task>
     <task id="LOCAL-00001" summary="dashbord part1">
       <option name="closed" value="true" />
