@@ -68,9 +68,9 @@ public class loginController {
 
                     login_Btn.getScene().getWindow().hide();
 
-//                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test.fxml"));
+                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test.fxml"));
 //                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainLibrary.fxml"));
-                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashbord.fxml"));
+//                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashbord.fxml"));
 
 
 //                    Parent root = FXMLLoader.load(getClass().getResource("dashbord.fxml"));
