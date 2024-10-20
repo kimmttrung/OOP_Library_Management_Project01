@@ -1,5 +1,9 @@
-package Entity;
+package DataAccessObject;
 
+import Entity.Book;
+import Entity.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import management.libarymanagement.DataBase;
 
 import java.sql.Connection;
@@ -15,8 +19,8 @@ public class UserDAO {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    public ArrayList<User> getAllUsers() {
-        ArrayList<User> users = new ArrayList<>();
+    public ObservableList<User> getAllUsers() {
+        ObservableList<User> users = FXCollections.observableArrayList();
         String sql = "SELECT * FROM user";
 
         try {

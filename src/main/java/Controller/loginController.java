@@ -1,16 +1,16 @@
-package management.libarymanagement;
+package Controller;
 
 import Entity.Book;
-import Entity.BookDAO;
+import DataAccessObject.BookDAO;
 import Entity.User;
-import Entity.UserDAO;
+import DataAccessObject.UserDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import management.libarymanagement.DataBase;
 
 import java.io.IOException;
 import java.sql.*;
@@ -36,9 +36,6 @@ public class loginController {
     private Statement statement;
     private ResultSet resultSet;
 
-    private double x;
-    private double y;
-
     @FXML
     public void login() {
         String sql = "SELECT * FROM accounts WHERE username = ? AND password= ?";
@@ -60,41 +57,14 @@ public class loginController {
                 alert.showAndWait();
             } else {
                 if (resultSet.next()) {
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("admin Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully Login");
-                    alert.showAndWait();
-
-                    login_Btn.getScene().getWindow().hide();
-
-                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test.fxml"));
-//                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainLibrary.fxml"));
-//                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashbord.fxml"));
-
-
-//                    Parent root = FXMLLoader.load(getClass().getResource("dashbord.fxml"));
-
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test1.fxml"));
                     Parent root = loader.load();
 
-//                    Stage currentStage = (Stage) login_Btn.getScene().getWindow();
-//                    currentStage.close();
+                    Stage currentStage = (Stage) login_Btn.getScene().getWindow();
+                    currentStage.close();
 
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
-
-                    root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                        x = e.getSceneX();
-                        y = e.getSceneY();
-                    });
-
-                    root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                        stage.setX(e.getScreenX() - x);
-                        stage.setY(e.getScreenY() - y);
-                    });
-
-                    stage.initStyle(StageStyle.TRANSPARENT);
-
                     stage.setScene(scene);
                     stage.show();
 
@@ -126,7 +96,7 @@ public class loginController {
     }
 
     @FXML
-    void minimize() {
+    public void minimize() {
         Stage stage = (Stage) minimizeBtn.getScene().getWindow();
         stage.setIconified(true);
     }

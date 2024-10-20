@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<?import com.gluonhq.charm.glisten.control.Icon?>-->
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane accessibleRole="BUTTON" cache="true" prefHeight="600.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookController">
+    <children>
+        <AnchorPane layoutX="1.0" prefHeight="80.0" prefWidth="986.0" styleClass="semiTop-form" stylesheets="@../css/dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <AnchorPane prefHeight="57.0" prefWidth="988.0" styleClass="top-from" stylesheets="@../css/dashbordDesign.css" AnchorPane.bottomAnchor="796.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Button fx:id="close_btn" layoutX="932.0" layoutY="-0.6666666666666666" minWidth="53.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="53.0" styleClass="close-btn" stylesheets="@../css/dashbordDesign.css" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+<!--                            <graphic>-->
+<!--                                <Icon content="CLOSE" prefHeight="47.0" prefWidth="39.0" />-->
+<!--                            </graphic>-->
+                        </Button>
+                        <Button fx:id="minimize" layoutX="1100.0" layoutY="6.0" minWidth="53.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="53.0" styleClass="minimize-btn" stylesheets="@../css/dashbordDesign.css">
+<!--                            <graphic>-->
+<!--                                <Icon content="FULLSCREEN" />-->
+<!--                            </graphic>-->
+                        </Button>
+                        <Label layoutX="116.0" layoutY="8.0" text="Library Management">
+                            <font>
+                                <Font name="Segoe UI Black" size="24.0" />
+                            </font>
+                        </Label>
+                        <Button layoutX="20.0" layoutY="5.0" mnemonicParsing="false">
+<!--                            <graphic>-->
+<!--                                <Icon content="MENU" />-->
+<!--                            </graphic>-->
+                        </Button>
+                        <Button layoutX="20.0" layoutY="4.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="54.0" styleClass="bars" stylesheets="@../css/dashbordDesign.css">
+<!--                            <graphic>-->
+<!--                                <Icon content="CHEVRON_LEFT" />-->
+<!--                            </graphic>-->
+                        </Button>
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="-3.0" layoutY="175.0" prefHeight="678.0" prefWidth="287.0" styleClass="nav-form" stylesheets="@../css/dashbordDesign.css">
+                    <children>
+                        <AnchorPane layoutX="42.0" layoutY="37.0" prefHeight="200.0" prefWidth="200.0">
+                            <children>
+                                <Circle fill="DODGERBLUE" layoutX="100.0" layoutY="99.0" radius="93.0" stroke="BLACK" strokeType="INSIDE" />
+                                <Button layoutX="23.0" layoutY="22.0" minWidth="53.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="155.0" styleClass="edit-btn" stylesheets="@../css/dashbordDesign.css">
+<!--                                    <graphic>-->
+<!--                                        <Icon content="EDIT" prefWidth="15.0" />-->
+<!--                                    </graphic>-->
+                                </Button>
+                            </children>
+                        </AnchorPane>
+                        <Label layoutX="50.0" layoutY="246.0" styleClass="edit-label" stylesheets="@../css/dashbordDesign.css" text="Welcome" textFill="WHITE">
+                            <font>
+                                <Font name="Segoe UI Black" size="72.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="availableBook_btnn" layoutX="67.0" layoutY="369.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css" text="Available Books">
+                            <font>
+                                <Font name="Microsoft Sans Serif" size="12.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="issueBooks_btn" layoutX="67.0" layoutY="425.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css" text="Issue Books" />
+                        <Button fx:id="returnBooks_btn" layoutX="67.0" layoutY="484.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css" text="Return Books" />
+                        <Button fx:id="savedBooks_btn" layoutX="67.0" layoutY="541.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css" text="Saved Books" />
+                        <Line endX="107.66668701171875" layoutX="155.0" layoutY="343.0" startX="-134.3333282470703" stroke="#e9e0e0" />
+                        <Button fx:id="signOut_btn" layoutX="23.0" layoutY="629.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">
+<!--                            <graphic>-->
+<!--                                <Icon content="SLIDESHOW" />-->
+<!--                            </graphic>-->
+                        </Button>
+                        <Label layoutX="90.0" layoutY="640.0" styleClass="edit-label1" stylesheets="@../css/dashbordDesign.css" text="Sign Out" textFill="WHITE">
+                            <font>
+                                <Font name="Segoe UI" size="10.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="286.0" layoutY="175.0" prefHeight="678.0" prefWidth="864.0" styleClass="than-btn" stylesheets="@../css/dashbordDesign.css">
+                    <children>
+                        <AnchorPane layoutX="282.0" layoutY="10.0" prefHeight="657.0" prefWidth="509.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css">
+                            <children>
+                                <TableView fx:id="bookTable" layoutX="10.0" layoutY="13.0" prefHeight="629.0" prefWidth="617.0">
+                                    <columns>
+                                        <TableColumn fx:id="idColumn" prefWidth="57.0" text="BookID" />
+                                        <TableColumn fx:id="titleColumn" prefWidth="255.0" text="Title" />
+                                        <TableColumn fx:id="authorColumn" prefWidth="104.0" text="Author" />
+                                        <TableColumn fx:id="publisherColumn" prefWidth="105.0" text="Publisher" />
+                              <TableColumn fx:id="publishedDateColumn" prefWidth="95.0" text="Published Date" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="7.0" layoutY="15.0" prefHeight="650.0" prefWidth="256.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css">
+                            <children>
+                                <AnchorPane layoutX="40.0" layoutY="14.0" prefHeight="259.0" prefWidth="172.0" styleClass="image-card" stylesheets="@../css/dashbordDesign.css">
+                                    <children>
+                                        <ImageView fx:id="bookImageView" fitHeight="250.0" fitWidth="170.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                                    </children>
+                                </AnchorPane>
+                                <Button fx:id="save_btn" layoutX="27.0" layoutY="377.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="save-btn" stylesheets="@../css/dashbordDesign.css" text="Save" />
+                                <Button fx:id="take_btn" layoutX="153.0" layoutY="377.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="take-btn" stylesheets="@../css/dashbordDesign.css" text="Take" />
+                                <Label layoutX="83.0" layoutY="286.0" stylesheets="@../css/dashbordDesign.css" text="Learn c++">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <Separator layoutX="273.0" layoutY="8.0" orientation="VERTICAL" prefHeight="666.0" prefWidth="0.0" />
+                    </children></AnchorPane>
+                <Label layoutX="524.0" layoutY="43.0" prefHeight="58.0" prefWidth="99.0" styleClass="edit-label1" stylesheets="@../css/dashbordDesign.css" text="Tìm Kiếm" />
+                <TextField fx:id="searchField" layoutX="152.0" layoutY="96.0" prefHeight="41.0" prefWidth="772.0" promptText="Bạn muốn tìm sách gì?" styleClass="text-fild" stylesheets="@../css/dashbordDesign.css" />
+                <Button layoutX="939.0" layoutY="94.0" mnemonicParsing="false" onAction="#searchBook" prefHeight="41.0" prefWidth="78.0" styleClass="find_btn" stylesheets="@../css/dashbordDesign.css" text="Find" textFill="#ed5c5c" />
+            </children>
+        </AnchorPane>
+    </children>
+    <cursor>
+        <Cursor fx:constant="HAND" />
+    </cursor>
+</AnchorPane>

@@ -28,6 +28,14 @@ public class Book {
         this.image = image;
     }
 
+    public Book(int bookID, String name, String author,String publisher, String publishedDate) {
+        this.bookID = bookID;
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+        this.publishedDate = publishedDate;
+    }
+
     public int getBookID() {
         return bookID;
     }
@@ -70,5 +78,10 @@ public class Book {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Book [Name=" + name + ", Author=" + author + ", Publisher=" + publisher + ", PublishedDate=" + publishedDate + "]";
     }
 }
