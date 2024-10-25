@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookController">
+<AnchorPane style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookControl">
     <children>
         <!-- Header -->
         <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #4A90E2; -fx-padding: 15;">
             <Label style="-fx-font-size: 30; -fx-text-fill: white; -fx-font-weight: bold;" text="QUẢN LÝ THƯ VIỆN" />
             <TextField fx:id="searchField" promptText="Tìm kiếm sách hoặc thành viên..." style="-fx-padding: 5; -fx-font-size: 16; -fx-background-radius: 5;" />
-            <Button onAction="#searchBook" style="-fx-background-color: #ffffff; -fx-text-fill: #4A90E2; -fx-font-weight: bold;" text="Tìm kiếm" />
+<!--            <Button onAction="#searchBook" style="-fx-background-color: #ffffff; -fx-text-fill: #4A90E2; -fx-font-weight: bold;" text="Tìm kiếm" />-->
         </VBox>
 
         <!-- Tabs for managing books and members -->
@@ -30,7 +30,7 @@
                         <TextField fx:id="bookAuthorField" promptText="Tác giả" style="-fx-padding: 5;" />
                         <TextField fx:id="bookPublisherField" promptText="Nhà xuất bản" style="-fx-padding: 5;" />
                         <TextField fx:id="bookYearField" promptText="Năm xuất bản" style="-fx-padding: 5;" />
-                        <Button onAction="#updateBook" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Thêm Sách" />
+                        <Button fx:id="returnBooks_btn" onAction="#searchBooks" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Thêm Sách" />
                     </HBox>
                     <TableView fx:id="bookTable" prefHeight="606.0" prefWidth="770.0">
                         <columns>

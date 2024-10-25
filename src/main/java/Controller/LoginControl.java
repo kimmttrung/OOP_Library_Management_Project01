@@ -1,7 +1,5 @@
 package Controller;
 
-import Entity.Book;
-import DataAccessObject.BookDAO;
 import Entity.User;
 import DataAccessObject.UserDAO;
 import javafx.fxml.FXML;
@@ -12,10 +10,9 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import management.libarymanagement.DataBase;
 
-import java.io.IOException;
 import java.sql.*;
 
-public class loginController {
+public class LoginControl {
     @FXML
     private Button login_Btn;
 
@@ -105,15 +102,5 @@ public class loginController {
     public void exit() {
         Stage stage = (Stage) exitBtn.getScene().getWindow();
         stage.close();
-    }
-
-    public void addUserTest() {
-        User user = new User();
-        user.setUserName("thephap");
-        user.setPhoneNumber("09009");
-
-        UserDAO userDAO = new UserDAO();
-        userDAO.addUser(user);
-        System.out.println("addSuccess");
     }
 }

@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.scene.control.TableView;
 
 import javax.swing.text.html.ImageView;
 import java.awt.event.MouseEvent;
@@ -18,7 +17,7 @@ import java.util.ResourceBundle;
 
 //import static jdk.xml.internal.SecuritySupport.getResource;
 
-public class dashBordController implements Initializable {
+public class DashBoardControl implements Initializable {
 
 
     @FXML
@@ -119,6 +118,4 @@ public class dashBordController implements Initializable {
 
 
     }
-
-
 }

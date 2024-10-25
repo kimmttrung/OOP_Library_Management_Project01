@@ -15,21 +15,21 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane accessibleRole="BUTTON" cache="true" prefHeight="600.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookController">
+<AnchorPane accessibleRole="BUTTON" cache="true" prefHeight="600.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookControl">
     <children>
         <AnchorPane layoutX="1.0" prefHeight="80.0" prefWidth="986.0" styleClass="semiTop-form" stylesheets="@../css/dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
             <children>
                 <AnchorPane prefHeight="57.0" prefWidth="988.0" styleClass="top-from" stylesheets="@../css/dashbordDesign.css" AnchorPane.bottomAnchor="796.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Button fx:id="close_btn" layoutX="932.0" layoutY="-0.6666666666666666" minWidth="53.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="53.0" styleClass="close-btn" stylesheets="@../css/dashbordDesign.css" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
-<!--                            <graphic>-->
-<!--                                <Icon content="CLOSE" prefHeight="47.0" prefWidth="39.0" />-->
-<!--                            </graphic>-->
+                            <!--                            <graphic>-->
+                            <!--                                <Icon content="CLOSE" prefHeight="47.0" prefWidth="39.0" />-->
+                            <!--                            </graphic>-->
                         </Button>
                         <Button fx:id="minimize" layoutX="1100.0" layoutY="6.0" minWidth="53.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="53.0" styleClass="minimize-btn" stylesheets="@../css/dashbordDesign.css">
-<!--                            <graphic>-->
-<!--                                <Icon content="FULLSCREEN" />-->
-<!--                            </graphic>-->
+                            <!--                            <graphic>-->
+                            <!--                                <Icon content="FULLSCREEN" />-->
+                            <!--                            </graphic>-->
                         </Button>
                         <Label layoutX="116.0" layoutY="8.0" text="Library Management">
                             <font>
@@ -37,14 +37,14 @@
                             </font>
                         </Label>
                         <Button layoutX="20.0" layoutY="5.0" mnemonicParsing="false">
-<!--                            <graphic>-->
-<!--                                <Icon content="MENU" />-->
-<!--                            </graphic>-->
+                            <!--                            <graphic>-->
+                            <!--                                <Icon content="MENU" />-->
+                            <!--                            </graphic>-->
                         </Button>
                         <Button layoutX="20.0" layoutY="4.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="54.0" styleClass="bars" stylesheets="@../css/dashbordDesign.css">
-<!--                            <graphic>-->
-<!--                                <Icon content="CHEVRON_LEFT" />-->
-<!--                            </graphic>-->
+                            <!--                            <graphic>-->
+                            <!--                                <Icon content="CHEVRON_LEFT" />-->
+                            <!--                            </graphic>-->
                         </Button>
                     </children>
                 </AnchorPane>
@@ -54,9 +54,9 @@
                             <children>
                                 <Circle fill="DODGERBLUE" layoutX="100.0" layoutY="99.0" radius="93.0" stroke="BLACK" strokeType="INSIDE" />
                                 <Button layoutX="23.0" layoutY="22.0" minWidth="53.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="155.0" styleClass="edit-btn" stylesheets="@../css/dashbordDesign.css">
-<!--                                    <graphic>-->
-<!--                                        <Icon content="EDIT" prefWidth="15.0" />-->
-<!--                                    </graphic>-->
+                                    <!--                                    <graphic>-->
+                                    <!--                                        <Icon content="EDIT" prefWidth="15.0" />-->
+                                    <!--                                    </graphic>-->
                                 </Button>
                             </children>
                         </AnchorPane>
@@ -75,9 +75,9 @@
                         <Button fx:id="savedBooks_btn" layoutX="67.0" layoutY="541.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css" text="Saved Books" />
                         <Line endX="107.66668701171875" layoutX="155.0" layoutY="343.0" startX="-134.3333282470703" stroke="#e9e0e0" />
                         <Button fx:id="signOut_btn" layoutX="23.0" layoutY="629.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">
-<!--                            <graphic>-->
-<!--                                <Icon content="SLIDESHOW" />-->
-<!--                            </graphic>-->
+                            <!--                            <graphic>-->
+                            <!--                                <Icon content="SLIDESHOW" />-->
+                            <!--                            </graphic>-->
                         </Button>
                         <Label layoutX="90.0" layoutY="640.0" styleClass="edit-label1" stylesheets="@../css/dashbordDesign.css" text="Sign Out" textFill="WHITE">
                             <font>
@@ -96,7 +96,7 @@
                                         <TableColumn fx:id="titleColumn" prefWidth="255.0" text="Title" />
                                         <TableColumn fx:id="authorColumn" prefWidth="104.0" text="Author" />
                                         <TableColumn fx:id="publisherColumn" prefWidth="105.0" text="Publisher" />
-                              <TableColumn fx:id="publishedDateColumn" prefWidth="95.0" text="Published Date" />
+                                        <TableColumn fx:id="publishedDateColumn" prefWidth="95.0" text="Published Date" />
                                     </columns>
                                 </TableView>
                             </children>

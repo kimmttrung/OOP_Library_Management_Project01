@@ -10,14 +10,19 @@ import com.google.gson.JsonParser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Optional;
 
-public class BookController {
+public class BookControl {
 
     @FXML
     protected TextField bookIDField;
@@ -52,24 +57,27 @@ public class BookController {
 
     @FXML
     public void initialize() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
+        setUpTableColumns();
+        setUpBookSelectionListener();
+        loadBooks();
+    }
+
+    private void setUpTableColumns() {
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
+    }
+
+    private void setUpBookSelectionListener() {
         bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                String imageLink = newSelection.getImage();
-                if (imageLink != null && !imageLink.isEmpty()) {
-                    Image image = new Image(imageLink);
-                    bookImageView.setImage(image);
-                } else {
-                    Image defaultImage = new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
-                    bookImageView.setImage(defaultImage);
-                }
-            }
+            String imageLink = (newSelection != null) ? newSelection.getImage() : null;
+            Image image = (imageLink != null && !imageLink.isEmpty())
+                    ? new Image(imageLink)
+                    : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
+            bookImageView.setImage(image);
         });
-        loadBooks();
     }
 
     public void loadBooks() {
@@ -88,10 +96,16 @@ public class BookController {
             // Phân tích JSON
             JsonObject jsonObject = JsonParser.parseString(jsonData).getAsJsonObject();
             JsonArray items = jsonObject.getAsJsonArray("items");
+            if (items == null || items.size() == 0) {
+                showAlert(Alert.AlertType.INFORMATION, "No Results Found", "No books found for the search query: " + needBook);
+                return;
+            }
             searchBooks.deleteSearchedBook();
 
             for (int i = 0; i < items.size(); i++) {
                 JsonObject volumeInfo = items.get(i).getAsJsonObject().getAsJsonObject("volumeInfo");
+                String isbn = volumeInfo.has("industryIdentifiers") ?
+                        volumeInfo.getAsJsonArray("industryIdentifiers").get(0).getAsJsonObject().get("identifier").getAsString() : "Unknown"; // Get ISBN
                 String title = volumeInfo.has("title") ? volumeInfo.get("title").getAsString() : "Unknown";
                 String authors = volumeInfo.has("authors") ? volumeInfo.getAsJsonArray("authors").get(0).getAsString() : "Unknown";
                 String publisher = volumeInfo.has("publisher") ? volumeInfo.get("publisher").getAsString() : "Unknown";
@@ -99,7 +113,7 @@ public class BookController {
                 String imageLink = volumeInfo.has("imageLinks") ?
                         volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString() : null;
 
-                Book book = new Book(title, authors, publisher, publishedDate, imageLink);
+                Book book = new Book(isbn, title, authors, publisher, publishedDate, imageLink);
                 searchBooks.insertBook(book);
                 loadSearchBooks();
             }
@@ -113,82 +127,91 @@ public class BookController {
         bookTable.setItems(bookList);
     }
 
-    public void updateBook() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Update Book");
-        alert.setHeaderText(null);
-
-        if (bookTitleField.getText().isEmpty()) {
-            alert.setContentText("Please enter Book's Name");
-            alert.showAndWait();
-            return;
-        }
-        if (bookAuthorField.getText().isEmpty()) {
-            alert.setContentText("Please enter Author");
-            alert.showAndWait();
-            return;
-        }
-        if (bookPublisherField.getText().isEmpty()) {
-            alert.setContentText("Please enter Publisher");
-            alert.showAndWait();
-            return;
-        }
-        if (bookYearField.getText().isEmpty()) {
-            alert.setContentText("Please enter Year");
-            alert.showAndWait();
+    @FXML
+    private void updateBook() {
+        if (isAnyFieldEmpty(bookTitleField, bookAuthorField, bookPublisherField, bookYearField)) {
+            showAlert(Alert.AlertType.ERROR, "Update Book", "All fields are required.");
             return;
         }
 
-        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmAlert.setTitle("Confirm Update");
-        confirmAlert.setHeaderText("Are you sure you want to update the book?");
-
-        Optional<ButtonType> result = confirmAlert.showAndWait();
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update the book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            String bookName = bookTitleField.getText();
-            String bookAuthor = bookAuthorField.getText();
-            String bookPublisher = bookPublisherField.getText();
-            String bookYear = bookYearField.getText();
-
-            Book newBook = new Book(bookName, bookAuthor, bookPublisher, bookYear, null);
+            Book newBook = new Book(
+                    bookTitleField.getText(),
+                    bookAuthorField.getText(),
+                    bookPublisherField.getText(),
+                    bookYearField.getText(),
+                    null
+            );
 
             if (bookDAO.insertBook(newBook)) {
                 loadBooks();
+                showAlert(Alert.AlertType.INFORMATION, "Update Success", "Book updated successfully.");
             } else {
-                alert.setContentText("Error updating book. Please try again.");
-                alert.showAndWait();
+                showAlert(Alert.AlertType.ERROR, "Update Error", "Error updating book. Please try again.");
             }
         }
     }
 
-    public void deleteBook() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Delete Book");
-        alert.setHeaderText(null);
-
+    @FXML
+    private void deleteBook() {
         if (bookIDField.getText().isEmpty()) {
-            alert.setContentText("Please enter BookID you want to delete");
-            alert.showAndWait();
+            showAlert(Alert.AlertType.ERROR, "Delete Book", "Please enter Book ID.");
             return;
         }
 
-        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmAlert.setTitle("Confirm Delete");
-        confirmAlert.setHeaderText("Are you sure you want to delete this Book?");
-
-        Optional<ButtonType> result = confirmAlert.showAndWait();
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Delete", "Are you sure you want to delete this Book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             int bookId = Integer.parseInt(bookIDField.getText());
             if (bookDAO.deleteBook(bookId)) {
-                Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-                successAlert.setTitle("Success");
-                successAlert.setHeaderText(null);
-                successAlert.setContentText("Delete book successfully!");
-                successAlert.showAndWait();
+                loadBooks();
+                showAlert(Alert.AlertType.INFORMATION, "Delete Success", "Book deleted successfully.");
             } else {
-                alert.setContentText("Error deleting book. Please try again later!.");
-                alert.showAndWait();
+                showAlert(Alert.AlertType.ERROR, "Delete Error", "Error deleting book. Please try again.");
             }
         }
+    }
+
+    private boolean isAnyFieldEmpty(TextField... fields) {
+        for (TextField field : fields) {
+            if (field.getText().trim().isEmpty()) return true;
+        }
+        return false;
+    }
+
+    public void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public Optional<ButtonType> showConfirmationAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        return alert.showAndWait();
+    }
+
+
+
+
+
+    @FXML
+    protected Button returnBooks_btn;
+
+    public void searchBooks() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test1.fxml"));
+        Parent root = loader.load();
+
+        Stage currentStage = (Stage) returnBooks_btn.getScene().getWindow();
+        currentStage.close();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
