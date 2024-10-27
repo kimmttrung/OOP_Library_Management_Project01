@@ -1,7 +1,6 @@
 package DataAccessObject;
 
 import management.libarymanagement.DataBase;
-import Entity.Book;
 import Entity.Borrower;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

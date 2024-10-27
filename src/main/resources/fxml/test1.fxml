@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane accessibleRole="BUTTON" cache="true" prefHeight="600.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookControl">
+<AnchorPane accessibleRole="BUTTON" cache="true" prefHeight="600.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashBoardControl">
     <children>
         <AnchorPane layoutX="1.0" prefHeight="80.0" prefWidth="986.0" styleClass="semiTop-form" stylesheets="@../css/dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -74,7 +74,7 @@
                         <Button fx:id="returnBooks_btn" layoutX="67.0" layoutY="484.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css" text="Return Books" />
                         <Button fx:id="savedBooks_btn" layoutX="67.0" layoutY="541.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="164.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css" text="Saved Books" />
                         <Line endX="107.66668701171875" layoutX="155.0" layoutY="343.0" startX="-134.3333282470703" stroke="#e9e0e0" />
-                        <Button fx:id="signOut_btn" layoutX="23.0" layoutY="629.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">
+                        <Button fx:id="signOut_btn" layoutX="23.0" layoutY="629.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="40.0" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">
                             <!--                            <graphic>-->
                             <!--                                <Icon content="SLIDESHOW" />-->
                             <!--                            </graphic>-->
@@ -88,9 +88,9 @@
                 </AnchorPane>
                 <AnchorPane layoutX="286.0" layoutY="175.0" prefHeight="678.0" prefWidth="864.0" styleClass="than-btn" stylesheets="@../css/dashbordDesign.css">
                     <children>
-                        <AnchorPane layoutX="282.0" layoutY="10.0" prefHeight="657.0" prefWidth="509.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css">
+                        <AnchorPane layoutX="276.0" layoutY="12.0" prefHeight="657.0" prefWidth="509.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css">
                             <children>
-                                <TableView fx:id="bookTable" layoutX="10.0" layoutY="13.0" prefHeight="629.0" prefWidth="617.0">
+                                <TableView fx:id="bookTable" layoutX="10.0" layoutY="13.0" prefHeight="324.0" prefWidth="617.0">
                                     <columns>
                                         <TableColumn fx:id="idColumn" prefWidth="57.0" text="BookID" />
                                         <TableColumn fx:id="titleColumn" prefWidth="255.0" text="Title" />
@@ -99,6 +99,13 @@
                                         <TableColumn fx:id="publishedDateColumn" prefWidth="95.0" text="Published Date" />
                                     </columns>
                                 </TableView>
+                        <TextField fx:id="bookTitleField" layoutX="33.0" layoutY="372.0" prefHeight="26.0" prefWidth="117.0" promptText="Title" />
+                        <TextField fx:id="bookAuthorField" layoutX="159.0" layoutY="372.0" prefHeight="26.0" prefWidth="117.0" promptText="Author" />
+                        <TextField fx:id="bookPublisherField" layoutX="289.0" layoutY="372.0" prefHeight="26.0" prefWidth="117.0" promptText="Publisher" />
+                        <TextField fx:id="bookYearField" layoutX="423.0" layoutY="373.0" prefHeight="26.0" prefWidth="117.0" promptText="PublishedYear" />
+                        <Button layoutX="547.0" layoutY="427.0" mnemonicParsing="false" onAction="#updateBook" prefHeight="49.0" prefWidth="68.0" styleClass="save-btn" stylesheets="@../css/dashbordDesign.css" text="Add" />
+                        <Button layoutX="547.0" layoutY="519.0" mnemonicParsing="false" onAction="#deleteBook" prefHeight="49.0" prefWidth="68.0" styleClass="take-btn" stylesheets="@../css/dashbordDesign.css" text="Delete" />
+                        <TextField fx:id="bookIDField" layoutX="272.0" layoutY="531.0" promptText="BookID " />
                             </children>
                         </AnchorPane>
                         <AnchorPane layoutX="7.0" layoutY="15.0" prefHeight="650.0" prefWidth="256.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css">
@@ -108,8 +115,8 @@
                                         <ImageView fx:id="bookImageView" fitHeight="250.0" fitWidth="170.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                                     </children>
                                 </AnchorPane>
-                                <Button fx:id="save_btn" layoutX="27.0" layoutY="377.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="save-btn" stylesheets="@../css/dashbordDesign.css" text="Save" />
-                                <Button fx:id="take_btn" layoutX="153.0" layoutY="377.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="take-btn" stylesheets="@../css/dashbordDesign.css" text="Take" />
+                                <Button fx:id="save_btn" layoutX="149.0" layoutY="370.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="save-btn" stylesheets="@../css/dashbordDesign.css" text="Save" />
+                                <Button fx:id="take_btn" layoutX="149.0" layoutY="451.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="take-btn" stylesheets="@../css/dashbordDesign.css" text="Take" />
                                 <Label layoutX="83.0" layoutY="286.0" stylesheets="@../css/dashbordDesign.css" text="Learn c++">
                                     <font>
                                         <Font size="20.0" />
