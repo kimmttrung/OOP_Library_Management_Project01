@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ThePhapp&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kimmttrung/OOP_Library_Management_Project01.git&quot;,
+    &quot;accountId&quot;: &quot;ec4ca4ad-fa99-4f13-b6e8-042d4199200e&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2mvbD3S73i5FvIHkw3x29psejs2" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.DataBase.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GoogleBooksAPI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GoogleBooksToDB.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LibaryManagement.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LibraryApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LibraryManagement.executor&quot;: &quot;Run&quot;,
+    &quot;Application.pLibraryManagement.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ThePhapp&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ChatApplication/OOP_Library_Management_Project01&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\image" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="" />
+      <created>1727959874617</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727959874617</updated>
+      <workItem from="1727959875625" duration="1000" />
+      <workItem from="1727959905586" duration="28000" />
+      <workItem from="1727960017328" duration="307000" />
+      <workItem from="1727960519394" duration="17000" />
+      <workItem from="1728036166100" duration="21000" />
+      <workItem from="1728114156076" duration="7146000" />
+      <workItem from="1728191198950" duration="2336000" />
+      <workItem from="1728215865184" duration="144000" />
+      <workItem from="1728220609811" duration="41000" />
+      <workItem from="1728220928235" duration="2650000" />
+      <workItem from="1728303578758" duration="39000" />
+      <workItem from="1728549448228" duration="4686000" />
+      <workItem from="1728555599137" duration="455000" />
+      <workItem from="1728556195616" duration="163000" />
+      <workItem from="1728556812495" duration="42000" />
+      <workItem from="1728557803102" duration="7000" />
+      <workItem from="1728558054606" duration="1000" />
+      <workItem from="1728559366223" duration="1986000" />
+      <workItem from="1728561370243" duration="25000" />
+      <workItem from="1728561405611" duration="72000" />
+      <workItem from="1728561488295" duration="78000" />
+      <workItem from="1728561622651" duration="19000" />
+      <workItem from="1728571135930" duration="76000" />
+      <workItem from="1728571217764" duration="795000" />
+      <workItem from="1728572306809" duration="2572000" />
+      <workItem from="1728639677902" duration="1101000" />
+      <workItem from="1728819007576" duration="34000" />
+      <workItem from="1728819457240" duration="2469000" />
+      <workItem from="1728822360796" duration="1482000" />
+      <workItem from="1728892491198" duration="765000" />
+      <workItem from="1728908041969" duration="949000" />
+      <workItem from="1728983254804" duration="8277000" />
+      <workItem from="1729006793314" duration="1124000" />
+      <workItem from="1729050115692" duration="3364000" />
+      <workItem from="1729093289520" duration="1278000" />
+      <workItem from="1729253787916" duration="7011000" />
+      <workItem from="1729266190301" duration="5470000" />
+      <workItem from="1729272805388" duration="837000" />
+      <workItem from="1729309191088" duration="16920000" />
+      <workItem from="1729358078816" duration="5004000" />
+      <workItem from="1729859837655" duration="321000" />
+      <workItem from="1729868243819" duration="835000" />
+      <workItem from="1729869541739" duration="4307000" />
+      <workItem from="1729958894726" duration="3979000" />
+      <workItem from="1730019154907" duration="3310000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
