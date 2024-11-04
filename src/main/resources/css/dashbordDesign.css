@@ -23,7 +23,7 @@
     -fx-background-color: #ddddddd;
 }
 .bars{
-    -fx-background-color:transparent;
+    -fx-background-color: transparent;
     -fx-background-radius:5px;
     -fx-cursor: hand;
 }
