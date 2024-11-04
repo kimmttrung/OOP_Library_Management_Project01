@@ -66,13 +66,13 @@ public class loginController {
                     login_Btn.getScene().getWindow().hide();
 
 //                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test.fxml"));
-//                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainLibrary.fxml"));
 //                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashbord.fxml"));
 
 
 //                    Parent root = FXMLLoader.load(getClass().getResource("dashbord.fxml"));
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test1.fxml"));
+//                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test2.fxml"));
                     Parent root = loader.load();
 
                     Stage currentStage = (Stage) login_Btn.getScene().getWindow();
