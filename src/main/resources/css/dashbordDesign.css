@@ -16,8 +16,8 @@
     -fx-background-color:#f13f57;
 }
 .minimize-btn{
-     -fx-background-color: transparent;
-     -fx-cursor: hand;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
 }
 .minimize-btn:hover{
     -fx-background-color: #ddddddd;

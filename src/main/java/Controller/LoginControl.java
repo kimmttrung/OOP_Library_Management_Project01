@@ -12,76 +12,58 @@ import java.sql.*;
 public class LoginControl {
 
     @FXML
-    private Button login_Btn; // Nút "Đăng nhập" trên giao diện
+    private Button login_Btn;
 
     @FXML
-    private TextField userName; // Trường nhập tên người dùng
+    private TextField userName;
 
     @FXML
-    private PasswordField passWord; // Trường nhập mật khẩu
+    private PasswordField passWord;
 
     @FXML
-    private Button minimizeBtn; // Nút để thu nhỏ cửa sổ
+    private Button minimizeBtn;
 
     @FXML
-    private Button exitBtn; // Nút để thoát cửa sổ
+    private Button exitBtn;
 
-    private Connection connect; // Kết nối với cơ sở dữ liệu
-    private PreparedStatement pst; // Chuẩn bị câu lệnh SQL
-    private Statement statement; // Thực hiện các câu lệnh SQL
-    private ResultSet resultSet; // Lưu kết quả truy vấn SQL
+    private Connection connect;
+    private PreparedStatement pst;
+    private Statement statement;
+    private ResultSet resultSet;
 
     @FXML
     public void login() {
-        String sql = "SELECT * FROM accounts WHERE username = ? AND password= ?"; // Câu lệnh SQL để kiểm tra tài khoản
+        String sql = "SELECT * FROM accounts WHERE username = ? AND password= ?";
 
         try {
-            // Kết nối tới cơ sở dữ liệu
             connect = DataBase.getConnection();
-
-            // Chuẩn bị câu lệnh SQL với tham số
             pst = connect.prepareStatement(sql);
-            pst.setString(1, userName.getText()); // Thiết lập tham số 1 là tên người dùng
-            pst.setString(2, passWord.getText()); // Thiết lập tham số 2 là mật khẩu
-
-            // Thực hiện truy vấn và lưu kết quả
+            pst.setString(1, userName.getText());
+            pst.setString(2, passWord.getText());
             resultSet = pst.executeQuery();
 
-            Alert alert; // Khởi tạo biến cảnh báo
+            Alert alert;
 
-            // Kiểm tra nếu tên người dùng hoặc mật khẩu bị bỏ trống
             if (userName.getText().isEmpty() || passWord.getText().isEmpty()) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
-                alert.setContentText("Please enter all the fields"); // Hiển thị thông báo yêu cầu nhập đủ các trường
+                alert.setContentText("Please enter all the fields");
                 alert.showAndWait();
             } else {
-                // Nếu tên người dùng và mật khẩu đúng
                 if (resultSet.next()) {
-                    // Xác nhận khi đăng nhập thành công
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("admin Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully Login");
-                    alert.showAndWait();
-
-                    // Tải giao diện mới khi đăng nhập thành công
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test1.fxml"));
                     Parent root = loader.load();
 
-                    // Đóng cửa sổ đăng nhập hiện tại
                     Stage currentStage = (Stage) login_Btn.getScene().getWindow();
                     currentStage.close();
 
-                    // Mở cửa sổ mới
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show();
 
                 } else {
-                    // Thông báo lỗi nếu tên người dùng hoặc mật khẩu sai
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
@@ -92,7 +74,6 @@ public class LoginControl {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            // Đảm bảo đóng các kết nối, câu lệnh và kết quả sau khi hoàn thành
             try {
                 if (resultSet != null) {
                     resultSet.close();
@@ -104,21 +85,19 @@ public class LoginControl {
                     connect.close();
                 }
             } catch (Exception e) {
-                // Xử lý lỗi nếu có trong khi đóng tài nguyên
+                ;
             }
         }
     }
 
     @FXML
     public void minimize() {
-        // Thu nhỏ cửa sổ hiện tại
         Stage stage = (Stage) minimizeBtn.getScene().getWindow();
         stage.setIconified(true);
     }
 
     @FXML
     public void exit() {
-        // Đóng cửa sổ hiện tại
         Stage stage = (Stage) exitBtn.getScene().getWindow();
         stage.close();
     }
