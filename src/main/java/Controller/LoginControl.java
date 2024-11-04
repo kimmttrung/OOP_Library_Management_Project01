@@ -1,4 +1,4 @@
-package management.libarymanagement;
+package Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,14 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import management.libarymanagement.DataBase;
+import java.sql.*;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+public class LoginControl {
 
-public class loginController {
     @FXML
     private Button login_Btn;
 
@@ -30,20 +27,20 @@ public class loginController {
     private Button exitBtn;
 
     private Connection connect;
-    private PreparedStatement prepare;
+    private PreparedStatement pst;
     private Statement statement;
     private ResultSet resultSet;
 
     @FXML
     public void login() {
         String sql = "SELECT * FROM accounts WHERE username = ? AND password= ?";
-        connect = DataBase.getConnection();
 
         try {
-            prepare = connect.prepareStatement(sql);
-            prepare.setString(1, userName.getText());
-            prepare.setString(2, passWord.getText());
-            resultSet = prepare.executeQuery();
+            connect = DataBase.getConnection();
+            pst = connect.prepareStatement(sql);
+            pst.setString(1, userName.getText());
+            pst.setString(2, passWord.getText());
+            resultSet = pst.executeQuery();
 
             Alert alert;
 
@@ -55,7 +52,7 @@ public class loginController {
                 alert.showAndWait();
             } else {
                 if (resultSet.next()) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test1.fxml"));
                     Parent root = loader.load();
 
                     Stage currentStage = (Stage) login_Btn.getScene().getWindow();
@@ -65,6 +62,7 @@ public class loginController {
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show();
+
                 } else {
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
@@ -75,12 +73,26 @@ public class loginController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (Exception e) {
+                ;
+            }
         }
     }
 
     @FXML
-    void minimize() {
-        Stage stage = (Stage)minimizeBtn.getScene().getWindow();
+    public void minimize() {
+        Stage stage = (Stage) minimizeBtn.getScene().getWindow();
         stage.setIconified(true);
     }
 
