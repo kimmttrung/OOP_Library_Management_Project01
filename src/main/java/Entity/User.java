@@ -50,6 +50,7 @@ public class User {
     }
 
     public String getRegistrationDate() {
+        this.registrationDate = getCurrentDate();
         return registrationDate;
     }
 

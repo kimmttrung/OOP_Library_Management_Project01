@@ -3,6 +3,7 @@ package Controller;
 import DataAccessObject.BookDAO;
 import DataAccessObject.SearchBooks;
 import Entity.Book;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,8 +16,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.awt.event.MouseEvent;
 import java.net.URL;
@@ -124,7 +127,7 @@ public class DashBoardControl implements Initializable {
     }
 
     private void setUpTableColumns() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));

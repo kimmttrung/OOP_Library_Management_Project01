@@ -1,5 +1,8 @@
 package Entity;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Borrower {
     private int id;
     private String username;
@@ -65,6 +68,7 @@ public class Borrower {
     }
 
     public String getBorrow_from() {
+        this.borrow_from = getCurrentDate();
         return borrow_from;
     }
 
@@ -86,6 +90,12 @@ public class Borrower {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    private String getCurrentDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.now();
+        return date.format(formatter);
     }
 
     @Override

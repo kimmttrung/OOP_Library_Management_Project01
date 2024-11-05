@@ -8,160 +8,161 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class UserControl {
 
     @FXML
-    private TextField userID;
-    @FXML
-    private TextField userNameField;
-    @FXML
-    private TextField phoneNumberField;
+    private TextField userID, userNameField, phoneNumberField;
     @FXML
     private TableView<User> userTable;
     @FXML
     private TableColumn<User, Integer> idColumn;
     @FXML
-    private TableColumn<User, String> nameColumn;
-    @FXML
-    private TableColumn<User, String> phoneColumn;
+    private TableColumn<User, String> nameColumn, phoneColumn, registrationDate;
 
     private ObservableList<User> userList = FXCollections.observableArrayList();
-    private UserDAO userDAO = new UserDAO();
+    private final UserDAO userDAO = new UserDAO();
 
     @FXML
     public void initialize() {
-        // Set up the table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        registrationDate.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
 
         loadUsers();
     }
 
     public void addUser() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Add User");
-        alert.setHeaderText(null);
+        if (validateInput()) {
+            if (confirmAction("Confirm Addition", "Are you sure you want to add this User?")) {
+                User newUser = new User(userNameField.getText(), phoneNumberField.getText(), getCurrentDate());
 
-        if (userNameField.getText().isEmpty()) {
-            alert.setContentText("Please enter User's Name");
-            alert.showAndWait();
-            return;
-        }
-        if (phoneNumberField.getText().isEmpty()) {
-            alert.setContentText("Please enter Phone Number");
-            alert.showAndWait();
-            return;
-        }
-
-        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmAlert.setTitle("Confirm Addition");
-        confirmAlert.setHeaderText("Are you sure you want to add this User?");
-
-        Optional<ButtonType> result = confirmAlert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            String userName = userNameField.getText();
-            String phoneNumber = phoneNumberField.getText();
-            String registrationDate = getCurrentDate();
-
-            User newUser = new User(userName, phoneNumber, registrationDate);
-
-            if (userDAO.addUser(newUser)) {
-                loadUsers(); // Reload users to refresh the table
-                showSuccessAlert("Add User", "User added successfully!");
-            } else {
-                alert.setContentText("Error adding user. Please try again.");
-                alert.showAndWait();
+                if (userDAO.addUser(newUser)) {
+                    loadUsers();
+                    showAlert(Alert.AlertType.INFORMATION, "Add User", "User added successfully!");
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Add User", "Error adding user. Please try again.");
+                }
             }
         }
     }
 
     public void deleteUser() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Delete User");
-        alert.setHeaderText(null);
-
-        if (userID.getText().isEmpty()) {
-            alert.setContentText("Please enter UserID you want to delete");
-            alert.showAndWait();
-            return;
-        }
-
-        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmAlert.setTitle("Confirm Delete");
-        confirmAlert.setHeaderText("Are you sure you want to delete this User?");
-
-        Optional<ButtonType> result = confirmAlert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+        if (!userID.getText().isEmpty() && confirmAction("Confirm Delete", "Are you sure you want to delete this User?")) {
             int userId = Integer.parseInt(userID.getText());
 
             if (userDAO.deleteUser(userId)) {
                 loadUsers();
-                showSuccessAlert("Delete User", "User deleted successfully!");
+                showAlert(Alert.AlertType.INFORMATION, "Delete User", "User deleted successfully!");
             } else {
-                alert.setContentText("Error deleting user. Please try again later!");
-                alert.showAndWait();
+                showAlert(Alert.AlertType.ERROR, "Delete User", "Error deleting user. Please try again later!");
             }
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Delete User", "Please enter UserID you want to delete");
         }
     }
 
     public void updateUser() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Update User");
-        alert.setHeaderText(null);
+        if (validateUpdateInput()) {
+            if (confirmAction("Confirm Update", "Are you sure you want to update this User?")) {
+                User updatedUser = new User();
+                updatedUser.setId(Integer.parseInt(userID.getText()));
+                updatedUser.setPhoneNumber(phoneNumberField.getText());
 
-        if (userID.getText().isEmpty()) {
-            alert.setContentText("Please enter UserID of the user to update");
-            alert.showAndWait();
-            return;
+                if (userDAO.updateUser(updatedUser)) {
+                    loadUsers();
+                    showAlert(Alert.AlertType.INFORMATION, "Update User", "User updated successfully!");
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Update User", "Error updating user. Please try again.");
+                }
+            }
         }
-        if (userNameField.getText().isEmpty()) {
-            alert.setContentText("Please enter User's Name");
-            alert.showAndWait();
-            return;
+    }
+
+    public void findUserByUsername() {
+        if (!userNameField.getText().isEmpty()) {
+            User user = userDAO.findUser(userNameField.getText());
+            if (user != null) {
+                showUserInfo(user);
+            } else {
+                showAlert(Alert.AlertType.INFORMATION, "Find User", "User not found");
+            }
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Find User", "Please enter the username to search");
         }
-        if (phoneNumberField.getText().isEmpty()) {
-            alert.setContentText("Please enter Phone Number");
-            alert.showAndWait();
-            return;
-        }
+    }
 
-        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmAlert.setTitle("Confirm Update");
-        confirmAlert.setHeaderText("Are you sure you want to update this User?");
-
-        Optional<ButtonType> result = confirmAlert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            //int userId = Integer.parseInt(userID.getText());
-            String userName = userNameField.getText();
-            String phoneNumber = phoneNumberField.getText();
-
-            User updatedUser = new User(userName, phoneNumber);
-
-            userDAO.updateUser(updatedUser);
-            loadUsers(); // Reload users to refresh the table
-            showSuccessAlert("Update User", "User updated successfully!");
+    public void findUserByID() {
+        if (!userID.getText().isEmpty()) {
+            User user = userDAO.findUserbyID(Integer.parseInt(userID.getText()));
+            if (user != null) {
+                showUserInfo(user);
+            } else {
+                showAlert(Alert.AlertType.INFORMATION, "Find User", "User not found");
+            }
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Find User", "Please enter the UserID to search");
         }
     }
 
     private void loadUsers() {
-        userList.clear();
-        userList.addAll(userDAO.getAllUsers());
+        userList.setAll(userDAO.getAllUsers());
         userTable.setItems(userList);
     }
 
-    private void showSuccessAlert(String title, String content) {
-        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-        successAlert.setTitle(title);
-        successAlert.setHeaderText(null);
-        successAlert.setContentText(content);
-        successAlert.showAndWait();
+    private boolean validateInput() {
+        if (userNameField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Add User", "Please enter User's Name");
+            return false;
+        }
+        if (phoneNumberField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Add User", "Please enter Phone Number");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateUpdateInput() {
+        if (userID.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Update User", "Please enter UserID of the user to update");
+            return false;
+        }
+        if (phoneNumberField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Update User", "Please enter Phone Number");
+            return false;
+        }
+        return true;
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private boolean confirmAction(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
+    }
+
+    private void showUserInfo(User user) {
+        userID.setText(String.valueOf(user.getId()));
+        userNameField.setText(user.getUserName());
+        phoneNumberField.setText(user.getPhoneNumber());
+        registrationDate.setText(user.getRegistrationDate());
     }
 
     private String getCurrentDate() {
-        // Implement this method to return the current date as a string
-        return "";
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 }

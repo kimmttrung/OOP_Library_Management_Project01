@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Optional;
 
@@ -48,9 +50,15 @@ public class BorrowerControl {
     private void borrowBook() {
         String username = borrowerUsernameField.getText();
         String bookId = bookIDField.getText();
+        String borrow_to = toDateField.getText();
 
-        if (username.isEmpty() || bookId.isEmpty()) {
+        if (username.isEmpty() || bookId.isEmpty() || borrow_to.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Borrow Book", "Please enter both Username and Book ID.");
+            return;
+        }
+
+        if (!borrowerDAO.getBorrowerByStatusAndUsername("processing", username).isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Borrow Book", "This user already has a borrowed book.");
             return;
         }
 
@@ -60,7 +68,7 @@ public class BorrowerControl {
         Optional<ButtonType> result = confirmAlert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            borrowerDAO.insertBorrower(username, bookId);
+            borrowerDAO.insertBorrower(username, bookId, getCurrentDate(), borrow_to);
             loadBorrowers();
             showAlert(Alert.AlertType.INFORMATION, "Success", "Book borrowed successfully.");
         }
@@ -96,7 +104,7 @@ public class BorrowerControl {
     @FXML
     private void renewBook() {
         String borrowerId = borrowerIDField.getText();
-        int additionalDays = 7; // Number of days for renewal
+        int additionalDays = 7;
 
         if (borrowerId.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Renew Book", "Please enter Borrower ID.");
@@ -110,7 +118,7 @@ public class BorrowerControl {
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
-            if (borrower != null && borrower.getStatus().equals("processing")) {
+            if (borrower != null && "processing".equals(borrower.getStatus())) {
                 try {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date currentDueDate = dateFormat.parse(borrower.getBorrow_to());
@@ -135,5 +143,9 @@ public class BorrowerControl {
         alert.setContentText(message);
         alert.showAndWait();
     }
-}
 
+    private String getCurrentDate() {
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+}

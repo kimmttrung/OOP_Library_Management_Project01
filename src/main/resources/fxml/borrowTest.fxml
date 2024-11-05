@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="656.0" prefWidth="1022.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
+   <children>
+      <TableView fx:id="borrowerTable" layoutY="1.0" prefHeight="284.0" prefWidth="1022.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="135.0" text="id" />
+          <TableColumn fx:id="usernameColumn" prefWidth="127.0" text="name" />
+            <TableColumn fx:id="statusColumn" prefWidth="132.0" text="statusColumn" />
+            <TableColumn fx:id="fromColumn" prefWidth="199.0" text="fromColumn" />
+            <TableColumn fx:id="toColumn" prefWidth="194.0" text="toColumn" />
+            <TableColumn fx:id="bookIdColumn" prefWidth="234.0" text="bookIdColumn" />
+        </columns>
+      </TableView>
+      <TextField fx:id="borrowerIDField" layoutX="128.0" layoutY="389.0" promptText="borrowerIDField" />
+      <TextField fx:id="borrowerUsernameField" layoutX="308.0" layoutY="389.0" promptText="borrowerUsernameField" />
+      <TextField fx:id="bookIDField" layoutX="497.0" layoutY="389.0" promptText="bookIDField" />
+      <TextField fx:id="statusField" layoutX="681.0" layoutY="389.0" promptText="statusField" />
+      <TextField fx:id="fromDateField" layoutX="859.0" layoutY="389.0" promptText="fromDateField" />
+      <TextField fx:id="toDateField" layoutX="859.0" layoutY="431.0" promptText="toDateField" />
+      <Button layoutX="112.0" layoutY="498.0" mnemonicParsing="false" onAction="#borrowBook" text="borrowBook" />
+      <Button layoutX="244.0" layoutY="498.0" mnemonicParsing="false" onAction="#returnBook" text="returnBook" />
+      <Button layoutX="376.0" layoutY="498.0" mnemonicParsing="false" onAction="#renewBook" text="renewBook" />
+   </children>
+</AnchorPane>
