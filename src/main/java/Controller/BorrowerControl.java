@@ -147,5 +147,4 @@ public class BorrowerControl {
     private String getCurrentDate() {
         return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
-
 }

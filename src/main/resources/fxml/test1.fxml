@@ -115,7 +115,7 @@
                                         <ImageView fx:id="bookImageView" fitHeight="250.0" fitWidth="170.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                                     </children>
                                 </AnchorPane>
-                                <Button fx:id="save_btn" layoutX="149.0" layoutY="370.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="save-btn" stylesheets="@../css/dashBoardDesign.css" text="Save" />
+                                <Button fx:id="save_btn" layoutX="95.0" layoutY="351.0" mnemonicParsing="false" onAction="#saveSelectedBook" prefHeight="49.0" prefWidth="68.0" styleClass="save-btn" stylesheets="@../css/dashBoardDesign.css" text="Save" />
                                 <Button fx:id="take_btn" layoutX="149.0" layoutY="451.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="take-btn" stylesheets="@../css/dashBoardDesign.css" text="Take" />
                                 <Label layoutX="83.0" layoutY="286.0" stylesheets="@../css/dashBoardDesign.css" text="Learn c++">
                                     <font>

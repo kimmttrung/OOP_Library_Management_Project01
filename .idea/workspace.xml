@@ -5,20 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/borrowTest.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/userTest.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/BookSearchApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/BookSearchService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dashbordDesign.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dashBoardDesign.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/mainLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/mainLibrary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/loginForm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/test1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/test1.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
     </list>
@@ -30,9 +26,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="CSS File" />
         <option value="Class" />
-        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -66,6 +62,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.BookSearchApp.executor": "Run",
     "Application.DataBase.executor": "Run",
     "Application.GoogleBooksAPI.executor": "Run",
     "Application.GoogleBooksToDB.executor": "Run",
@@ -73,12 +70,14 @@
     "Application.LibaryManagement.executor": "Run",
     "Application.LibraryApp.executor": "Run",
     "Application.LibraryManagement.executor": "Run",
+    "Application.LoginRegisterForgotPass.executor": "Run",
     "Application.MainApp.executor": "Run",
     "Application.pLibraryManagement.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "ThePhapp",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -87,7 +86,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -159,7 +158,10 @@
       <workItem from="1730019154907" duration="7071000" />
       <workItem from="1730261334168" duration="3971000" />
       <workItem from="1730296463795" duration="20000" />
-      <workItem from="1730729361804" duration="10277000" />
+      <workItem from="1730729361804" duration="14619000" />
+      <workItem from="1730866630476" duration="3022000" />
+      <workItem from="1730902193130" duration="13000" />
+      <workItem from="1730903069384" duration="5506000" />
     </task>
     <servers />
   </component>

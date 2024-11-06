@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -19,9 +20,9 @@
                   <Font name="Berlin Sans FB" size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="userName" layoutX="141.0" layoutY="154.0" prefHeight="35.0" prefWidth="253.0" promptText="Username" styleClass="textField" stylesheets="@../css/designLogin.css" />
-            <PasswordField fx:id="passWord" layoutX="141.0" layoutY="197.0" prefHeight="35.0" prefWidth="253.0" promptText="Password" styleClass="textField" />
-            <Button fx:id="login_Btn" layoutX="224.0" layoutY="256.0" mnemonicParsing="false" onAction="#login" prefHeight="47.0" prefWidth="87.0" styleClass="login-btn" stylesheets="@../css/designLogin.css" text="Login" textFill="#100202">
+            <TextField fx:id="login_username" layoutX="141.0" layoutY="154.0" prefHeight="35.0" prefWidth="253.0" promptText="Username" styleClass="textField" stylesheets="@../css/designLogin.css" />
+            <PasswordField fx:id="login_password" layoutX="141.0" layoutY="197.0" prefHeight="35.0" prefWidth="253.0" promptText="Password" styleClass="textField" />
+            <Button fx:id="login_Btn" layoutX="224.0" layoutY="296.0" mnemonicParsing="false" onAction="#login" prefHeight="47.0" prefWidth="87.0" styleClass="login-btn" stylesheets="@../css/designLogin.css" text="Login" textFill="#100202">
                <font>
                   <Font size="14.0" />
                </font>
@@ -34,6 +35,12 @@
                   <Image url="@../image/logo.png" />
                </image>
             </ImageView>
+            <CheckBox fx:id="login_selectShowPassword" layoutX="142.0" layoutY="243.0" mnemonicParsing="false" onAction="#showPassword" prefHeight="36.0" prefWidth="154.0" text="Show Password" textFill="#d3c6c6">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </CheckBox>
+            <TextField fx:id="login_showPassword" layoutX="141.0" layoutY="197.0" prefHeight="35.0" prefWidth="253.0" promptText="Password" styleClass="textField" stylesheets="@../css/designLogin.css" visible="false" />
 
          </children>
       </AnchorPane>

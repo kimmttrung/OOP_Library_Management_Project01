@@ -17,20 +17,18 @@ public class BookDAO {
 
     public ObservableList<Book> getAllBooks() {
         ObservableList<Book> books = FXCollections.observableArrayList();
-        String sql = "SELECT bookID, name, author, publisher, publishedDate FROM books";
+        String sql = "SELECT * FROM books";
 
         try {
             conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
-                books.add(new Book(
-                        rs.getInt("bookID"),
-                        rs.getString("name"),
-                        rs.getString("author"),
-                        rs.getString("publisher"),
-                        rs.getString("publishedDate")
-                ));
+                Book book = new Book(
+                        rs.getString(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getString(6));
+                books.add(book);
             }
         } catch (Exception e) {
             e.printStackTrace();

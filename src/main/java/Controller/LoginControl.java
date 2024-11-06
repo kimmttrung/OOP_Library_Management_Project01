@@ -15,10 +15,16 @@ public class LoginControl {
     private Button login_Btn;
 
     @FXML
-    private TextField userName;
+    private TextField login_username;
 
     @FXML
-    private PasswordField passWord;
+    private PasswordField login_password;
+
+    @FXML
+    private TextField login_showPassword;
+
+    @FXML
+    private CheckBox login_selectShowPassword;
 
     @FXML
     private Button minimizeBtn;
@@ -38,13 +44,20 @@ public class LoginControl {
         try {
             connect = DataBase.getConnection();
             pst = connect.prepareStatement(sql);
-            pst.setString(1, userName.getText());
-            pst.setString(2, passWord.getText());
+            pst.setString(1, login_username.getText());
+            pst.setString(2, login_password.getText());
             resultSet = pst.executeQuery();
 
             Alert alert;
 
-            if (userName.getText().isEmpty() || passWord.getText().isEmpty()) {
+            if (login_username.getText().isEmpty() || login_password.getText().isEmpty()) {
+
+                if(login_selectShowPassword.isSelected()){
+                    login_password.setText(login_showPassword.getText());
+                }else{
+                    login_showPassword.setText(login_password.getText());
+                }
+
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
@@ -52,7 +65,7 @@ public class LoginControl {
                 alert.showAndWait();
             } else {
                 if (resultSet.next()) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/borrowTest.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test1.fxml"));
                     Parent root = loader.load();
 
                     Stage currentStage = (Stage) login_Btn.getScene().getWindow();
@@ -88,6 +101,20 @@ public class LoginControl {
                 ;
             }
         }
+    }
+
+    public void showPassword() {
+
+        if (login_selectShowPassword.isSelected()) {
+            login_showPassword.setText(login_password.getText());
+            login_showPassword.setVisible(true);
+            login_password.setVisible(false);
+        } else {
+            login_password.setText(login_showPassword.getText());
+            login_showPassword.setVisible(false);
+            login_password.setVisible(true);
+        }
+
     }
 
     @FXML

@@ -1,9 +1,6 @@
 package Controller;
 
-import DataAccessObject.BookDAO;
-import DataAccessObject.SearchBooks;
 import Entity.Book;
-import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,10 +13,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 
 import java.awt.event.MouseEvent;
 import java.net.URL;
@@ -89,7 +84,7 @@ public class DashBoardControl implements Initializable {
     public void logout(ActionEvent event){
         try{
             if (event.getSource() == signOut_btn){
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginForm.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
@@ -168,6 +163,22 @@ public class DashBoardControl implements Initializable {
     }
 
     @FXML
+    private void saveSelectedBook() {
+        Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
+        if (selectedBook == null) {
+            showAlert(Alert.AlertType.WARNING, "Save Book", "Please select a book to save.");
+            return;
+        }
+
+        boolean isSaved = bookControl.saveBookToDatabase(selectedBook);
+        if (isSaved) {
+            showAlert(Alert.AlertType.INFORMATION, "Save Book", "Book saved successfully!");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Save Book", "Failed to save the book.");
+        }
+    }
+
+    @FXML
     private void updateBook() {
         if (isAnyFieldEmpty(bookTitleField, bookAuthorField, bookPublisherField, bookYearField)) {
             showAlert(Alert.AlertType.ERROR, "Update Book", "All fields are required.");
@@ -204,7 +215,7 @@ public class DashBoardControl implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             int bookId = Integer.parseInt(bookIDField.getText());
             if (bookControl.deleteBook(bookId)) {
-                loadBooks();  // Reload books in the table view
+                loadBooks();
                 showAlert(Alert.AlertType.INFORMATION, "Delete Success", "Book deleted successfully.");
             } else {
                 showAlert(Alert.AlertType.ERROR, "Delete Error", "Error deleting book. Please try again.");

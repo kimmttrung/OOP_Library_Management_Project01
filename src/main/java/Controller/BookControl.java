@@ -1,7 +1,6 @@
 package Controller;
 
 import API.GoogleBooksAPI;
-import DataAccessObject.SearchBooks;
 import Entity.Book;
 import DataAccessObject.BookDAO;
 import com.google.gson.JsonArray;
@@ -13,7 +12,6 @@ import javafx.collections.ObservableList;
 public class BookControl {
 
     private BookDAO bookDAO = new BookDAO();
-    private SearchBooks searchBooks = new SearchBooks();
     private ObservableList<Book> searchResults = FXCollections.observableArrayList();
 
     public ObservableList<Book> getAllBooks() {
@@ -30,7 +28,7 @@ public class BookControl {
             if (items == null || items.size() == 0) {
                 return;
             }
-            searchBooks.deleteSearchedBook();
+
             searchResults.clear();
 
             for (int i = 0; i < items.size(); i++) {
@@ -45,7 +43,6 @@ public class BookControl {
                         volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString() : null;
 
                 Book book = new Book(isbn, title, authors, publisher, publishedDate, imageLink);
-                searchBooks.insertBook(book);
                 searchResults.add(book);
             }
         } catch (Exception e) {
@@ -65,5 +62,9 @@ public class BookControl {
     public boolean deleteBook(int bookId) {
         //delete book from the database based on ID
         return bookDAO.deleteBook(bookId);
+    }
+
+    public boolean saveBookToDatabase(Book book) {
+        return bookDAO.insertBook(book);
     }
 }
