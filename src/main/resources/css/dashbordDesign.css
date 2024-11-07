@@ -117,3 +117,8 @@
 .find_btn:hover{
     -fx-background-color:#ed5c5c;
 }
+.mainCenter{
+    -fx-background-color: #fff;
+    -fx-border-color: #00000;
+    -fx-font-size: 20px;
+}

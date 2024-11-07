@@ -52,6 +52,7 @@ public class LoginControl {
                 alert.showAndWait();
             } else {
                 if (resultSet.next()) {
+
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test1.fxml"));
                     Parent root = loader.load();
 

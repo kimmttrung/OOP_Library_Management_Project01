@@ -3,6 +3,7 @@ package Controller;
 import DataAccessObject.BookDAO;
 import DataAccessObject.SearchBooks;
 import Entity.Book;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,9 +16,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.Optional;
@@ -25,6 +30,10 @@ import java.util.ResourceBundle;
 
 public class DashBoardControl implements Initializable {
 
+    @FXML
+    private Button bars_btn;
+    @FXML
+    private Button arrow_btn;
     @FXML
     private ImageView availableBook_btn;
     @FXML
@@ -71,6 +80,27 @@ public class DashBoardControl implements Initializable {
     private TextField bookPublisherField;
     @FXML
     private TextField bookIDField;
+    @FXML
+    private AnchorPane nav_form;
+    @FXML
+    private AnchorPane mainCenter_form;
+    @FXML
+    private Button halfNav_availableBtn;
+
+    @FXML
+    private AnchorPane halfNav_form;
+
+    @FXML
+    private Button halfNav_returnBtn;
+
+    @FXML
+    private Button halfNav_saveBtn;
+
+    @FXML
+    private Button halfNav_takeBtn;
+
+    @FXML
+    private Circle smallCircle_image;
 
     private BookControl bookControl = new BookControl();
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
@@ -116,6 +146,60 @@ public class DashBoardControl implements Initializable {
         stage.setIconified(true);
 
     }
+    public void sliderArrow() {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(.5));
+        slide.setNode(nav_form);
+        slide.setToX(-287);
+
+        TranslateTransition slide1 = new TranslateTransition();
+        slide1.setDuration(Duration.seconds(.5));
+        slide1.setNode(mainCenter_form);
+        slide1.setToX(-270);
+
+        TranslateTransition slide2 = new TranslateTransition();
+        slide2.setDuration(Duration.seconds(.5));
+        slide2.setNode(halfNav_form);
+        slide2.setToX(135);
+
+        slide.setOnFinished((ActionEvent event) -> {
+            arrow_btn.setVisible(false);
+            bars_btn.setVisible(true);
+        });
+
+        slide2.play();
+        slide1.play();
+        slide.play();
+    }
+    public void sliderBars() {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(.5));
+        slide.setNode(nav_form);
+        slide.setToX(0);
+
+        TranslateTransition slide1 = new TranslateTransition();
+        slide1.setDuration(Duration.seconds(.5));
+        slide1.setNode(mainCenter_form);
+        slide1.setToX(0);
+
+        TranslateTransition slide2 = new TranslateTransition();
+        slide2.setDuration(Duration.seconds(.5));
+        slide2.setNode(halfNav_form);
+        slide2.setToX(0);
+
+
+        slide.setOnFinished((ActionEvent event) -> {
+            arrow_btn.setVisible(true);
+            bars_btn.setVisible(false);
+        });
+
+        slide2.play();
+        slide1.play();
+        slide.play();
+
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources){
         setUpTableColumns();
