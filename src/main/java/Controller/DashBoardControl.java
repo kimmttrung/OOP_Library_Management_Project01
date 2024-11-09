@@ -41,6 +41,8 @@ public class DashBoardControl implements Initializable {
     @FXML
     private Button find_btn;
     @FXML
+    private Button availableBook_btnn;
+    @FXML
     private Button issueBooks_btn;
     @FXML
     private Button minimize;
@@ -102,6 +104,9 @@ public class DashBoardControl implements Initializable {
     @FXML
     private Circle smallCircle_image;
 
+    @FXML
+    private AnchorPane valueBook;
+
     private BookControl bookControl = new BookControl();
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
 
@@ -155,12 +160,12 @@ public class DashBoardControl implements Initializable {
         TranslateTransition slide1 = new TranslateTransition();
         slide1.setDuration(Duration.seconds(.5));
         slide1.setNode(mainCenter_form);
-        slide1.setToX(-270);
+        slide1.setToX(-140);
 
         TranslateTransition slide2 = new TranslateTransition();
         slide2.setDuration(Duration.seconds(.5));
         slide2.setNode(halfNav_form);
-        slide2.setToX(135);
+        slide2.setToX(0);
 
         slide.setOnFinished((ActionEvent event) -> {
             arrow_btn.setVisible(false);
@@ -185,7 +190,7 @@ public class DashBoardControl implements Initializable {
         TranslateTransition slide2 = new TranslateTransition();
         slide2.setDuration(Duration.seconds(.5));
         slide2.setNode(halfNav_form);
-        slide2.setToX(0);
+        slide2.setToX(-135);
 
 
         slide.setOnFinished((ActionEvent event) -> {
@@ -198,6 +203,46 @@ public class DashBoardControl implements Initializable {
         slide.play();
 
     }
+
+    public void avalueBooks1() {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(.5));
+        slide.setNode(mainCenter_form);
+        slide.setToX(-1500);
+
+        TranslateTransition slide1 = new TranslateTransition();
+        slide1.setDuration(Duration.seconds(.5));
+        slide1.setNode(valueBook);
+        slide1.setToX(0);
+
+        slide.setOnFinished((ActionEvent event) -> {
+            availableBook_btnn.setVisible(true);
+            halfNav_availableBtn.setVisible(true);
+        });
+
+        slide1.play();
+        slide.play();
+    }
+    public void avalueBooks2() {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(.5));
+        slide.setNode(mainCenter_form);
+        slide.setToX(0);
+
+        TranslateTransition slide1 = new TranslateTransition();
+        slide1.setDuration(Duration.seconds(.5));
+        slide1.setNode(valueBook);
+        slide1.setToX(-1500);
+
+        slide.setOnFinished((ActionEvent event) -> {
+            issueBooks_btn.setVisible(true);
+            halfNav_takeBtn.setVisible(true);
+        });
+
+        slide1.play();
+        slide.play();
+    }
+
 
 
     @Override
