@@ -29,14 +29,14 @@ public class Book {
         this.image = image;
     }
 
-    public Book(String isbn, String name, String author,String publisher, String publishedDate, String image) {
-        this.isbn = isbn;
-        this.name = name;
-        this.author = author;
-        this.publisher = publisher;
-        this.publishedDate = publishedDate;
-        this.image = image;
-    }
+//    public Book(String isbn, String name, String author,String publisher, String publishedDate, String image) {
+//        this.isbn = isbn;
+//        this.name = name;
+//        this.author = author;
+//        this.publisher = publisher;
+//        this.publishedDate = publishedDate;
+//        this.image = image;
+//    }
 
     public Book(int bookID, String name, String author,String publisher, String publishedDate) {
         this.bookID = bookID;

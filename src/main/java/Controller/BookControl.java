@@ -33,8 +33,6 @@ public class BookControl {
 
             for (int i = 0; i < items.size(); i++) {
                 JsonObject volumeInfo = items.get(i).getAsJsonObject().getAsJsonObject("volumeInfo");
-                String isbn = volumeInfo.has("industryIdentifiers") ?
-                        volumeInfo.getAsJsonArray("industryIdentifiers").get(0).getAsJsonObject().get("identifier").getAsString() : "Unknown";
                 String title = volumeInfo.has("title") ? volumeInfo.get("title").getAsString() : "Unknown";
                 String authors = volumeInfo.has("authors") ? volumeInfo.getAsJsonArray("authors").get(0).getAsString() : "Unknown";
                 String publisher = volumeInfo.has("publisher") ? volumeInfo.get("publisher").getAsString() : "Unknown";
@@ -42,7 +40,7 @@ public class BookControl {
                 String imageLink = volumeInfo.has("imageLinks") ?
                         volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString() : null;
 
-                Book book = new Book(isbn, title, authors, publisher, publishedDate, imageLink);
+                Book book = new Book(title, authors, publisher, publishedDate, imageLink);
                 searchResults.add(book);
             }
         } catch (Exception e) {
