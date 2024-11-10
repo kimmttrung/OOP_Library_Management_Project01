@@ -25,8 +25,11 @@ import javafx.util.Duration;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
 
 public class DashBoardControl implements Initializable {
 
@@ -105,10 +108,65 @@ public class DashBoardControl implements Initializable {
     private Circle smallCircle_image;
 
     @FXML
-    private AnchorPane valueBook;
+    private AnchorPane issue_from;
+
+    @FXML
+    private AnchorPane save_from;
+
+    @FXML
+    private AnchorPane return_from;
+
+    @FXML
+    private TextField take_FirstName;
+
+    @FXML
+    private TextField take_LastName;
+
+    @FXML
+    private Label take_author_label;
+
+    @FXML
+    private TextField take_bookTitle;
+
+    @FXML
+    private Button take_clearBtn;
+
+    @FXML
+    private ComboBox<?> take_gender;
+
+    @FXML
+    private Label take_genre_label;
+
+    @FXML
+    private ImageView take_imageView;
+
+    @FXML
+    private Label take_issuedDate;
+
+    @FXML
+    private Label take_save_label;
+
+    @FXML
+    private Button take_takeBtn;
+
+    @FXML
+    private Label take_title_label;
+    @FXML
+    private Button signOut_btn1;
+    @FXML
+    private Button dardBord_btn;
+    @FXML
+    private AnchorPane dardBord_from;
+    @FXML
+    private Button dardBordIn_btn;
+    @FXML
+    private Button dardBordOut_btn;
+    @FXML
+    private Button halfNav_dardBord_btn;
 
     private BookControl bookControl = new BookControl();
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
+    private String comBox[] = {"Male", "Female", "Orther"};
 
     @FXML
     void circle_image(MouseEvent event) {
@@ -120,7 +178,7 @@ public class DashBoardControl implements Initializable {
     @FXML
     public void logout(ActionEvent event){
         try{
-            if (event.getSource() == signOut_btn){
+            if (event.getSource() == signOut_btn || event.getSource() == signOut_btn1){
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -149,8 +207,22 @@ public class DashBoardControl implements Initializable {
     public void minimize(){
         Stage stage = (Stage)minimize.getScene().getWindow();
         stage.setIconified(true);
-
     }
+
+    public void dardBordView(ActionEvent event){
+        if(event.getSource() == dardBordIn_btn) {
+            dardBord_from.setVisible(true);
+            dardBordIn_btn.setVisible(false);
+            dardBordOut_btn.setVisible(true);
+        }
+        if (event.getSource() == dardBordOut_btn) {
+            dardBord_from.setVisible(false);
+            dardBordOut_btn.setVisible(false);
+            dardBordIn_btn.setVisible(true);
+        }
+    }
+
+
     public void sliderArrow() {
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(.5));
@@ -160,12 +232,12 @@ public class DashBoardControl implements Initializable {
         TranslateTransition slide1 = new TranslateTransition();
         slide1.setDuration(Duration.seconds(.5));
         slide1.setNode(mainCenter_form);
-        slide1.setToX(-140);
+        slide1.setToX(0);
 
         TranslateTransition slide2 = new TranslateTransition();
         slide2.setDuration(Duration.seconds(.5));
         slide2.setNode(halfNav_form);
-        slide2.setToX(0);
+        slide2.setToX(135);
 
         slide.setOnFinished((ActionEvent event) -> {
             arrow_btn.setVisible(false);
@@ -192,7 +264,6 @@ public class DashBoardControl implements Initializable {
         slide2.setNode(halfNav_form);
         slide2.setToX(-135);
 
-
         slide.setOnFinished((ActionEvent event) -> {
             arrow_btn.setVisible(true);
             bars_btn.setVisible(false);
@@ -201,57 +272,163 @@ public class DashBoardControl implements Initializable {
         slide2.play();
         slide1.play();
         slide.play();
+    }
+
+    public void gender() {
+        List<String> combo = new ArrayList<>();
+
+        for (String data : comBox) {
+            combo.add(data);
+        }
+        ObservableList list = FXCollections.observableArrayList(combo);
+
+        take_gender.setItems(list);
+
 
     }
 
-    public void avalueBooks1() {
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(.5));
-        slide.setNode(mainCenter_form);
-        slide.setToX(-1500);
+    public void abTakeButton(ActionEvent event) {
 
-        TranslateTransition slide1 = new TranslateTransition();
-        slide1.setDuration(Duration.seconds(.5));
-        slide1.setNode(valueBook);
-        slide1.setToX(0);
+        if (event.getSource() == take_btn) {
+            issue_from.setVisible(true);
+            mainCenter_form.setVisible(false);
+            return_from.setVisible(false);
+            save_from.setVisible(false);
+            dardBord_from.setVisible(false);
 
-        slide.setOnFinished((ActionEvent event) -> {
-            availableBook_btnn.setVisible(true);
-            halfNav_availableBtn.setVisible(true);
-        });
+            issueBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);");
+            availableBook_btnn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            returnBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            savedBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
 
-        slide1.play();
-        slide.play();
-    }
-    public void avalueBooks2() {
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(.5));
-        slide.setNode(mainCenter_form);
-        slide.setToX(0);
+            halfNav_takeBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);");
+            halfNav_availableBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_returnBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_saveBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_dardBord_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+        }
 
-        TranslateTransition slide1 = new TranslateTransition();
-        slide1.setDuration(Duration.seconds(.5));
-        slide1.setNode(valueBook);
-        slide1.setToX(-1500);
-
-        slide.setOnFinished((ActionEvent event) -> {
-            issueBooks_btn.setVisible(true);
-            halfNav_takeBtn.setVisible(true);
-        });
-
-        slide1.play();
-        slide.play();
     }
 
+    public void navButtonDesign(ActionEvent event) {
+        if(event.getSource() == dardBord_btn || event.getSource() == halfNav_dardBord_btn) {
+            issue_from.setVisible(false);
+            mainCenter_form.setVisible(false);
+            return_from.setVisible(false);
+            save_from.setVisible(false);
+            dardBord_from.setVisible(true);
+            dardBordIn_btn.setVisible(false);
+            dardBordOut_btn.setVisible(true);
 
+
+            dardBord_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);");
+            issueBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            returnBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            savedBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            availableBook_btnn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+
+            halfNav_dardBord_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);");
+            halfNav_takeBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_returnBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_saveBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_availableBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+        }
+
+        if (event.getSource() == availableBook_btnn || event.getSource() == halfNav_availableBtn) {
+
+            mainCenter_form.setVisible(true);
+            issue_from.setVisible(false);
+            return_from.setVisible(false);
+            save_from.setVisible(false);
+            dardBord_from.setVisible(false);
+
+            availableBook_btnn.setStyle("-fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);");
+            issueBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            returnBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            savedBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            dardBord_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+
+            halfNav_availableBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);");
+            halfNav_takeBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_returnBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_saveBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_dardBord_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+
+        } else if (event.getSource() == issueBooks_btn || event.getSource() == halfNav_takeBtn) {
+
+            mainCenter_form.setVisible(false);
+            issue_from.setVisible(true);
+            return_from.setVisible(false);
+            save_from.setVisible(false);
+            dardBord_from.setVisible(false);
+
+            issueBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);");
+            availableBook_btnn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            returnBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            savedBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            dardBord_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+
+            halfNav_takeBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);");
+            halfNav_availableBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_returnBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_saveBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_dardBord_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+
+
+        } else if (event.getSource() == returnBooks_btn || event.getSource() == halfNav_returnBtn) {
+
+            mainCenter_form.setVisible(false);
+            issue_from.setVisible(false);
+            return_from.setVisible(true);
+            save_from.setVisible(false);
+            dardBord_from.setVisible(false);
+
+            returnBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);");
+            issueBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            availableBook_btnn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            savedBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            dardBord_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+
+            halfNav_returnBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);");
+            halfNav_availableBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_takeBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_saveBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_dardBord_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+
+
+        } else if (event.getSource() == savedBooks_btn || event.getSource() == halfNav_saveBtn) {
+
+            mainCenter_form.setVisible(false);
+            issue_from.setVisible(false);
+            return_from.setVisible(false);
+            save_from.setVisible(true);
+            dardBord_from.setVisible(false);
+
+            savedBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);");
+            issueBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            returnBooks_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            availableBook_btnn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            dardBord_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+
+            halfNav_saveBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);");
+            halfNav_availableBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_takeBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_returnBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+            halfNav_dardBord_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
+
+
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
         setUpTableColumns();
         setUpBookSelectionListener();
         loadBooks();
+        gender();
     }
 
+    // SOWN DATA BOOK
     private void setUpTableColumns() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

@@ -9,18 +9,18 @@
     -fx-border-width:0px 0px .5px 0px;
 }
 .close-btn{
-    -fx-background-color: transparent;
+    -fx-background-color: #4ebc6f;
     -fx-cursor: hand;
 }
 .close-btn:hover{
-    -fx-background-color:#f13f57;
+    -fx-background-color:#1ed251;
 }
 .minimize-btn{
-    -fx-background-color: transparent;
+    -fx-background-color: #cc399e;
     -fx-cursor: hand;
 }
 .minimize-btn:hover{
-    -fx-background-color: #ddddddd;
+    -fx-background-color: #cc61ac;
 }
 .bars{
     -fx-background-color: transparent;
@@ -48,6 +48,7 @@
     -fx-font-family:"Microsoft Sans Serif";
     -fx-text-fill: #fff;
     -fx-font-size: 20px;
+    -fx-text-fill: #000;
 }
 .nav-btn{
     -fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);
@@ -119,12 +120,12 @@
 }
 .mainCenter{
     -fx-background-color: #fff;
-    -fx-border-color: #00000;
+    -fx-border-color: #000;
     -fx-font-size: 20px;
 }
 .textFilled_take{
     -fx-background-color: #fff;
-    -fx-border-color: #0000;
+    -fx-border-color: #000;
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
     -fx-border-width:.4px;
@@ -140,4 +141,18 @@
     -fx-border-color: #0000;
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
+}
+.clear-btn{
+    -fx-background-color:#376282;
+    -fx-background-radius:15px;
+    -fx-font-size:15px;
+    -fx-cursor:hand;
+    -fx-text-fill:#fff;
+}
+.clear-btn:hover{
+    -fx-background-color:###4386b5;
+}
+.dardBord{
+    -fx-background-color: #376282;
+    -fx-background-radius:5px;
 }
