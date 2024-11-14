@@ -122,20 +122,23 @@ public class BookDAO {
 
     public Book getBookByID(int bookID) {
         Book book = null;
-        String sql = "SELECT * FROM books WHERE bookID = " + bookID;
+        String sql = "SELECT * FROM books WHERE bookID = ?";
 
         try {
             conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
+            pst.setInt(1, bookID);
+
             rs = pst.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 book = new Book(
-                        rs.getInt("id"),
+                        rs.getInt("bookID"),
                         rs.getString("name"),
                         rs.getString("author"),
                         rs.getString("publisher"),
                         rs.getString("publishedDate"),
-                        rs.getString("image"));
+                        rs.getString("image")
+                );
             }
         } catch (Exception e) {
             e.printStackTrace();

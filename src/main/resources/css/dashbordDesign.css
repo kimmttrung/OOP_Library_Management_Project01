@@ -20,7 +20,7 @@
     -fx-cursor: hand;
 }
 .minimize-btn:hover{
-    -fx-background-color: #ddddddd;
+    -fx-background-color: #dddddd;
 }
 .bars{
     -fx-background-color: transparent;
@@ -31,7 +31,7 @@
     -fx-background-color: #d6d6d6;
 }
 .nav-form{
-    -fx-background-color:linear-gradient(to bottom right, #252d50, #324f6b);
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #252d50, #324f6b);
 }
 .edit-btn{
     -fx-background-color: transparent;

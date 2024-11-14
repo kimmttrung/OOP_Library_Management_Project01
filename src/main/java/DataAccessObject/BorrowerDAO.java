@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -40,7 +41,8 @@ public class BorrowerDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Borrower b = new Borrower(rs.getInt("id"), rs.getString("username"),
-                            rs.getInt("book_id"), rs.getString("borrow_from"),
+                            rs.getInt("book_id"), rs.getString("bookName"),
+                            rs.getString("borrow_from"),
                             rs.getString("borrow_to"), rs.getString("status"));
                     if (!"processing".equals(status)) {
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -67,7 +69,8 @@ public class BorrowerDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Borrower b = new Borrower(rs.getInt("id"), rs.getString("username"),
-                            rs.getInt("book_id"), rs.getString("borrow_from"),
+                            rs.getInt("book_id"), rs.getString("bookName")
+                            ,rs.getString("borrow_from"),
                             rs.getString("borrow_to"), rs.getString("status"));
                     if (!"processing".equals(status)) {
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -95,10 +98,13 @@ public class BorrowerDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Borrower b = new Borrower(rs.getInt("id"), rs.getString("username"),
-                            rs.getInt("book_id"), rs.getString("borrow_from"),
+                            rs.getInt("book_id"), rs.getString("bookName"), rs.getString("borrow_from"),
                             rs.getString("borrow_to"), rs.getString("status"));
                     list.add(b);
+                    rs.close();
                 }
+                ps.close();
+                conn.close();
             }
         } catch (Exception e) {
             System.err.println("Error in getBorrowerByStatusAndUserId: " + e.getMessage());
@@ -115,7 +121,7 @@ public class BorrowerDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     b = new Borrower(rs.getInt("id"), rs.getString("username"),
-                            rs.getInt("book_id"), rs.getString("borrow_from"),
+                            rs.getInt("book_id"), rs.getString("bookName"), rs.getString("borrow_from"),
                             rs.getString("borrow_to"), rs.getString("status"));
                 }
             }
@@ -126,32 +132,51 @@ public class BorrowerDAO {
     }
 
     public void updateBorrower(Borrower borrower) {
-        String sql = "UPDATE borrower SET username = ?, book_id = ?, borrow_from = ?, borrow_to = ?, status = ? WHERE id = ?";
+        String sql = "UPDATE borrower SET username = ?, book_id = ?, bookName = ?, borrow_from = ?, borrow_to = ?, status = ? WHERE id = ?";
         try (Connection conn = DataBase.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, borrower.getUsername());
             ps.setInt(2, borrower.getBookid());
-            ps.setString(3, borrower.getBorrow_from());
-            ps.setString(4, borrower.getBorrow_to());
-            ps.setString(5, borrower.getStatus());
-            ps.setInt(6, borrower.getId());
+            ps.setString(3, borrower.getBookName());
+            ps.setString(4, borrower.getBorrow_from());
+            ps.setString(5, borrower.getBorrow_to());
+            ps.setString(6, borrower.getStatus());
+            ps.setInt(7, borrower.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error in updateBorrower: " + e.getMessage());
         }
     }
 
-    public void insertBorrower(String username, String bookid, String borrow_from, String borrow_to) {
-        String sql = "INSERT INTO borrower (username, book_id, borrow_from,borrow_to, status) VALUES (?, ?, ?, ?,  'processing')";
+    public void insertBorrower(String username, String bookid, String bookName, String borrow_from, String borrow_to) {
+        String sql = "INSERT INTO borrower (username, book_id, bookName, borrow_from,borrow_to, status) VALUES (?, ?, ?, ?, ?,  'processing')";
         try (Connection conn = DataBase.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, username);
             ps.setString(2, bookid);
-            ps.setString(3, borrow_from);
-            ps.setString(4, borrow_to);
+            ps.setString(3, bookName);
+            ps.setString(4, borrow_from);
+            ps.setString(5, borrow_to);
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error in insertBorrower: " + e.getMessage());
+        }
+    }
+
+    public boolean insertBorrowHistory(int memberId, int bookId, String borrowDate) {
+        String query = "INSERT INTO BorrowHistory (memberId, bookId, borrowDate) VALUES (?, ?, ?)";
+
+        try (Connection conn = DataBase.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, memberId);
+            stmt.setInt(2, bookId);
+            stmt.setString(3, borrowDate);
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
