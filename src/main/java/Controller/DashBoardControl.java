@@ -1,5 +1,7 @@
 package Controller;
 
+import DataAccessObject.BookDAO;
+import DataAccessObject.SearchBooks;
 import Entity.Book;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -20,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,7 +30,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class DashBoardControl implements Initializable {
+//implements Initializable
+
+public class DashBoardControl  {
 
     @FXML
     private Button bars_btn;
@@ -160,6 +165,40 @@ public class DashBoardControl implements Initializable {
     @FXML
     private Button halfNav_dardBord_btn;
 
+    //
+
+    @FXML
+    private Button bookAll_btn;
+
+    @FXML
+    private Button dashBoard_btn;
+
+    @FXML
+    private Button minus_btn;
+
+    @FXML
+    private AnchorPane nav_from;
+
+    @FXML
+    private Button searchAPI_btn;
+
+    @FXML
+    private Button userAll_btn;
+
+    @FXML
+    private Button bookAll_dashBoard_btn;
+
+    @FXML
+    private Button searchAPI_dashBoard_btn;
+
+    @FXML
+    private Button userAll_dashBoard_btn;
+
+    @FXML
+    private AnchorPane main_from;
+
+
+
     private BookControl bookControl = new BookControl();
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
     private String comBox[] = {"Male", "Female", "Orther"};
@@ -172,9 +211,9 @@ public class DashBoardControl implements Initializable {
     private double y = 0;
 
     @FXML
-    public void logout(ActionEvent event){
+    public void DownloadPages(ActionEvent event){
         try{
-            if (event.getSource() == signOut_btn || event.getSource() == signOut_btn1){
+            if (event.getSource() == signOut_btn){
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -190,6 +229,64 @@ public class DashBoardControl implements Initializable {
                 stage.setScene(scene);
                 stage.show();
                 signOut_btn.getScene().getWindow().hide();
+
+
+            } else if (event.getSource() == searchAPI_btn) {
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/serachAPI.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
+                    x = e.getSceneX();
+                    y = e.getSceneY();
+                });
+                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
+                    stage.setX(e.getScreenX() - x);
+                    stage.setY(e.getScreenY() - y);
+                });
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.show();
+                searchAPI_btn.getScene().getWindow().hide();
+
+
+            } else if (event.getSource() == dashBoard_btn) {
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/dashBoard.fxml"));
+
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
+                    x = e.getSceneX();
+                    y = e.getSceneY();
+                });
+                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
+                    stage.setX(e.getScreenX() - x);
+                    stage.setY(e.getScreenY() - y);
+                });
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.show();
+                dashBoard_btn.getScene().getWindow().hide();
+
+
+            } else if (event.getSource() == bookAll_btn || event.getSource() == bookAll_dashBoard_btn) {
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/availableBook.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
+                    x = e.getSceneX();
+                    y = e.getSceneY();
+                });
+                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
+                    stage.setX(e.getScreenX() - x);
+                    stage.setY(e.getScreenY() - y);
+                });
+
+
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.show();
+                bookAll_btn.getScene().getWindow().hide();
+
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -201,72 +298,52 @@ public class DashBoardControl implements Initializable {
     }
 
     public void minimize(){
-        Stage stage = (Stage)minimize.getScene().getWindow();
+        Stage stage = (Stage)minus_btn.getScene().getWindow();
         stage.setIconified(true);
     }
 
-    public void dardBordView(ActionEvent event){
-        if(event.getSource() == dardBordIn_btn) {
-            dardBord_from.setVisible(true);
-            dardBordIn_btn.setVisible(false);
-            dardBordOut_btn.setVisible(true);
-        }
-        if (event.getSource() == dardBordOut_btn) {
-            dardBord_from.setVisible(false);
-            dardBordOut_btn.setVisible(false);
-            dardBordIn_btn.setVisible(true);
-        }
-    }
+//    public void dardBordView(ActionEvent event){
+//        if(event.getSource() == dardBordIn_btn) {
+//            dardBord_from.setVisible(true);
+//            dardBordIn_btn.setVisible(false);
+//            dardBordOut_btn.setVisible(true);
+//        }
+//        if (event.getSource() == dardBordOut_btn) {
+//            dardBord_from.setVisible(false);
+//            dardBordOut_btn.setVisible(false);
+//            dardBordIn_btn.setVisible(true);
+//        }
+//    }
 
 
     public void sliderArrow() {
+
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(.5));
-        slide.setNode(nav_form);
-        slide.setToX(-287);
-
-        TranslateTransition slide1 = new TranslateTransition();
-        slide1.setDuration(Duration.seconds(.5));
-        slide1.setNode(mainCenter_form);
-        slide1.setToX(0);
-
-        TranslateTransition slide2 = new TranslateTransition();
-        slide2.setDuration(Duration.seconds(.5));
-        slide2.setNode(halfNav_form);
-        slide2.setToX(135);
+        slide.setNode(nav_from);
+        slide.setToX(-320);
 
         slide.setOnFinished((ActionEvent event) -> {
-            arrow_btn.setVisible(false);
             bars_btn.setVisible(true);
+            arrow_btn.setVisible(false);
         });
 
-        slide2.play();
-        slide1.play();
         slide.play();
     }
+
     public void sliderBars() {
+
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(.5));
-        slide.setNode(nav_form);
+        slide.setNode(nav_from);
         slide.setToX(0);
 
-        TranslateTransition slide1 = new TranslateTransition();
-        slide1.setDuration(Duration.seconds(.5));
-        slide1.setNode(mainCenter_form);
-        slide1.setToX(0);
-
-        TranslateTransition slide2 = new TranslateTransition();
-        slide2.setDuration(Duration.seconds(.5));
-        slide2.setNode(halfNav_form);
-        slide2.setToX(-135);
 
         slide.setOnFinished((ActionEvent event) -> {
             arrow_btn.setVisible(true);
             bars_btn.setVisible(false);
         });
 
-        slide2.play();
-        slide1.play();
         slide.play();
     }
 
@@ -330,7 +407,7 @@ public class DashBoardControl implements Initializable {
             halfNav_availableBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
         }
 
-        if (event.getSource() == availableBook_btnn || event.getSource() == halfNav_availableBtn) {
+        if (event.getSource() == availableBook_btnn ) {
 
             mainCenter_form.setVisible(true);
             issue_from.setVisible(false);
@@ -350,7 +427,7 @@ public class DashBoardControl implements Initializable {
             halfNav_saveBtn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
             halfNav_dardBord_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);");
 
-        } else if (event.getSource() == issueBooks_btn || event.getSource() == halfNav_takeBtn) {
+        } else if (event.getSource() == issueBooks_btn ) {
 
             mainCenter_form.setVisible(false);
             issue_from.setVisible(true);
@@ -415,30 +492,33 @@ public class DashBoardControl implements Initializable {
 
         }
     }
-    @Override
-    public void initialize(URL location, ResourceBundle resources){
-        setUpTableColumns();
-        setUpBookSelectionListener();
-        loadBooks();
-    }
 
-    private void setUpTableColumns() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-        publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
-        publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
-    }
+//    @Override
+//    public void initialize(URL location, ResourceBundle resources){
+//        setUpTableColumns();
+//        setUpBookSelectionListener();
+//        loadBooks();
+//        gender();
+//    }
 
-    private void setUpBookSelectionListener() {
-        bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            String imageLink = (newSelection != null) ? newSelection.getImage() : null;
-            Image image = (imageLink != null && !imageLink.isEmpty())
-                    ? new Image(imageLink)
-                    : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
-            bookImageView.setImage(image);
-        });
-    }
+    // SOWN DATA BOOK
+//    private void setUpTableColumns() {
+//        idColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+//        titleColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+//        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
+//        publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
+//        publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
+//    }
+//
+//    private void setUpBookSelectionListener() {
+//        bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+//            String imageLink = (newSelection != null) ? newSelection.getImage() : null;
+//            Image image = (imageLink != null && !imageLink.isEmpty())
+//                    ? new Image(imageLink)
+//                    : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
+//            bookImageView.setImage(image);
+//        });
+//    }
 
     @FXML
     private void loadBooks() {
@@ -461,22 +541,6 @@ public class DashBoardControl implements Initializable {
     private void loadSearchResults() {
         bookList = FXCollections.observableArrayList(bookControl.getSearchResults());
         bookTable.setItems(bookList);
-    }
-
-    @FXML
-    private void saveSelectedBook() {
-        Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
-        if (selectedBook == null) {
-            showAlert(Alert.AlertType.WARNING, "Save Book", "Please select a book to save.");
-            return;
-        }
-
-        boolean isSaved = bookControl.saveBookToDatabase(selectedBook);
-        if (isSaved) {
-            showAlert(Alert.AlertType.INFORMATION, "Save Book", "Book saved successfully!");
-        } else {
-            showAlert(Alert.AlertType.ERROR, "Save Book", "Failed to save the book.");
-        }
     }
 
     @FXML
@@ -511,12 +575,12 @@ public class DashBoardControl implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Delete Book", "Please enter Book ID you want to delete.");
             return;
         }
-
+        
         Optional<ButtonType> result = showConfirmationAlert("Confirm Delete", "Are you sure you want to delete this Book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             int bookId = Integer.parseInt(bookIDField.getText());
             if (bookControl.deleteBook(bookId)) {
-                loadBooks();
+                loadBooks();  // Reload books in the table view
                 showAlert(Alert.AlertType.INFORMATION, "Delete Success", "Book deleted successfully.");
             } else {
                 showAlert(Alert.AlertType.ERROR, "Delete Error", "Error deleting book. Please try again.");

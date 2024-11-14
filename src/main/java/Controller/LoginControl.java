@@ -66,7 +66,8 @@ public class LoginControl {
             } else {
                 if (resultSet.next()) {
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test1.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashBoard.fxml"));
+//                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/serachAPI.fxml"));
                     Parent root = loader.load();
 
                     Stage currentStage = (Stage) login_Btn.getScene().getWindow();
