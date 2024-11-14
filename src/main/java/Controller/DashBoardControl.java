@@ -194,6 +194,9 @@ public class DashBoardControl  {
     @FXML
     private Button userAll_dashBoard_btn;
 
+    @FXML
+    private AnchorPane main_from;
+
 
 
     private BookControl bookControl = new BookControl();
@@ -228,7 +231,7 @@ public class DashBoardControl  {
                 signOut_btn.getScene().getWindow().hide();
 
 
-            } else if (event.getSource() == searchAPI_btn || event.getSource() == searchAPI_dashBoard_btn) {
+            } else if (event.getSource() == searchAPI_btn) {
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/serachAPI.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -277,6 +280,8 @@ public class DashBoardControl  {
                     stage.setX(e.getScreenX() - x);
                     stage.setY(e.getScreenY() - y);
                 });
+
+
                 stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.show();

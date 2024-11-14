@@ -149,6 +149,7 @@ public class SearchAPI {
                     stage.setX(e.getScreenX() - x);
                     stage.setY(e.getScreenY() - y);
                 });
+
                 stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.show();
@@ -174,7 +175,7 @@ public class SearchAPI {
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(.5));
         slide.setNode(nav_from);
-        slide.setToX(-320);
+        slide.setToX(-335);
 
         slide.setOnFinished((ActionEvent event) -> {
             bars_btn.setVisible(true);

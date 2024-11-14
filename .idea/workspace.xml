@@ -5,21 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/availableBook.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/dashBoard.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/serachAPI.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/availableBook.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dashbordDesign.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dashbordDesign.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/mainLibrary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/mainLibrary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/test1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/test1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/availableBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/availableBook.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/dashBoard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/dashBoard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/serachAPI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/serachAPI.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +86,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\image" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="H:\OOP_ThuVien\OOP_Library_Management_Project01\src\main\resources\css" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
