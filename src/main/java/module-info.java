@@ -4,7 +4,7 @@ module management.libarymanagement {
     requires java.sql;
     requires com.google.gson;
     requires java.desktop;
-    requires fontawesomefx;
+    //requires fontawesomefx;
 
     opens management.libarymanagement to javafx.fxml;
     opens Controller to javafx.fxml;

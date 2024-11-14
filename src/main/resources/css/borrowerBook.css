@@ -130,16 +130,7 @@
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
 }
-.clear-btn{
-    -fx-background-color:#376282;
-    -fx-background-radius:15px;
-    -fx-font-size:15px;
-    -fx-cursor:hand;
-    -fx-text-fill:#fff;
-}
-.clear-btn:hover{
-    -fx-background-color:#4386b5;
-}
+
 .textField{
     -fx-background-color: transparent;
     -fx-text-inner-color: #fff;
@@ -151,8 +142,9 @@
     -fx-border-width: 0px 0px .8px 0px;
 }
 .iconBookInfor{
-    -fx-background-color: #18d2cc;
+    -fx-background-color: #1e966e;
+    -fx-cursor:hand;
 }
 .iconBookInfor:hover{
-    -fx-background-color: #348b88;
+    -fx-background-color: #56c59e;
 }
