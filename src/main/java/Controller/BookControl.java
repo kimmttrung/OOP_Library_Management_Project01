@@ -23,49 +23,36 @@ import javafx.util.Duration;
 
 
 public class BookControl {
-
+    @FXML
+    private Button borrowerBook_btn;
     @FXML
     private Button arrow_btn;
-
     @FXML
     private TableColumn<?, ?> authorColumn;
-
     @FXML
     private Button bars_btn;
-
     @FXML
     private Button bookAll_btn;
-
     @FXML
     private TableView<?> bookTable;
-
     @FXML
     private Button close_btn;
-
     @FXML
     private Button dashBoard_btn;
-
     @FXML
     private TableColumn<?, ?> idColumn;
-
     @FXML
     private Button minus_btn;
-
     @FXML
     private AnchorPane nav_from;
-
     @FXML
     private TableColumn<?, ?> publishedDateColumn;
-
     @FXML
     private TableColumn<?, ?> publisherColumn;
-
     @FXML
     private Button searchAPI_btn;
-
     @FXML
     private Button search_btn;
-
     @FXML
     private Button signOut_btn;
 
@@ -132,8 +119,8 @@ public class BookControl {
                 dashBoard_btn.getScene().getWindow().hide();
 
 
-            } else if (event.getSource() == bookAll_btn) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/availableBook.fxml"));
+            } else if (event.getSource() == borrowerBook_btn) {
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Borrower.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
@@ -145,11 +132,11 @@ public class BookControl {
                     stage.setY(e.getScreenY() - y);
                 });
 
+
                 stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.show();
-                bookAll_btn.getScene().getWindow().hide();
-
+                borrowerBook_btn.getScene().getWindow().hide();
             }
         }catch (Exception e){
             e.printStackTrace();

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
+    <top>
+        <AnchorPane prefHeight="748.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+            <AnchorPane layoutX="3.0" layoutY="474.0" prefHeight="285.0" prefWidth="1117.0">
+                <Label layoutX="365.0" layoutY="38.0" prefHeight="30.0" prefWidth="142.0" text="MÃ NGƯỜI MƯỢN" AnchorPane.leftAnchor="365.0" AnchorPane.topAnchor="38.0" />
+                <TextField fx:id="borrowerIDField" layoutX="511.0" layoutY="36.0" prefHeight="34.0" prefWidth="250.0" promptText="User's ID" AnchorPane.leftAnchor="511.0" AnchorPane.topAnchor="36.0" />
+
+                <Label layoutX="363.0" layoutY="146.0" prefHeight="38.0" prefWidth="145.0" text="NGÀY TRẢ" AnchorPane.leftAnchor="363.0" AnchorPane.topAnchor="146.0" />
+                <DatePicker fx:id="toDatePicker" layoutX="509.0" layoutY="143.0" prefHeight="43.0" prefWidth="175.0" AnchorPane.leftAnchor="509.0" AnchorPane.topAnchor="143.0" />
+
+                <Button layoutX="433.0" layoutY="212.0" prefHeight="38.0" prefWidth="51.0" styleClass="iconBookInfor" stylesheets="@../css/borrowerBook.css" AnchorPane.leftAnchor="433.0" AnchorPane.topAnchor="212.0">
+               <graphic>
+                  <FontAwesomeIconView glyphName="CLIPBOARD" size="40" />
+               </graphic></Button>
+                <TextField fx:id="bookIDField" layoutX="511.0" layoutY="83.0" prefHeight="41.0" prefWidth="149.0" promptText="Book's ID" />
+            <Label layoutX="362.0" layoutY="85.0" prefHeight="38.0" prefWidth="142.0" text="MÃ SÁCH" />
+            <Button layoutX="561.0" layoutY="212.0" mnemonicParsing="false" styleClass="iconBookInfor" stylesheets="@../css/borrowerBook.css">
+               <graphic>
+                  <FontAwesomeIconView glyphName="ARROW_CIRCLE_LEFT" size="40" />
+               </graphic></Button>
+            <Button layoutX="682.0" layoutY="212.0" mnemonicParsing="false" styleClass="iconBookInfor" stylesheets="@../css/borrowerBook.css">
+               <graphic>
+                  <FontAwesomeIconView glyphName="ARROW_CIRCLE_RIGHT" size="40" />
+               </graphic></Button>
+            <TextField fx:id="findBorrowerField" layoutX="828.0" layoutY="12.0" prefHeight="41.0" prefWidth="181.0" />
+            <Button layoutX="1034.0" layoutY="12.0" mnemonicParsing="false" styleClass="find_btn" stylesheets="@../css/borrowerBook.css">
+               <graphic>
+                  <FontAwesomeIconView glyphName="SEARCH" size="30" />
+               </graphic></Button>
+            <AnchorPane layoutX="845.0" layoutY="70.0" prefHeight="187.0" prefWidth="145.0" styleClass="image-card" stylesheets="@../css/dashbordDesign.css">
+               <children>
+                  <ImageView fx:id="bookImageView" fitHeight="187.0" fitWidth="148.0" layoutX="-3.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="436.0" layoutY="267.0" text="BORROW" />
+            <Label layoutX="564.0" layoutY="267.0" text="RETURN" />
+            <Label layoutX="687.0" layoutY="267.0" text="RENEW" />
+            <AnchorPane layoutX="52.0" layoutY="33.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Circle fill="#769fc5" layoutX="100.0" layoutY="100.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Button layoutX="56.0" layoutY="46.0" mnemonicParsing="false">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="USER" size="100" />
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+            </AnchorPane>
+         <AnchorPane layoutX="2.0" layoutY="2.0" prefHeight="61.0" prefWidth="1111.0">
+            <children>
+               <Button fx:id="bars_btn" mnemonicParsing="false" onAction="#sliderBars" stylesheets="@../css/dashbordDesign.css">
+                  <graphic>
+                     <FontAwesomeIconView glyphName="BARS" size="30" />
+                  </graphic>
+               </Button>
+               <Button fx:id="arrow_btn" mnemonicParsing="false" onAction="#sliderArrow">
+                  <graphic>
+                     <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
+                  </graphic>
+               </Button>
+               <Button fx:id="close_btn" layoutX="1071.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/dashbordDesign.css">
+                  <graphic>
+                     <FontAwesomeIconView glyphName="CLOSE" size="30" />
+                  </graphic>
+               </Button>
+               <Button fx:id="minus_btn" layoutX="1031.0" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../css/dashbordDesign.css">
+                  <graphic>
+                     <FontAwesomeIconView glyphName="MINUS" size="30" />
+                  </graphic>
+               </Button>
+               <Label layoutX="507.0" layoutY="13.0" stylesheets="@../css/dashbordDesign.css" text="BORROWER" textFill="#56c59e">
+                  <font>
+                     <Font name="Segoe UI Black" size="24.0" />
+                  </font>
+               </Label>
+            </children>
+         </AnchorPane>
+         <TitledPane expanded="true" layoutY="73.0" prefHeight="401.0" prefWidth="1121.0" text="Borrower List">
+            <content>
+               <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="403.0" prefWidth="1088.0" vbarPolicy="ALWAYS">
+                  <content>
+                     <TableView fx:id="borrowerTable" prefHeight="375.0" prefWidth="938.0">
+                        <columns>
+                           <TableColumn fx:id="idColumn" editable="false" prefWidth="93.0" style="-fx-alignment: CENTER;" text="      List">
+                              <cellValueFactory>
+                                 <PropertyValueFactory property="borrowerId" />
+                              </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="usernameColumn" editable="false" prefWidth="167.0" style="-fx-alignment: CENTER;" text="           Name">
+                              <cellValueFactory>
+                                 <PropertyValueFactory property="borrowerName" />
+                              </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="bookIdColumn" editable="false" prefWidth="97.0" style="-fx-alignment: CENTER;" text="   Book ID">
+                              <cellValueFactory>
+                                 <PropertyValueFactory property="bookId" />
+                              </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="bookNameColumn" editable="false" prefWidth="259.0" style="-fx-alignment: CENTER;" text="               Book Name">
+                              <cellValueFactory>
+                                 <PropertyValueFactory property="bookTitle" />
+                              </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="fromColumn" editable="false" prefWidth="135.0" style="-fx-alignment: CENTER;" text=" Borrow From">
+                              <cellValueFactory>
+                                 <PropertyValueFactory property="loanDate" />
+                              </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="toColumn" editable="false" prefWidth="122.0" style="-fx-alignment: CENTER;" text="    Borrow To" />
+                           <TableColumn fx:id="statusColumn" editable="false" prefWidth="119.0" resizable="false" style="-fx-alignment: CENTER;" text="        Status" />
+                        </columns>
+                     </TableView>
+                  </content>
+               </ScrollPane>
+            </content>
+         </TitledPane>
+         <AnchorPane fx:id="nav_from" layoutY="74.0" prefHeight="684.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/dashbordDesign.css">
+            <children>
+               <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">
+                  <graphic>
+                     <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
+                  </graphic>
+               </Button>
+               <Label layoutX="66.0" layoutY="108.0" prefHeight="61.0" prefWidth="183.0" styleClass="edit-label" stylesheets="@../css/dashbordDesign.css" text="Welcome" textFill="WHITE">
+                  <font>
+                     <Font name="Segoe UI Black" size="72.0" />
+                  </font>
+               </Label>
+               <AnchorPane layoutX="31.0" layoutY="169.0" prefHeight="92.0" prefWidth="254.0">
+                  <children>
+                     <Button fx:id="bookAll_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css">
+                        <font>
+                           <Font name="Microsoft Sans Serif" size="12.0" />
+                        </font>
+                        <graphic>
+                           <FontAwesomeIconView glyphName="BOOK" size="50" />
+                        </graphic>
+                     </Button>
+                     <Label layoutX="127.0" layoutY="30.0" text="ALL BOOKS" textFill="#c0c0c0">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </AnchorPane>
+               <AnchorPane layoutX="31.0" layoutY="261.0" prefHeight="92.0" prefWidth="254.0">
+                  <children>
+                     <Label layoutX="127.0" layoutY="30.0" text="ALL USER" textFill="#c0c0c0">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                     <Button fx:id="userAll_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css">
+                        <graphic>
+                           <FontAwesomeIconView glyphName="USER" size="50" />
+                        </graphic>
+                     </Button>
+                  </children>
+               </AnchorPane>
+               <AnchorPane layoutX="31.0" layoutY="353.0" prefHeight="92.0" prefWidth="254.0">
+                  <children>
+                     <Label layoutX="127.0" layoutY="30.0" text="SEARCH API" textFill="#c0c0c0">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                     <Button fx:id="searchAPI_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css">
+                        <graphic>
+                           <FontAwesomeIconView glyphName="SEARCH" size="50" />
+                        </graphic>
+                     </Button>
+                  </children>
+               </AnchorPane>
+               <AnchorPane layoutX="23.0" layoutY="537.0" prefHeight="92.0" prefWidth="254.0">
+                  <children>
+                     <Label layoutX="127.0" layoutY="30.0" text="DASHBOARD" textFill="#c0c0c0">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                     <Button fx:id="dashBoard_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css">
+                        <graphic>
+                           <FontAwesomeIconView glyphName="HOME" size="50" />
+                        </graphic>
+                     </Button>
+                  </children>
+               </AnchorPane>
+               <AnchorPane layoutX="90.0" layoutY="-10.0" prefHeight="112.0" prefWidth="120.0">
+                  <children>
+                     <Circle fill="DODGERBLUE" layoutX="62.0" layoutY="72.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+                  </children>
+               </AnchorPane>
+               <AnchorPane layoutX="23.0" layoutY="445.0" prefHeight="92.0" prefWidth="254.0">
+                  <children>
+                     <Label layoutX="127.0" layoutY="30.0" text="BORROWER" textFill="#c0c0c0">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                     <Button fx:id="borrowerBook_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css">
+                        <graphic>
+                           <FontAwesomeIconView glyphName="USER_CIRCLE" size="50" />
+                        </graphic>
+                     </Button>
+                  </children>
+               </AnchorPane>
+            </children>
+         </AnchorPane>
+        </AnchorPane>
+    </top>
+</BorderPane>
