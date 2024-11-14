@@ -156,3 +156,18 @@
     -fx-background-color: #376282;
     -fx-background-radius:5px;
 }
+.dardBordBook-form{
+    -fx-background-color: #94dd78;
+    -fx-background-radius:15px;
+}
+.dardBord1{
+    -fx-background-color: #35d4a2;
+    -fx-background-radius:15px;
+}
+.dardBordIcon{
+    -fx-background-color: #fff;
+    -fx-cursor: hand;
+}
+.dardBordIcon:hover{
+    -fx-background-color: #1187c2;
+}
