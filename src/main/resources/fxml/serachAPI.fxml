@@ -160,7 +160,7 @@
                               </AnchorPane>
                               <AnchorPane fx:id="nav_from" layoutY="-3.0" prefHeight="693.0" prefWidth="335.0" styleClass="nav-form" stylesheets="@../css/dashbordDesign.css">
                                  <children>
-                                    <Button fx:id="signOut_btn1" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">
+                                    <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">
                                        <graphic>
                                           <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
                                        </graphic>
@@ -194,7 +194,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="userAll_btn1" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css">
+                                          <Button fx:id="userAll_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css">
                                              <graphic>
                                                 <FontAwesomeIconView glyphName="USER" size="50" />
                                              </graphic>
@@ -208,7 +208,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="searchAPI_btn1" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css">
+                                          <Button layoutX="27.0" layoutY="13.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css">
                                              <graphic>
                                                 <FontAwesomeIconView glyphName="SEARCH" size="50" />
                                              </graphic>
