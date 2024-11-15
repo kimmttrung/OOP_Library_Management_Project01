@@ -24,6 +24,8 @@ public class SearchAPI {
     @FXML
     private Button bookAll_btn;
     @FXML
+    private Button bookAll_dashBoard_btn;
+    @FXML
     private ImageView bookImageView;
     @FXML
     private TableView<?> bookTable;
@@ -54,7 +56,11 @@ public class SearchAPI {
     @FXML
     private Button userAll_btn;
     @FXML
+    private Button userAll_dashBoard_btn;
+    @FXML
     private Button borrowerBook_btn;
+    @FXML
+    private Button borrowerDashBoard_btn;
 
 
     private double x = 0;
@@ -97,7 +103,7 @@ public class SearchAPI {
                 dashBoard_btn.getScene().getWindow().hide();
 
 
-            } else if (event.getSource() == bookAll_btn) {
+            } else if (event.getSource() == bookAll_btn || event.getSource() == bookAll_dashBoard_btn) {
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/availableBook.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -114,7 +120,7 @@ public class SearchAPI {
                 stage.setScene(scene);
                 stage.show();
                 bookAll_btn.getScene().getWindow().hide();
-            } else if (event.getSource() == borrowerBook_btn) {
+            } else if (event.getSource() == borrowerBook_btn || event.getSource() == borrowerDashBoard_btn) {
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/Borrower.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -132,6 +138,8 @@ public class SearchAPI {
                 stage.setScene(scene);
                 stage.show();
                 borrowerBook_btn.getScene().getWindow().hide();
+            } else if (event.getSource() == userAll_btn || event.getSource() == userAll_dashBoard_btn) {
+
             }
         }catch (Exception e){
             e.printStackTrace();

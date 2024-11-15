@@ -113,7 +113,7 @@
                             <children>
                                 <AnchorPane layoutX="15.0" layoutY="13.0" prefHeight="151.0" prefWidth="238.0" styleClass="dardBord1" stylesheets="@../css/dashbordDesign.css">
                                     <children>
-                                        <Button layoutX="95.0" layoutY="30.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/dashbordDesign.css">
+                                        <Button fx:id="borrowerDashBoard_btn" layoutX="95.0" layoutY="30.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/dashbordDesign.css">
                                             <graphic>
                                                 <FontAwesomeIconView glyphName="USER_CIRCLE" size="50" />
                                             </graphic>
@@ -210,7 +210,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="dashBoard_btn1" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css">
+                              <Button fx:id="borrowerBook_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/dashbordDesign.css">
                                  <graphic>
                                     <FontAwesomeIconView glyphName="USER_CIRCLE" size="50" />
                                  </graphic>

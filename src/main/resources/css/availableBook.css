@@ -150,9 +150,10 @@
 .textField:focused{
     -fx-border-width: 0px 0px .8px 0px;
 }
-.iconBookInfor{
+.iconBook{
     -fx-background-color: #18d2cc;
+    -fx-cursor: hand;
 }
-.iconBookInfor:hover{
+.iconBook:hover{
     -fx-background-color: #348b88;
 }
