@@ -5,20 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/availableBook.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/availableBook.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/borrowerBook.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/borrowerBook.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/userBook.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/userBook.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Borrower.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Borrower.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/availableBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/availableBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/serachAPI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/serachAPI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/userBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/userBook.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,12 +31,12 @@
     &quot;assignee&quot;: &quot;ThePhapp&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/kimmttrung/OOP_Library_Management_Project01.git&quot;,
-    &quot;accountId&quot;: &quot;ec4ca4ad-fa99-4f13-b6e8-042d4199200e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/kimmttrung/OOP_Library_Management_Project01.git",
+    "accountId": "20d4a28f-ec06-4c74-8526-5cf1ad8a2292"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -97,14 +83,6 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\image" />
     </key>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
