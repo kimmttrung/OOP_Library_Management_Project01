@@ -70,7 +70,7 @@ public class SearchAPI {
     public void DownloadPages(ActionEvent event){
         try{
             if (event.getSource() == signOut_btn){
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginForm.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {

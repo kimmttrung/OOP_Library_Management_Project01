@@ -45,9 +45,9 @@
                     <graphic>
                         <FontAwesomeIconView glyphName="SEARCH" size="30" />
                     </graphic></Button>
-                <AnchorPane layoutX="845.0" layoutY="70.0" prefHeight="187.0" prefWidth="145.0" styleClass="image-card" stylesheets="@../css/dashbordDesign.css">
+                <AnchorPane layoutX="845.0" layoutY="70.0" prefHeight="189.0" prefWidth="125.0" styleClass="image-card" stylesheets="@../css/dashbordDesign.css">
                     <children>
-                        <ImageView fx:id="bookImageView" fitHeight="187.0" fitWidth="148.0" layoutX="-3.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="bookImageView" fitHeight="187.0" fitWidth="133.0" layoutX="-3.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
                     </children>
                 </AnchorPane>
                 <Label layoutX="436.0" layoutY="267.0" text="BORROW" />
