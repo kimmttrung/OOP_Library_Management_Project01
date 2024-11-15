@@ -1,13 +1,9 @@
 package Entity;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class Borrower {
     private int id;
     private String username;
     private int bookid;
-    private String bookName;
     private String borrow_from;
     private String borrow_to;
     private String status;
@@ -16,11 +12,10 @@ public class Borrower {
     public Borrower() {
     }
 
-    public Borrower(int id, String username, int bookid, String bookName, String borrow_from, String borrow_to, String status) {
+    public Borrower(int id, String username, int bookid, String borrow_from, String borrow_to, String status) {
         this.id = id;
         this.username = username;
         this.bookid = bookid;
-        this.bookName = bookName;
         this.borrow_from = borrow_from;
         this.borrow_to = borrow_to;
         this.status = status;
@@ -69,16 +64,7 @@ public class Borrower {
         this.bookid = bookid;
     }
 
-    public String getBookName() {
-        return bookName;
-    }
-
-    public void setBookname(String bookName) {
-        this.bookName = bookName;
-    }
-
     public String getBorrow_from() {
-        this.borrow_from = getCurrentDate();
         return borrow_from;
     }
 
@@ -100,12 +86,6 @@ public class Borrower {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    private String getCurrentDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate date = LocalDate.now();
-        return date.format(formatter);
     }
 
     @Override

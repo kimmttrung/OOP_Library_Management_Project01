@@ -15,25 +15,16 @@ public class LoginControl {
     private Button login_Btn;
 
     @FXML
-    private TextField login_username;
+    private TextField userName;
 
     @FXML
-    private PasswordField login_password;
-
-    @FXML
-    private TextField login_showPassword;
-
-    @FXML
-    private CheckBox login_selectShowPassword;
+    private PasswordField passWord;
 
     @FXML
     private Button minimizeBtn;
 
     @FXML
     private Button exitBtn;
-
-    private double x = 0;
-    private double y = 0;
 
     private Connection connect;
     private PreparedStatement pst;
@@ -47,20 +38,13 @@ public class LoginControl {
         try {
             connect = DataBase.getConnection();
             pst = connect.prepareStatement(sql);
-            pst.setString(1, login_username.getText());
-            pst.setString(2, login_password.getText());
+            pst.setString(1, userName.getText());
+            pst.setString(2, passWord.getText());
             resultSet = pst.executeQuery();
 
             Alert alert;
 
-            if (login_username.getText().isEmpty() || login_password.getText().isEmpty()) {
-
-                if(login_selectShowPassword.isSelected()){
-                    login_password.setText(login_showPassword.getText());
-                }else{
-                    login_showPassword.setText(login_password.getText());
-                }
-
+            if (userName.getText().isEmpty() || passWord.getText().isEmpty()) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
@@ -70,6 +54,7 @@ public class LoginControl {
                 if (resultSet.next()) {
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashBoard.fxml"));
+//                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/serachAPI.fxml"));
                     Parent root = loader.load();
 
                     Stage currentStage = (Stage) login_Btn.getScene().getWindow();
@@ -105,20 +90,6 @@ public class LoginControl {
                 ;
             }
         }
-    }
-
-    public void showPassword() {
-
-        if (login_selectShowPassword.isSelected()) {
-            login_showPassword.setText(login_password.getText());
-            login_showPassword.setVisible(true);
-            login_password.setVisible(false);
-        } else {
-            login_password.setText(login_showPassword.getText());
-            login_showPassword.setVisible(false);
-            login_password.setVisible(true);
-        }
-
     }
 
     @FXML

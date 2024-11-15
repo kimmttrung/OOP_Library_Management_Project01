@@ -1,6 +1,7 @@
 package Controller;
 
-
+import DataAccessObject.BookDAO;
+import DataAccessObject.SearchBooks;
 import Entity.Book;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -8,19 +9,26 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 //implements Initializable
 
@@ -34,10 +42,6 @@ public class DashBoardControl  {
     private Button bars_btn;
     @FXML
     private Button arrow_btn;
-    @FXML
-    private ImageView availableBook_btn;
-    @FXML
-    private Button close_btn;
     @FXML
     private Button signOut_btn;
     @FXML
@@ -55,7 +59,6 @@ public class DashBoardControl  {
     private TextField bookPublisherField;
     @FXML
     private TextField bookIDField;
-
     @FXML
     private ComboBox<?> take_gender;
     @FXML
@@ -63,21 +66,21 @@ public class DashBoardControl  {
     @FXML
     private Button bookAll_dashBoard_btn;
     @FXML
-    private Button dashBoard_btn;
-    @FXML
     private Button minus_btn;
     @FXML
     private AnchorPane nav_from;
     @FXML
     private Button searchAPI_btn;
-
     @FXML
     private Button userAll_btn;
-
     @FXML
     private Button userAll_dashBoard_btn;
 
 
+
+
+    private BookControl bookControl = new BookControl();
+    private ObservableList<Book> bookList = FXCollections.observableArrayList();
     private String comBox[] = {"Male", "Female", "Orther"};
 
     @FXML
@@ -91,7 +94,7 @@ public class DashBoardControl  {
     public void DownloadPages(ActionEvent event){
         try{
             if (event.getSource() == signOut_btn){
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginForm.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
@@ -174,6 +177,8 @@ public class DashBoardControl  {
                     stage.setX(e.getScreenX() - x);
                     stage.setY(e.getScreenY() - y);
                 });
+
+
                 stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.show();
@@ -235,5 +240,96 @@ public class DashBoardControl  {
         take_gender.setItems(list);
 
 
+    }
+
+    @FXML
+    private void loadBooks() {
+        bookList = FXCollections.observableArrayList(bookControl.getAllBooks());
+        bookTable.setItems(bookList);
+    }
+
+    @FXML
+    private void searchBook() {
+        String query = searchField.getText();
+        if (query.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Search Book", "Please enter a search query.");
+            return;
+        }
+
+        bookControl.searchBooks(query);
+        loadSearchResults();
+    }
+
+    private void loadSearchResults() {
+        bookList = FXCollections.observableArrayList(bookControl.getSearchResults());
+        bookTable.setItems(bookList);
+    }
+
+    @FXML
+    private void updateBook() {
+        if (isAnyFieldEmpty(bookTitleField, bookAuthorField, bookPublisherField, bookYearField)) {
+            showAlert(Alert.AlertType.ERROR, "Update Book", "All fields are required.");
+            return;
+        }
+
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update the book?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Book newBook = new Book(
+                    bookTitleField.getText(),
+                    bookAuthorField.getText(),
+                    bookPublisherField.getText(),
+                    bookYearField.getText(),
+                    null
+            );
+
+            if (bookControl.updateBook(newBook)) {
+                loadBooks();  // Reload books in the table view
+                showAlert(Alert.AlertType.INFORMATION, "Update Success", "Book updated successfully.");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Update Error", "Error updating book. Please try again.");
+            }
+        }
+    }
+
+    @FXML
+    private void deleteBook() {
+        if (bookIDField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Delete Book", "Please enter Book ID you want to delete.");
+            return;
+        }
+        
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Delete", "Are you sure you want to delete this Book?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            int bookId = Integer.parseInt(bookIDField.getText());
+            if (bookControl.deleteBook(bookId)) {
+                loadBooks();  // Reload books in the table view
+                showAlert(Alert.AlertType.INFORMATION, "Delete Success", "Book deleted successfully.");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Delete Error", "Error deleting book. Please try again.");
+            }
+        }
+    }
+
+    private boolean isAnyFieldEmpty(TextField... fields) {
+        for (TextField field : fields) {
+            if (field.getText().trim().isEmpty()) return true;
+        }
+        return false;
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private Optional<ButtonType> showConfirmationAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        return alert.showAndWait();
     }
 }

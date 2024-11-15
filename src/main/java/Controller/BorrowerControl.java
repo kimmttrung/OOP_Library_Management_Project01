@@ -1,59 +1,44 @@
 package Controller;
 
-import DataAccessObject.BookDAO;
 import DataAccessObject.BorrowerDAO;
-import DataAccessObject.UserDAO;
-import Entity.Book;
 import Entity.Borrower;
-import Entity.User;
-
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Optional;
 
 public class BorrowerControl {
 
     @FXML
-    private TextField borrowerIDField, borrowerUsernameField, bookIDField, findBorrowerField;
-    @FXML
-    private DatePicker toDatePicker;
+    private TextField borrowerIDField, borrowerUsernameField, bookIDField, statusField, fromDateField, toDateField;
     @FXML
     private TableView<Borrower> borrowerTable;
     @FXML
-    private TableColumn<Borrower, Integer> idColumn, bookNameColumn;
+    private TableColumn<Borrower, Integer> idColumn;
     @FXML
     private TableColumn<Borrower, String> usernameColumn, statusColumn, fromColumn, toColumn;
     @FXML
     private TableColumn<Borrower, Integer> bookIdColumn;
-    @FXML
-    private ImageView bookImageView;
     @FXML
     private Button arrow_btn;
     @FXML
     private Button bars_btn;
     @FXML
     private Button bookAll_btn;
-    @FXML
-    private Button close_btn;
     @FXML
     private Button dashBoard_btn;
     @FXML
@@ -67,6 +52,8 @@ public class BorrowerControl {
     @FXML
     private Button userAll_btn;
 
+
+
     private ObservableList<Borrower> borrowerList = FXCollections.observableArrayList();
     private BorrowerDAO borrowerDAO = new BorrowerDAO();
 
@@ -75,13 +62,10 @@ public class BorrowerControl {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         bookIdColumn.setCellValueFactory(new PropertyValueFactory<>("bookid"));
-        bookNameColumn.setCellValueFactory(new PropertyValueFactory<>("bookName"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         fromColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_from"));
         toColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_to"));
-
         loadBorrowers();
-        setUpBookSelectionListener();
     }
 
     private double x = 0;
@@ -91,7 +75,7 @@ public class BorrowerControl {
     public void DownloadPages(ActionEvent event){
         try{
             if (event.getSource() == signOut_btn){
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginForm.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
@@ -228,12 +212,11 @@ public class BorrowerControl {
 
     @FXML
     private void borrowBook() {
-        String borrowerId = borrowerIDField.getText();
+        String username = borrowerUsernameField.getText();
         String bookId = bookIDField.getText();
-        String borrow_to = convertDatePickerToString(toDatePicker);
 
-        if (borrowerId.isEmpty() || bookId.isEmpty() || borrow_to.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Borrow Book", "Please enter both user's ID, Book's ID and return Day.");
+        if (username.isEmpty() || bookId.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Borrow Book", "Please enter both Username and Book ID.");
             return;
         }
 
@@ -243,34 +226,8 @@ public class BorrowerControl {
         Optional<ButtonType> result = confirmAlert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            BookDAO bookDAO = new BookDAO();
-            Book borrowBook = bookDAO.getBookByID(Integer.parseInt(bookId));
-
-            if (borrowBook == null) {
-                showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book not found.");
-                return;
-            }
-
-            UserDAO userBorrow = new UserDAO();
-            User borrower = userBorrow.findUserbyID(Integer.parseInt(borrowerId));
-            if (userBorrow == null) {
-                showAlert(Alert.AlertType.ERROR, "Borrow Book", "User not found.");
-                return;
-            }
-            String username = borrower.getUserName();
-            String bookName = borrowBook.getName();;
-            borrowerDAO.insertBorrower(username, bookId, bookName, getCurrentDate(), borrow_to);
+            borrowerDAO.insertBorrower(username, bookId);
             loadBorrowers();
-
-            //UserDAO userDAO = new UserDAO();
-           // boolean successSaveToHistory = borrowerDAO.insertBorrowHistory(userDAO.findUser(username).getId(), Integer.parseInt(bookId), getCurrentDate());
-
-//            if (successSaveToHistory) {
-//                System.out.println("Borrowed book saved successfully");
-//            } else {
-//                System.out.println("Failed to save borrowed book");
-//            }
-
             showAlert(Alert.AlertType.INFORMATION, "Success", "Book borrowed successfully.");
         }
     }
@@ -304,8 +261,8 @@ public class BorrowerControl {
 
     @FXML
     private void renewBook() {
-        String borrowerId = findBorrowerField.getText();
-        int additionalDays = 7;
+        String borrowerId = borrowerIDField.getText();
+        int additionalDays = 7; // Number of days for renewal
 
         if (borrowerId.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Renew Book", "Please enter Borrower ID.");
@@ -319,7 +276,7 @@ public class BorrowerControl {
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
-            if (borrower != null && "processing".equals(borrower.getStatus())) {
+            if (borrower != null && borrower.getStatus().equals("processing")) {
                 try {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date currentDueDate = dateFormat.parse(borrower.getBorrow_to());
@@ -337,49 +294,6 @@ public class BorrowerControl {
         }
     }
 
-    @FXML
-    private void searchBorrowerById() {
-        String borrowerId = findBorrowerField.getText();
-
-        if (borrowerId.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Search Borrower", "Please enter Borrower ID.");
-            loadBorrowers();
-            return;
-        }
-
-        Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
-
-        if (borrower != null) {
-            ObservableList<Borrower> foundBorrowers = FXCollections.observableArrayList(borrower);
-            borrowerTable.setItems(foundBorrowers);
-        } else {
-            showAlert(Alert.AlertType.INFORMATION, "Search Borrower", "No borrower found with the provided ID.");
-        }
-    }
-
-    private void setUpBookSelectionListener() {
-        borrowerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection == null) {
-                bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
-                return;
-            }
-
-            int bookId = newSelection.getBookid();
-            BookDAO bookDAO = new BookDAO();
-            Book borrowBook = bookDAO.getBookByID(bookId);
-
-            if (borrowBook == null) {
-                showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book not found.");
-                return;
-            }
-            String imageLink = borrowBook.getImage();
-            Image image = (imageLink != null && !imageLink.isEmpty())
-                    ? new Image(imageLink)
-                    : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
-            bookImageView.setImage(image);
-        });
-    }
-
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -387,16 +301,5 @@ public class BorrowerControl {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    private String getCurrentDate() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    }
-
-    public String convertDatePickerToString(DatePicker datePicker) {
-        LocalDate date = datePicker.getValue();
-        if (date != null) {
-            return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        }
-        return null;
-    }
 }
+
