@@ -32,6 +32,9 @@ public class LoginControl {
     @FXML
     private Button exitBtn;
 
+    private double x = 0;
+    private double y = 0;
+
     private Connection connect;
     private PreparedStatement pst;
     private Statement statement;

@@ -156,7 +156,21 @@ public class SearchAPI {
                 stage.show();
                 borrowerBook_btn.getScene().getWindow().hide();
             } else if (event.getSource() == userAll_btn || event.getSource() == userAll_dashBoard_btn) {
-
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/userBook.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
+                    x = e.getSceneX();
+                    y = e.getSceneY();
+                });
+                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
+                    stage.setX(e.getScreenX() - x);
+                    stage.setY(e.getScreenY() - y);
+                });
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.show();
+                userAll_btn.getScene().getWindow().hide();
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -232,9 +246,9 @@ public class SearchAPI {
     }
 
     private void loadSearchResults() {
-        if (searchResults.isEmpty()) {
-            showAlert(Alert.AlertType.INFORMATION, "Search Book", "No books found for the given query.");
-        }
+//        if (searchResults.isEmpty()) {
+//            showAlert(Alert.AlertType.INFORMATION, "Search Book", "No books found for the given query.");
+//        }
         searchBookTable.setItems(FXCollections.observableArrayList(searchResults));
     }
 

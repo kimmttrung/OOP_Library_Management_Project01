@@ -159,7 +159,22 @@ public class BorrowerControl {
                 stage.show();
                 bookAll_btn.getScene().getWindow().hide();
             } else if (event.getSource() == userAll_btn) {
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/userBook.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
+                    x = e.getSceneX();
+                    y = e.getSceneY();
+                });
+                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
+                    stage.setX(e.getScreenX() - x);
+                    stage.setY(e.getScreenY() - y);
+                });
 
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.show();
+                userAll_btn.getScene().getWindow().hide();
             }
         }catch (Exception e){
             e.printStackTrace();
