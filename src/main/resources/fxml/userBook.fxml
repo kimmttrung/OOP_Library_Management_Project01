@@ -19,7 +19,7 @@
                   <FontAwesomeIconView glyphName="BARS" size="30" />
                </graphic>
             </Button>
-            <Button fx:id="arrow_btn" layoutY="1.0" mnemonicParsing="false" onAction="#sliderArrow" stylesheets="@../css/userBook.css">
+            <Button fx:id="arrow_btn" layoutY="1.0" mnemonicParsing="false" onAction="#sliderArrow">
                <graphic>
                   <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
                </graphic>
@@ -51,11 +51,11 @@
                      <children>
                         <TableView fx:id="bookTable" layoutX="14.666666666666668" layoutY="14.666666666666668" prefHeight="657.0" prefWidth="768.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
                            <columns>
-                              <TableColumn fx:id="idColumn" prefWidth="106.666748046875" text="User ID" />
-                              <TableColumn fx:id="titleColumn" prefWidth="170.6667251586914" text="Full Name" />
-                              <TableColumn fx:id="authorColumn" prefWidth="169.3333740234375" text="Phone Number" />
-                              <TableColumn fx:id="publisherColumn" prefWidth="185.99984741210938" text="Address" />
-                              <TableColumn fx:id="publishedDateColumn" prefWidth="145.33331298828125" text="Status" />
+                              <TableColumn prefWidth="106.666748046875" text="User ID" />
+                              <TableColumn prefWidth="170.6667251586914" text="Full Name" />
+                              <TableColumn prefWidth="169.3333740234375" text="Phone Number" />
+                              <TableColumn prefWidth="185.99984741210938" text="Address" />
+                              <TableColumn prefWidth="145.33331298828125" text="Status" />
                            </columns>
                         </TableView>
                      </children>

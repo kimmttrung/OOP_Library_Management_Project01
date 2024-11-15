@@ -49,12 +49,12 @@
                               <Button fx:id="arrow_btn" layoutX="20.0" layoutY="4.0" mnemonicParsing="false" onAction="#sliderArrow" prefHeight="41.0" prefWidth="54.0" styleClass="bars" stylesheets="@../css/dashbordDesign.css">
 
                             </Button>
-                        <Button fx:id="dardBordIn_btn" layoutX="94.0" layoutY="5.0" mnemonicParsing="false" onAction="#dardBordView">
+                        <Button fx:id="dardBordIn_btn" layoutX="94.0" layoutY="5.0" mnemonicParsing="false" >
                            <graphic>
                               <FontAwesomeIconView glyphName="HOME" size="30" />
                            </graphic>
                         </Button>
-                        <Button fx:id="dardBordOut_btn" layoutX="94.0" layoutY="5.0" mnemonicParsing="false" onAction="#dardBordView" prefHeight="41.0" prefWidth="54.0" styleClass="bars" stylesheets="@../css/dashbordDesign.css" />
+                        <Button fx:id="dardBordOut_btn" layoutX="94.0" layoutY="5.0" mnemonicParsing="false"  prefHeight="41.0" prefWidth="54.0" styleClass="bars" stylesheets="@../css/dashbordDesign.css" />
                           </children>
                       </AnchorPane>
                       <AnchorPane layoutX="288.0" layoutY="177.0" prefHeight="678.0" prefWidth="895.0" styleClass="mainCenter" stylesheets="@../css/dashbordDesign.css">
@@ -69,7 +69,7 @@
                                                 </children>
                                             </AnchorPane>
                                             <Button fx:id="save_btn" layoutX="40.0" layoutY="451.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="save-btn" stylesheets="@../css/dashbordDesign.css" text="Save" />
-                                            <Button fx:id="take_btn" layoutX="149.0" layoutY="451.0" mnemonicParsing="false" onAction="#abTakeButton" prefHeight="49.0" prefWidth="68.0" styleClass="take-btn" stylesheets="@../css/dashbordDesign.css" text="Take" />
+                                            <Button fx:id="take_btn" layoutX="149.0" layoutY="451.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="take-btn" stylesheets="@../css/dashbordDesign.css" text="Take" />
                                             <Label layoutX="83.0" layoutY="286.0" stylesheets="@../css/dashbordDesign.css" text="Learn c++">
                                                 <font>
                                                     <Font size="20.0" />
