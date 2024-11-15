@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
+<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
     <top>
         <AnchorPane prefHeight="748.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
             <AnchorPane layoutX="3.0" layoutY="474.0" prefHeight="285.0" prefWidth="1117.0">
@@ -26,28 +26,28 @@
                 <Label layoutX="363.0" layoutY="146.0" prefHeight="38.0" prefWidth="145.0" text="NGÀY TRẢ" AnchorPane.leftAnchor="363.0" AnchorPane.topAnchor="146.0" />
                 <DatePicker fx:id="toDatePicker" layoutX="509.0" layoutY="143.0" prefHeight="43.0" prefWidth="175.0" AnchorPane.leftAnchor="509.0" AnchorPane.topAnchor="143.0" />
 
-                <Button layoutX="433.0" layoutY="212.0" prefHeight="38.0" prefWidth="51.0" styleClass="iconBookInfor" stylesheets="@../css/borrowerBook.css" AnchorPane.leftAnchor="433.0" AnchorPane.topAnchor="212.0">
+                <Button layoutX="433.0" layoutY="212.0" onAction="#borrowBook" prefHeight="38.0" prefWidth="51.0" styleClass="iconBookInfor" stylesheets="@../css/borrowerBook.css" AnchorPane.leftAnchor="433.0" AnchorPane.topAnchor="212.0">
                     <graphic>
                         <FontAwesomeIconView glyphName="CLIPBOARD" size="40" />
                     </graphic></Button>
                 <TextField fx:id="bookIDField" layoutX="511.0" layoutY="83.0" prefHeight="41.0" prefWidth="149.0" promptText="Book's ID" />
                 <Label layoutX="362.0" layoutY="85.0" prefHeight="38.0" prefWidth="142.0" text="MÃ SÁCH" />
-                <Button layoutX="561.0" layoutY="212.0" mnemonicParsing="false" styleClass="iconBookInfor" stylesheets="@../css/borrowerBook.css">
+                <Button layoutX="561.0" layoutY="212.0" mnemonicParsing="false" onAction="#returnBook" styleClass="iconBookInfor" stylesheets="@../css/borrowerBook.css">
                     <graphic>
                         <FontAwesomeIconView glyphName="ARROW_CIRCLE_LEFT" size="40" />
                     </graphic></Button>
-                <Button layoutX="682.0" layoutY="212.0" mnemonicParsing="false" styleClass="iconBookInfor" stylesheets="@../css/borrowerBook.css">
+                <Button layoutX="682.0" layoutY="212.0" mnemonicParsing="false" onAction="#renewBook" styleClass="iconBookInfor" stylesheets="@../css/borrowerBook.css">
                     <graphic>
-                        <FontAwesomeIconView glyphName="ARROW_CIRCLE_RIGHT" size="40" />
+                        <FontAwesomeIconView glyphName="ARROW_CIRCLE_RIGHT" size="40" text="" />
                     </graphic></Button>
                 <TextField fx:id="findBorrowerField" layoutX="828.0" layoutY="12.0" prefHeight="41.0" prefWidth="181.0" />
                 <Button layoutX="1034.0" layoutY="12.0" mnemonicParsing="false" styleClass="find_btn" stylesheets="@../css/borrowerBook.css">
                     <graphic>
                         <FontAwesomeIconView glyphName="SEARCH" size="30" />
                     </graphic></Button>
-                <AnchorPane layoutX="845.0" layoutY="70.0" prefHeight="189.0" prefWidth="125.0" styleClass="image-card" stylesheets="@../css/dashbordDesign.css">
+                <AnchorPane layoutX="828.0" layoutY="62.0" prefHeight="195.0" prefWidth="148.0" styleClass="image-card" stylesheets="@../css/dashbordDesign.css">
                     <children>
-                        <ImageView fx:id="bookImageView" fitHeight="187.0" fitWidth="133.0" layoutX="-3.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="bookImageView" fitHeight="207.0" fitWidth="159.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
                     </children>
                 </AnchorPane>
                 <Label layoutX="436.0" layoutY="267.0" text="BORROW" />

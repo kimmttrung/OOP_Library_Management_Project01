@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SearchAPI">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SearchAPI">
     <children>
         <AnchorPane layoutX="217.0" layoutY="73.0" prefHeight="750.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -50,16 +50,16 @@
                             <children>
                                 <AnchorPane layoutX="1.0" layoutY="87.0" prefHeight="662.0" prefWidth="335.0" styleClass="mainCenter" stylesheets="@../css/dashbordDesign.css">
                            <children>
-                              <AnchorPane layoutX="9.0" layoutY="8.0" prefHeight="648.0" prefWidth="318.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css">
+                              <AnchorPane layoutX="10.0" layoutY="11.0" prefHeight="648.0" prefWidth="318.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css">
                                  <children>
-                                    <AnchorPane layoutX="59.0" layoutY="42.0" prefHeight="196.0" prefWidth="178.0" styleClass="image-card" stylesheets="@../css/dashbordDesign.css">
+                                    <AnchorPane layoutX="53.0" layoutY="39.0" prefHeight="290.0" prefWidth="213.0" styleClass="image-card" stylesheets="@../css/dashbordDesign.css">
                                        <children>
-                                          <ImageView fx:id="bookImageView" fitHeight="188.0" fitWidth="170.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="bookImageView" fitHeight="282.0" fitWidth="206.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
                                     </AnchorPane>
-                                    <Button fx:id="save_btn" layoutX="40.0" layoutY="401.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="save-btn" stylesheets="@../css/dashbordDesign.css" text="Save" />
-                                    <Button fx:id="take_btn" layoutX="169.0" layoutY="401.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="take-btn" stylesheets="@../css/dashbordDesign.css" text="Take" />
-                                    <Label layoutX="104.0" layoutY="266.0" stylesheets="@../css/dashbordDesign.css" text="Title Book">
+                                    <Button fx:id="save_btn" layoutX="48.0" layoutY="401.0" mnemonicParsing="false" onAction="#saveSelectedBook" prefHeight="49.0" prefWidth="68.0" styleClass="save-btn" stylesheets="@../css/dashbordDesign.css" text="Save" />
+                                    <Button fx:id="take_btn" layoutX="204.0" layoutY="401.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="68.0" styleClass="take-btn" stylesheets="@../css/dashbordDesign.css" text="Take" />
+                                    <Label layoutX="111.0" layoutY="335.0" prefHeight="35.0" prefWidth="97.0" stylesheets="@../css/dashbordDesign.css" text="Title Book">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -261,19 +261,19 @@
                         </AnchorPane>
                         <AnchorPane layoutX="324.0" layoutY="1.0" prefHeight="755.0" prefWidth="775.0">
                             <children>
-                                <TextField layoutX="72.0" layoutY="40.0" prefHeight="35.0" prefWidth="574.0" />
+                                <TextField fx:id="searchField" layoutX="72.0" layoutY="40.0" prefHeight="35.0" prefWidth="574.0" />
                                 <Label layoutX="348.0" layoutY="7.0" text="TÌM KIẾM" textFill="#2a9d5c">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <Button layoutX="679.0" layoutY="37.0" mnemonicParsing="false" styleClass="find_btn" stylesheets="@../css/dashbordDesign.css">
+                                <Button layoutX="679.0" layoutY="37.0" mnemonicParsing="false" onAction="#searchBook" styleClass="find_btn" stylesheets="@../css/dashbordDesign.css">
                                     <graphic>
                                         <FontAwesomeIconView glyphName="SEARCH" size="30" />
                                     </graphic>
                                 </Button>
                                 <AnchorPane layoutX="11.0" layoutY="83.0" prefHeight="693.0" prefWidth="773.0" styleClass="mainCenter" stylesheets="@../css/dashbordDesign.css" />
-                                <TableView fx:id="bookTable" layoutX="21.0" layoutY="91.0" prefHeight="679.0" prefWidth="756.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css">
+                                <TableView fx:id="searchBookTable" layoutX="21.0" layoutY="91.0" prefHeight="679.0" prefWidth="756.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css">
                                     <columns>
                                         <TableColumn fx:id="idColumn" prefWidth="68.0" text="BookID" />
                                         <TableColumn fx:id="titleColumn" prefWidth="299.3332824707031" text="Title" />

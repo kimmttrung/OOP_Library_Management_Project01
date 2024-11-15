@@ -218,7 +218,7 @@ public class BorrowerControl {
         String borrow_to = convertDatePickerToString(toDatePicker);
 
         if (borrowerId.isEmpty() || bookId.isEmpty() || borrow_to.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Borrow Book", "Please enter both user's ID and Book's ID.");
+            showAlert(Alert.AlertType.ERROR, "Borrow Book", "Please enter both user's ID, Book's ID and return Day.");
             return;
         }
 
