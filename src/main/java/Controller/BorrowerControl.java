@@ -137,7 +137,7 @@ public class BorrowerControl {
             loadBorrowers();
 
             //UserDAO userDAO = new UserDAO();
-           // boolean successSaveToHistory = borrowerDAO.insertBorrowHistory(userDAO.findUser(username).getId(), Integer.parseInt(bookId), getCurrentDate());
+            // boolean successSaveToHistory = borrowerDAO.insertBorrowHistory(userDAO.findUser(username).getId(), Integer.parseInt(bookId), getCurrentDate());
 
 //            if (successSaveToHistory) {
 //                System.out.println("Borrowed book saved successfully");

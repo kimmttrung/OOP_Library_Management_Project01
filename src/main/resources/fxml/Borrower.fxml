@@ -54,37 +54,37 @@
                         </Button>
                     </children>
                 </AnchorPane>
-            <GridPane hgap="20" layoutX="373.0" layoutY="14.0" vgap="15">
-               <columnConstraints>
-                  <ColumnConstraints prefWidth="150" />
-                  <ColumnConstraints prefWidth="300" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints prefHeight="50" />
-                  <RowConstraints prefHeight="50" />
-                  <RowConstraints prefHeight="50" />
-               </rowConstraints>
-               <children>
-                  <Label text="Borrower ID:" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                     <font>
-                        <Font name="Segoe UI Black Italic" size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="borrowerIDField" prefHeight="39.0" prefWidth="312.0" promptText="Enter User ID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                  <Label text="Book ID:" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Segoe UI Black Italic" size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="bookIDField" prefHeight="37.0" prefWidth="306.0" promptText="Enter Book ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Return Date:" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="Segoe UI Black Italic" size="16.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="toDatePicker" prefHeight="42.0" prefWidth="302.0" promptText="Select Return Date" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-               </children>
-            </GridPane>
+                <GridPane hgap="20" layoutX="373.0" layoutY="14.0" vgap="15">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="150" />
+                        <ColumnConstraints prefWidth="300" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints prefHeight="50" />
+                        <RowConstraints prefHeight="50" />
+                        <RowConstraints prefHeight="50" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Borrower ID:" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="Segoe UI Black Italic" size="16.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="borrowerIDField" prefHeight="39.0" prefWidth="312.0" promptText="Enter User ID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <Label text="Book ID:" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Segoe UI Black Italic" size="16.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="bookIDField" prefHeight="37.0" prefWidth="306.0" promptText="Enter Book ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Return Date:" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="Segoe UI Black Italic" size="16.0" />
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="toDatePicker" prefHeight="42.0" prefWidth="302.0" promptText="Select Return Date" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    </children>
+                </GridPane>
             </AnchorPane>
             <AnchorPane layoutX="2.0" layoutY="2.0" prefHeight="61.0" prefWidth="1111.0">
                 <children>
@@ -246,12 +246,12 @@
                     </AnchorPane>
                 </children>
             </AnchorPane>
-             <TextField fx:id="findBorrowerField" layoutX="393.0" layoutY="65.0" prefHeight="41.0" prefWidth="329.0" />
-             <Button layoutX="738.0" layoutY="66.0" mnemonicParsing="false" styleClass="find_btn" stylesheets="@../css/borrowerBook.css">
-                 <graphic>
-                     <FontAwesomeIconView glyphName="SEARCH" size="30" />
-                 </graphic>
-         </Button>
+            <TextField fx:id="findBorrowerField" layoutX="393.0" layoutY="65.0" prefHeight="41.0" prefWidth="329.0" />
+            <Button layoutX="738.0" layoutY="66.0" mnemonicParsing="false" styleClass="find_btn" stylesheets="@../css/borrowerBook.css">
+                <graphic>
+                    <FontAwesomeIconView glyphName="SEARCH" size="30" />
+                </graphic>
+            </Button>
         </AnchorPane>
     </top>
 </BorderPane>

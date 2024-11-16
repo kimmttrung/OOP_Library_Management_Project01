@@ -17,20 +17,18 @@ public class BookDAO {
 
     public ObservableList<Book> getAllBooks() {
         ObservableList<Book> books = FXCollections.observableArrayList();
-        String sql = "SELECT bookID, name, author, publisher, publishedDate FROM books";
+        String sql = "SELECT * FROM books";
 
         try {
             conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
-                books.add(new Book(
-                        rs.getInt("bookID"),
-                        rs.getString("name"),
-                        rs.getString("author"),
-                        rs.getString("publisher"),
-                        rs.getString("publishedDate")
-                ));
+                Book book = new Book(
+                        rs.getInt(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getString(6));
+                books.add(book);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,20 +122,23 @@ public class BookDAO {
 
     public Book getBookByID(int bookID) {
         Book book = null;
-        String sql = "SELECT * FROM books WHERE bookID = " + bookID;
+        String sql = "SELECT * FROM books WHERE bookID = ?";
 
         try {
             conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
+            pst.setInt(1, bookID);
+
             rs = pst.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 book = new Book(
-                        rs.getInt("id"),
+                        rs.getInt("bookID"),
                         rs.getString("name"),
                         rs.getString("author"),
                         rs.getString("publisher"),
                         rs.getString("publishedDate"),
-                        rs.getString("image"));
+                        rs.getString("image")
+                );
             }
         } catch (Exception e) {
             e.printStackTrace();
