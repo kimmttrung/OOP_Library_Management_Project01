@@ -110,7 +110,7 @@
     -fx-font-size: 19px;
 }
 .textFilled_take{
-    -fx-border-width: .8px;
+    -fx-border-width.8px;
 }
 .label1_take{
     -fx-background-color: #fff;

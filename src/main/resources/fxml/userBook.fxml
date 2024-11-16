@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserControl">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserControl">
    <children>
       <AnchorPane prefHeight="788.0" prefWidth="1108.6666666666667" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -19,7 +19,7 @@
                   <FontAwesomeIconView glyphName="BARS" size="30" />
                </graphic>
             </Button>
-            <Button fx:id="arrow_btn" layoutY="1.0" mnemonicParsing="false" onAction="#sliderArrow" stylesheets="@../css/userBook.css">
+            <Button fx:id="arrow_btn" layoutY="1.0" mnemonicParsing="false" onAction="#sliderArrow">
                <graphic>
                   <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
                </graphic>
@@ -49,13 +49,13 @@
                <children>
                   <AnchorPane layoutX="306.0" prefHeight="679.0" prefWidth="793.0" styleClass="mainCenter" stylesheets="@../css/availableBook.css">
                      <children>
-                        <TableView fx:id="userTable" layoutX="14.666666666666668" layoutY="14.666666666666668" prefHeight="657.0" prefWidth="768.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
+                        <TableView fx:id="bookTable" layoutX="14.666666666666668" layoutY="14.666666666666668" prefHeight="657.0" prefWidth="768.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
                            <columns>
-                              <TableColumn fx:id="idColumn" prefWidth="106.666748046875" text="User ID" />
-                              <TableColumn fx:id="nameColumn" prefWidth="170.6667251586914" text="Full Name" />
-                              <TableColumn fx:id="phoneColumn" prefWidth="169.3333740234375" text="Phone Number" />
-                              <TableColumn fx:id="registrationDateColumn" prefWidth="185.99984741210938" text="Registration Date" />
-                              <TableColumn fx:id="publishedDateColumn" prefWidth="145.33331298828125" text="Status" />
+                              <TableColumn prefWidth="106.666748046875" text="User ID" />
+                              <TableColumn prefWidth="170.6667251586914" text="Full Name" />
+                              <TableColumn prefWidth="169.3333740234375" text="Phone Number" />
+                              <TableColumn prefWidth="185.99984741210938" text="Address" />
+                              <TableColumn prefWidth="145.33331298828125" text="Status" />
                            </columns>
                         </TableView>
                      </children>
@@ -63,10 +63,10 @@
                   <AnchorPane layoutX="-10.0" layoutY="-1.0" prefHeight="679.0" prefWidth="308.0" styleClass="mainCenter" stylesheets="@../css/availableBook.css">
                      <children>
                         <Label layoutX="37.0" layoutY="214.0" text="User ID" />
-                        <TextField fx:id="userID" layoutX="34.0" layoutY="244.0" prefHeight="30.0" prefWidth="249.0" />
+                        <TextField layoutX="34.0" layoutY="244.0" prefHeight="30.0" prefWidth="249.0" />
                         <Label layoutX="34.0" layoutY="311.0" text="Full Name" />
-                        <TextField fx:id="userNameField" layoutX="33.0" layoutY="342.0" prefHeight="27.0" prefWidth="249.0" />
-                        <TextField fx:id="phoneNumberField" layoutX="34.0" layoutY="439.0" prefHeight="27.0" prefWidth="249.0" />
+                        <TextField layoutX="33.0" layoutY="342.0" prefHeight="27.0" prefWidth="249.0" />
+                        <TextField layoutX="34.0" layoutY="439.0" prefHeight="27.0" prefWidth="249.0" />
                         <AnchorPane layoutX="56.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Circle fill="#5784ae" layoutX="104.0" layoutY="100.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
@@ -78,21 +78,23 @@
                            </children>
                         </AnchorPane>
                         <Label layoutX="37.0" layoutY="409.0" text="Phone Number" />
-                        <Button layoutX="33.0" layoutY="618.0" mnemonicParsing="false" onAction="#addUser" styleClass="iconUser" stylesheets="@../css/userBook.css">
+                        <Button layoutX="33.0" layoutY="618.0" mnemonicParsing="false" styleClass="iconUser" stylesheets="@../css/userBook.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="PLUS_SQUARE" size="30" />
                            </graphic>
                         </Button>
-                        <Button layoutX="126.0" layoutY="618.0" mnemonicParsing="false" onAction="#deleteUser" styleClass="iconUser" stylesheets="@../css/userBook.css">
+                        <Button layoutX="126.0" layoutY="618.0" mnemonicParsing="false" styleClass="iconUser" stylesheets="@../css/userBook.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="TRASH" size="30" />
                            </graphic>
                         </Button>
-                        <Button layoutX="220.0" layoutY="622.0" mnemonicParsing="false" onAction="#updateUser" styleClass="iconUser" stylesheets="@../css/userBook.css">
+                        <Button layoutX="220.0" layoutY="622.0" mnemonicParsing="false" styleClass="iconUser" stylesheets="@../css/userBook.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="EDIT" size="25" text="" />
                            </graphic>
                         </Button>
+                        <Label layoutX="33.0" layoutY="516.0" text="Address" />
+                        <TextField layoutX="34.0" layoutY="546.0" prefHeight="27.0" prefWidth="249.0" />
                         <AnchorPane fx:id="nav_from" layoutX="1.0" layoutY="1.0" prefHeight="679.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/dashbordDesign.css">
                            <children>
                               <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">

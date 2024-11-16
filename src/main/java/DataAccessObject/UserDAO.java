@@ -63,7 +63,6 @@ public class UserDAO {
             pst.setString(1, username);
             rs = pst.executeQuery();
             while (rs.next()) {
-                user = new User();
                 user.setUserName(rs.getString("username"));
                 user.setId(rs.getInt("id"));
                 user.setPhoneNumber(rs.getString("phoneNumber"));
@@ -99,7 +98,6 @@ public class UserDAO {
             pst.setInt(1, id);
             rs = pst.executeQuery();
             while (rs.next()) {
-                user = new User();
                 user.setUserName(rs.getString("username"));
                 user.setId(rs.getInt("id"));
                 user.setPhoneNumber(rs.getString("phoneNumber"));
@@ -174,7 +172,7 @@ public class UserDAO {
         return false;
     }
 
-    public boolean updateUser(User user) {
+    public void updateUser(User user) {
         String sql = "UPDATE user SET phoneNumber = ? WHERE id = ?";
 
         try {
@@ -182,10 +180,7 @@ public class UserDAO {
             pst = connect.prepareStatement(sql);
             pst.setString(1, user.getPhoneNumber());
             pst.setInt(2, user.getId());
-            int affectedRows = pst.executeUpdate();
-            if (affectedRows > 0) {
-                return true;
-            }
+            pst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -200,6 +195,5 @@ public class UserDAO {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 }
