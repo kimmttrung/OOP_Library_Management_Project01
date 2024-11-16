@@ -14,13 +14,6 @@
         <junit.version>5.10.2</junit.version>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>gluon-releases</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -62,10 +55,11 @@
         </dependency>
 
         <dependency>
-            <groupId>com.gluonhq</groupId>
-            <artifactId>charm-glisten</artifactId>
-            <version>6.0.6</version>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx-fontawesome</artifactId>
+            <version>4.7.0-9.1.2</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -88,7 +82,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>management.libarymanagement/management.libarymanagement.HelloApplication
+                            <mainClass>management.libarymanagement/management.libarymanagement.LibraryManagement
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

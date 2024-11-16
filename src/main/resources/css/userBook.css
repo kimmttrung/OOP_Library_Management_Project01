@@ -1,13 +1,3 @@
-.top-from{
-    -fx-background-color: #fff;
-    -fx-border-color: #000;
-    -fx-border-width:.2px .2px .5px .2px;
-}
-.semiTop-form{
-    -fx-background-color: #32a434;
-    -fx-border-color:#000;
-    -fx-border-width:0px 0px .5px 0px;
-}
 .close-btn{
     -fx-background-color: #4ebc6f;
     -fx-cursor: hand;
@@ -69,12 +59,10 @@
 }
 .logout-btn:hover{
     -fx-font-size:20px;
-    -fx-background-color:red;
+    -fx-background-color: red;
     -fx-background-radius:10px;
 }
-.than-btn{
-    -fx-background-color:aqua;
-}
+
 .text-fild{
     -fx-background-color:#fff;
 }
@@ -97,16 +85,6 @@
 }
 .save-btn:hover{
     -fx-background-color:#66e29e;
-}
-.take-btn{
-    -fx-background-color:#914f96;
-    -fx-background-radius:15px;
-    -fx-font-size:15px;
-    -fx-cursor:hand;
-    -fx-text-fill:#fff;
-}
-.take-btn:hover{
-    -fx-background-color:#b356bb;
 }
 .find_btn{
     -fx-background-color:#b31b1b;
@@ -142,32 +120,23 @@
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
 }
-.clear-btn{
-    -fx-background-color:#376282;
-    -fx-background-radius:15px;
+
+.textField{
+    -fx-background-color: transparent;
+    -fx-text-inner-color: #fff;
+    -fx-border-color: #fff;
+    -fx-border-width: 0px 0px .2px 0px;
+    -fx-font-size: 15px;
+}
+.textField:focused{
+    -fx-border-width: 0px 0px .8px 0px;
+}
+.iconUser{
+    -fx-background-color:#914f96;
     -fx-font-size:15px;
     -fx-cursor:hand;
     -fx-text-fill:#fff;
 }
-.clear-btn:hover{
-    -fx-background-color:#4386b5;
-}
-.dardBord{
-    -fx-background-color: #376282;
-    -fx-background-radius:5px;
-}
-.dardBordBook-form{
-    -fx-background-color: #94dd78;
-    -fx-background-radius:15px;
-}
-.dardBord1{
-    -fx-background-color: #35d4a2;
-    -fx-background-radius:15px;
-}
-.dardBordIcon{
-    -fx-background-color: #fff;
-    -fx-cursor: hand;
-}
-.dardBordIcon:hover{
-    -fx-background-color: #1187c2;
+.iconUser:hover{
+    -fx-background-color:#b356bb;
 }

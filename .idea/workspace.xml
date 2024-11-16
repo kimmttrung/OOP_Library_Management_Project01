@@ -5,20 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/BookSearchController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/dashBordController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/SearchBooks.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/dashbordDesign.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/test1.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/image/defaultBook.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/loginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/AlertHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/SearchBooks.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/test.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/DataBase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +26,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
         <option value="FxmlFile" />
         <option value="Class" />
       </list>
@@ -54,39 +53,43 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2mvbD3S73i5FvIHkw3x29psejs2" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.DataBase.executor": "Run",
-    "Application.GoogleBooksAPI.executor": "Run",
-    "Application.GoogleBooksToDB.executor": "Run",
-    "Application.HelloApplication.executor": "Run",
-    "Application.LibaryManagement.executor": "Run",
-    "Application.LibraryApp.executor": "Run",
-    "Application.LibraryManagement.executor": "Run",
-    "Application.pLibraryManagement.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "ThePhapp",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01/src/main/resources/image",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.BookSearchApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DataBase.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GoogleBooksAPI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GoogleBooksToDB.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LibaryManagement.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LibraryApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LibraryManagement.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LoginRegisterForgotPass.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.pLibraryManagement.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ThePhapp&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ChatApplication/OOP_Library_Management_Project01/src/main/resources/image&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\image" />
@@ -148,6 +151,32 @@
       <workItem from="1729272805388" duration="837000" />
       <workItem from="1729309191088" duration="16920000" />
       <workItem from="1729358078816" duration="5004000" />
+      <workItem from="1729859837655" duration="321000" />
+      <workItem from="1729868243819" duration="835000" />
+      <workItem from="1729869541739" duration="4307000" />
+      <workItem from="1729958894726" duration="3979000" />
+      <workItem from="1730019154907" duration="7071000" />
+      <workItem from="1730261334168" duration="3971000" />
+      <workItem from="1730296463795" duration="20000" />
+      <workItem from="1730729361804" duration="14619000" />
+      <workItem from="1730866630476" duration="3022000" />
+      <workItem from="1730902193130" duration="13000" />
+      <workItem from="1730903069384" duration="6341000" />
+      <workItem from="1731062804162" duration="1053000" />
+      <workItem from="1731150657831" duration="661000" />
+      <workItem from="1731249522828" duration="3836000" />
+      <workItem from="1731401136822" duration="42000" />
+      <workItem from="1731401286653" duration="423000" />
+      <workItem from="1731401717936" duration="640000" />
+      <workItem from="1731402954787" duration="930000" />
+      <workItem from="1731403896313" duration="1175000" />
+      <workItem from="1731506749817" duration="795000" />
+      <workItem from="1731507561960" duration="17222000" />
+      <workItem from="1731657819359" duration="3726000" />
+      <workItem from="1731664060730" duration="6150000" />
+      <workItem from="1731684147065" duration="18745000" />
+      <workItem from="1731775523838" duration="397000" />
+      <workItem from="1731776645478" duration="303000" />
     </task>
     <servers />
   </component>
