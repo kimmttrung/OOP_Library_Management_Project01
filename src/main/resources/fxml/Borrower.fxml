@@ -76,12 +76,12 @@
                      <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
                   </graphic>
                </Button>
-               <Button fx:id="close_btn" layoutX="1077.0" layoutY="-5.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/dashbordDesign.css">
+               <Button fx:id="close_btn" layoutX="1077.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/dashbordDesign.css">
                   <graphic>
                      <FontAwesomeIconView glyphName="CLOSE" size="30" />
                   </graphic>
                </Button>
-               <Button fx:id="minus_btn" layoutX="1037.0" layoutY="-6.0" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../css/dashbordDesign.css">
+               <Button fx:id="minus_btn" layoutX="1037.0" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../css/dashbordDesign.css">
                   <graphic>
                      <FontAwesomeIconView glyphName="MINUS" size="30" />
                   </graphic>
