@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashBoardControl">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashBoardControl">
     <children>
         <AnchorPane layoutX="217.0" layoutY="73.0" prefHeight="750.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -50,21 +50,16 @@
                             <children>
                                 <AnchorPane layoutX="15.0" layoutY="13.0" prefHeight="151.0" prefWidth="238.0" styleClass="dardBord1" stylesheets="@../css/dashbordDesign.css">
                                     <children>
-                                        <Button fx:id="bookAll_dashBoard_btn" layoutX="88.0" layoutY="14.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/dashbordDesign.css">
+                                        <Button fx:id="bookAll_dashBoard_btn" layoutX="88.0" layoutY="31.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/dashbordDesign.css">
                                             <graphic>
                                                 <FontAwesomeIconView glyphName="BOOK" size="50" />
                                             </graphic>
                                         </Button>
-                                        <Label layoutX="47.0" layoutY="76.0" text="ALL VIEW BOOK">
+                                        <Label layoutX="47.0" layoutY="101.0" text="ALL VIEW BOOK">
                                             <font>
                                                 <Font name="Segoe UI Black" size="18.0" />
                                             </font>
                                         </Label>
-                              <Label fx:id="bookCountLabel" layoutX="112.0" layoutY="89.0" prefHeight="69.0" prefWidth="14.0">
-                                 <font>
-                                    <Font name="Segoe UI Black" size="18.0" />
-                                 </font>
-                              </Label>
                                     </children>
                                 </AnchorPane>
                             </children>
@@ -100,21 +95,16 @@
                             <children>
                                 <AnchorPane layoutX="15.0" layoutY="13.0" prefHeight="151.0" prefWidth="238.0" styleClass="dardBord1" stylesheets="@../css/dashbordDesign.css">
                                     <children>
-                                        <Button fx:id="userAll_dashBoard_btn" layoutX="93.0" layoutY="14.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/dashbordDesign.css">
+                                        <Button fx:id="userAll_dashBoard_btn" layoutX="93.0" layoutY="28.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/dashbordDesign.css">
                                             <graphic>
                                                 <FontAwesomeIconView glyphName="USER" size="50" />
                                             </graphic>
                                         </Button>
-                                        <Label layoutX="77.0" layoutY="76.0" text="ALL USER">
+                                        <Label layoutX="77.0" layoutY="99.0" text="ALL USER">
                                             <font>
                                                 <Font name="Segoe UI Black" size="18.0" />
                                             </font>
                                         </Label>
-                              <Label fx:id="userCountLabel" layoutX="112.0" layoutY="89.0" prefHeight="69.0" prefWidth="14.0">
-                                 <font>
-                                    <Font name="Segoe UI Black" size="18.0" />
-                                 </font>
-                              </Label>
                                     </children>
                                 </AnchorPane>
                             </children>
@@ -123,21 +113,16 @@
                             <children>
                                 <AnchorPane layoutX="15.0" layoutY="13.0" prefHeight="151.0" prefWidth="238.0" styleClass="dardBord1" stylesheets="@../css/dashbordDesign.css">
                                     <children>
-                                        <Button fx:id="borrowerDashBoard_btn" layoutX="92.0" layoutY="14.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/dashbordDesign.css">
+                                        <Button fx:id="borrowerDashBoard_btn" layoutX="95.0" layoutY="30.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/dashbordDesign.css">
                                             <graphic>
                                                 <FontAwesomeIconView glyphName="USER_CIRCLE" size="50" />
                                             </graphic>
                                         </Button>
-                                        <Label layoutX="72.0" layoutY="76.0" text="BORROWER">
+                                        <Label layoutX="72.0" layoutY="103.0" text="BORROWER">
                                             <font>
                                                 <Font name="Segoe UI Black" size="18.0" />
                                             </font>
                                         </Label>
-                              <Label fx:id="borrowerCountLabel" layoutX="118.0" layoutY="89.0" prefHeight="69.0" prefWidth="14.0">
-                                 <font>
-                                    <Font name="Segoe UI Black" size="18.0" />
-                                 </font>
-                              </Label>
                                     </children>
                                 </AnchorPane>
                             </children>

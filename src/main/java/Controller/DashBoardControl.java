@@ -21,7 +21,6 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import management.libarymanagement.DataBase;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -76,12 +75,6 @@ public class DashBoardControl  {
     private Button userAll_btn;
     @FXML
     private Button userAll_dashBoard_btn;
-    @FXML
-    private Label bookCountLabel;
-    @FXML
-    private Label userCountLabel;
-    @FXML
-    private Label borrowerCountLabel;
 
 
 
@@ -96,15 +89,6 @@ public class DashBoardControl  {
 
     private double x = 0;
     private double y = 0;
-
-    @FXML
-    public void initialize() {
-        nav_from.setTranslateX(-320);
-        bars_btn.setVisible(true);
-        arrow_btn.setVisible(false);
-
-        updateCounts();
-    }
 
     @FXML
     public void DownloadPages(ActionEvent event){
@@ -254,85 +238,77 @@ public class DashBoardControl  {
         ObservableList list = FXCollections.observableArrayList(combo);
 
         take_gender.setItems(list);
+
+
     }
 
-    public void updateCounts() {
-        int bookCount = DataBase.getCount("books"); // Replace "books" with your table name
-        int userCount = DataBase.getCount("user"); // Replace "users" with your table name
-        int borrowerCount = DataBase.getCount("borrower"); // Replace "borrowers" with your table name
-
-        bookCountLabel.setText("" + bookCount);
-        userCountLabel.setText("" + userCount);
-        borrowerCountLabel.setText("" + borrowerCount);
+    @FXML
+    private void loadBooks() {
+        bookList = FXCollections.observableArrayList(bookControl.getAllBooks());
+        bookTable.setItems(bookList);
     }
 
-//    @FXML
-//    private void loadBooks() {
-//        bookList = FXCollections.observableArrayList(bookControl.getAllBooks());
-//        bookTable.setItems(bookList);
-//    }
+    @FXML
+    private void searchBook() {
+        String query = searchField.getText();
+        if (query.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Search Book", "Please enter a search query.");
+            return;
+        }
 
-//    @FXML
-//    private void searchBook() {
-//        String query = searchField.getText();
-//        if (query.isEmpty()) {
-//            showAlert(Alert.AlertType.WARNING, "Search Book", "Please enter a search query.");
-//            return;
-//        }
-//
-//        bookControl.searchBooks(query);
-//        loadSearchResults();
-//    }
+        bookControl.searchBooks(query);
+        loadSearchResults();
+    }
 
-//    private void loadSearchResults() {
-//        bookList = FXCollections.observableArrayList(bookControl.getSearchResults());
-//        bookTable.setItems(bookList);
-//    }
+    private void loadSearchResults() {
+        bookList = FXCollections.observableArrayList(bookControl.getSearchResults());
+        bookTable.setItems(bookList);
+    }
 
-//    @FXML
-//    private void updateBook() {
-//        if (isAnyFieldEmpty(bookTitleField, bookAuthorField, bookPublisherField, bookYearField)) {
-//            showAlert(Alert.AlertType.ERROR, "Update Book", "All fields are required.");
-//            return;
-//        }
-//
-//        Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update the book?");
-//        if (result.isPresent() && result.get() == ButtonType.OK) {
-//            Book newBook = new Book(
-//                    bookTitleField.getText(),
-//                    bookAuthorField.getText(),
-//                    bookPublisherField.getText(),
-//                    bookYearField.getText(),
-//                    null
-//            );
-//
-//            if (bookControl.updateBook(newBook)) {
-//                loadBooks();  // Reload books in the table view
-//                showAlert(Alert.AlertType.INFORMATION, "Update Success", "Book updated successfully.");
-//            } else {
-//                showAlert(Alert.AlertType.ERROR, "Update Error", "Error updating book. Please try again.");
-//            }
-//        }
-//    }
+    @FXML
+    private void updateBook() {
+        if (isAnyFieldEmpty(bookTitleField, bookAuthorField, bookPublisherField, bookYearField)) {
+            showAlert(Alert.AlertType.ERROR, "Update Book", "All fields are required.");
+            return;
+        }
 
-//    @FXML
-//    private void deleteBook() {
-//        if (bookIDField.getText().isEmpty()) {
-//            showAlert(Alert.AlertType.ERROR, "Delete Book", "Please enter Book ID you want to delete.");
-//            return;
-//        }
-//
-//        Optional<ButtonType> result = showConfirmationAlert("Confirm Delete", "Are you sure you want to delete this Book?");
-//        if (result.isPresent() && result.get() == ButtonType.OK) {
-//            int bookId = Integer.parseInt(bookIDField.getText());
-//            if (bookControl.deleteBook(bookId)) {
-//                loadBooks();  // Reload books in the table view
-//                showAlert(Alert.AlertType.INFORMATION, "Delete Success", "Book deleted successfully.");
-//            } else {
-//                showAlert(Alert.AlertType.ERROR, "Delete Error", "Error deleting book. Please try again.");
-//            }
-//        }
-//    }
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update the book?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Book newBook = new Book(
+                    bookTitleField.getText(),
+                    bookAuthorField.getText(),
+                    bookPublisherField.getText(),
+                    bookYearField.getText(),
+                    null
+            );
+
+            if (bookControl.updateBook(newBook)) {
+                loadBooks();  // Reload books in the table view
+                showAlert(Alert.AlertType.INFORMATION, "Update Success", "Book updated successfully.");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Update Error", "Error updating book. Please try again.");
+            }
+        }
+    }
+
+    @FXML
+    private void deleteBook() {
+        if (bookIDField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Delete Book", "Please enter Book ID you want to delete.");
+            return;
+        }
+        
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Delete", "Are you sure you want to delete this Book?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            int bookId = Integer.parseInt(bookIDField.getText());
+            if (bookControl.deleteBook(bookId)) {
+                loadBooks();  // Reload books in the table view
+                showAlert(Alert.AlertType.INFORMATION, "Delete Success", "Book deleted successfully.");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Delete Error", "Error deleting book. Please try again.");
+            }
+        }
+    }
 
     private boolean isAnyFieldEmpty(TextField... fields) {
         for (TextField field : fields) {
