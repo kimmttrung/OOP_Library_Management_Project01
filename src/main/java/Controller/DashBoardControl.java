@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import management.libarymanagement.DataBase;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -55,7 +56,6 @@ public class DashBoardControl  {
     private TextField bookPublisherField;
     @FXML
     private TextField bookIDField;
-
     @FXML
     private ComboBox<?> take_gender;
     @FXML
@@ -70,12 +70,16 @@ public class DashBoardControl  {
     private AnchorPane nav_from;
     @FXML
     private Button searchAPI_btn;
-
     @FXML
     private Button userAll_btn;
-
     @FXML
     private Button userAll_dashBoard_btn;
+    @FXML
+    private Label bookCountLabel;
+    @FXML
+    private Label userCountLabel;
+    @FXML
+    private Label borrowerCountLabel;
 
 
     private String comBox[] = {"Male", "Female", "Orther"};
@@ -86,6 +90,15 @@ public class DashBoardControl  {
 
     private double x = 0;
     private double y = 0;
+
+    @FXML
+    public void initialize() {
+        nav_from.setTranslateX(-320);
+        bars_btn.setVisible(true);
+        arrow_btn.setVisible(false);
+
+        updateCounts();
+    }
 
     @FXML
     public void DownloadPages(ActionEvent event){
@@ -233,7 +246,15 @@ public class DashBoardControl  {
         ObservableList list = FXCollections.observableArrayList(combo);
 
         take_gender.setItems(list);
+    }
 
+    public void updateCounts() {
+        int bookCount = DataBase.getCount("books"); // Replace "books" with your table name
+        int userCount = DataBase.getCount("user"); // Replace "users" with your table name
+        int borrowerCount = DataBase.getCount("borrower"); // Replace "borrowers" with your table name
 
+        bookCountLabel.setText("" + bookCount);
+        userCountLabel.setText("" + userCount);
+        borrowerCountLabel.setText("" + borrowerCount);
     }
 }

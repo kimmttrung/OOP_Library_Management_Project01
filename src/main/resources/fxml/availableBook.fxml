@@ -74,26 +74,26 @@
                               <FontAwesomeIconView glyphName="TRASH" size="30" />
                            </graphic>
                         </Button>
-                        <TextField layoutX="202.0" layoutY="479.0" prefHeight="43.0" prefWidth="133.0" promptText="Title" />
-                        <TextField layoutX="475.0" layoutY="479.0" prefHeight="43.0" prefWidth="120.0" promptText="Publisher" />
+                        <TextField fx:id="bookTitleField" layoutX="202.0" layoutY="479.0" prefHeight="43.0" prefWidth="133.0" promptText="Title" />
+                        <TextField fx:id="bookPublisherField" layoutX="475.0" layoutY="479.0" prefHeight="43.0" prefWidth="120.0" promptText="Publisher" />
                         <TextField layoutX="607.0" layoutY="479.0" prefHeight="43.0" prefWidth="163.0" promptText="Published Date" />
                         <TextField fx:id="bookIDField" layoutX="89.0" layoutY="550.0" prefHeight="43.0" prefWidth="91.0" promptText="IDBook" />
                         <TextField layoutX="202.0" layoutY="616.0" prefHeight="43.0" prefWidth="133.0" promptText="Title" />
                         <TextField layoutX="351.0" layoutY="616.0" prefHeight="43.0" prefWidth="106.0" promptText="Author" />
                         <TextField layoutX="475.0" layoutY="614.0" prefHeight="43.0" prefWidth="120.0" promptText="Publisher" />
-                        <TextField layoutX="607.0" layoutY="614.0" prefHeight="43.0" prefWidth="163.0" promptText="Published Date" />
+                        <TextField fx:id="bookYearField" layoutX="607.0" layoutY="614.0" prefHeight="43.0" prefWidth="163.0" promptText="Published Date" />
                         <TextField layoutX="89.0" layoutY="616.0" prefHeight="43.0" prefWidth="91.0" promptText="IDBook" />
-                        <TextField layoutX="351.0" layoutY="479.0" prefHeight="43.0" prefWidth="106.0" promptText="Author" />
+                        <TextField fx:id="bookAuthorField" layoutX="351.0" layoutY="479.0" prefHeight="43.0" prefWidth="106.0" promptText="Author" />
                         <TextField layoutX="89.0" layoutY="479.0" prefHeight="43.0" prefWidth="91.0" promptText="IDBook" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="-10.0" layoutY="-1.0" prefHeight="679.0" prefWidth="308.0" styleClass="mainCenter" stylesheets="@../css/availableBook.css">
                      <children>
-                        <Label layoutX="25.0" layoutY="-1.0" text="Book ID" />
+                        <Label layoutX="25.0" layoutY="-1.0" text="Title" />
                         <TextField layoutX="25.0" layoutY="29.0" prefHeight="27.0" prefWidth="249.0" />
-                        <Label layoutX="25.0" layoutY="81.0" text="Title" />
+                        <Label layoutX="25.0" layoutY="81.0" text="Name of author" />
                         <TextField layoutX="25.0" layoutY="111.0" prefHeight="27.0" prefWidth="249.0" />
-                        <Label layoutX="25.0" layoutY="162.0" text="Name of author" />
+                        <Label layoutX="25.0" layoutY="162.0" text="Publisher" />
                         <TextField layoutX="25.0" layoutY="192.0" prefHeight="27.0" prefWidth="249.0" />
                         <Label layoutX="25.0" layoutY="251.0" text="Published Date" />
                         <TextField layoutX="25.0" layoutY="281.0" prefHeight="27.0" prefWidth="249.0" />

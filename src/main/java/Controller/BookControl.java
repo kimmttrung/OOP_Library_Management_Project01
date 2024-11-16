@@ -3,10 +3,6 @@ package Controller;
 import API.GoogleBooksAPI;
 import Entity.Book;
 import DataAccessObject.BookDAO;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,12 +19,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import javafx.scene.control.*;
 
-import java.net.URL;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
+import static Controller.AlertHelper.showAlert;
+import static Controller.AlertHelper.showConfirmationAlert;
 
 
 public class BookControl {
@@ -99,6 +94,118 @@ public class BookControl {
 
     private double x = 0;
     private double y = 0;
+
+    private final BookDAO bookDAO = new BookDAO();
+    private final ObservableList<Book> searchResults = FXCollections.observableArrayList();
+    private ObservableList<Book> bookList = FXCollections.observableArrayList();
+
+    @FXML
+    public void initialize() {
+        nav_from.setTranslateX(-320);
+        bars_btn.setVisible(true);
+        arrow_btn.setVisible(false);
+
+        setUpTableColumns();
+        setUpBookSelectionListener();
+        loadBooks();
+    }
+
+    private void setUpTableColumns() {
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
+        publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
+        publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
+    }
+
+    //    private void setUpBookSelectionListener() {
+//        bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+//            String imageLink = (newSelection != null) ? newSelection.getImage() : null;
+//            Image image = (imageLink != null && !imageLink.isEmpty())
+//                    ? new Image(imageLink)
+//                    : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
+//            bookImageView.setImage(image);
+//        });
+//    }
+    private void setUpBookSelectionListener() {
+        bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection == null) {
+                bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
+                return;
+            }
+
+            int bookId = newSelection.getBookID();
+            Book selectedBook = bookDAO.getBookByID(bookId);
+
+            if (selectedBook == null) {
+                showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book not found.");
+                return;
+            }
+            String imageLink = selectedBook.getImage();
+            Image image = (imageLink != null && !imageLink.isEmpty())
+                    ? new Image(imageLink)
+                    : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
+            bookImageView.setImage(image);
+        });
+    }
+
+    @FXML
+    private void loadBooks() {
+        bookList = FXCollections.observableArrayList(bookDAO.getAllBooks());
+        bookTable.setItems(bookList);
+    }
+
+    @FXML
+    private void updateBook() {
+        if (isAnyFieldEmpty(bookTitleField, bookAuthorField, bookPublisherField, bookYearField)) {
+            showAlert(Alert.AlertType.ERROR, "Update Book", "All fields are required.");
+            return;
+        }
+
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update the book?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Book newBook = new Book(
+                    bookTitleField.getText(),
+                    bookAuthorField.getText(),
+                    bookPublisherField.getText(),
+                    bookYearField.getText(),
+                    null
+            );
+
+            if (bookDAO.insertBook(newBook)) {
+                loadBooks();
+                showAlert(Alert.AlertType.INFORMATION, "Update Success", "Book updated successfully.");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Update Error", "Error updating book. Please try again.");
+            }
+        }
+    }
+
+    @FXML
+    private void deleteBook() {
+        if (bookIDField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Delete Book", "Please enter Book ID you want to delete.");
+            return;
+        }
+
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Delete", "Are you sure you want to delete this Book?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            int bookId = Integer.parseInt(bookIDField.getText());
+            if (bookDAO.deleteBook(bookId)) {
+                loadBooks();
+                showAlert(Alert.AlertType.INFORMATION, "Delete Success", "Book deleted successfully.");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Delete Error", "Error deleting book. Please try again.");
+            }
+        }
+    }
+
+    private boolean isAnyFieldEmpty(TextField... fields) {
+        for (TextField field : fields) {
+            if (field.getText().trim().isEmpty()) return true;
+        }
+        return false;
+    }
 
     @FXML
     public void DownloadPages(ActionEvent event) {
@@ -232,129 +339,5 @@ public class BookControl {
         });
 
         slide.play();
-    }
-
-    private final BookDAO bookDAO = new BookDAO();
-    private final ObservableList<Book> searchResults = FXCollections.observableArrayList();
-    private ObservableList<Book> bookList = FXCollections.observableArrayList();
-
-    @FXML
-    public void initialize() {
-        setUpTableColumns();
-        setUpBookSelectionListener();
-        loadBooks();
-    }
-
-    private void setUpTableColumns() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-        publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
-        publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
-    }
-
-//    private void setUpBookSelectionListener() {
-//        bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-//            String imageLink = (newSelection != null) ? newSelection.getImage() : null;
-//            Image image = (imageLink != null && !imageLink.isEmpty())
-//                    ? new Image(imageLink)
-//                    : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
-//            bookImageView.setImage(image);
-//        });
-//    }
-    private void setUpBookSelectionListener() {
-        bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection == null) {
-                bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
-                return;
-            }
-
-            int bookId = newSelection.getBookID();
-            Book selectedBook = bookDAO.getBookByID(bookId);
-
-            if (selectedBook == null) {
-                showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book not found.");
-                return;
-            }
-            String imageLink = selectedBook.getImage();
-            Image image = (imageLink != null && !imageLink.isEmpty())
-                    ? new Image(imageLink)
-                    : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
-            bookImageView.setImage(image);
-        });
-        }
-
-    @FXML
-    private void loadBooks() {
-        bookList = FXCollections.observableArrayList(bookDAO.getAllBooks());
-        bookTable.setItems(bookList);
-    }
-
-    @FXML
-    private void updateBook() {
-        if (isAnyFieldEmpty(bookTitleField, bookAuthorField, bookPublisherField, bookYearField)) {
-            showAlert(Alert.AlertType.ERROR, "Update Book", "All fields are required.");
-            return;
-        }
-
-        Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update the book?");
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            Book newBook = new Book(
-                    bookTitleField.getText(),
-                    bookAuthorField.getText(),
-                    bookPublisherField.getText(),
-                    bookYearField.getText(),
-                    null
-            );
-
-            if (bookDAO.insertBook(newBook)) {
-                loadBooks();
-                showAlert(Alert.AlertType.INFORMATION, "Update Success", "Book updated successfully.");
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Update Error", "Error updating book. Please try again.");
-            }
-        }
-    }
-
-    @FXML
-    private void deleteBook() {
-        if (bookIDField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Delete Book", "Please enter Book ID you want to delete.");
-            return;
-        }
-
-        Optional<ButtonType> result = showConfirmationAlert("Confirm Delete", "Are you sure you want to delete this Book?");
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            int bookId = Integer.parseInt(bookIDField.getText());
-            if (bookDAO.deleteBook(bookId)) {
-                loadBooks();
-                showAlert(Alert.AlertType.INFORMATION, "Delete Success", "Book deleted successfully.");
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Delete Error", "Error deleting book. Please try again.");
-            }
-        }
-    }
-
-    private boolean isAnyFieldEmpty(TextField... fields) {
-        for (TextField field : fields) {
-            if (field.getText().trim().isEmpty()) return true;
-        }
-        return false;
-    }
-
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    private Optional<ButtonType> showConfirmationAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        return alert.showAndWait();
     }
 }

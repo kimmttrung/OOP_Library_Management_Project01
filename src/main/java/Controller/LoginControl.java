@@ -6,8 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import management.libarymanagement.DataBase;
 import java.sql.*;
+import static Controller.AlertHelper.*;
 
 public class LoginControl {
 
@@ -51,8 +53,6 @@ public class LoginControl {
             pst.setString(2, login_password.getText());
             resultSet = pst.executeQuery();
 
-            Alert alert;
-
             if (login_username.getText().isEmpty() || login_password.getText().isEmpty()) {
 
                 if(login_selectShowPassword.isSelected()){
@@ -60,12 +60,7 @@ public class LoginControl {
                 }else{
                     login_showPassword.setText(login_password.getText());
                 }
-
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter all the fields");
-                alert.showAndWait();
+                showAlert(Alert.AlertType.ERROR, "Error", "Please enter all the fields");
             } else {
                 if (resultSet.next()) {
 
@@ -77,15 +72,20 @@ public class LoginControl {
 
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
+                    root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
+                        x = e.getSceneX();
+                        y = e.getSceneY();
+                    });
+                    root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
+                        stage.setX(e.getScreenX() - x);
+                        stage.setY(e.getScreenY() - y);
+                    });
+                    stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(scene);
                     stage.show();
 
                 } else {
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Username or Password is Incorrect");
-                    alert.showAndWait();
+                    showAlert(Alert.AlertType.ERROR, "Error", "Username or Password is Incorrect");
                 }
             }
         } catch (Exception e) {
