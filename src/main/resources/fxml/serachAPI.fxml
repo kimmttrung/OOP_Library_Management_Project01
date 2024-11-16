@@ -231,7 +231,7 @@
                                     </AnchorPane>
                                     <AnchorPane layoutX="90.0" layoutY="-10.0" prefHeight="112.0" prefWidth="120.0">
                                        <children>
-                                          <Circle fill="DODGERBLUE" layoutX="62.0" layoutY="72.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+                                          <Circle fx:id="circleProfile" fill="DODGERBLUE" layoutX="62.0" layoutY="72.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane layoutX="23.0" layoutY="445.0" prefHeight="92.0" prefWidth="254.0">

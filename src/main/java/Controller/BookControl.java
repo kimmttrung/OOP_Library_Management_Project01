@@ -16,6 +16,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -36,11 +38,7 @@ public class BookControl {
     @FXML
     private Button bars_btn;
     @FXML
-    private Button bookAll_btn;
-    @FXML
     private TableView<Book> bookTable;
-    @FXML
-    private Button close_btn;
     @FXML
     private Button dashBoard_btn;
     @FXML
@@ -56,29 +54,19 @@ public class BookControl {
     @FXML
     private Button searchAPI_btn;
     @FXML
-    private Button search_btn;
-    @FXML
     private Button signOut_btn;
-
     @FXML
     private TableColumn<?, ?> titleColumn;
-
+    @FXML
+    private Label titleLabel;
+    @FXML
+    private Label authorLabel;
+    @FXML
+    private Label publisherLabel;
+    @FXML
+    private Label publishedDateLabel;
     @FXML
     private Button userAll_btn;
-    @FXML
-    private ImageView availableBook_btn;
-    @FXML
-    private Button find_btn;
-    @FXML
-    private Button issueBooks_btn;
-    @FXML
-    private Button minimize;
-    @FXML
-    private Button returnBooks_btn;
-    @FXML
-    private Button save_btn;
-    @FXML
-    private Button savedBooks_btn;
     @FXML
     private ImageView bookImageView;
     @FXML
@@ -91,6 +79,8 @@ public class BookControl {
     private TextField bookPublisherField;
     @FXML
     private TextField bookIDField;
+    @FXML
+    private Circle circleProfile;
 
     private double x = 0;
     private double y = 0;
@@ -108,6 +98,9 @@ public class BookControl {
         setUpTableColumns();
         setUpBookSelectionListener();
         loadBooks();
+
+        Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
+        circleProfile.setFill(new ImagePattern(image));
     }
 
     private void setUpTableColumns() {
@@ -118,15 +111,6 @@ public class BookControl {
         publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
     }
 
-    //    private void setUpBookSelectionListener() {
-//        bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-//            String imageLink = (newSelection != null) ? newSelection.getImage() : null;
-//            Image image = (imageLink != null && !imageLink.isEmpty())
-//                    ? new Image(imageLink)
-//                    : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
-//            bookImageView.setImage(image);
-//        });
-//    }
     private void setUpBookSelectionListener() {
         bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection == null) {
@@ -141,12 +125,18 @@ public class BookControl {
                 showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book not found.");
                 return;
             }
+            titleLabel.setText(selectedBook.getName());
+            authorLabel.setText(selectedBook.getAuthor());
+            publisherLabel.setText(selectedBook.getPublisher());
+            publishedDateLabel.setText(selectedBook.getPublishedDate());
+
             String imageLink = selectedBook.getImage();
             Image image = (imageLink != null && !imageLink.isEmpty())
                     ? new Image(imageLink)
                     : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
             bookImageView.setImage(image);
         });
+
     }
 
     @FXML

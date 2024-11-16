@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="789.0" prefWidth="1101.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookControl">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookControl">
    <children>
       <AnchorPane fx:id="main_from" layoutX="5.0" onDragDetected="#DownloadPages" prefHeight="788.0" prefWidth="1108.0">
          <children>
@@ -87,17 +87,25 @@
                         <TextField layoutX="89.0" layoutY="479.0" prefHeight="43.0" prefWidth="91.0" promptText="IDBook" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="-10.0" layoutY="-1.0" prefHeight="679.0" prefWidth="308.0" styleClass="mainCenter" stylesheets="@../css/availableBook.css">
+                  <AnchorPane layoutX="-11.0" prefHeight="679.0" prefWidth="308.0" styleClass="mainCenter" stylesheets="@../css/availableBook.css">
                      <children>
-                        <Label layoutX="25.0" layoutY="-1.0" text="Title" />
-                        <TextField layoutX="25.0" layoutY="29.0" prefHeight="27.0" prefWidth="249.0" />
-                        <Label layoutX="25.0" layoutY="81.0" text="Name of author" />
-                        <TextField layoutX="25.0" layoutY="111.0" prefHeight="27.0" prefWidth="249.0" />
-                        <Label layoutX="25.0" layoutY="162.0" text="Publisher" />
-                        <TextField layoutX="25.0" layoutY="192.0" prefHeight="27.0" prefWidth="249.0" />
-                        <Label layoutX="25.0" layoutY="251.0" text="Published Date" />
-                        <TextField layoutX="25.0" layoutY="281.0" prefHeight="27.0" prefWidth="249.0" />
-                        <AnchorPane layoutX="57.0" layoutY="362.0" prefHeight="276.0" prefWidth="202.0" styleClass="image-card" stylesheets="@../css/availableBook.css">
+                        <Label layoutX="25.0" layoutY="350.0" text="Title:">
+                           <font>
+                              <Font name="Segoe UI Black Italic" size="18.0" />
+                           </font></Label>
+                        <Label layoutX="25.0" layoutY="433.0" text="Name of author:">
+                           <font>
+                              <Font name="Segoe UI Black Italic" size="18.0" />
+                           </font></Label>
+                        <Label layoutX="27.0" layoutY="510.0" text="Publisher:">
+                           <font>
+                              <Font name="Segoe UI Black Italic" size="18.0" />
+                           </font></Label>
+                        <Label layoutX="25.0" layoutY="590.0" text="Published Date:">
+                           <font>
+                              <Font name="Segoe UI Black Italic" size="18.0" />
+                           </font></Label>
+                        <AnchorPane layoutX="57.0" layoutY="36.0" prefHeight="276.0" prefWidth="202.0" styleClass="image-card" stylesheets="@../css/availableBook.css">
                            <children>
                               <ImageView fx:id="bookImageView" fitHeight="276.0" fitWidth="196.0" layoutX="3.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
@@ -175,7 +183,7 @@
                               </AnchorPane>
                               <AnchorPane layoutX="90.0" layoutY="-10.0" prefHeight="112.0" prefWidth="120.0">
                                  <children>
-                                    <Circle fill="DODGERBLUE" layoutX="62.0" layoutY="72.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+                                    <Circle fx:id="circleProfile" fill="DODGERBLUE" layoutX="62.0" layoutY="72.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="23.0" layoutY="445.0" prefHeight="92.0" prefWidth="254.0">
@@ -194,6 +202,10 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
+                        <Label fx:id="titleLabel" layoutX="25.0" layoutY="377.0" prefHeight="44.0" prefWidth="249.0" text="..." />
+                        <Label fx:id="authorLabel" layoutX="25.0" layoutY="460.0" prefHeight="44.0" prefWidth="249.0" text="..." />
+                        <Label fx:id="publisherLabel" layoutX="25.0" layoutY="537.0" prefHeight="44.0" prefWidth="249.0" text="..." />
+                        <Label fx:id="publishedDateLabel" layoutX="25.0" layoutY="617.0" prefHeight="44.0" prefWidth="249.0" text="..." />
                      </children>
                   </AnchorPane>
                </children>

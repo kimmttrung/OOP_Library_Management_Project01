@@ -1,7 +1,7 @@
 package Controller;
 
-
-import Entity.Book;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,19 +11,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import management.libarymanagement.DataBase;
 
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-
-//implements Initializable
 
 public class DashBoardControl  {
 
@@ -36,34 +41,13 @@ public class DashBoardControl  {
     @FXML
     private Button arrow_btn;
     @FXML
-    private ImageView availableBook_btn;
-    @FXML
-    private Button close_btn;
-    @FXML
     private Button signOut_btn;
-    @FXML
-    private ImageView bookImageView;
-    @FXML
-    private TextField searchField;
-    @FXML
-    private TableView<Book> bookTable;
-    private TextField bookTitleField;
-    @FXML
-    private TextField bookAuthorField;
-    @FXML
-    private TextField bookYearField;
-    @FXML
-    private TextField bookPublisherField;
-    @FXML
-    private TextField bookIDField;
     @FXML
     private ComboBox<?> take_gender;
     @FXML
     private Button bookAll_btn;
     @FXML
     private Button bookAll_dashBoard_btn;
-    @FXML
-    private Button dashBoard_btn;
     @FXML
     private Button minus_btn;
     @FXML
@@ -80,13 +64,17 @@ public class DashBoardControl  {
     private Label userCountLabel;
     @FXML
     private Label borrowerCountLabel;
-
+    @FXML
+    private Circle circleProfile;
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private ImageView myImageView1, myImageView2, myImageView3, myImageView4, myImageView5;
+    @FXML
+    private ImageView myImageView6, myImageView7, myImageView8, myImageView9;
+    private int currentIndex = 0;
 
     private String comBox[] = {"Male", "Female", "Orther"};
-
-    @FXML
-    void circle_image(MouseEvent event) {
-    }
 
     private double x = 0;
     private double y = 0;
@@ -98,6 +86,78 @@ public class DashBoardControl  {
         arrow_btn.setVisible(false);
 
         updateCounts();
+        setImageView();
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.millis(20), e -> scroll())
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private void setImageView() {
+        Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
+        circleProfile.setFill(new ImagePattern(image));
+
+        List<ImageView> imageViews = Arrays.asList(
+                myImageView1, myImageView2, myImageView3, myImageView4, myImageView5,
+                myImageView6, myImageView7, myImageView8, myImageView9
+        );
+
+        loadImagesToImageViews(imageViews);
+    }
+
+    public void loadImagesToImageViews(List<ImageView> imageViews) {
+        List<String> imageLinks = getImageLinksFromDatabase();
+
+        if (imageLinks.isEmpty()) return;
+
+        int totalImages = imageLinks.size();
+
+        for (ImageView imageView : imageViews) {
+            try {
+                String imageLink = imageLinks.get(currentIndex);
+                Image image = new Image(imageLink, true);
+                imageView.setImage(image);
+
+                currentIndex = (currentIndex + 1) % totalImages;
+            } catch (Exception e) {
+                System.err.println("Error loading image: " + e.getMessage());
+            }
+        }
+    }
+
+    private List<String> getImageLinksFromDatabase() {
+        List<String> imageLinks = new ArrayList<>();
+
+        try (Connection connection = DataBase.getConnection()) {
+            String sql = "SELECT image FROM books";
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(sql)) {
+
+                while (resultSet.next()) {
+                    String imageUrl = resultSet.getString("image");
+                    if (imageUrl != null && !imageUrl.isEmpty()) {
+                        imageLinks.add(imageUrl);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return imageLinks;
+    }
+
+    private void scroll() {
+        double hValue = scrollPane.getHvalue();
+        double increment = 0.001;
+
+        if (hValue < 1) {
+            scrollPane.setHvalue(hValue + increment);
+        } else {
+            scrollPane.setHvalue(0);
+        }
     }
 
     @FXML

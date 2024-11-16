@@ -12,7 +12,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -33,8 +36,6 @@ public class UserControl {
     @FXML
     private Button borrowerBook_btn;
     @FXML
-    private Button close_btn;
-    @FXML
     private Button dashBoard_btn;
     @FXML
     private TableColumn<User, Integer> idColumn;
@@ -49,26 +50,17 @@ public class UserControl {
     @FXML
     private AnchorPane nav_from;
     @FXML
-    private TableColumn<?, ?> publishedDateColumn;
-
-    @FXML
-    private TableColumn<?, ?> publisherColumn;
-    @FXML
     private Button searchAPI_btn;
     @FXML
-    private Button search_btn;
-    @FXML
     private Button signOut_btn;
-    @FXML
-    private TableColumn<?, ?> titleColumn;
-    @FXML
-    private Button userAll_btn;
     @FXML
     private TextField userID;
     @FXML
     private TextField userNameField;
     @FXML
     private TextField phoneNumberField;
+    @FXML
+    private Circle circleProfile;
 
     private ObservableList<User> userList = FXCollections.observableArrayList();
     private UserDAO userDAO = new UserDAO();
@@ -88,6 +80,9 @@ public class UserControl {
         registrationDateColumn.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
 
         loadUsers();
+
+        Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
+        circleProfile.setFill(new ImagePattern(image));
     }
 
     public void addUser() {

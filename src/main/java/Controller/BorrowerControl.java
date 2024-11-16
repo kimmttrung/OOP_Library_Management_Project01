@@ -17,6 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -36,7 +38,7 @@ import static Controller.AlertHelper.showConfirmationAlert;
 public class BorrowerControl {
 
     @FXML
-    private TextField borrowerIDField, borrowerUsernameField, bookIDField, findBorrowerField;
+    private TextField borrowerIDField, bookIDField, findBorrowerField;
     @FXML
     private DatePicker toDatePicker;
     @FXML
@@ -56,8 +58,6 @@ public class BorrowerControl {
     @FXML
     private Button bookAll_btn;
     @FXML
-    private Button close_btn;
-    @FXML
     private Button dashBoard_btn;
     @FXML
     private Button minus_btn;
@@ -69,6 +69,8 @@ public class BorrowerControl {
     private Button signOut_btn;
     @FXML
     private Button userAll_btn;
+    @FXML
+    private Circle circleProfile;
 
     private ObservableList<Borrower> borrowerList = FXCollections.observableArrayList();
     private BorrowerDAO borrowerDAO = new BorrowerDAO();
@@ -89,6 +91,9 @@ public class BorrowerControl {
 
         loadBorrowers();
         setUpBookSelectionListener();
+
+        Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
+        circleProfile.setFill(new ImagePattern(image));
     }
 
     private double x = 0;
