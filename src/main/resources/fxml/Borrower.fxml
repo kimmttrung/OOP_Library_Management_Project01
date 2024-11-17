@@ -246,8 +246,8 @@
                     </AnchorPane>
                 </children>
             </AnchorPane>
-            <TextField fx:id="findBorrowerField" layoutX="393.0" layoutY="65.0" prefHeight="41.0" prefWidth="329.0" />
-            <Button layoutX="738.0" layoutY="66.0" mnemonicParsing="false" styleClass="find_btn" stylesheets="@../css/borrowerBook.css">
+            <TextField fx:id="findBorrowerField" layoutX="393.0" layoutY="65.0" prefHeight="41.0" prefWidth="329.0" promptText="Enter Borrower's ID" />
+            <Button layoutX="738.0" layoutY="66.0" mnemonicParsing="false" onAction="#searchBorrowerById" styleClass="find_btn" stylesheets="@../css/borrowerBook.css">
                 <graphic>
                     <FontAwesomeIconView glyphName="SEARCH" size="30" />
                 </graphic>

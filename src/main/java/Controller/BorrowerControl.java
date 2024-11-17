@@ -208,7 +208,6 @@ public class BorrowerControl {
         String borrowerId = findBorrowerField.getText();
 
         if (borrowerId.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Search Borrower", "Please enter Borrower ID.");
             loadBorrowers();
             return;
         }

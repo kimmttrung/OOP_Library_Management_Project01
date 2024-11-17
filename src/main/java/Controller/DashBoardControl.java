@@ -71,8 +71,7 @@ public class DashBoardControl  {
     @FXML
     private ImageView myImageView1, myImageView2, myImageView3, myImageView4, myImageView5;
     @FXML
-    private ImageView myImageView6, myImageView7, myImageView8, myImageView9;
-    private int currentIndex = 0;
+    private ImageView myImageView6, myImageView7, myImageView8, myImageView9, myImageView10;
 
     private String comBox[] = {"Male", "Female", "Orther"};
 
@@ -101,7 +100,7 @@ public class DashBoardControl  {
 
         List<ImageView> imageViews = Arrays.asList(
                 myImageView1, myImageView2, myImageView3, myImageView4, myImageView5,
-                myImageView6, myImageView7, myImageView8, myImageView9
+                myImageView6, myImageView7, myImageView8, myImageView9, myImageView10
         );
 
         loadImagesToImageViews(imageViews);
@@ -110,19 +109,13 @@ public class DashBoardControl  {
     public void loadImagesToImageViews(List<ImageView> imageViews) {
         List<String> imageLinks = getImageLinksFromDatabase();
 
-        if (imageLinks.isEmpty()) return;
-
-        int totalImages = imageLinks.size();
-
-        for (ImageView imageView : imageViews) {
-            try {
-                String imageLink = imageLinks.get(currentIndex);
-                Image image = new Image(imageLink, true);
-                imageView.setImage(image);
-
-                currentIndex = (currentIndex + 1) % totalImages;
-            } catch (Exception e) {
-                System.err.println("Error loading image: " + e.getMessage());
+        for (int i = 0; i < imageViews.size(); i++) {
+            if (i < imageLinks.size()) {
+                String imageLink = imageLinks.get(i);
+                Image image = new Image(imageLink);
+                imageViews.get(i).setImage(image);
+            } else {
+                break;
             }
         }
     }
@@ -309,9 +302,9 @@ public class DashBoardControl  {
     }
 
     public void updateCounts() {
-        int bookCount = DataBase.getCount("books"); // Replace "books" with your table name
-        int userCount = DataBase.getCount("user"); // Replace "users" with your table name
-        int borrowerCount = DataBase.getCount("borrower"); // Replace "borrowers" with your table name
+        int bookCount = DataBase.getCount("books");
+        int userCount = DataBase.getCount("user");
+        int borrowerCount = DataBase.getCount("borrower");
 
         bookCountLabel.setText("" + bookCount);
         userCountLabel.setText("" + userCount);

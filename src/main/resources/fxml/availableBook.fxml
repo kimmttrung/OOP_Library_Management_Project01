@@ -30,10 +30,10 @@
                   <Font name="Segoe UI Black" size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="535.0" layoutY="40.0" prefHeight="38.0" prefWidth="301.0" promptText="Serach book" />
-            <Button fx:id="search_btn" layoutX="867.0" layoutY="39.0" mnemonicParsing="false" styleClass="find_btn" stylesheets="@../css/availableBook.css">
+            <TextField fx:id="findBookField" layoutX="535.0" layoutY="40.0" prefHeight="38.0" prefWidth="301.0" promptText="Enter Book's Name" />
+            <Button layoutX="867.0" layoutY="39.0" mnemonicParsing="false" onAction="#searchBookByName" styleClass="find_btn" stylesheets="@../css/availableBook.css">
                <graphic>
-                  <FontAwesomeIconView glyphName="SEARCH" size="30" />
+                  <FontAwesomeIconView glyphName="SEARCH" size="30" text="" />
                </graphic>
             </Button>
             <Button fx:id="close_btn" layoutX="1058.0" layoutY="1.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/availableBook.css">
@@ -59,12 +59,12 @@
                               <TableColumn fx:id="publishedDateColumn" prefWidth="151.0" text="Published Date" />
                            </columns>
                         </TableView>
-                        <Button layoutX="12.0" layoutY="479.0" mnemonicParsing="false" onAction="#updateBook" styleClass="iconBook" stylesheets="@../css/availableBook.css">
+                        <Button layoutX="12.0" layoutY="479.0" mnemonicParsing="false" onAction="#insertBook" styleClass="iconBook" stylesheets="@../css/availableBook.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="PLUS_SQUARE" size="30" text="" />
                            </graphic>
                         </Button>
-                        <Button layoutX="11.0" layoutY="616.0" mnemonicParsing="false" styleClass="iconBook" stylesheets="@../css/availableBook.css">
+                        <Button layoutX="11.0" layoutY="616.0" mnemonicParsing="false" onAction="#updateBook" styleClass="iconBook" stylesheets="@../css/availableBook.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="EDIT" size="25" text="" />
                            </graphic>
@@ -78,13 +78,12 @@
                         <TextField fx:id="bookPublisherField" layoutX="475.0" layoutY="479.0" prefHeight="43.0" prefWidth="120.0" promptText="Publisher" />
                         <TextField layoutX="607.0" layoutY="479.0" prefHeight="43.0" prefWidth="163.0" promptText="Published Date" />
                         <TextField fx:id="bookIDField" layoutX="89.0" layoutY="550.0" prefHeight="43.0" prefWidth="91.0" promptText="IDBook" />
-                        <TextField layoutX="202.0" layoutY="616.0" prefHeight="43.0" prefWidth="133.0" promptText="Title" />
-                        <TextField layoutX="351.0" layoutY="616.0" prefHeight="43.0" prefWidth="106.0" promptText="Author" />
-                        <TextField layoutX="475.0" layoutY="614.0" prefHeight="43.0" prefWidth="120.0" promptText="Publisher" />
-                        <TextField fx:id="bookYearField" layoutX="607.0" layoutY="614.0" prefHeight="43.0" prefWidth="163.0" promptText="Published Date" />
-                        <TextField layoutX="89.0" layoutY="616.0" prefHeight="43.0" prefWidth="91.0" promptText="IDBook" />
+                        <TextField fx:id="bookTitleAdjField" layoutX="202.0" layoutY="616.0" prefHeight="43.0" prefWidth="133.0" promptText="Title" />
+                        <TextField fx:id="bookAuthorAdjField" layoutX="351.0" layoutY="616.0" prefHeight="43.0" prefWidth="106.0" promptText="Author" />
+                        <TextField fx:id="bookPublisherAdjField" layoutX="475.0" layoutY="614.0" prefHeight="43.0" prefWidth="120.0" promptText="Publisher" />
+                        <TextField fx:id="bookYearAdjField" layoutX="607.0" layoutY="614.0" prefHeight="43.0" prefWidth="163.0" promptText="Published Date" />
+                        <TextField fx:id="bookIDAdjField" layoutX="89.0" layoutY="616.0" prefHeight="43.0" prefWidth="91.0" promptText="IDBook" />
                         <TextField fx:id="bookAuthorField" layoutX="351.0" layoutY="479.0" prefHeight="43.0" prefWidth="106.0" promptText="Author" />
-                        <TextField layoutX="89.0" layoutY="479.0" prefHeight="43.0" prefWidth="91.0" promptText="IDBook" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="-11.0" prefHeight="679.0" prefWidth="308.0" styleClass="mainCenter" stylesheets="@../css/availableBook.css">

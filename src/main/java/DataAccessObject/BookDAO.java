@@ -85,19 +85,25 @@ public class BookDAO {
         return listBook;
     }
 
-    public ArrayList<Book> getBookByName(String name) {
-        ArrayList<Book> listBook = getListBook();
-        String sql = "SELECT * FROM books WHERE name LIKE '%" + name + "%'";
+    public ArrayList<Book> getBooksByName(String name) {
+        ArrayList<Book> listBook = new ArrayList<>();
+        String sql = "SELECT * FROM books WHERE name LIKE ?";
 
         try {
             conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
+            pst.setString(1, "%" + name + "%");
+
             rs = pst.executeQuery();
             while (rs.next()) {
                 Book book = new Book(
-                        rs.getInt(1), rs.getString(2),
-                        rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getString(6));
+                        rs.getInt("bookID"),
+                        rs.getString("name"),
+                        rs.getString("author"),
+                        rs.getString("publisher"),
+                        rs.getString("publishedDate"),
+                        rs.getString("image")
+                );
                 listBook.add(book);
             }
         } catch (Exception e) {
@@ -117,6 +123,7 @@ public class BookDAO {
                 e.printStackTrace();
             }
         }
+
         return listBook;
     }
 
@@ -160,7 +167,7 @@ public class BookDAO {
         return book;
     }
 
-    public void updateBook(Book book) {
+    public boolean updateBook(Book book) {
         String sql = "UPDATE books SET name = ?, author = ?, publisher = ?, publishedDate = ? WHERE bookID = ?";
 
         try {
@@ -171,7 +178,11 @@ public class BookDAO {
             pst.setString(3, book.getPublisher());
             pst.setString(4, book.getPublishedDate());
             pst.setInt(5, book.getBookID());
-            pst.executeUpdate();
+
+            int affectedRows = pst.executeUpdate();
+            if (affectedRows > 0) {
+                return true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -186,6 +197,7 @@ public class BookDAO {
                 e.printStackTrace();
             }
         }
+        return false;
     }
 
     public boolean insertBook(Book book) {
