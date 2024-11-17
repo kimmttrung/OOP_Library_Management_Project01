@@ -37,8 +37,6 @@ public class SearchAPI {
     @FXML
     private Button bookAll_btn;
     @FXML
-    private Button bookAll_dashBoard_btn;
-    @FXML
     private ImageView bookImageView;
     @FXML
     private TableView<Book> searchBookTable;
@@ -59,8 +57,6 @@ public class SearchAPI {
     @FXML
     private Button save_btn;
     @FXML
-    private Button searchAPI_btn;
-    @FXML
     private Button signOut_btn;
     @FXML
     private Button take_btn;
@@ -69,11 +65,7 @@ public class SearchAPI {
     @FXML
     private Button userAll_btn;
     @FXML
-    private Button userAll_dashBoard_btn;
-    @FXML
     private Button borrowerBook_btn;
-    @FXML
-    private Button borrowerDashBoard_btn;
     @FXML
     private TextField searchField;
 
@@ -221,7 +213,7 @@ public class SearchAPI {
                 dashBoard_btn.getScene().getWindow().hide();
 
 
-            } else if (event.getSource() == bookAll_btn || event.getSource() == bookAll_dashBoard_btn) {
+            } else if (event.getSource() == bookAll_btn) {
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/availableBook.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -238,7 +230,7 @@ public class SearchAPI {
                 stage.setScene(scene);
                 stage.show();
                 bookAll_btn.getScene().getWindow().hide();
-            } else if (event.getSource() == borrowerBook_btn || event.getSource() == borrowerDashBoard_btn) {
+            } else if (event.getSource() == borrowerBook_btn ) {
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/Borrower.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -256,7 +248,7 @@ public class SearchAPI {
                 stage.setScene(scene);
                 stage.show();
                 borrowerBook_btn.getScene().getWindow().hide();
-            } else if (event.getSource() == userAll_btn || event.getSource() == userAll_dashBoard_btn) {
+            } else if (event.getSource() == userAll_btn) {
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/userBook.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);

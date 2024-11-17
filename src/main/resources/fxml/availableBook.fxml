@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookControl">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookControl">
    <children>
       <AnchorPane fx:id="main_from" layoutX="5.0" onDragDetected="#DownloadPages" prefHeight="788.0" prefWidth="1108.0">
          <children>
@@ -59,17 +59,17 @@
                               <TableColumn fx:id="publishedDateColumn" prefWidth="151.0" text="Published Date" />
                            </columns>
                         </TableView>
-                        <Button layoutX="12.0" layoutY="479.0" mnemonicParsing="false" onAction="#updateBook" styleClass="iconBook" stylesheets="@../css/availableBook.css">
+                        <Button layoutX="12.0" layoutY="479.0" mnemonicParsing="false" onAction="#updateBook" styleClass="iconBookInfor" stylesheets="@../css/availableBook.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="PLUS_SQUARE" size="30" text="" />
                            </graphic>
                         </Button>
-                        <Button layoutX="11.0" layoutY="616.0" mnemonicParsing="false" styleClass="iconBook" stylesheets="@../css/availableBook.css">
+                        <Button layoutX="11.0" layoutY="616.0" mnemonicParsing="false" styleClass="iconBookInfor" stylesheets="@../css/availableBook.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="EDIT" size="25" text="" />
                            </graphic>
                         </Button>
-                        <Button layoutX="12.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteBook" styleClass="iconBook" stylesheets="@../css/availableBook.css">
+                        <Button layoutX="12.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteBook" styleClass="iconBookInfor" stylesheets="@../css/availableBook.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="TRASH" size="30" />
                            </graphic>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashBoardControl">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashBoardControl">
     <children>
         <AnchorPane layoutX="217.0" layoutY="73.0" prefHeight="750.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -71,12 +71,11 @@
                         </AnchorPane>
                         <AnchorPane layoutX="33.0" layoutY="273.0" prefHeight="390.0" prefWidth="1033.0" styleClass="mainCenter" stylesheets="@../css/dashbordDesign.css">
                             <children>
-                                <Separator layoutX="683.0" layoutY="22.0" orientation="VERTICAL" prefHeight="322.0" prefWidth="0.0" />
-                                <AnchorPane layoutX="7.0" layoutY="10.0" prefHeight="367.0" prefWidth="665.0" stylesheets="@../css/dashbordDesign.css">
+                                <AnchorPane layoutX="-22.0" layoutY="10.0" prefHeight="367.0" prefWidth="638.0" stylesheets="@../css/dashbordDesign.css">
                                     <children>
-                                        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="49.0" layoutY="135.0" prefHeight="177.0" prefWidth="567.0" vbarPolicy="NEVER">
+                                        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="31.0" layoutY="111.0" prefHeight="177.0" prefWidth="567.0" vbarPolicy="NEVER">
                                             <content>
-                                                <HBox fx:id="imageContainer" alignment="CENTER" prefHeight="176.0" prefWidth="1224.0">
+                                                <HBox fx:id="imageContainer" alignment="CENTER" prefHeight="176.0" prefWidth="1266.0">
                                                     <children>
                                                         <ImageView fx:id="myImageView1" fitHeight="169.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
                                                         <ImageView fx:id="myImageView2" fitHeight="176.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" />
@@ -91,16 +90,16 @@
                                                 </HBox>
                                             </content>
                                         </ScrollPane>
-                                        <Label layoutX="70.0" layoutY="77.0" prefHeight="35.0" prefWidth="218.0" text="Suggested books:">
+                                        <Label layoutX="67.0" layoutY="40.0" prefHeight="35.0" prefWidth="218.0" text="Suggested books:">
                                             <font>
                                                 <Font name="Segoe UI Black Italic" size="24.0" />
                                             </font>
                                         </Label>
                                     </children></AnchorPane>
                                 <AnchorPane layoutX="694.0" layoutY="7.0" prefHeight="373.0" prefWidth="330.0">
-                                    <children>
-                                        <Circle fill="#79dbaa" layoutX="163.0" layoutY="175.0" radius="149.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
+                           <children>
+                              <PieChart fx:id="pieChart" layoutX="-128.0" layoutY="-64.0" prefHeight="445.0" prefWidth="474.0" AnchorPane.bottomAnchor="-8.0" AnchorPane.leftAnchor="-128.0" AnchorPane.rightAnchor="-16.0" AnchorPane.topAnchor="-64.0" />
+                           </children>
                                 </AnchorPane>
                             </children>
                         </AnchorPane>

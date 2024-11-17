@@ -3,6 +3,8 @@ package Controller;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,6 +35,8 @@ import java.util.List;
 
 public class DashBoardControl  {
 
+    @FXML
+    private PieChart pieChart;
     @FXML
     private Button borrowerDashBoard_btn;
     @FXML
@@ -81,6 +86,22 @@ public class DashBoardControl  {
 
     @FXML
     public void initialize() {
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Science", 40),
+                        new PieChart.Data("History", 30),
+                        new PieChart.Data("Technology", 20),
+                        new PieChart.Data("Sports", 70)
+                );
+        pieChartData.forEach(data -> data.nameProperty().bind(
+                Bindings.concat(
+                        data.getName(), ": ", data.pieValueProperty()
+                                )
+                )
+        );
+
+        pieChart.getData().addAll(pieChartData);
+
         nav_from.setTranslateX(-320);
         bars_btn.setVisible(true);
         arrow_btn.setVisible(false);
