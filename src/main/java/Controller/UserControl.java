@@ -61,6 +61,8 @@ public class UserControl {
     private TextField phoneNumberField;
     @FXML
     private Circle circleProfile;
+    @FXML
+    private TextField usernameSearchField;
 
     private ObservableList<User> userList = FXCollections.observableArrayList();
     private UserDAO userDAO = new UserDAO();
@@ -142,32 +144,62 @@ public class UserControl {
         }
     }
 
+    @FXML
     public void updateUser() {
-
         if (userID.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Update User", "Please enter UserID of the user to update");
-            return;
-        }
-        if (userNameField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Update User", "Please enter User's Name");
-            return;
-        }
-        if (phoneNumberField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Update User", "Please enter Phone Number");
+            showAlert(Alert.AlertType.ERROR, "Update User", "Please enter User ID to update.");
             return;
         }
 
-        Optional<ButtonType> result = showConfirmationAlert("Confirm Update","Are you sure you want to update this User?");
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            //int userId = Integer.parseInt(userID.getText());
-            String userName = userNameField.getText();
-            String phoneNumber = phoneNumberField.getText();
+        int userId;
+        try {
+            userId = Integer.parseInt(userID.getText());
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Update User", "User ID must be a valid number.");
+            return;
+        }
 
-            User updatedUser = new User(userName, phoneNumber);
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update this user?");
+        if (result.isEmpty() || result.get() != ButtonType.OK) {
+            return;
+        }
 
-            userDAO.updateUser(updatedUser);
-            loadUsers(); // Reload users to refresh the table
-            showSuccessAlert("Update User", "User updated successfully!");
+        User existingUser = userDAO.findUserbyID(userId);
+        if (existingUser == null) {
+            showAlert(Alert.AlertType.ERROR, "Update User", "User not found with ID: " + userId);
+            return;
+        }
+
+        String updatedName = userNameField.getText().isEmpty() ? existingUser.getUserName() : userNameField.getText();
+        String updatedPhone = phoneNumberField.getText().isEmpty() ? existingUser.getPhoneNumber() : phoneNumberField.getText();
+
+        User updatedUser = new User(userId, updatedName, updatedPhone);
+
+        if (userDAO.updateUser(updatedUser)) {
+            loadUsers();
+            showAlert(Alert.AlertType.INFORMATION, "Update User", "User updated successfully!");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Update User", "Failed to update user. Please try again.");
+        }
+    }
+
+    @FXML
+    private void searchUserByUsername() {
+        String username = usernameSearchField.getText().trim();
+
+        if (username.isEmpty()) {
+            loadUsers();
+            return;
+        }
+
+        User user = userDAO.findUser(username);
+
+        if (user != null) {
+            ObservableList<User> userList = FXCollections.observableArrayList();
+            userList.add(user);
+            userTable.setItems(userList);
+        } else {
+            showAlert(Alert.AlertType.INFORMATION, "Search User", "No user found with username: " + username);
         }
     }
 

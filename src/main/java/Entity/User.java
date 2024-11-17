@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class User {
-    private int id;
+    private Integer id;
     private String userName;
     private String phoneNumber;
     private String registrationDate;
@@ -23,6 +23,12 @@ public class User {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.registrationDate = registrationDate;
+    }
+
+    public User(Integer userId, String userName, String phoneNumber) {
+        this.id = userId;
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
     }
 
     public int getId() {
