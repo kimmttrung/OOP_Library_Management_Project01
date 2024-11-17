@@ -195,7 +195,7 @@
                         </AnchorPane>
                         <AnchorPane layoutX="324.0" layoutY="1.0" prefHeight="755.0" prefWidth="775.0">
                             <children>
-                                <TextField fx:id="searchField" layoutX="72.0" layoutY="40.0" prefHeight="35.0" prefWidth="574.0" />
+                                <TextField fx:id="searchField" layoutX="72.0" layoutY="40.0" prefHeight="35.0" prefWidth="574.0" promptText="Enter Book's Name" />
                                 <Label layoutX="348.0" layoutY="7.0" text="TÌM KIẾM" textFill="#2a9d5c">
                                     <font>
                                         <Font size="18.0" />

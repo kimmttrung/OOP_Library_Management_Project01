@@ -175,31 +175,21 @@ public class UserDAO {
     }
 
     public boolean updateUser(User user) {
-        String sql = "UPDATE user SET phoneNumber = ? WHERE id = ?";
+        String sql = "UPDATE user SET username = ?, phoneNumber = ? WHERE id = ?";
 
-        try {
-            connect = DataBase.getConnection();
-            pst = connect.prepareStatement(sql);
-            pst.setString(1, user.getPhoneNumber());
-            pst.setInt(2, user.getId());
-            int affectedRows = pst.executeUpdate();
-            if (affectedRows > 0) {
-                return true;
-            }
+        try (Connection connect = DataBase.getConnection();
+             PreparedStatement pst = connect.prepareStatement(sql)) {
+
+            pst.setString(1, user.getUserName());
+            pst.setString(2, user.getPhoneNumber());
+            pst.setInt(3, user.getId());
+
+            return pst.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (pst != null) {
-                    pst.close();
-                }
-                if (connect != null) {
-                    connect.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
+
         return false;
     }
+
 }

@@ -60,7 +60,7 @@
                                                 <Font name="Segoe UI Black" size="18.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="bookCountLabel" layoutX="112.0" layoutY="89.0" prefHeight="69.0" prefWidth="14.0">
+                                        <Label fx:id="bookCountLabel" layoutX="112.0" layoutY="89.0" prefHeight="69.0" prefWidth="34.0">
                                             <font>
                                                 <Font name="Segoe UI Black" size="18.0" />
                                             </font>
@@ -86,6 +86,7 @@
                                                         <ImageView fx:id="myImageView7" fitHeight="169.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
                                                         <ImageView fx:id="myImageView8" fitHeight="169.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
                                                         <ImageView fx:id="myImageView9" fitHeight="169.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="myImageView10" fitHeight="174.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true" />
                                                     </children>
                                                 </HBox>
                                             </content>
@@ -122,7 +123,7 @@
                                                 <Font name="Segoe UI Black" size="18.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="userCountLabel" layoutX="112.0" layoutY="89.0" prefHeight="69.0" prefWidth="14.0">
+                                        <Label fx:id="userCountLabel" layoutX="112.0" layoutY="89.0" prefHeight="69.0" prefWidth="34.0">
                                             <font>
                                                 <Font name="Segoe UI Black" size="18.0" />
                                             </font>
@@ -145,7 +146,7 @@
                                                 <Font name="Segoe UI Black" size="18.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="borrowerCountLabel" layoutX="118.0" layoutY="89.0" prefHeight="69.0" prefWidth="14.0">
+                                        <Label fx:id="borrowerCountLabel" layoutX="118.0" layoutY="89.0" prefHeight="69.0" prefWidth="34.0">
                                             <font>
                                                 <Font name="Segoe UI Black" size="18.0" />
                                             </font>

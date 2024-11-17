@@ -3,6 +3,7 @@ package Controller;
 import API.GoogleBooksAPI;
 import Entity.Book;
 import DataAccessObject.BookDAO;
+import Entity.Borrower;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static Controller.AlertHelper.showAlert;
@@ -70,17 +72,13 @@ public class BookControl {
     @FXML
     private ImageView bookImageView;
     @FXML
-    private TextField bookTitleField;
+    private TextField bookIDField, bookTitleField, bookAuthorField, bookYearField, bookPublisherField;
     @FXML
-    private TextField bookAuthorField;
-    @FXML
-    private TextField bookYearField;
-    @FXML
-    private TextField bookPublisherField;
-    @FXML
-    private TextField bookIDField;
+    private TextField bookIDAdjField, bookTitleAdjField, bookAuthorAdjField, bookYearAdjField, bookPublisherAdjField;
     @FXML
     private Circle circleProfile;
+    @FXML
+    private TextField findBookField;
 
     private double x = 0;
     private double y = 0;
@@ -146,13 +144,13 @@ public class BookControl {
     }
 
     @FXML
-    private void updateBook() {
+    private void insertBook() {
         if (isAnyFieldEmpty(bookTitleField, bookAuthorField, bookPublisherField, bookYearField)) {
-            showAlert(Alert.AlertType.ERROR, "Update Book", "All fields are required.");
+            showAlert(Alert.AlertType.ERROR, "Insert Book", "All fields are required.");
             return;
         }
 
-        Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update the book?");
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Insert", "Are you sure you want to insert the book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Book newBook = new Book(
                     bookTitleField.getText(),
@@ -164,12 +162,46 @@ public class BookControl {
 
             if (bookDAO.insertBook(newBook)) {
                 loadBooks();
-                showAlert(Alert.AlertType.INFORMATION, "Update Success", "Book updated successfully.");
+                showAlert(Alert.AlertType.INFORMATION, "Insert Success", "Book inserted successfully.");
             } else {
-                showAlert(Alert.AlertType.ERROR, "Update Error", "Error updating book. Please try again.");
+                showAlert(Alert.AlertType.ERROR, "Insert Error", "Error inserting book. Please try again.");
             }
         }
     }
+
+    @FXML
+    private void updateBook() {
+            if (isAnyFieldEmpty(bookIDAdjField)) {
+                showAlert(Alert.AlertType.ERROR, "Update Book", "Please enter a valid book ID and Information you want to update.");
+                return;
+            }
+            int bookId = Integer.parseInt(bookIDAdjField.getText());
+            Book selectedBook = bookDAO.getBookByID(bookId);
+            if (selectedBook == null) {
+                showAlert(Alert.AlertType.ERROR, "Update Book", "No book selected for update.");
+                return;
+            }
+
+            Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update the book?");
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Book updatedBook = new Book(
+                        selectedBook.getBookID(),
+                        bookTitleAdjField.getText().isEmpty() ? selectedBook.getName() : bookTitleAdjField.getText(),
+                        bookAuthorAdjField.getText().isEmpty() ? selectedBook.getAuthor() : bookAuthorAdjField.getText(),
+                        bookPublisherAdjField.getText().isEmpty() ? selectedBook.getPublisher() : bookPublisherAdjField.getText(),
+                        bookYearAdjField.getText().isEmpty() ? selectedBook.getPublishedDate() : bookYearAdjField.getText(),
+                        selectedBook.getImage()
+                );
+
+                if (bookDAO.updateBook(updatedBook)) {
+                    loadBooks();
+                    showAlert(Alert.AlertType.INFORMATION, "Update Success", "Book updated successfully.");
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Update Error", "Error updating book. Please try again.");
+                }
+            }
+    }
+
 
     @FXML
     private void deleteBook() {
@@ -187,6 +219,25 @@ public class BookControl {
             } else {
                 showAlert(Alert.AlertType.ERROR, "Delete Error", "Error deleting book. Please try again.");
             }
+        }
+    }
+
+    @FXML
+    private void searchBookByName() {
+        String bookFindName = findBookField.getText();
+
+        if (bookFindName.isEmpty()) {
+            loadBooks();
+            return;
+        }
+
+        ArrayList<Book> foundBooks = bookDAO.getBooksByName(bookFindName);
+
+        if (foundBooks != null && !foundBooks.isEmpty()) {
+            ObservableList<Book> bookList = FXCollections.observableArrayList(foundBooks);
+            bookTable.setItems(bookList);
+        } else {
+            showAlert(Alert.AlertType.INFORMATION, "Search Book", "No books found with the provided name.");
         }
     }
 
