@@ -30,7 +30,7 @@
                   <Font name="Segoe UI Black" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="findBookField" layoutX="535.0" layoutY="40.0" prefHeight="38.0" prefWidth="301.0" promptText="Serach book" />
+            <TextField fx:id="findBookField" layoutX="535.0" layoutY="40.0" prefHeight="38.0" prefWidth="301.0" promptText="Enter Book's Name" />
             <Button layoutX="867.0" layoutY="39.0" mnemonicParsing="false" onAction="#searchBookByName" styleClass="find_btn" stylesheets="@../css/availableBook.css">
                <graphic>
                   <FontAwesomeIconView glyphName="SEARCH" size="30" text="" />
@@ -109,7 +109,7 @@
                               <ImageView fx:id="bookImageView" fitHeight="276.0" fitWidth="196.0" layoutX="3.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="nav_from" layoutY="1.0" prefHeight="679.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/dashbordDesign.css" visible="false">
+                        <AnchorPane fx:id="nav_from" layoutY="1.0" prefHeight="679.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/dashbordDesign.css">
                            <children>
                               <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">
                                  <graphic>
