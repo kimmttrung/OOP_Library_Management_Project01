@@ -3,7 +3,6 @@ package Controller;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,15 +16,13 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import management.libarymanagement.DataBase;
+import Database.DataBase;
 
-import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -133,7 +130,7 @@ public class DashBoardControl  {
         for (int i = 0; i < imageViews.size(); i++) {
             if (i < imageLinks.size()) {
                 String imageLink = imageLinks.get(i);
-                Image image = new Image(imageLink);
+                Image image = new Image(imageLink, true);
                 imageViews.get(i).setImage(image);
             } else {
                 break;

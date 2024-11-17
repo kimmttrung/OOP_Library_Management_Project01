@@ -10,10 +10,12 @@ module management.libarymanagement {
     opens DataAccessObject;
     opens API;
     opens Entity;
+    opens Database;
 
     exports management.libarymanagement;
     exports Controller;
     exports DataAccessObject;
     exports API;
     exports Entity;
+    exports Database;
 }

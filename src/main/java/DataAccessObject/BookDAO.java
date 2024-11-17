@@ -1,9 +1,9 @@
 package DataAccessObject;
 
 import Entity.Book;
+import Database.DataBase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import management.libarymanagement.DataBase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

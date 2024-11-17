@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import management.libarymanagement.DataBase;
+import Database.DataBase;
 import java.sql.*;
 import static Controller.AlertHelper.*;
 

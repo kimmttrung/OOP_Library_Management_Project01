@@ -3,12 +3,13 @@ package DataAccessObject;
 import Entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import management.libarymanagement.DataBase;
+import Database.DataBase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 
 
 public class UserDAO {
