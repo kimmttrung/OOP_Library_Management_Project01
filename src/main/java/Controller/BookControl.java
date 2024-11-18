@@ -1,9 +1,11 @@
 package Controller;
 
 import API.GoogleBooksAPI;
+import API.QRCodeGenerator;
 import Entity.Book;
 import DataAccessObject.BookDAO;
 import Entity.Borrower;
+import com.google.zxing.WriterException;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +25,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -60,17 +64,9 @@ public class BookControl {
     @FXML
     private TableColumn<?, ?> titleColumn;
     @FXML
-    private Label titleLabel;
-    @FXML
-    private Label authorLabel;
-    @FXML
-    private Label publisherLabel;
-    @FXML
-    private Label publishedDateLabel;
-    @FXML
     private Button userAll_btn;
     @FXML
-    private ImageView bookImageView;
+    private ImageView bookImageView, qrCodeImageView;
     @FXML
     private TextField bookIDField, bookTitleField, bookAuthorField, bookYearField, bookPublisherField;
     @FXML
@@ -96,9 +92,13 @@ public class BookControl {
         setUpTableColumns();
         setUpBookSelectionListener();
         loadBooks();
+        createQRCodeDirectory();
+    }
 
-        Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
-        circleProfile.setFill(new ImagePattern(image));
+    @FXML
+    private void loadBooks() {
+        bookList = FXCollections.observableArrayList(bookDAO.getAllBooks());
+        bookTable.setItems(bookList);
     }
 
     private void setUpTableColumns() {
@@ -107,6 +107,9 @@ public class BookControl {
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
+
+        Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
+        circleProfile.setFill(new ImagePattern(image));
     }
 
     private void setUpBookSelectionListener() {
@@ -123,10 +126,6 @@ public class BookControl {
                 showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book not found.");
                 return;
             }
-            titleLabel.setText(selectedBook.getName());
-            authorLabel.setText(selectedBook.getAuthor());
-            publisherLabel.setText(selectedBook.getPublisher());
-            publishedDateLabel.setText(selectedBook.getPublishedDate());
 
             String imageLink = selectedBook.getImage();
             Image image = (imageLink != null && !imageLink.isEmpty())
@@ -135,12 +134,6 @@ public class BookControl {
             bookImageView.setImage(image);
         });
 
-    }
-
-    @FXML
-    private void loadBooks() {
-        bookList = FXCollections.observableArrayList(bookDAO.getAllBooks());
-        bookTable.setItems(bookList);
     }
 
     @FXML
@@ -238,6 +231,47 @@ public class BookControl {
             bookTable.setItems(bookList);
         } else {
             showAlert(Alert.AlertType.INFORMATION, "Search Book", "No books found with the provided name.");
+        }
+    }
+
+    @FXML
+    private void generateQRCode() {
+        Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
+
+        if (selectedBook == null) {
+            showAlert(Alert.AlertType.ERROR, "Generate QR Code", "Please select a book to generate QR code.");
+            return;
+        }
+
+        // Chuỗi dữ liệu mã hóa trong QR Code (VD: JSON)
+        String qrData = String.format(
+                "{ \"bookID\": %d, \"title\": \"%s\", \"author\": \"%s\", \"publisher\": \"%s\", \"publishedDate\": \"%s\" }",
+                selectedBook.getBookID(),
+                selectedBook.getName(),
+                selectedBook.getAuthor(),
+                selectedBook.getPublisher(),
+                selectedBook.getPublishedDate()
+        );
+
+        // Đường dẫn lưu file QR Code
+        String filePath = "src/main/resources/qr_codes/book_" + selectedBook.getBookID() + ".png";
+
+        try {
+            QRCodeGenerator.generateQRCodeImage(qrData, 200, 200, filePath);
+            showAlert(Alert.AlertType.INFORMATION, "QR Code Generated", "QR Code saved at: " + filePath);
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Generate QR Code", "Error generating QR Code: " + e.getMessage());
+        }
+
+        Image qrImage = new Image(new File(filePath).toURI().toString());
+        qrCodeImageView.setImage(qrImage);
+    }
+
+    private void createQRCodeDirectory() {
+        File directory = new File("src/main/resources/qr_codes");
+        if (!directory.exists()) {
+            directory.mkdirs();
         }
     }
 

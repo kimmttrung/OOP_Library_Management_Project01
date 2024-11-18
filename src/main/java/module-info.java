@@ -4,6 +4,8 @@ module management.libarymanagement {
     requires java.sql;
     requires com.google.gson;
     requires java.desktop;
+    requires com.google.zxing;
+    requires com.google.zxing.javase;
 
     opens management.libarymanagement to javafx.fxml;
     opens Controller to javafx.fxml;

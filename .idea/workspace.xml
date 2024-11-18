@@ -5,15 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Database/DataBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/API/QRCodeGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/DataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainLibrary.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_interface.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/availableBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/availableBook.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/userBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/userBook.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +190,11 @@
       <workItem from="1731837549582" duration="116000" />
       <workItem from="1731837770514" duration="15000" />
       <workItem from="1731837825282" duration="19000" />
-      <workItem from="1731838932784" duration="912000" />
+      <workItem from="1731838932784" duration="1838000" />
+      <workItem from="1731858165285" duration="9000" />
+      <workItem from="1731917162496" duration="847000" />
+      <workItem from="1731923523267" duration="1000" />
+      <workItem from="1731930537675" duration="3576000" />
     </task>
     <servers />
   </component>

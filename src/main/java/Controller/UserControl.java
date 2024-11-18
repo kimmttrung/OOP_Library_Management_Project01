@@ -64,11 +64,11 @@ public class UserControl {
     @FXML
     private TextField usernameSearchField;
 
-    private ObservableList<User> userList = FXCollections.observableArrayList();
-    private UserDAO userDAO = new UserDAO();
-
     private double x = 0;
     private double y = 0;
+
+    private ObservableList<User> userList = FXCollections.observableArrayList();
+    private UserDAO userDAO = new UserDAO();
 
     @FXML
     public void initialize() {
@@ -76,12 +76,21 @@ public class UserControl {
         bars_btn.setVisible(true);
         arrow_btn.setVisible(false);
 
+        setUpTableColumn();
+        loadUsers();
+    }
+
+    private void loadUsers() {
+        userList.clear();
+        userList.addAll(userDAO.getAllUsers());
+        userTable.setItems(userList);
+    }
+
+    private void setUpTableColumn() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         registrationDateColumn.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
-
-        loadUsers();
 
         Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
         circleProfile.setFill(new ImagePattern(image));
@@ -201,12 +210,6 @@ public class UserControl {
         } else {
             showAlert(Alert.AlertType.INFORMATION, "Search User", "No user found with username: " + username);
         }
-    }
-
-    private void loadUsers() {
-        userList.clear();
-        userList.addAll(userDAO.getAllUsers());
-        userTable.setItems(userList);
     }
 
     private String getCurrentDate() {

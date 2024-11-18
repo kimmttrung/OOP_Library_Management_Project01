@@ -72,6 +72,9 @@ public class BorrowerControl {
     @FXML
     private Circle circleProfile;
 
+    private double x = 0;
+    private double y = 0;
+
     private ObservableList<Borrower> borrowerList = FXCollections.observableArrayList();
     private BorrowerDAO borrowerDAO = new BorrowerDAO();
 
@@ -81,6 +84,17 @@ public class BorrowerControl {
         bars_btn.setVisible(true);
         arrow_btn.setVisible(false);
 
+        setUpTableColumn();
+        loadBorrowers();
+        setUpBookSelectionListener();
+    }
+
+    private void loadBorrowers() {
+        borrowerList = FXCollections.observableArrayList(borrowerDAO.getBorrowerByStatus("processing"));
+        borrowerTable.setItems(borrowerList);
+    }
+
+    private void setUpTableColumn() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         bookIdColumn.setCellValueFactory(new PropertyValueFactory<>("bookid"));
@@ -89,19 +103,8 @@ public class BorrowerControl {
         fromColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_from"));
         toColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_to"));
 
-        loadBorrowers();
-        setUpBookSelectionListener();
-
         Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
         circleProfile.setFill(new ImagePattern(image));
-    }
-
-    private double x = 0;
-    private double y = 0;
-
-    private void loadBorrowers() {
-        borrowerList = FXCollections.observableArrayList(borrowerDAO.getBorrowerByStatus("processing"));
-        borrowerTable.setItems(borrowerList);
     }
 
     @FXML
