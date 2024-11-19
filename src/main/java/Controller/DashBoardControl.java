@@ -1,39 +1,39 @@
 package Controller;
 
-import DataAccessObject.BookDAO;
-import DataAccessObject.SearchBooks;
-import Entity.Book;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import Database.DataBase;
 
-import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
-
-//implements Initializable
 
 public class DashBoardControl  {
 
+    @FXML
+    private PieChart pieChart;
     @FXML
     private Button borrowerDashBoard_btn;
     @FXML
@@ -44,21 +44,6 @@ public class DashBoardControl  {
     private Button arrow_btn;
     @FXML
     private Button signOut_btn;
-    @FXML
-    private ImageView bookImageView;
-    @FXML
-    private TextField searchField;
-    @FXML
-    private TableView<Book> bookTable;
-    private TextField bookTitleField;
-    @FXML
-    private TextField bookAuthorField;
-    @FXML
-    private TextField bookYearField;
-    @FXML
-    private TextField bookPublisherField;
-    @FXML
-    private TextField bookIDField;
     @FXML
     private ComboBox<?> take_gender;
     @FXML
@@ -75,26 +60,122 @@ public class DashBoardControl  {
     private Button userAll_btn;
     @FXML
     private Button userAll_dashBoard_btn;
-
-
-
-
-    private BookControl bookControl = new BookControl();
-    private ObservableList<Book> bookList = FXCollections.observableArrayList();
-    private String comBox[] = {"Male", "Female", "Orther"};
-
     @FXML
-    void circle_image(MouseEvent event) {
-    }
+    private Label bookCountLabel;
+    @FXML
+    private Label userCountLabel;
+    @FXML
+    private Label borrowerCountLabel;
+    @FXML
+    private Circle circleProfile;
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private ImageView myImageView1, myImageView2, myImageView3, myImageView4, myImageView5;
+    @FXML
+    private ImageView myImageView6, myImageView7, myImageView8, myImageView9, myImageView10;
+
+    private String comBox[] = {"Male", "Female", "Orther"};
 
     private double x = 0;
     private double y = 0;
 
     @FXML
+    public void initialize() {
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Science", 40),
+                        new PieChart.Data("History", 30),
+                        new PieChart.Data("Technology", 20),
+                        new PieChart.Data("Sports", 70)
+                );
+        pieChartData.forEach(data -> data.nameProperty().bind(
+                Bindings.concat(
+                        data.getName(), ": ", data.pieValueProperty()
+                                )
+                )
+        );
+
+        pieChart.getData().addAll(pieChartData);
+
+        nav_from.setTranslateX(-320);
+        bars_btn.setVisible(true);
+        arrow_btn.setVisible(false);
+
+        updateCounts();
+        setImageView();
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.millis(20), e -> scroll())
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private void setImageView() {
+        Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
+        circleProfile.setFill(new ImagePattern(image));
+
+        List<ImageView> imageViews = Arrays.asList(
+                myImageView1, myImageView2, myImageView3, myImageView4, myImageView5,
+                myImageView6, myImageView7, myImageView8, myImageView9, myImageView10
+        );
+
+        loadImagesToImageViews(imageViews);
+    }
+
+    public void loadImagesToImageViews(List<ImageView> imageViews) {
+        List<String> imageLinks = getImageLinksFromDatabase();
+
+        for (int i = 0; i < imageViews.size(); i++) {
+            if (i < imageLinks.size()) {
+                String imageLink = imageLinks.get(i);
+                Image image = new Image(imageLink, true);
+                imageViews.get(i).setImage(image);
+            } else {
+                break;
+            }
+        }
+    }
+
+    private List<String> getImageLinksFromDatabase() {
+        List<String> imageLinks = new ArrayList<>();
+
+        try (Connection connection = DataBase.getConnection()) {
+            String sql = "SELECT image FROM books";
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(sql)) {
+
+                while (resultSet.next()) {
+                    String imageUrl = resultSet.getString("image");
+                    if (imageUrl != null && !imageUrl.isEmpty()) {
+                        imageLinks.add(imageUrl);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return imageLinks;
+    }
+
+    private void scroll() {
+        double hValue = scrollPane.getHvalue();
+        double increment = 0.001;
+
+        if (hValue < 1) {
+            scrollPane.setHvalue(hValue + increment);
+        } else {
+            scrollPane.setHvalue(0);
+        }
+    }
+
+    @FXML
     public void DownloadPages(ActionEvent event){
         try{
             if (event.getSource() == signOut_btn){
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginForm.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
@@ -177,8 +258,6 @@ public class DashBoardControl  {
                     stage.setX(e.getScreenX() - x);
                     stage.setY(e.getScreenY() - y);
                 });
-
-
                 stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.show();
@@ -238,98 +317,15 @@ public class DashBoardControl  {
         ObservableList list = FXCollections.observableArrayList(combo);
 
         take_gender.setItems(list);
-
-
     }
 
-    @FXML
-    private void loadBooks() {
-        bookList = FXCollections.observableArrayList(bookControl.getAllBooks());
-        bookTable.setItems(bookList);
-    }
+    public void updateCounts() {
+        int bookCount = DataBase.getCount("books");
+        int userCount = DataBase.getCount("user");
+        int borrowerCount = DataBase.getCount("borrower");
 
-    @FXML
-    private void searchBook() {
-        String query = searchField.getText();
-        if (query.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Search Book", "Please enter a search query.");
-            return;
-        }
-
-        bookControl.searchBooks(query);
-        loadSearchResults();
-    }
-
-    private void loadSearchResults() {
-        bookList = FXCollections.observableArrayList(bookControl.getSearchResults());
-        bookTable.setItems(bookList);
-    }
-
-    @FXML
-    private void updateBook() {
-        if (isAnyFieldEmpty(bookTitleField, bookAuthorField, bookPublisherField, bookYearField)) {
-            showAlert(Alert.AlertType.ERROR, "Update Book", "All fields are required.");
-            return;
-        }
-
-        Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update the book?");
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            Book newBook = new Book(
-                    bookTitleField.getText(),
-                    bookAuthorField.getText(),
-                    bookPublisherField.getText(),
-                    bookYearField.getText(),
-                    null
-            );
-
-            if (bookControl.updateBook(newBook)) {
-                loadBooks();  // Reload books in the table view
-                showAlert(Alert.AlertType.INFORMATION, "Update Success", "Book updated successfully.");
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Update Error", "Error updating book. Please try again.");
-            }
-        }
-    }
-
-    @FXML
-    private void deleteBook() {
-        if (bookIDField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Delete Book", "Please enter Book ID you want to delete.");
-            return;
-        }
-        
-        Optional<ButtonType> result = showConfirmationAlert("Confirm Delete", "Are you sure you want to delete this Book?");
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            int bookId = Integer.parseInt(bookIDField.getText());
-            if (bookControl.deleteBook(bookId)) {
-                loadBooks();  // Reload books in the table view
-                showAlert(Alert.AlertType.INFORMATION, "Delete Success", "Book deleted successfully.");
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Delete Error", "Error deleting book. Please try again.");
-            }
-        }
-    }
-
-    private boolean isAnyFieldEmpty(TextField... fields) {
-        for (TextField field : fields) {
-            if (field.getText().trim().isEmpty()) return true;
-        }
-        return false;
-    }
-
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    private Optional<ButtonType> showConfirmationAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        return alert.showAndWait();
+        bookCountLabel.setText("" + bookCount);
+        userCountLabel.setText("" + userCount);
+        borrowerCountLabel.setText("" + borrowerCount);
     }
 }

@@ -3,12 +3,13 @@ package DataAccessObject;
 import Entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import management.libarymanagement.DataBase;
+import Database.DataBase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 
 
 public class UserDAO {
@@ -63,6 +64,7 @@ public class UserDAO {
             pst.setString(1, username);
             rs = pst.executeQuery();
             while (rs.next()) {
+                user = new User();
                 user.setUserName(rs.getString("username"));
                 user.setId(rs.getInt("id"));
                 user.setPhoneNumber(rs.getString("phoneNumber"));
@@ -98,6 +100,7 @@ public class UserDAO {
             pst.setInt(1, id);
             rs = pst.executeQuery();
             while (rs.next()) {
+                user = new User();
                 user.setUserName(rs.getString("username"));
                 user.setId(rs.getInt("id"));
                 user.setPhoneNumber(rs.getString("phoneNumber"));
@@ -172,28 +175,22 @@ public class UserDAO {
         return false;
     }
 
-    public void updateUser(User user) {
-        String sql = "UPDATE user SET phoneNumber = ? WHERE id = ?";
+    public boolean updateUser(User user) {
+        String sql = "UPDATE user SET username = ?, phoneNumber = ? WHERE id = ?";
 
-        try {
-            connect = DataBase.getConnection();
-            pst = connect.prepareStatement(sql);
-            pst.setString(1, user.getPhoneNumber());
-            pst.setInt(2, user.getId());
-            pst.executeUpdate();
+        try (Connection connect = DataBase.getConnection();
+             PreparedStatement pst = connect.prepareStatement(sql)) {
+
+            pst.setString(1, user.getUserName());
+            pst.setString(2, user.getPhoneNumber());
+            pst.setInt(3, user.getId());
+
+            return pst.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (pst != null) {
-                    pst.close();
-                }
-                if (connect != null) {
-                    connect.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
+
+        return false;
     }
+
 }

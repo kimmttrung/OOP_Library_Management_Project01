@@ -12,78 +12,216 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.util.Optional;
 
+import static Controller.AlertHelper.*;
+
 public class UserControl {
     @FXML
     private Button arrow_btn;
-    @FXML
-    private TableColumn<?, ?> authorColumn;
     @FXML
     private Button bars_btn;
     @FXML
     private Button bookAll_btn;
     @FXML
-    private TableView<?> bookTable;
+    private TableView<User> userTable;
     @FXML
     private Button borrowerBook_btn;
     @FXML
-    private Button close_btn;
-    @FXML
     private Button dashBoard_btn;
     @FXML
-    private TableColumn<?, ?> idColumn;
+    private TableColumn<User, Integer> idColumn;
+    @FXML
+    private TableColumn<User, String> nameColumn;
+    @FXML
+    private TableColumn<User, String> phoneColumn;
+    @FXML
+    private TableColumn<User, String> registrationDateColumn;
     @FXML
     private Button minus_btn;
     @FXML
     private AnchorPane nav_from;
     @FXML
-    private TableColumn<?, ?> publishedDateColumn;
-
-    @FXML
-    private TableColumn<?, ?> publisherColumn;
-    @FXML
     private Button searchAPI_btn;
-    @FXML
-    private Button search_btn;
     @FXML
     private Button signOut_btn;
     @FXML
-    private TableColumn<?, ?> titleColumn;
+    private TextField userID;
     @FXML
-    private Button userAll_btn;
+    private TextField userNameField;
+    @FXML
+    private TextField phoneNumberField;
+    @FXML
+    private Circle circleProfile;
+    @FXML
+    private TextField usernameSearchField;
 
-//    @FXML
-//    private TextField userID;
-//    @FXML
-//    private TextField userNameField;
-//    @FXML
-//    private TextField phoneNumberField;
-//    @FXML
-//    private TableView<User> userTable;
-//    @FXML
-//    private TableColumn<User, Integer> idColumn;
-//    @FXML
-//    private TableColumn<User, String> nameColumn;
-//    @FXML
-//    private TableColumn<User, String> phoneColumn;
+    private double x = 0;
+    private double y = 0;
 
     private ObservableList<User> userList = FXCollections.observableArrayList();
     private UserDAO userDAO = new UserDAO();
 
-    private double x = 0;
-    private double y = 0;
+    @FXML
+    public void initialize() {
+        nav_from.setTranslateX(-320);
+        bars_btn.setVisible(true);
+        arrow_btn.setVisible(false);
+
+        setUpTableColumn();
+        loadUsers();
+    }
+
+    private void loadUsers() {
+        userList.clear();
+        userList.addAll(userDAO.getAllUsers());
+        userTable.setItems(userList);
+    }
+
+    private void setUpTableColumn() {
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        registrationDateColumn.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
+
+        Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
+        circleProfile.setFill(new ImagePattern(image));
+    }
+
+    public void addUser() {
+
+        if (userNameField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter User's Name");
+            return;
+        }
+        if (phoneNumberField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter Phone Number");
+            return;
+        }
+
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Addition", "Are you sure you want to add this User?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            String userName = userNameField.getText();
+            String phoneNumber = phoneNumberField.getText();
+            String registrationDate = getCurrentDate();
+
+            User newUser = new User(userName, phoneNumber, registrationDate);
+
+            if (userDAO.addUser(newUser)) {
+                loadUsers(); // Reload users to refresh the table
+                showSuccessAlert("Add User", "User added successfully!");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "ERROR", "Something went wrong");
+            }
+        }
+    }
+
+    public void deleteUser() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Delete User");
+        alert.setHeaderText(null);
+
+        if (userID.getText().isEmpty()) {
+            alert.setContentText("Please enter UserID you want to delete");
+            alert.showAndWait();
+            return;
+        }
+
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirm Delete");
+        confirmAlert.setHeaderText("Are you sure you want to delete this User?");
+
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            int userId = Integer.parseInt(userID.getText());
+
+            if (userDAO.deleteUser(userId)) {
+                loadUsers();
+                showSuccessAlert("Delete User", "User deleted successfully!");
+            } else {
+                alert.setContentText("Error deleting user. Please try again later!");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    @FXML
+    public void updateUser() {
+        if (userID.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Update User", "Please enter User ID to update.");
+            return;
+        }
+
+        int userId;
+        try {
+            userId = Integer.parseInt(userID.getText());
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Update User", "User ID must be a valid number.");
+            return;
+        }
+
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update this user?");
+        if (result.isEmpty() || result.get() != ButtonType.OK) {
+            return;
+        }
+
+        User existingUser = userDAO.findUserbyID(userId);
+        if (existingUser == null) {
+            showAlert(Alert.AlertType.ERROR, "Update User", "User not found with ID: " + userId);
+            return;
+        }
+
+        String updatedName = userNameField.getText().isEmpty() ? existingUser.getUserName() : userNameField.getText();
+        String updatedPhone = phoneNumberField.getText().isEmpty() ? existingUser.getPhoneNumber() : phoneNumberField.getText();
+
+        User updatedUser = new User(userId, updatedName, updatedPhone);
+
+        if (userDAO.updateUser(updatedUser)) {
+            loadUsers();
+            showAlert(Alert.AlertType.INFORMATION, "Update User", "User updated successfully!");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Update User", "Failed to update user. Please try again.");
+        }
+    }
+
+    @FXML
+    private void searchUserByUsername() {
+        String username = usernameSearchField.getText().trim();
+
+        if (username.isEmpty()) {
+            loadUsers();
+            return;
+        }
+
+        User user = userDAO.findUser(username);
+
+        if (user != null) {
+            ObservableList<User> userList = FXCollections.observableArrayList();
+            userList.add(user);
+            userTable.setItems(userList);
+        } else {
+            showAlert(Alert.AlertType.INFORMATION, "Search User", "No user found with username: " + username);
+        }
+    }
+
+    private String getCurrentDate() {
+        // Implement this method to return the current date as a string
+        return "";
+    }
 
     @FXML
     public void DownloadPages(ActionEvent event){
         try{
             if (event.getSource() == signOut_btn){
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginForm.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
@@ -213,140 +351,5 @@ public class UserControl {
         });
 
         slide.play();
-    }
-
-//    @FXML
-//    public void initialize() {
-//        // Set up the table columns
-//        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        nameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
-//        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-//
-//        loadUsers();
-//    }
-
-//    public void addUser() {
-//        Alert alert = new Alert(Alert.AlertType.ERROR);
-//        alert.setTitle("Add User");
-//        alert.setHeaderText(null);
-//
-//        if (userNameField.getText().isEmpty()) {
-//            alert.setContentText("Please enter User's Name");
-//            alert.showAndWait();
-//            return;
-//        }
-//        if (phoneNumberField.getText().isEmpty()) {
-//            alert.setContentText("Please enter Phone Number");
-//            alert.showAndWait();
-//            return;
-//        }
-//
-//        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-//        confirmAlert.setTitle("Confirm Addition");
-//        confirmAlert.setHeaderText("Are you sure you want to add this User?");
-//
-//        Optional<ButtonType> result = confirmAlert.showAndWait();
-//        if (result.isPresent() && result.get() == ButtonType.OK) {
-//            String userName = userNameField.getText();
-//            String phoneNumber = phoneNumberField.getText();
-//            String registrationDate = getCurrentDate();
-//
-//            User newUser = new User(userName, phoneNumber, registrationDate);
-//
-//            if (userDAO.addUser(newUser)) {
-//                loadUsers(); // Reload users to refresh the table
-//                showSuccessAlert("Add User", "User added successfully!");
-//            } else {
-//                alert.setContentText("Error adding user. Please try again.");
-//                alert.showAndWait();
-//            }
-//        }
-//    }
-
-//    public void deleteUser() {
-//        Alert alert = new Alert(Alert.AlertType.ERROR);
-//        alert.setTitle("Delete User");
-//        alert.setHeaderText(null);
-//
-//        if (userID.getText().isEmpty()) {
-//            alert.setContentText("Please enter UserID you want to delete");
-//            alert.showAndWait();
-//            return;
-//        }
-//
-//        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-//        confirmAlert.setTitle("Confirm Delete");
-//        confirmAlert.setHeaderText("Are you sure you want to delete this User?");
-//
-//        Optional<ButtonType> result = confirmAlert.showAndWait();
-//        if (result.isPresent() && result.get() == ButtonType.OK) {
-//            int userId = Integer.parseInt(userID.getText());
-//
-//            if (userDAO.deleteUser(userId)) {
-//                loadUsers();
-//                showSuccessAlert("Delete User", "User deleted successfully!");
-//            } else {
-//                alert.setContentText("Error deleting user. Please try again later!");
-//                alert.showAndWait();
-//            }
-//        }
-//    }
-
-//    public void updateUser() {
-//        Alert alert = new Alert(Alert.AlertType.ERROR);
-//        alert.setTitle("Update User");
-//        alert.setHeaderText(null);
-//
-//        if (userID.getText().isEmpty()) {
-//            alert.setContentText("Please enter UserID of the user to update");
-//            alert.showAndWait();
-//            return;
-//        }
-//        if (userNameField.getText().isEmpty()) {
-//            alert.setContentText("Please enter User's Name");
-//            alert.showAndWait();
-//            return;
-//        }
-//        if (phoneNumberField.getText().isEmpty()) {
-//            alert.setContentText("Please enter Phone Number");
-//            alert.showAndWait();
-//            return;
-//        }
-//
-//        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-//        confirmAlert.setTitle("Confirm Update");
-//        confirmAlert.setHeaderText("Are you sure you want to update this User?");
-//
-//        Optional<ButtonType> result = confirmAlert.showAndWait();
-//        if (result.isPresent() && result.get() == ButtonType.OK) {
-//            //int userId = Integer.parseInt(userID.getText());
-//            String userName = userNameField.getText();
-//            String phoneNumber = phoneNumberField.getText();
-//
-//            User updatedUser = new User(userName, phoneNumber);
-//
-//            userDAO.updateUser(updatedUser);
-//            loadUsers(); // Reload users to refresh the table
-//            showSuccessAlert("Update User", "User updated successfully!");
-//        }
-//    }
-//
-//    private void loadUsers() {
-//        userList.clear();
-//        userList.addAll(userDAO.getAllUsers());
-//        userTable.setItems(userList);
-//    }
-
-    private void showSuccessAlert(String title, String content) {
-        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-        successAlert.setTitle(title);
-        successAlert.setHeaderText(null);
-        successAlert.setContentText(content);
-        successAlert.showAndWait();
-    }
-
-    private String getCurrentDate() {
-        // Implement this method to return the current date as a string
-        return "";
     }
 }

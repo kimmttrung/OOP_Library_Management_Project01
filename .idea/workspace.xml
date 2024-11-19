@@ -15,8 +15,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
+        <option value="CSS File" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -33,9 +34,16 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/kimmttrung/OOP_Library_Management_Project01.git&quot;,
-    &quot;accountId&quot;: &quot;20d4a28f-ec06-4c74-8526-5cf1ad8a2292&quot;
+    &quot;accountId&quot;: &quot;ec4ca4ad-fa99-4f13-b6e8-042d4199200e&quot;
   }
 }</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -50,6 +58,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.BookSearchApp.executor": "Run",
     "Application.DataBase.executor": "Run",
     "Application.GoogleBooksAPI.executor": "Run",
     "Application.GoogleBooksToDB.executor": "Run",
@@ -57,12 +66,14 @@
     "Application.LibaryManagement.executor": "Run",
     "Application.LibraryApp.executor": "Run",
     "Application.LibraryManagement.executor": "Run",
+    "Application.LoginRegisterForgotPass.executor": "Run",
+    "Application.MainApp.executor": "Run",
     "Application.pLibraryManagement.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "MaiTrung",
-    "ignore.virus.scanning.warn.message": "true",
+    "git-widget-placeholder": "ThePhapp",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "H:/OOP ThuVien/OOP_Library_Management_Project01",
+    "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -71,7 +82,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -79,9 +90,14 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\image" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="H:\OOP_ThuVien\OOP_Library_Management_Project01\src\main\resources\css" />
-    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -135,7 +151,40 @@
       <workItem from="1729868243819" duration="835000" />
       <workItem from="1729869541739" duration="4307000" />
       <workItem from="1729958894726" duration="3979000" />
-      <workItem from="1730019154907" duration="3310000" />
+      <workItem from="1730019154907" duration="7071000" />
+      <workItem from="1730261334168" duration="3971000" />
+      <workItem from="1730296463795" duration="20000" />
+      <workItem from="1730729361804" duration="14619000" />
+      <workItem from="1730866630476" duration="3022000" />
+      <workItem from="1730902193130" duration="13000" />
+      <workItem from="1730903069384" duration="6341000" />
+      <workItem from="1731062804162" duration="1053000" />
+      <workItem from="1731150657831" duration="661000" />
+      <workItem from="1731249522828" duration="3836000" />
+      <workItem from="1731401136822" duration="42000" />
+      <workItem from="1731401286653" duration="423000" />
+      <workItem from="1731401717936" duration="640000" />
+      <workItem from="1731402954787" duration="930000" />
+      <workItem from="1731403896313" duration="1175000" />
+      <workItem from="1731506749817" duration="795000" />
+      <workItem from="1731507561960" duration="17222000" />
+      <workItem from="1731657819359" duration="3726000" />
+      <workItem from="1731664060730" duration="6150000" />
+      <workItem from="1731684147065" duration="18745000" />
+      <workItem from="1731775523838" duration="397000" />
+      <workItem from="1731776645478" duration="303000" />
+      <workItem from="1731777511712" duration="5000" />
+      <workItem from="1731814011107" duration="8182000" />
+      <workItem from="1731836655842" duration="25000" />
+      <workItem from="1731836948118" duration="65000" />
+      <workItem from="1731837549582" duration="116000" />
+      <workItem from="1731837770514" duration="15000" />
+      <workItem from="1731837825282" duration="19000" />
+      <workItem from="1731838932784" duration="1838000" />
+      <workItem from="1731858165285" duration="9000" />
+      <workItem from="1731917162496" duration="847000" />
+      <workItem from="1731923523267" duration="1000" />
+      <workItem from="1731930537675" duration="3576000" />
     </task>
     <servers />
   </component>
