@@ -6,6 +6,7 @@ module management.libarymanagement {
     requires java.desktop;
     requires com.google.zxing;
     requires com.google.zxing.javase;
+    requires animatefx;
 
     opens management.libarymanagement to javafx.fxml;
     opens Controller to javafx.fxml;

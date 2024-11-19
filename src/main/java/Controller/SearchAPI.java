@@ -7,6 +7,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +25,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.IOException;
+import java.util.Optional;
+
 import static Controller.AlertHelper.showAlert;
+import static Controller.AlertHelper.showConfirmationAlert;
 
 
 public class SearchAPI {
@@ -177,97 +182,64 @@ public class SearchAPI {
     }
 
     @FXML
-    public void DownloadPages(ActionEvent event){
-        try{
-            if (event.getSource() == signOut_btn){
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginForm.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                signOut_btn.getScene().getWindow().hide();
-            } else if (event.getSource() == dashBoard_btn) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/dashBoard.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                dashBoard_btn.getScene().getWindow().hide();
-
-
+    public void DownloadPages(ActionEvent event) {
+        try {
+            if (event.getSource() == signOut_btn) {
+                Optional<ButtonType> result = showConfirmationAlert("Confirm Exit", "Are you sure you want to exit?");
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    applySceneTransition(signOut_btn, "/fxml/loginForm.fxml");
+                }
             } else if (event.getSource() == bookAll_btn) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/availableBook.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                bookAll_btn.getScene().getWindow().hide();
-            } else if (event.getSource() == borrowerBook_btn ) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Borrower.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-
-
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                borrowerBook_btn.getScene().getWindow().hide();
+                applySceneTransition(bookAll_btn, "/fxml/availableBook.fxml");
+            } else if (event.getSource() == dashBoard_btn) {
+                applySceneTransition(dashBoard_btn, "/fxml/dashBoard.fxml");
+            } else if (event.getSource() == borrowerBook_btn) {
+                applySceneTransition(borrowerBook_btn, "/fxml/Borrower.fxml");
             } else if (event.getSource() == userAll_btn) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/userBook.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                userAll_btn.getScene().getWindow().hide();
+                applySceneTransition(userAll_btn, "/fxml/userBook.fxml");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void applySceneTransition(Button sourceButton, String fxmlPath) {
+        Stage currentStage = (Stage) sourceButton.getScene().getWindow();
+
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), currentStage.getScene().getRoot());
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        fadeOut.setOnFinished(event -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+                Scene newScene = new Scene(root);
+                Stage newStage = new Stage();
+
+                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
+                    x = e.getSceneX();
+                    y = e.getSceneY();
+                });
+                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
+                    newStage.setX(e.getScreenX() - x);
+                    newStage.setY(e.getScreenY() - y);
+                });
+
+                newStage.initStyle(StageStyle.TRANSPARENT);
+                newStage.setScene(newScene);
+
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(500), root);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.play();
+
+                newStage.show();
+                currentStage.hide();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        fadeOut.play();
     }
 
     public void exit(){

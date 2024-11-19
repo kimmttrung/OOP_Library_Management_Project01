@@ -1,5 +1,7 @@
 package Controller;
 
+import animatefx.animation.*;
+import javafx.animation.ParallelTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,34 +57,45 @@ public class LoginControl {
 
             if (login_username.getText().isEmpty() || login_password.getText().isEmpty()) {
 
-                if(login_selectShowPassword.isSelected()){
+                if (login_selectShowPassword.isSelected()) {
                     login_password.setText(login_showPassword.getText());
-                }else{
+                } else {
                     login_showPassword.setText(login_password.getText());
                 }
                 showAlert(Alert.AlertType.ERROR, "Error", "Please enter all the fields");
             } else {
                 if (resultSet.next()) {
+                    Parent rootNode = (Parent) login_Btn.getScene().getRoot();
+                    ZoomOut zoomOut = new ZoomOut (rootNode);
+                    zoomOut.setOnFinished(event -> {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashBoard.fxml"));
+                            Parent root = loader.load();
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dashBoard.fxml"));
-                    Parent root = loader.load();
+                            Stage stage = new Stage();
+                            Scene scene = new Scene(root);
 
-                    Stage currentStage = (Stage) login_Btn.getScene().getWindow();
-                    currentStage.close();
+                            root.setOnMousePressed(e -> {
+                                x = e.getSceneX();
+                                y = e.getSceneY();
+                            });
+                            root.setOnMouseDragged(e -> {
+                                stage.setX(e.getScreenX() - x);
+                                stage.setY(e.getScreenY() - y);
+                            });
 
-                    Stage stage = new Stage();
-                    Scene scene = new Scene(root);
-                    root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                        x = e.getSceneX();
-                        y = e.getSceneY();
+                            stage.initStyle(StageStyle.TRANSPARENT);
+                            stage.setScene(scene);
+
+                            new ZoomIn (root).play();
+
+                            stage.show();
+                            ((Stage) login_Btn.getScene().getWindow()).close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     });
-                    root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                        stage.setX(e.getScreenX() - x);
-                        stage.setY(e.getScreenY() - y);
-                    });
-                    stage.initStyle(StageStyle.TRANSPARENT);
-                    stage.setScene(scene);
-                    stage.show();
+                    zoomOut.play();
 
                 } else {
                     showAlert(Alert.AlertType.ERROR, "Error", "Username or Password is Incorrect");
@@ -92,17 +105,11 @@ public class LoginControl {
             e.printStackTrace();
         } finally {
             try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (pst != null) {
-                    pst.close();
-                }
-                if (connect != null) {
-                    connect.close();
-                }
+                if (resultSet != null) resultSet.close();
+                if (pst != null) pst.close();
+                if (connect != null) connect.close();
             } catch (Exception e) {
-                ;
+                e.printStackTrace();
             }
         }
     }
