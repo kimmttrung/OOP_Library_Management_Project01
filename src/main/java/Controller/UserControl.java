@@ -3,7 +3,9 @@ package Controller;
 import Entity.User;
 import DataAccessObject.UserDAO;
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -49,6 +51,8 @@ public class UserControl {
     private TableColumn<User, String> registrationDateColumn;
     @FXML
     private Button minus_btn;
+    @FXML
+    private Button close_btn;
     @FXML
     private AnchorPane nav_from;
     @FXML
@@ -280,8 +284,23 @@ public class UserControl {
         fadeOut.play();
     }
 
-    public void exit(){
-        System.exit(0);
+    public void exit() {
+        Stage primaryStage = (Stage) close_btn.getScene().getWindow();
+
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        scaleDown.setFromX(1.0);
+        scaleDown.setToX(0.5);
+        scaleDown.setFromY(1.0);
+        scaleDown.setToY(0.5);
+
+        fadeOut.setOnFinished(event -> Platform.exit());
+
+        fadeOut.play();
+        scaleDown.play();
     }
 
     public void minimize(){

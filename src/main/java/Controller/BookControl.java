@@ -5,9 +5,12 @@ import Entity.Book;
 import DataAccessObject.BookDAO;
 import com.google.zxing.WriterException;
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +56,8 @@ public class BookControl {
     @FXML
     private AnchorPane nav_from;
     @FXML
+    private Button close_btn;
+    @FXML
     private TableColumn<?, ?> publishedDateColumn;
     @FXML
     private TableColumn<?, ?> publisherColumn;
@@ -96,8 +101,27 @@ public class BookControl {
 
     @FXML
     private void loadBooks() {
-        bookList = FXCollections.observableArrayList(bookDAO.getAllBooks());
-        bookTable.setItems(bookList);
+        Task<Void> loadBooksTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                bookList = FXCollections.observableArrayList(bookDAO.getAllBooks());
+                return null;
+            }
+
+            @Override
+            protected void succeeded() {
+                bookTable.setItems(bookList);
+            }
+
+            @Override
+            protected void failed() {
+                showAlert(Alert.AlertType.ERROR, "Load Books", "Failed to load books.");
+            }
+        };
+
+        Thread loadBooksThread = new Thread(loadBooksTask);
+        loadBooksThread.setDaemon(true);
+        loadBooksThread.start();
     }
 
     private void setUpTableColumns() {
@@ -242,29 +266,46 @@ public class BookControl {
             return;
         }
 
-        // Chuỗi dữ liệu mã hóa trong QR Code (VD: JSON)
-        String qrData = String.format(
-                "{ \"bookID\": %d, \"title\": \"%s\", \"author\": \"%s\", \"publisher\": \"%s\", \"publishedDate\": \"%s\" }",
-                selectedBook.getBookID(),
-                selectedBook.getName(),
-                selectedBook.getAuthor(),
-                selectedBook.getPublisher(),
-                selectedBook.getPublishedDate()
-        );
+        Task<Void> generateQRCodeTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                String qrData = String.format(
+                        "{ \"bookID\": %d, \"title\": \"%s\", \"author\": \"%s\", \"publisher\": \"%s\", \"publishedDate\": \"%s\" }",
+                        selectedBook.getBookID(),
+                        selectedBook.getName(),
+                        selectedBook.getAuthor(),
+                        selectedBook.getPublisher(),
+                        selectedBook.getPublishedDate()
+                );
 
-        // Đường dẫn lưu file QR Code
-        String filePath = "src/main/resources/qr_codes/book_" + selectedBook.getBookID() + ".png";
+                String filePath = "src/main/resources/qr_codes/book_" + selectedBook.getBookID() + ".png";
 
-        try {
-            QRCodeGenerator.generateQRCodeImage(qrData, 200, 200, filePath);
-            showAlert(Alert.AlertType.INFORMATION, "QR Code Generated", "QR Code saved at: " + filePath);
-        } catch (WriterException | IOException e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Generate QR Code", "Error generating QR Code: " + e.getMessage());
-        }
+                try {
+                    QRCodeGenerator.generateQRCodeImage(qrData, 200, 200, filePath);
+                    Image qrImage = new Image(new File(filePath).toURI().toString());
+                    qrCodeImageView.setImage(qrImage);
+                } catch (WriterException | IOException e) {
+                    e.printStackTrace();
+                    showAlert(Alert.AlertType.ERROR, "Generate QR Code", "Error generating QR Code: " + e.getMessage());
+                }
 
-        Image qrImage = new Image(new File(filePath).toURI().toString());
-        qrCodeImageView.setImage(qrImage);
+                return null;
+            }
+
+            @Override
+            protected void succeeded() {
+                showAlert(Alert.AlertType.INFORMATION, "QR Code Generated", "QR Code saved successfully.");
+            }
+
+            @Override
+            protected void failed() {
+                showAlert(Alert.AlertType.ERROR, "Generate QR Code", "Error generating QR Code.");
+            }
+        };
+
+        Thread qrCodeThread = new Thread(generateQRCodeTask);
+        qrCodeThread.setDaemon(true);
+        qrCodeThread.start();
     }
 
     private void createQRCodeDirectory() {
@@ -342,9 +383,23 @@ public class BookControl {
         fadeOut.play();
     }
 
-
     public void exit() {
-        System.exit(0);
+        Stage primaryStage = (Stage) close_btn.getScene().getWindow();
+
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        scaleDown.setFromX(1.0);
+        scaleDown.setToX(0.5);
+        scaleDown.setFromY(1.0);
+        scaleDown.setToY(0.5);
+
+        fadeOut.setOnFinished(event -> Platform.exit());
+
+        fadeOut.play();
+        scaleDown.play();
     }
 
     public void minimize() {

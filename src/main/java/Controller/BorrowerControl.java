@@ -8,6 +8,8 @@ import Entity.Borrower;
 import Entity.User;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -64,6 +66,8 @@ public class BorrowerControl {
     @FXML
     private Button minus_btn;
     @FXML
+    private Button close_btn;
+    @FXML
     private AnchorPane nav_from;
     @FXML
     private Button searchAPI_btn;
@@ -115,7 +119,7 @@ public class BorrowerControl {
         String bookId = bookIDField.getText();
         String borrow_to = convertDatePickerToString(toDatePicker);
 
-        if (borrowerId.isEmpty() || bookId.isEmpty() || borrow_to.isEmpty()) {
+        if (borrowerId.isEmpty() || bookId.isEmpty() || borrow_to == null) {
             showAlert(Alert.AlertType.ERROR, "Borrow Book", "Please enter both user's ID, Book's ID and return Day.");
             return;
         }
@@ -138,17 +142,9 @@ public class BorrowerControl {
             }
             String username = borrower.getUserName();
             String bookName = borrowBook.getName();;
+
             borrowerDAO.insertBorrower(username, bookId, bookName, getCurrentDate(), borrow_to);
             loadBorrowers();
-
-            //UserDAO userDAO = new UserDAO();
-            // boolean successSaveToHistory = borrowerDAO.insertBorrowHistory(userDAO.findUser(username).getId(), Integer.parseInt(bookId), getCurrentDate());
-
-//            if (successSaveToHistory) {
-//                System.out.println("Borrowed book saved successfully");
-//            } else {
-//                System.out.println("Failed to save borrowed book");
-//            }
 
             showAlert(Alert.AlertType.INFORMATION, "Success", "Book borrowed successfully.");
         }
@@ -323,8 +319,23 @@ public class BorrowerControl {
         fadeOut.play();
     }
 
-    public void exit(){
-        System.exit(0);
+    public void exit() {
+        Stage primaryStage = (Stage) close_btn.getScene().getWindow();
+
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        scaleDown.setFromX(1.0);
+        scaleDown.setToX(0.5);
+        scaleDown.setFromY(1.0);
+        scaleDown.setToY(0.5);
+
+        fadeOut.setOnFinished(event -> Platform.exit());
+
+        fadeOut.play();
+        scaleDown.play();
     }
 
     public void minimize(){

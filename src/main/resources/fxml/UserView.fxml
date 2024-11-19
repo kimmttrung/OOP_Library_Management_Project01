@@ -29,8 +29,8 @@
                   <Font name="Segoe UI Black" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameSearchField" layoutX="535.0" layoutY="40.0" prefHeight="38.0" prefWidth="301.0" promptText="Enter User's Name" />
-            <Button layoutX="867.0" layoutY="39.0" mnemonicParsing="false" onAction="#searchUserByUsername" styleClass="find_btn" stylesheets="@../css/User.css">
+            <TextField fx:id="usernameSearchField" layoutX="327.0" layoutY="40.0" prefHeight="44.0" prefWidth="512.0" promptText="Enter User's Name" />
+            <Button layoutX="867.0" layoutY="39.0" mnemonicParsing="false" onAction="#searchUserByUsername" prefHeight="44.0" prefWidth="40.0" styleClass="find_btn" stylesheets="@../css/User.css">
                <graphic>
                   <FontAwesomeIconView glyphName="SEARCH" size="30" />
                </graphic>

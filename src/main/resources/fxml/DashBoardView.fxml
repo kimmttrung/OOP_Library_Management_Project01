@@ -22,7 +22,7 @@
                                 <FontAwesomeIconView glyphName="BARS" size="30" />
                             </graphic>
                         </Button>
-                        <Button fx:id="clode_btn" layoutX="1061.0" layoutY="1.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/DashBoard.css">
+                        <Button fx:id="close_btn" layoutX="1061.0" layoutY="1.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/DashBoard.css">
                             <graphic>
                                 <FontAwesomeIconView glyphName="CLOSE" size="30" />
                             </graphic>
@@ -73,7 +73,7 @@
                             <children>
                                 <AnchorPane layoutX="-22.0" layoutY="10.0" prefHeight="367.0" prefWidth="638.0" stylesheets="@../css/DashBoard.css">
                                     <children>
-                                        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="31.0" layoutY="111.0" prefHeight="177.0" prefWidth="567.0" vbarPolicy="NEVER">
+                                        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="27.0" layoutY="184.0" prefHeight="177.0" prefWidth="567.0" vbarPolicy="NEVER">
                                             <content>
                                                 <HBox fx:id="imageContainer" alignment="CENTER" prefHeight="176.0" prefWidth="1266.0">
                                                     <children>
@@ -91,7 +91,7 @@
                                                 </HBox>
                                             </content>
                                         </ScrollPane>
-                                        <Label layoutX="67.0" layoutY="40.0" prefHeight="35.0" prefWidth="218.0" text="Suggested books:">
+                                        <Label layoutX="27.0" layoutY="131.0" prefHeight="35.0" prefWidth="218.0" text="Suggested books:">
                                             <font>
                                                 <Font name="Segoe UI Black Italic" size="24.0" />
                                             </font>
