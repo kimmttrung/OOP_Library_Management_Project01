@@ -1,5 +1,6 @@
 package Controller;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
@@ -23,19 +24,21 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import Database.DataBase;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+
+import static Controller.AlertHelper.showConfirmationAlert;
 
 public class DashBoardControl  {
 
     @FXML
     private PieChart pieChart;
-    @FXML
-    private Button borrowerDashBoard_btn;
     @FXML
     private Button borrowerBook_btn;
     @FXML
@@ -45,11 +48,7 @@ public class DashBoardControl  {
     @FXML
     private Button signOut_btn;
     @FXML
-    private ComboBox<?> take_gender;
-    @FXML
     private Button bookAll_btn;
-    @FXML
-    private Button bookAll_dashBoard_btn;
     @FXML
     private Button minus_btn;
     @FXML
@@ -58,8 +57,6 @@ public class DashBoardControl  {
     private Button searchAPI_btn;
     @FXML
     private Button userAll_btn;
-    @FXML
-    private Button userAll_dashBoard_btn;
     @FXML
     private Label bookCountLabel;
     @FXML
@@ -71,37 +68,18 @@ public class DashBoardControl  {
     @FXML
     private ScrollPane scrollPane;
     @FXML
+    private Button bookAll_dashBoard_btn, borrowerDashBoard_btn, userAll_dashBoard_btn;
+    @FXML
     private ImageView myImageView1, myImageView2, myImageView3, myImageView4, myImageView5;
     @FXML
     private ImageView myImageView6, myImageView7, myImageView8, myImageView9, myImageView10;
-
-    private String comBox[] = {"Male", "Female", "Orther"};
 
     private double x = 0;
     private double y = 0;
 
     @FXML
     public void initialize() {
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Science", 40),
-                        new PieChart.Data("History", 30),
-                        new PieChart.Data("Technology", 20),
-                        new PieChart.Data("Sports", 70)
-                );
-        pieChartData.forEach(data -> data.nameProperty().bind(
-                Bindings.concat(
-                        data.getName(), ": ", data.pieValueProperty()
-                                )
-                )
-        );
-
-        pieChart.getData().addAll(pieChartData);
-
-        nav_from.setTranslateX(-320);
-        bars_btn.setVisible(true);
-        arrow_btn.setVisible(false);
-
+        setUpInit();
         updateCounts();
         setImageView();
 
@@ -171,101 +149,87 @@ public class DashBoardControl  {
         }
     }
 
+    private void setUpInit() {
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Science", 40),
+                        new PieChart.Data("History", 30),
+                        new PieChart.Data("Technology", 20),
+                        new PieChart.Data("Sports", 70)
+                );
+        pieChartData.forEach(data -> data.nameProperty().bind(
+                        Bindings.concat(
+                                data.getName(), ": ", data.pieValueProperty()
+                        )
+                )
+        );
+
+        pieChart.getData().addAll(pieChartData);
+
+        nav_from.setTranslateX(-320);
+        bars_btn.setVisible(true);
+        arrow_btn.setVisible(false);
+    }
+
     @FXML
-    public void DownloadPages(ActionEvent event){
-        try{
-            if (event.getSource() == signOut_btn){
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginForm.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                signOut_btn.getScene().getWindow().hide();
-
-
+    public void DownloadPages(ActionEvent event) {
+        try {
+            if (event.getSource() == signOut_btn) {
+                Optional<ButtonType> result = showConfirmationAlert("Confirm Exit", "Are you sure you want to exit?");
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
+                }
             } else if (event.getSource() == searchAPI_btn) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/serachAPI.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                searchAPI_btn.getScene().getWindow().hide();
-
-
+                applySceneTransition(searchAPI_btn, "/fxml/SearchView.fxml");
             } else if (event.getSource() == bookAll_btn || event.getSource() == bookAll_dashBoard_btn) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/availableBook.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-
-
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                bookAll_btn.getScene().getWindow().hide();
+                applySceneTransition(bookAll_btn, "/fxml/BookView.fxml");
             } else if (event.getSource() == borrowerBook_btn || event.getSource() == borrowerDashBoard_btn) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Borrower.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-
-
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                borrowerBook_btn.getScene().getWindow().hide();
+                applySceneTransition(borrowerBook_btn, "/fxml/BorrowerView.fxml");
             } else if (event.getSource() == userAll_btn || event.getSource() == userAll_dashBoard_btn) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/userBook.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                userAll_btn.getScene().getWindow().hide();
+                applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void applySceneTransition(Button sourceButton, String fxmlPath) {
+        Stage currentStage = (Stage) sourceButton.getScene().getWindow();
+
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), currentStage.getScene().getRoot());
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        fadeOut.setOnFinished(event -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+                Scene newScene = new Scene(root);
+                Stage newStage = new Stage();
+
+                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
+                    x = e.getSceneX();
+                    y = e.getSceneY();
+                });
+                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
+                    newStage.setX(e.getScreenX() - x);
+                    newStage.setY(e.getScreenY() - y);
+                });
+
+                newStage.initStyle(StageStyle.TRANSPARENT);
+                newStage.setScene(newScene);
+
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(500), root);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.play();
+
+                newStage.show();
+                currentStage.hide();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        fadeOut.play();
     }
 
     public void exit(){
@@ -306,17 +270,6 @@ public class DashBoardControl  {
         });
 
         slide.play();
-    }
-
-    public void gender() {
-        List<String> combo = new ArrayList<>();
-
-        for (String data : comBox) {
-            combo.add(data);
-        }
-        ObservableList list = FXCollections.observableArrayList(combo);
-
-        take_gender.setItems(list);
     }
 
     public void updateCounts() {

@@ -7,6 +7,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +25,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.IOException;
+import java.util.Optional;
+
 import static Controller.AlertHelper.showAlert;
+import static Controller.AlertHelper.showConfirmationAlert;
 
 
 public class SearchAPI {
@@ -41,11 +46,9 @@ public class SearchAPI {
     @FXML
     private TableView<Book> searchBookTable;
     @FXML
-    private Button close_btn;
-    @FXML
     private Button dashBoard_btn;
     @FXML
-    private TableColumn<?, ?> idColumn;
+    private TableColumn<?, ?> categoryColumn;
     @FXML
     private Button minus_btn;
     @FXML
@@ -55,11 +58,7 @@ public class SearchAPI {
     @FXML
     private TableColumn<?, ?> publisherColumn;
     @FXML
-    private Button save_btn;
-    @FXML
     private Button signOut_btn;
-    @FXML
-    private Button take_btn;
     @FXML
     private TableColumn<?, ?> titleColumn;
     @FXML
@@ -68,6 +67,8 @@ public class SearchAPI {
     private Button borrowerBook_btn;
     @FXML
     private TextField searchField;
+    @FXML
+    private Label titleLabel, authorLabel, publisherLabel, categoriesLabel;
 
     private double x = 0;
     private double y = 0;
@@ -87,7 +88,7 @@ public class SearchAPI {
     }
 
     private void setUpTableColumns() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
@@ -96,7 +97,17 @@ public class SearchAPI {
 
     private void setUpBookSelectionListener() {
         searchBookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            String imageLink = (newSelection != null) ? newSelection.getImage() : null;
+            if (newSelection == null) {
+                bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
+                return;
+            }
+
+            titleLabel.setText(newSelection.getName());
+            authorLabel.setText(newSelection.getAuthor());
+            publisherLabel.setText(newSelection.getPublisher());
+            categoriesLabel.setText(newSelection.getCategory());
+
+            String imageLink = newSelection.getImage();
             Image image = (imageLink != null && !imageLink.isEmpty())
                     ? new Image(imageLink)
                     : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
@@ -140,11 +151,15 @@ public class SearchAPI {
                 String authors = volumeInfo.has("authors") ? volumeInfo.getAsJsonArray("authors").get(0).getAsString() : "Unknown";
                 String publisher = volumeInfo.has("publisher") ? volumeInfo.get("publisher").getAsString() : "Unknown";
                 String publishedDate = volumeInfo.has("publishedDate") ? volumeInfo.get("publishedDate").getAsString() : "Unknown";
+                String category = "Unknown";
+                if (volumeInfo.has("categories") && volumeInfo.get("categories").isJsonArray() && volumeInfo.getAsJsonArray("categories").size() > 0) {
+                    category = volumeInfo.getAsJsonArray("categories").get(0).getAsString();
+                }
                 String imageLink = volumeInfo.has("imageLinks") && volumeInfo.getAsJsonObject("imageLinks").has("thumbnail")
                         ? volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString()
                         : null;
 
-                Book book = new Book(title, authors, publisher, publishedDate, imageLink);
+                Book book = new Book(title, authors, publisher, publishedDate, imageLink, category);
                 searchResults.add(book);
             }
         } catch (Exception e) {
@@ -177,97 +192,64 @@ public class SearchAPI {
     }
 
     @FXML
-    public void DownloadPages(ActionEvent event){
-        try{
-            if (event.getSource() == signOut_btn){
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginForm.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                signOut_btn.getScene().getWindow().hide();
-            } else if (event.getSource() == dashBoard_btn) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/dashBoard.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                dashBoard_btn.getScene().getWindow().hide();
-
-
+    public void DownloadPages(ActionEvent event) {
+        try {
+            if (event.getSource() == signOut_btn) {
+                Optional<ButtonType> result = showConfirmationAlert("Confirm Exit", "Are you sure you want to exit?");
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
+                }
             } else if (event.getSource() == bookAll_btn) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/availableBook.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                bookAll_btn.getScene().getWindow().hide();
-            } else if (event.getSource() == borrowerBook_btn ) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Borrower.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-
-
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                borrowerBook_btn.getScene().getWindow().hide();
+                applySceneTransition(bookAll_btn, "/fxml/BookView.fxml");
+            } else if (event.getSource() == dashBoard_btn) {
+                applySceneTransition(dashBoard_btn, "/fxml/DashBoardView.fxml");
+            } else if (event.getSource() == borrowerBook_btn) {
+                applySceneTransition(borrowerBook_btn, "/fxml/BorrowerView.fxml");
             } else if (event.getSource() == userAll_btn) {
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/userBook.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    stage.setX(e.getScreenX() - x);
-                    stage.setY(e.getScreenY() - y);
-                });
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-                userAll_btn.getScene().getWindow().hide();
+                applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void applySceneTransition(Button sourceButton, String fxmlPath) {
+        Stage currentStage = (Stage) sourceButton.getScene().getWindow();
+
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), currentStage.getScene().getRoot());
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        fadeOut.setOnFinished(event -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+                Scene newScene = new Scene(root);
+                Stage newStage = new Stage();
+
+                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
+                    x = e.getSceneX();
+                    y = e.getSceneY();
+                });
+                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
+                    newStage.setX(e.getScreenX() - x);
+                    newStage.setY(e.getScreenY() - y);
+                });
+
+                newStage.initStyle(StageStyle.TRANSPARENT);
+                newStage.setScene(newScene);
+
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(500), root);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.play();
+
+                newStage.show();
+                currentStage.hide();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        fadeOut.play();
     }
 
     public void exit(){

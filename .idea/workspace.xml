@@ -6,6 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/availableBook.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/Book.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/borrowerBook.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/Borrower.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dashbordDesign.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/DashBoard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/designLogin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/LoginDesign.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/userBook.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/User.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Borrower.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/BorrowerView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/availableBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/BookView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/dashBoard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/DashBoardView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/loginForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/LoginForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/mainLibrary.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/searchAPI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/SearchView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/userBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/UserView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +38,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -58,19 +80,26 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.AnimateFXDemo.executor": "Run",
     "Application.BookSearchApp.executor": "Run",
     "Application.DataBase.executor": "Run",
     "Application.GoogleBooksAPI.executor": "Run",
     "Application.GoogleBooksToDB.executor": "Run",
     "Application.HelloApplication.executor": "Run",
+    "Application.HoverEffectDemo.executor": "Run",
     "Application.LibaryManagement.executor": "Run",
     "Application.LibraryApp.executor": "Run",
     "Application.LibraryManagement.executor": "Run",
     "Application.LoginRegisterForgotPass.executor": "Run",
+    "Application.Main.executor": "Run",
     "Application.MainApp.executor": "Run",
     "Application.pLibraryManagement.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "ThePhapp",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01",
     "list.type.of.created.stylesheet": "CSS",
@@ -79,15 +108,16 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources" />
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\image" />
     </key>
   </component>
@@ -185,6 +215,10 @@
       <workItem from="1731917162496" duration="847000" />
       <workItem from="1731923523267" duration="1000" />
       <workItem from="1731930537675" duration="3576000" />
+      <workItem from="1731939608671" duration="769000" />
+      <workItem from="1731995856934" duration="3721000" />
+      <workItem from="1732002940382" duration="3411000" />
+      <workItem from="1732007340272" duration="5962000" />
     </task>
     <servers />
   </component>

@@ -7,6 +7,7 @@ public class Book {
     private String publisher;
     private String publishedDate;
     private String image;
+    private String categories;
 
     public Book() {
     }
@@ -28,12 +29,14 @@ public class Book {
         this.image = image;
     }
 
-    public Book(int bookID, String name, String author,String publisher, String publishedDate) {
+    public Book(String name, String author,String publisher, String publishedDate, String image, String categories) {
         this.bookID = bookID;
         this.name = name;
         this.author = author;
         this.publisher = publisher;
         this.publishedDate = publishedDate;
+        this.image = image;
+        this.categories = categories;
     }
 
     public int getBookID() {
@@ -78,6 +81,14 @@ public class Book {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getCategory() {
+        return categories;
+    }
+
+    public void setCategory(String categories) {
+        this.categories = categories;
     }
 
     @Override
