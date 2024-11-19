@@ -117,10 +117,16 @@ public class BorrowerControl {
     private void borrowBook() {
         String borrowerId = borrowerIDField.getText();
         String bookId = bookIDField.getText();
-        String borrow_to = convertDatePickerToString(toDatePicker);
+        LocalDate borrowToDate = toDatePicker.getValue();
 
-        if (borrowerId.isEmpty() || bookId.isEmpty() || borrow_to == null) {
+        if (borrowerId.isEmpty() || bookId.isEmpty() || borrowToDate == null) {
             showAlert(Alert.AlertType.ERROR, "Borrow Book", "Please enter both user's ID, Book's ID and return Day.");
+            return;
+        }
+
+        LocalDate today = LocalDate.now();
+        if (!borrowToDate.isAfter(today)) {
+            showAlert(Alert.AlertType.ERROR, "Borrow Book", "Return date must be after today.");
             return;
         }
 
@@ -132,18 +138,21 @@ public class BorrowerControl {
             if (borrowBook == null) {
                 showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book not found.");
                 return;
+            } else if (borrowerDAO.checkBookExists(borrowBook.getBookID())) {
+                showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book already being borrowed.");
+                return;
             }
 
             UserDAO userBorrow = new UserDAO();
             User borrower = userBorrow.findUserbyID(Integer.parseInt(borrowerId));
-            if (userBorrow == null) {
+            if (borrower == null) {
                 showAlert(Alert.AlertType.ERROR, "Borrow Book", "User not found.");
                 return;
             }
             String username = borrower.getUserName();
             String bookName = borrowBook.getName();;
 
-            borrowerDAO.insertBorrower(username, bookId, bookName, getCurrentDate(), borrow_to);
+            borrowerDAO.insertBorrower(username, bookId, bookName, getCurrentDate(), borrowToDate.toString());
             loadBorrowers();
 
             showAlert(Alert.AlertType.INFORMATION, "Success", "Book borrowed successfully.");
