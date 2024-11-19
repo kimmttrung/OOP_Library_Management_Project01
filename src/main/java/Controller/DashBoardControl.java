@@ -40,8 +40,6 @@ public class DashBoardControl  {
     @FXML
     private PieChart pieChart;
     @FXML
-    private Button borrowerDashBoard_btn;
-    @FXML
     private Button borrowerBook_btn;
     @FXML
     private Button bars_btn;
@@ -50,11 +48,7 @@ public class DashBoardControl  {
     @FXML
     private Button signOut_btn;
     @FXML
-    private ComboBox<?> take_gender;
-    @FXML
     private Button bookAll_btn;
-    @FXML
-    private Button bookAll_dashBoard_btn;
     @FXML
     private Button minus_btn;
     @FXML
@@ -63,8 +57,6 @@ public class DashBoardControl  {
     private Button searchAPI_btn;
     @FXML
     private Button userAll_btn;
-    @FXML
-    private Button userAll_dashBoard_btn;
     @FXML
     private Label bookCountLabel;
     @FXML
@@ -76,37 +68,18 @@ public class DashBoardControl  {
     @FXML
     private ScrollPane scrollPane;
     @FXML
+    private Button bookAll_dashBoard_btn, borrowerDashBoard_btn, userAll_dashBoard_btn;
+    @FXML
     private ImageView myImageView1, myImageView2, myImageView3, myImageView4, myImageView5;
     @FXML
     private ImageView myImageView6, myImageView7, myImageView8, myImageView9, myImageView10;
-
-    private String comBox[] = {"Male", "Female", "Orther"};
 
     private double x = 0;
     private double y = 0;
 
     @FXML
     public void initialize() {
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Science", 40),
-                        new PieChart.Data("History", 30),
-                        new PieChart.Data("Technology", 20),
-                        new PieChart.Data("Sports", 70)
-                );
-        pieChartData.forEach(data -> data.nameProperty().bind(
-                Bindings.concat(
-                        data.getName(), ": ", data.pieValueProperty()
-                                )
-                )
-        );
-
-        pieChart.getData().addAll(pieChartData);
-
-        nav_from.setTranslateX(-320);
-        bars_btn.setVisible(true);
-        arrow_btn.setVisible(false);
-
+        setUpInit();
         updateCounts();
         setImageView();
 
@@ -176,22 +149,44 @@ public class DashBoardControl  {
         }
     }
 
+    private void setUpInit() {
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Science", 40),
+                        new PieChart.Data("History", 30),
+                        new PieChart.Data("Technology", 20),
+                        new PieChart.Data("Sports", 70)
+                );
+        pieChartData.forEach(data -> data.nameProperty().bind(
+                        Bindings.concat(
+                                data.getName(), ": ", data.pieValueProperty()
+                        )
+                )
+        );
+
+        pieChart.getData().addAll(pieChartData);
+
+        nav_from.setTranslateX(-320);
+        bars_btn.setVisible(true);
+        arrow_btn.setVisible(false);
+    }
+
     @FXML
     public void DownloadPages(ActionEvent event) {
         try {
             if (event.getSource() == signOut_btn) {
                 Optional<ButtonType> result = showConfirmationAlert("Confirm Exit", "Are you sure you want to exit?");
                 if (result.isPresent() && result.get() == ButtonType.OK) {
-                    applySceneTransition(signOut_btn, "/fxml/loginForm.fxml");
+                    applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
                 }
             } else if (event.getSource() == searchAPI_btn) {
-                applySceneTransition(searchAPI_btn, "/fxml/searchAPI.fxml");
-            } else if (event.getSource() == bookAll_btn) {
-                applySceneTransition(bookAll_btn, "/fxml/availableBook.fxml");
-            } else if (event.getSource() == borrowerBook_btn) {
-                applySceneTransition(borrowerBook_btn, "/fxml/Borrower.fxml");
-            } else if (event.getSource() == userAll_btn) {
-                applySceneTransition(userAll_btn, "/fxml/userBook.fxml");
+                applySceneTransition(searchAPI_btn, "/fxml/SearchView.fxml");
+            } else if (event.getSource() == bookAll_btn || event.getSource() == bookAll_dashBoard_btn) {
+                applySceneTransition(bookAll_btn, "/fxml/BookView.fxml");
+            } else if (event.getSource() == borrowerBook_btn || event.getSource() == borrowerDashBoard_btn) {
+                applySceneTransition(borrowerBook_btn, "/fxml/BorrowerView.fxml");
+            } else if (event.getSource() == userAll_btn || event.getSource() == userAll_dashBoard_btn) {
+                applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -275,17 +270,6 @@ public class DashBoardControl  {
         });
 
         slide.play();
-    }
-
-    public void gender() {
-        List<String> combo = new ArrayList<>();
-
-        for (String data : comBox) {
-            combo.add(data);
-        }
-        ObservableList list = FXCollections.observableArrayList(combo);
-
-        take_gender.setItems(list);
     }
 
     public void updateCounts() {

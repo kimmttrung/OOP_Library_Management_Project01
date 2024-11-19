@@ -225,16 +225,16 @@ public class UserControl {
             if (event.getSource() == signOut_btn) {
                 Optional<ButtonType> result = showConfirmationAlert("Confirm Exit", "Are you sure you want to exit?");
                 if (result.isPresent() && result.get() == ButtonType.OK) {
-                    applySceneTransition(signOut_btn, "/fxml/loginForm.fxml");
+                    applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
                 }
             } else if (event.getSource() == searchAPI_btn) {
-                applySceneTransition(searchAPI_btn, "/fxml/searchAPI.fxml");
+                applySceneTransition(searchAPI_btn, "/fxml/SearchView.fxml");
             } else if (event.getSource() == dashBoard_btn) {
-                applySceneTransition(dashBoard_btn, "/fxml/dashBoard.fxml");
+                applySceneTransition(dashBoard_btn, "/fxml/DashBoardView.fxml");
             } else if (event.getSource() == borrowerBook_btn) {
-                applySceneTransition(borrowerBook_btn, "/fxml/Borrower.fxml");
+                applySceneTransition(borrowerBook_btn, "/fxml/BorrowerView.fxml");
             } else if (event.getSource() == bookAll_btn) {
-                applySceneTransition(bookAll_btn, "/fxml/availableBook.fxml");
+                applySceneTransition(bookAll_btn, "/fxml/BookView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();
