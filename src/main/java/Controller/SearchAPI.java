@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -41,8 +43,6 @@ public class SearchAPI {
     @FXML
     private TableView<Book> searchBookTable;
     @FXML
-    private Button close_btn;
-    @FXML
     private Button dashBoard_btn;
     @FXML
     private TableColumn<?, ?> idColumn;
@@ -68,6 +68,8 @@ public class SearchAPI {
     private Button borrowerBook_btn;
     @FXML
     private TextField searchField;
+    @FXML
+    private BarChart<String, Double> chart;
 
     private double x = 0;
     private double y = 0;
@@ -77,7 +79,20 @@ public class SearchAPI {
 
     @FXML
     public void initialize() {
-        nav_from.setTranslateX(-320);
+        XYChart.Series<String, Double> series1 = new XYChart.Series<>();
+        series1.setName("Happy New Year 2025");
+        series1.getData().add(new XYChart.Data("Mystery ", 500));
+        series1.getData().add(new XYChart.Data("Sport ", 300));
+        series1.getData().add(new XYChart.Data("History ", 200));
+        series1.getData().add(new XYChart.Data("Poetry ", 400));
+        series1.getData().add(new XYChart.Data("Health ", 700));
+        series1.getData().add(new XYChart.Data("Romance  ", 100));
+        series1.getData().add(new XYChart.Data("Biography  ", 150));
+        series1.getData().add(new XYChart.Data("Travel  ", 250));
+
+        chart.getData().add(series1);
+
+        nav_from.setTranslateX(-335);
         bars_btn.setVisible(true);
         arrow_btn.setVisible(false);
 

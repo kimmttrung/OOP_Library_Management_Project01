@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -90,7 +90,7 @@
                                         </AnchorPane>
                                         <AnchorPane fx:id="nav_from" layoutY="-3.0" prefHeight="693.0" prefWidth="335.0" styleClass="nav-form" stylesheets="@../css/dashbordDesign.css">
                                             <children>
-                                                <Button fx:id="signOut_btn1" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">
+                                                <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">
                                                     <graphic>
                                                         <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
                                                     </graphic>
@@ -208,16 +208,16 @@
                                 </Button>
                                 <AnchorPane layoutX="11.0" layoutY="83.0" prefHeight="693.0" prefWidth="773.0" styleClass="mainCenter" stylesheets="@../css/dashbordDesign.css">
                            <children>
-                              <AnchorPane layoutX="21.0" layoutY="392.0" prefHeight="291.0" prefWidth="729.0">
+                              <AnchorPane layoutX="21.0" layoutY="392.0" prefHeight="291.0" prefWidth="742.0">
                                  <children>
-                                    <AreaChart layoutX="14.0" layoutY="10.0" prefHeight="255.0" prefWidth="708.0">
+                                    <BarChart fx:id="chart" layoutX="121.0" layoutY="-45.0" prefHeight="355.3333333333333" prefWidth="742.0" styleClass="chart-bar" stylesheets="@../css/searchAPI.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
                                       <yAxis>
                                         <NumberAxis side="LEFT" />
                                       </yAxis>
-                                    </AreaChart>
+                                    </BarChart>
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>
