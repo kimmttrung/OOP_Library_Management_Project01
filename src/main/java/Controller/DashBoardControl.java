@@ -191,7 +191,6 @@ public class DashBoardControl  {
                 stage.show();
                 signOut_btn.getScene().getWindow().hide();
 
-
             } else if (event.getSource() == searchAPI_btn) {
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/serachAPI.fxml"));
                 Stage stage = new Stage();

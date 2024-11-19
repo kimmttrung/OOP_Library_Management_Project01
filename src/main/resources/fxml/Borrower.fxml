@@ -19,9 +19,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
+<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
     <top>
-        <AnchorPane prefHeight="633.0" prefWidth="1121.0" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="759.0" prefWidth="1154.0" BorderPane.alignment="CENTER">
             <AnchorPane layoutX="3.0" layoutY="474.0" prefHeight="285.0" prefWidth="1117.0">
 
                 <Button layoutX="433.0" layoutY="212.0" onAction="#borrowBook" prefHeight="38.0" prefWidth="51.0" styleClass="iconBookInfor" stylesheets="@../css/borrowerBook.css" AnchorPane.leftAnchor="433.0" AnchorPane.topAnchor="212.0">
@@ -115,18 +115,18 @@
                     </Label>
                 </children>
             </AnchorPane>
-            <TitledPane expanded="true" layoutX="111.0" layoutY="134.0" prefHeight="340.0" prefWidth="1010.0" text="Borrower List">
+            <TitledPane expanded="true" layoutY="134.0" prefHeight="340.0" prefWidth="1009.0" text="Borrower List">
                 <content>
                     <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="327.0" prefWidth="1008.0" vbarPolicy="ALWAYS">
                         <content>
-                            <TableView fx:id="borrowerTable" prefHeight="375.0" prefWidth="1024.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css">
+                            <TableView fx:id="borrowerTable" prefHeight="314.0" prefWidth="1019.0" styleClass="card-form" stylesheets="@../css/dashbordDesign.css">
                                 <columns>
-                                    <TableColumn fx:id="idColumn" editable="false" prefWidth="82.0" style="-fx-alignment: CENTER;" text="      List">
+                                    <TableColumn fx:id="idColumn" editable="false" prefWidth="76.66665661334991" style="-fx-alignment: CENTER;" text="      List">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="borrowerId" />
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="usernameColumn" editable="false" prefWidth="178.0" style="-fx-alignment: CENTER;" text="           Name">
+                                    <TableColumn fx:id="usernameColumn" editable="false" prefWidth="183.33334350585938" style="-fx-alignment: CENTER;" text="           Name">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="borrowerName" />
                                         </cellValueFactory>
@@ -146,8 +146,8 @@
                                             <PropertyValueFactory property="loanDate" />
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="toColumn" editable="false" prefWidth="122.0" style="-fx-alignment: CENTER;" text="    Borrow To" />
-                                    <TableColumn fx:id="statusColumn" editable="false" prefWidth="119.0" resizable="false" style="-fx-alignment: CENTER;" text="        Status" />
+                                    <TableColumn fx:id="toColumn" editable="false" prefWidth="128.6666259765625" style="-fx-alignment: CENTER;" text="    Borrow To" />
+                                    <TableColumn fx:id="statusColumn" editable="false" prefWidth="108.0" resizable="false" style="-fx-alignment: CENTER;" text="        Status" />
                                 </columns>
                             </TableView>
                         </content>
@@ -158,7 +158,7 @@
                 <children>
                     <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">
                         <graphic>
-                            <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
+                            <FontAwesomeIconView glyphName="SIGN_OUT" size="30" />
                         </graphic>
                     </Button>
                     <Label layoutX="66.0" layoutY="108.0" prefHeight="61.0" prefWidth="183.0" styleClass="edit-label" stylesheets="@../css/dashbordDesign.css" text="Welcome" textFill="WHITE">
@@ -252,6 +252,20 @@
                     <FontAwesomeIconView glyphName="SEARCH" size="30" />
                 </graphic>
             </Button>
+         <AnchorPane layoutX="1012.0" layoutY="135.0" prefHeight="337.0" prefWidth="103.0">
+            <children>
+               <Button layoutX="32.0" layoutY="90.0" mnemonicParsing="false" styleClass="close-btn" stylesheets="@../css/borrowerBook.css">
+                  <graphic>
+                     <FontAwesomeIconView glyphName="CHECK" size="40" />
+                  </graphic>
+               </Button>
+               <Button layoutX="36.0" layoutY="180.0" mnemonicParsing="false" styleClass="find_btn" stylesheets="@../css/borrowerBook.css">
+                  <graphic>
+                     <FontAwesomeIconView glyphName="CLOSE" size="40" />
+                  </graphic>
+               </Button>
+            </children>
+         </AnchorPane>
         </AnchorPane>
     </top>
 </BorderPane>

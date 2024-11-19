@@ -15,5 +15,10 @@
 }
 .transparent{
     -fx-background-color: rgba(0, 0, 0, 0);
-
+}
+.most-contacted-layout{
+    -fx-background-radius: 0 50 50 50;
+}
+.light-gray-background{
+    -fx-background-color: #F3F3F3;
 }

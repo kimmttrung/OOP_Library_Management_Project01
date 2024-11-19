@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserControl">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserControl">
    <children>
       <AnchorPane prefHeight="788.0" prefWidth="1108.6666666666667" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -97,7 +97,7 @@
                            <children>
                               <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/dashbordDesign.css">
                                  <graphic>
-                                    <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
+                                    <FontAwesomeIconView glyphName="SIGN_OUT" size="30" />
                                  </graphic>
                               </Button>
                               <Label layoutX="66.0" layoutY="108.0" prefHeight="61.0" prefWidth="183.0" styleClass="edit-label" stylesheets="@../css/dashbordDesign.css" text="Welcome" textFill="WHITE">

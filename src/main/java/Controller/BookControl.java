@@ -133,7 +133,6 @@ public class BookControl {
                     : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
             bookImageView.setImage(image);
         });
-
     }
 
     @FXML
