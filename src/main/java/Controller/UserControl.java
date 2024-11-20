@@ -24,6 +24,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static Controller.AlertHelper.*;
@@ -87,6 +88,7 @@ public class UserControl {
     }
 
     private void loadUsers() {
+        // Clear the current list and load all users from the database into the table
         userList.clear();
         userList.addAll(userDAO.getAllUsers());
         userTable.setItems(userList);
@@ -98,12 +100,12 @@ public class UserControl {
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         registrationDateColumn.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
 
+        // Set the default profile image for users
         Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
         circleProfile.setFill(new ImagePattern(image));
     }
 
     public void addUser() {
-
         if (userNameField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter User's Name");
             return;
@@ -117,12 +119,12 @@ public class UserControl {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             String userName = userNameField.getText();
             String phoneNumber = phoneNumberField.getText();
-            String registrationDate = getCurrentDate();
+            String registrationDate = LocalDate.now().toString(); // Set registration date to current date
 
             User newUser = new User(userName, phoneNumber, registrationDate);
 
             if (userDAO.addUser(newUser)) {
-                loadUsers(); // Reload users to refresh the table
+                loadUsers();
                 showSuccessAlert("Add User", "User added successfully!");
             } else {
                 showAlert(Alert.AlertType.ERROR, "ERROR", "Something went wrong");
@@ -131,21 +133,14 @@ public class UserControl {
     }
 
     public void deleteUser() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Delete User");
-        alert.setHeaderText(null);
+
 
         if (userID.getText().isEmpty()) {
-            alert.setContentText("Please enter UserID you want to delete");
-            alert.showAndWait();
+            showAlert(Alert.AlertType.ERROR, "DELETE USER", "Please enter User ID");
             return;
         }
 
-        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmAlert.setTitle("Confirm Delete");
-        confirmAlert.setHeaderText("Are you sure you want to delete this User?");
-
-        Optional<ButtonType> result = confirmAlert.showAndWait();
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Deletion", "Are you sure you want to delete this User?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             int userId = Integer.parseInt(userID.getText());
 
@@ -153,8 +148,7 @@ public class UserControl {
                 loadUsers();
                 showSuccessAlert("Delete User", "User deleted successfully!");
             } else {
-                alert.setContentText("Error deleting user. Please try again later!");
-                alert.showAndWait();
+                showAlert(Alert.AlertType.ERROR, "ERROR", "Something went wrong");
             }
         }
     }
@@ -168,6 +162,7 @@ public class UserControl {
 
         int userId;
         try {
+            // Try to parse the user ID
             userId = Integer.parseInt(userID.getText());
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Update User", "User ID must be a valid number.");
@@ -179,7 +174,8 @@ public class UserControl {
             return;
         }
 
-        User existingUser = userDAO.findUserbyID(userId);
+        // Find the existing user with the given ID
+        User existingUser = userDAO.findUserById(userId);
         if (existingUser == null) {
             showAlert(Alert.AlertType.ERROR, "Update User", "User not found with ID: " + userId);
             return;
@@ -190,6 +186,7 @@ public class UserControl {
 
         User updatedUser = new User(userId, updatedName, updatedPhone);
 
+        // Attempt to update the user in the database
         if (userDAO.updateUser(updatedUser)) {
             loadUsers();
             showAlert(Alert.AlertType.INFORMATION, "Update User", "User updated successfully!");
@@ -216,11 +213,6 @@ public class UserControl {
         } else {
             showAlert(Alert.AlertType.INFORMATION, "Search User", "No user found with username: " + username);
         }
-    }
-
-    private String getCurrentDate() {
-        // Implement this method to return the current date as a string
-        return "";
     }
 
     @FXML

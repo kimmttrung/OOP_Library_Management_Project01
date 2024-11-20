@@ -12,6 +12,7 @@ import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -30,10 +31,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Optional;
 
 import static Controller.AlertHelper.showAlert;
@@ -77,12 +75,17 @@ public class BorrowerControl {
     private Button userAll_btn;
     @FXML
     private Circle circleProfile;
+    @FXML
+    private ComboBox<String> filterComboBox;
 
     private double x = 0;
     private double y = 0;
 
     private ObservableList<Borrower> borrowerList = FXCollections.observableArrayList();
     private BorrowerDAO borrowerDAO = new BorrowerDAO();
+    private DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
+    private FilteredList<Borrower> filteredList;
+
 
     @FXML
     public void initialize() {
@@ -92,15 +95,18 @@ public class BorrowerControl {
 
         setUpTableColumn();
         loadBorrowers();
+        markOverdueBorrowers();
         setUpBookSelectionListener();
+        setUpFilter();
     }
 
+    @FXML
     private void loadBorrowers() {
-        borrowerList = FXCollections.observableArrayList(borrowerDAO.getBorrowerByStatus("processing"));
-        borrowerTable.setItems(borrowerList);
+        borrowerList.setAll(borrowerDAO.getAllBorrowers());
     }
 
     private void setUpTableColumn() {
+        // Set up table columns with PropertyValueFactory to map fields to columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         bookIdColumn.setCellValueFactory(new PropertyValueFactory<>("bookid"));
@@ -109,8 +115,26 @@ public class BorrowerControl {
         fromColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_from"));
         toColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_to"));
 
+        // Set default profile image in the table
         Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
         circleProfile.setFill(new ImagePattern(image));
+
+        // Set custom styling for the status column based on the status value
+        statusColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String status, boolean empty) {
+                super.updateItem(status, empty);
+                if (empty || status == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(status);
+                    setStyle("-fx-background-color: " +
+                            ("overdue".equals(status) ? "red" :
+                                    "processing".equals(status) ? "yellow" : "green"));
+                }
+            }
+        });
     }
 
     @FXML
@@ -119,40 +143,50 @@ public class BorrowerControl {
         String bookId = bookIDField.getText();
         LocalDate borrowToDate = toDatePicker.getValue();
 
+        // Validate input fields
         if (borrowerId.isEmpty() || bookId.isEmpty() || borrowToDate == null) {
             showAlert(Alert.AlertType.ERROR, "Borrow Book", "Please enter both user's ID, Book's ID and return Day.");
             return;
         }
 
+        // Ensure the return date is after today
         LocalDate today = LocalDate.now();
         if (!borrowToDate.isAfter(today)) {
             showAlert(Alert.AlertType.ERROR, "Borrow Book", "Return date must be after today.");
             return;
         }
 
+        // Format the return date
+        String formattedReturnDate = dateFormatter.formatDate(borrowToDate);
+
+        // Confirm borrowing action
         Optional<ButtonType> result = showConfirmationAlert("Confirm Borrow", "Are you sure you want to borrow this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Check if the borrower and book exist, and if the book is available
             BookDAO bookDAO = new BookDAO();
+            UserDAO userBorrow = new UserDAO();
             Book borrowBook = bookDAO.getBookByID(Integer.parseInt(bookId));
+            User borrower = userBorrow.findUserById(Integer.parseInt(borrowerId));
 
-            if (borrowBook == null) {
+            // Handle various error scenarios
+            if (borrower == null) {
+                showAlert(Alert.AlertType.ERROR, "Borrow Book", "User not found.");
+                return;
+            } else if (borrowBook == null) {
                 showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book not found.");
                 return;
             } else if (borrowerDAO.checkBookExists(borrowBook.getBookID())) {
                 showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book already being borrowed.");
                 return;
-            }
-
-            UserDAO userBorrow = new UserDAO();
-            User borrower = userBorrow.findUserbyID(Integer.parseInt(borrowerId));
-            if (borrower == null) {
-                showAlert(Alert.AlertType.ERROR, "Borrow Book", "User not found.");
+            } else if (borrowerDAO.checkLimitStmt(borrower.getUserName())) {
+                showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book limit reached.");
                 return;
             }
-            String username = borrower.getUserName();
-            String bookName = borrowBook.getName();;
 
-            borrowerDAO.insertBorrower(username, bookId, bookName, getCurrentDate(), borrowToDate.toString());
+            // Add borrower record to the database and reload borrowers
+            String username = borrower.getUserName();
+            String bookName = borrowBook.getName();
+            borrowerDAO.insertBorrower(username, bookId, bookName, dateFormatter.formatDate(today), formattedReturnDate);
             loadBorrowers();
 
             showAlert(Alert.AlertType.INFORMATION, "Success", "Book borrowed successfully.");
@@ -170,6 +204,7 @@ public class BorrowerControl {
 
         Optional<ButtonType> result = showConfirmationAlert("Confirm Return", "Are you sure you want to return this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Update borrower's status to "returned"
             Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
             if (borrower != null) {
                 borrower.setStatus("returned");
@@ -184,7 +219,7 @@ public class BorrowerControl {
 
     @FXML
     private void renewBook() {
-        String borrowerId = findBorrowerField.getText();
+        String borrowerId = borrowerIDField.getText();
         int additionalDays = 7;
 
         if (borrowerId.isEmpty()) {
@@ -194,13 +229,13 @@ public class BorrowerControl {
 
         Optional<ButtonType> result = showConfirmationAlert("Confirm Renewal", "Are you sure you want to renew this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Renew the borrower's book
             Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
             if (borrower != null && "processing".equals(borrower.getStatus())) {
                 try {
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    Date currentDueDate = dateFormat.parse(borrower.getBorrow_to());
-                    Date newDueDate = new Date(currentDueDate.getTime() + (long) additionalDays * 24 * 60 * 60 * 1000);
-                    borrower.setBorrow_to(dateFormat.format(newDueDate));
+                    LocalDate currentDueDate = dateFormatter.parseDate(borrower.getBorrow_to());
+                    LocalDate newDueDate = currentDueDate.plusDays(additionalDays);
+                    borrower.setBorrow_to(dateFormatter.formatDate(newDueDate));
                     borrowerDAO.updateBorrower(borrower);
                     loadBorrowers();
                     showAlert(Alert.AlertType.INFORMATION, "Success", "Book renewed successfully.");
@@ -222,6 +257,7 @@ public class BorrowerControl {
             return;
         }
 
+        // Search for the borrower by ID
         Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
 
         if (borrower != null) {
@@ -232,13 +268,27 @@ public class BorrowerControl {
         }
     }
 
+    private void markOverdueBorrowers() {
+        // Iterate through borrowers and mark overdue ones
+        for (Borrower borrower : borrowerList) {
+            LocalDate dueDate = dateFormatter.parseDate(borrower.getBorrow_to());
+            if (dueDate.isBefore(LocalDate.now())) {
+                borrower.setStatus("overdue");
+                borrowerDAO.updateBorrower(borrower);
+            }
+        }
+        loadBorrowers();
+    }
+
     private void setUpBookSelectionListener() {
+        // Set up a listener to change the book image when a borrower is selected
         borrowerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection == null) {
                 bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
                 return;
             }
 
+            // Retrieve the selected book and set the image
             int bookId = newSelection.getBookid();
             BookDAO bookDAO = new BookDAO();
             Book borrowBook = bookDAO.getBookByID(bookId);
@@ -255,16 +305,25 @@ public class BorrowerControl {
         });
     }
 
-    private String getCurrentDate() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    }
+    @FXML
+    private void setUpFilter() {
+        // Set up the filter combo box with statuses
+        filterComboBox.getItems().addAll("All", "Processing", "Returned", "Overdue");
+        filterComboBox.setValue("All");
 
-    public String convertDatePickerToString(DatePicker datePicker) {
-        LocalDate date = datePicker.getValue();
-        if (date != null) {
-            return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        }
-        return null;
+        // Initialize FilteredList based on borrowerList
+        filteredList = new FilteredList<>(borrowerList, p -> true);
+
+        // Listen for value changes in ComboBox to update filter
+        filterComboBox.valueProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue == null || "All".equals(newValue)) {
+                filteredList.setPredicate(p -> true);
+            } else {
+                filteredList.setPredicate(borrower -> newValue.equalsIgnoreCase(borrower.getStatus()));
+            }
+        });
+
+        borrowerTable.setItems(filteredList);
     }
 
     @FXML
@@ -285,7 +344,7 @@ public class BorrowerControl {
                 applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -322,7 +381,7 @@ public class BorrowerControl {
                 newStage.show();
                 currentStage.hide();
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         });
         fadeOut.play();
