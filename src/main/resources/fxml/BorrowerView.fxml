@@ -98,7 +98,7 @@
                             <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
                         </graphic>
                     </Button>
-                    <Button fx:id="close_btn" layoutX="1071.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/DashBoard.css">
+                    <Button fx:id="close_btn" layoutX="1071.0" layoutY="-1.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/DashBoard.css">
                         <graphic>
                             <FontAwesomeIconView glyphName="CLOSE" size="30" />
                         </graphic>

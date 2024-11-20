@@ -8,9 +8,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +56,8 @@ public class SearchAPI {
     private TableColumn<?, ?> categoryColumn;
     @FXML
     private Button minus_btn;
+    @FXML
+    private Button close_btn;
     @FXML
     private AnchorPane nav_from;
     @FXML
@@ -135,9 +140,6 @@ public class SearchAPI {
     }
 
     private void loadSearchResults() {
-//        if (searchResults.isEmpty()) {
-//            showAlert(Alert.AlertType.INFORMATION, "Search Book", "No books found for the given query.");
-//        }
         searchBookTable.setItems(FXCollections.observableArrayList(searchResults));
     }
 
@@ -154,36 +156,58 @@ public class SearchAPI {
     }
 
     private void searchBooks(String query) {
-        GoogleBooksAPI googleBooksAPI = new GoogleBooksAPI();
-        try {
-            String jsonData = googleBooksAPI.fetchBooksData(query);
-            JsonObject jsonObject = JsonParser.parseString(jsonData).getAsJsonObject();
-            JsonArray items = jsonObject.has("items") ? jsonObject.getAsJsonArray("items") : null;
+        Task<Void> searchBooksTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                GoogleBooksAPI googleBooksAPI = new GoogleBooksAPI();
+                try {
+                    String jsonData = googleBooksAPI.fetchBooksData(query);
+                    JsonObject jsonObject = JsonParser.parseString(jsonData).getAsJsonObject();
+                    JsonArray items = jsonObject.has("items") ? jsonObject.getAsJsonArray("items") : null;
 
-            if (items == null || items.isEmpty()) return;
+                    if (items == null || items.isEmpty()) return null;
 
-            searchResults.clear();
+                    searchResults.clear();
 
-            for (JsonElement item : items) {
-                JsonObject volumeInfo = item.getAsJsonObject().getAsJsonObject("volumeInfo");
-                String title = volumeInfo.has("title") ? volumeInfo.get("title").getAsString() : "Unknown";
-                String authors = volumeInfo.has("authors") ? volumeInfo.getAsJsonArray("authors").get(0).getAsString() : "Unknown";
-                String publisher = volumeInfo.has("publisher") ? volumeInfo.get("publisher").getAsString() : "Unknown";
-                String publishedDate = volumeInfo.has("publishedDate") ? volumeInfo.get("publishedDate").getAsString() : "Unknown";
-                String category = "Unknown";
-                if (volumeInfo.has("categories") && volumeInfo.get("categories").isJsonArray() && volumeInfo.getAsJsonArray("categories").size() > 0) {
-                    category = volumeInfo.getAsJsonArray("categories").get(0).getAsString();
+                    for (JsonElement item : items) {
+                        JsonObject volumeInfo = item.getAsJsonObject().getAsJsonObject("volumeInfo");
+                        String title = volumeInfo.has("title") ? volumeInfo.get("title").getAsString() : "Unknown";
+                        String authors = volumeInfo.has("authors") ? volumeInfo.getAsJsonArray("authors").get(0).getAsString() : "Unknown";
+                        String publisher = volumeInfo.has("publisher") ? volumeInfo.get("publisher").getAsString() : "Unknown";
+                        String publishedDate = volumeInfo.has("publishedDate") ? volumeInfo.get("publishedDate").getAsString() : "Unknown";
+                        String category = "Unknown";
+                        if (volumeInfo.has("categories") && volumeInfo.get("categories").isJsonArray() && volumeInfo.getAsJsonArray("categories").size() > 0) {
+                            category = volumeInfo.getAsJsonArray("categories").get(0).getAsString();
+                        }
+                        String imageLink = volumeInfo.has("imageLinks") && volumeInfo.getAsJsonObject("imageLinks").has("thumbnail")
+                                ? volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString()
+                                : null;
+
+                        Book book = new Book(title, authors, publisher, publishedDate, imageLink, category);
+                        searchResults.add(book);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                String imageLink = volumeInfo.has("imageLinks") && volumeInfo.getAsJsonObject("imageLinks").has("thumbnail")
-                        ? volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString()
-                        : null;
-
-                Book book = new Book(title, authors, publisher, publishedDate, imageLink, category);
-                searchResults.add(book);
+                return null;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+            @Override
+            protected void succeeded() {
+                super.succeeded();
+                loadSearchResults(); // Update UI with new data
+            }
+
+            @Override
+            protected void failed() {
+                super.failed();
+                showAlert(Alert.AlertType.ERROR, "Search Error", "Error occurred while searching for books.");
+            }
+        };
+
+        Thread searchBooksThread = new Thread(searchBooksTask);
+        searchBooksThread.setDaemon(true); // Daemon thread to allow app to exit without waiting for this task
+        searchBooksThread.start();
     }
 
     @FXML
@@ -193,21 +217,32 @@ public class SearchAPI {
             showAlert(Alert.AlertType.WARNING, "Save Book", "Please select a book to save.");
             return;
         }
+        Task<Void> saveBookTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                boolean isSaved = bookDAO.insertBook(selectedBook);
+                if (!isSaved) {
+                    throw new Exception("Failed to save the book.");
+                }
+                return null;
+            }
 
-        boolean isSaved = bookDAO.insertBook(selectedBook);
-        if (isSaved) {
-            showAlert(Alert.AlertType.INFORMATION, "Save Book", "Book saved successfully!");
-        } else {
-            showAlert(Alert.AlertType.ERROR, "Save Book", "Failed to save the book.");
-        }
-    }
+            @Override
+            protected void succeeded() {
+                super.succeeded();
+                showAlert(Alert.AlertType.INFORMATION, "Save Book", "Book saved successfully!");
+            }
 
+            @Override
+            protected void failed() {
+                super.failed();
+                showAlert(Alert.AlertType.ERROR, "Save Book", "Failed to save the book.");
+            }
+        };
 
-    private boolean isAnyFieldEmpty(TextField... fields) {
-        for (TextField field : fields) {
-            if (field.getText().trim().isEmpty()) return true;
-        }
-        return false;
+        Thread saveBookThread = new Thread(saveBookTask);
+        saveBookThread.setDaemon(true); // Daemon thread to allow app to exit without waiting for this task
+        saveBookThread.start();
     }
 
     @FXML
@@ -271,8 +306,23 @@ public class SearchAPI {
         fadeOut.play();
     }
 
-    public void exit(){
-        System.exit(0);
+    public void exit() {
+        Stage primaryStage = (Stage) close_btn.getScene().getWindow();
+
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        scaleDown.setFromX(1.0);
+        scaleDown.setToX(0.5);
+        scaleDown.setFromY(1.0);
+        scaleDown.setToY(0.5);
+
+        fadeOut.setOnFinished(event -> Platform.exit());
+
+        fadeOut.play();
+        scaleDown.play();
     }
 
     public void minimize(){

@@ -1,12 +1,11 @@
 package Controller;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +51,8 @@ public class DashBoardControl  {
     @FXML
     private Button minus_btn;
     @FXML
+    private Button close_btn;
+    @FXML
     private AnchorPane nav_from;
     @FXML
     private Button searchAPI_btn;
@@ -94,12 +95,25 @@ public class DashBoardControl  {
         Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
         circleProfile.setFill(new ImagePattern(image));
 
-        List<ImageView> imageViews = Arrays.asList(
-                myImageView1, myImageView2, myImageView3, myImageView4, myImageView5,
-                myImageView6, myImageView7, myImageView8, myImageView9, myImageView10
-        );
+        // Tạo một Task để tải dữ liệu từ cơ sở dữ liệu
+        Task<List<String>> loadImagesTask = new Task<>() {
+            @Override
+            protected List<String> call() throws Exception {
+                return getImageLinksFromDatabase();
+            }
+        };
 
-        loadImagesToImageViews(imageViews);
+        // Sau khi Task hoàn thành, load ảnh vào ImageViews
+        loadImagesTask.setOnSucceeded(event -> {
+            List<ImageView> imageViews = Arrays.asList(
+                    myImageView1, myImageView2, myImageView3, myImageView4, myImageView5,
+                    myImageView6, myImageView7, myImageView8, myImageView9, myImageView10
+            );
+            loadImagesToImageViews(imageViews);
+        });
+
+        // Bắt đầu Task
+        new Thread(loadImagesTask).start();
     }
 
     public void loadImagesToImageViews(List<ImageView> imageViews) {
@@ -232,8 +246,23 @@ public class DashBoardControl  {
         fadeOut.play();
     }
 
-    public void exit(){
-        System.exit(0);
+    public void exit() {
+        Stage primaryStage = (Stage) close_btn.getScene().getWindow();
+
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        scaleDown.setFromX(1.0);
+        scaleDown.setToX(0.5);
+        scaleDown.setFromY(1.0);
+        scaleDown.setToY(0.5);
+
+        fadeOut.setOnFinished(event -> Platform.exit());
+
+        fadeOut.play();
+        scaleDown.play();
     }
 
     public void minimize(){

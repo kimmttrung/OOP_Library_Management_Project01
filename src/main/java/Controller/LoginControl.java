@@ -1,6 +1,9 @@
 package Controller;
 
 import animatefx.animation.*;
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import Database.DataBase;
+import javafx.util.Duration;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -228,9 +233,22 @@ public class LoginControl {
         stage.setIconified(true);
     }
 
-    @FXML
-    private void exit() {
-        Stage stage = (Stage) exitBtn.getScene().getWindow();
-        stage.close();
+    public void exit() {
+        Stage primaryStage = (Stage) exitBtn.getScene().getWindow();
+
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        scaleDown.setFromX(1.0);
+        scaleDown.setToX(0.5);
+        scaleDown.setFromY(1.0);
+        scaleDown.setToY(0.5);
+
+        fadeOut.setOnFinished(event -> Platform.exit());
+
+        fadeOut.play();
+        scaleDown.play();
     }
 }
