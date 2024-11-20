@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -154,7 +155,7 @@
                     </ScrollPane>
                 </content>
             </TitledPane>
-            <AnchorPane fx:id="nav_from" layoutY="74.0" prefHeight="684.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/DashBoard.css">
+            <AnchorPane fx:id="nav_from" layoutY="74.0" prefHeight="684.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/DashBoard.css" visible="false">
                 <children>
                     <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/DashBoard.css">
                         <graphic>
@@ -252,6 +253,7 @@
                     <FontAwesomeIconView glyphName="SEARCH" size="30" />
                 </graphic>
             </Button>
+         <ComboBox fx:id="filterComboBox" layoutX="844.0" layoutY="64.0" prefHeight="44.0" prefWidth="149.0" promptText="Select Status" />
         </AnchorPane>
     </top>
 </BorderPane>

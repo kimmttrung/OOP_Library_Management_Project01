@@ -182,17 +182,14 @@ public class LoginControl {
 
     @FXML
     private void showPassword() {
-
         if (login_selectShowPassword.isSelected()) {
-            login_showPassword.setText(login_password.getText());
             login_showPassword.setVisible(true);
             login_password.setVisible(false);
         } else {
-            login_password.setText(login_showPassword.getText());
             login_showPassword.setVisible(false);
             login_password.setVisible(true);
         }
-
+        login_showPassword.textProperty().bindBidirectional(login_password.textProperty());
     }
 
     private void registerClearFields() {

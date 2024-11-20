@@ -12,6 +12,7 @@ import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -30,10 +31,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Optional;
 
 import static Controller.AlertHelper.showAlert;
@@ -77,12 +76,17 @@ public class BorrowerControl {
     private Button userAll_btn;
     @FXML
     private Circle circleProfile;
+    @FXML
+    private ComboBox<String> filterComboBox;
 
     private double x = 0;
     private double y = 0;
 
     private ObservableList<Borrower> borrowerList = FXCollections.observableArrayList();
     private BorrowerDAO borrowerDAO = new BorrowerDAO();
+    private DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
+    private FilteredList<Borrower> filteredList;
+
 
     @FXML
     public void initialize() {
@@ -92,12 +96,14 @@ public class BorrowerControl {
 
         setUpTableColumn();
         loadBorrowers();
+        markOverdueBorrowers();
         setUpBookSelectionListener();
+        setUpFilter();
     }
 
+    @FXML
     private void loadBorrowers() {
-        borrowerList = FXCollections.observableArrayList(borrowerDAO.getBorrowerByStatus("processing"));
-        borrowerTable.setItems(borrowerList);
+        borrowerList.setAll(borrowerDAO.getAllBorrowers());
     }
 
     private void setUpTableColumn() {
@@ -111,6 +117,22 @@ public class BorrowerControl {
 
         Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
         circleProfile.setFill(new ImagePattern(image));
+
+        statusColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String status, boolean empty) {
+                super.updateItem(status, empty);
+                if (empty || status == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(status);
+                    setStyle("-fx-background-color: " +
+                            ("overdue".equals(status) ? "red" :
+                                    "processing".equals(status) ? "yellow" : "green"));
+                }
+            }
+        });
     }
 
     @FXML
@@ -130,29 +152,32 @@ public class BorrowerControl {
             return;
         }
 
+        String formattedReturnDate = dateFormatter.formatDate(borrowToDate);
+
         Optional<ButtonType> result = showConfirmationAlert("Confirm Borrow", "Are you sure you want to borrow this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             BookDAO bookDAO = new BookDAO();
+            UserDAO userBorrow = new UserDAO();
             Book borrowBook = bookDAO.getBookByID(Integer.parseInt(bookId));
+            User borrower = userBorrow.findUserbyID(Integer.parseInt(borrowerId));
 
-            if (borrowBook == null) {
+            if (borrower == null) {
+                showAlert(Alert.AlertType.ERROR, "Borrow Book", "User not found.");
+                return;
+            } else if (borrowBook == null) {
                 showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book not found.");
                 return;
             } else if (borrowerDAO.checkBookExists(borrowBook.getBookID())) {
                 showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book already being borrowed.");
                 return;
-            }
-
-            UserDAO userBorrow = new UserDAO();
-            User borrower = userBorrow.findUserbyID(Integer.parseInt(borrowerId));
-            if (borrower == null) {
-                showAlert(Alert.AlertType.ERROR, "Borrow Book", "User not found.");
+            } else if (borrowerDAO.checkLimitStmt(borrower.getUserName())) {
+                showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book limit reached.");
                 return;
             }
             String username = borrower.getUserName();
-            String bookName = borrowBook.getName();;
+            String bookName = borrowBook.getName();
 
-            borrowerDAO.insertBorrower(username, bookId, bookName, getCurrentDate(), borrowToDate.toString());
+            borrowerDAO.insertBorrower(username, bookId, bookName, dateFormatter.formatDate(today), formattedReturnDate);
             loadBorrowers();
 
             showAlert(Alert.AlertType.INFORMATION, "Success", "Book borrowed successfully.");
@@ -197,10 +222,9 @@ public class BorrowerControl {
             Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
             if (borrower != null && "processing".equals(borrower.getStatus())) {
                 try {
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    Date currentDueDate = dateFormat.parse(borrower.getBorrow_to());
-                    Date newDueDate = new Date(currentDueDate.getTime() + (long) additionalDays * 24 * 60 * 60 * 1000);
-                    borrower.setBorrow_to(dateFormat.format(newDueDate));
+                    LocalDate currentDueDate = dateFormatter.parseDate(borrower.getBorrow_to());
+                    LocalDate newDueDate = currentDueDate.plusDays(additionalDays);
+                    borrower.setBorrow_to(dateFormatter.formatDate(newDueDate));
                     borrowerDAO.updateBorrower(borrower);
                     loadBorrowers();
                     showAlert(Alert.AlertType.INFORMATION, "Success", "Book renewed successfully.");
@@ -232,6 +256,17 @@ public class BorrowerControl {
         }
     }
 
+    private void markOverdueBorrowers() {
+        for (Borrower borrower : borrowerList) {
+            LocalDate dueDate = dateFormatter.parseDate(borrower.getBorrow_to());
+            if (dueDate.isBefore(LocalDate.now())) {
+                borrower.setStatus("overdue");
+                borrowerDAO.updateBorrower(borrower);
+            }
+        }
+        loadBorrowers();
+    }
+
     private void setUpBookSelectionListener() {
         borrowerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection == null) {
@@ -255,16 +290,24 @@ public class BorrowerControl {
         });
     }
 
-    private String getCurrentDate() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    }
+    @FXML
+    private void setUpFilter() {
+        filterComboBox.getItems().addAll("All", "Processing", "Returned", "Overdue");
+        filterComboBox.setValue("All");
 
-    public String convertDatePickerToString(DatePicker datePicker) {
-        LocalDate date = datePicker.getValue();
-        if (date != null) {
-            return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        }
-        return null;
+        // Khởi tạo FilteredList dựa trên borrowerList
+        filteredList = new FilteredList<>(borrowerList, p -> true);
+
+        // Lắng nghe thay đổi giá trị trong ComboBox để cập nhật bộ lọc
+        filterComboBox.valueProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue == null || "All".equals(newValue)) {
+                filteredList.setPredicate(p -> true);
+            } else {
+                filteredList.setPredicate(borrower -> newValue.equalsIgnoreCase(borrower.getStatus()));
+            }
+        });
+
+        borrowerTable.setItems(filteredList);
     }
 
     @FXML
@@ -285,7 +328,7 @@ public class BorrowerControl {
                 applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -322,7 +365,7 @@ public class BorrowerControl {
                 newStage.show();
                 currentStage.hide();
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         });
         fadeOut.play();
