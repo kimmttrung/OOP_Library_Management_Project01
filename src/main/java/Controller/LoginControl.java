@@ -145,12 +145,12 @@ public class LoginControl {
         } else if (signup_password.getText().length() < 4) {
             showAlert(Alert.AlertType.ERROR, "Error", "Passwords must be at least 4 characters");
         } else {
-            String checkUsername = "SELECT * FROM accounts WHERE username = '"
-                    + signup_username.getText() + "'";
+            String checkUsername = "SELECT * FROM accounts WHERE username = ?";
             connect = DataBase.getConnection();
             try {
-                statement = connect.createStatement();
-                resultSet = statement.executeQuery(checkUsername);
+                pst = connect.prepareStatement(checkUsername);
+                pst.setString(1, signup_username.getText());
+                resultSet = pst.executeQuery();
 
                 if (resultSet.next()) {
                     showAlert(Alert.AlertType.ERROR, "Error", signup_username.getText() + " is already taken");
@@ -183,17 +183,14 @@ public class LoginControl {
 
     @FXML
     private void showPassword() {
-
         if (login_selectShowPassword.isSelected()) {
-            login_showPassword.setText(login_password.getText());
             login_showPassword.setVisible(true);
             login_password.setVisible(false);
         } else {
-            login_password.setText(login_showPassword.getText());
             login_showPassword.setVisible(false);
             login_password.setVisible(true);
         }
-
+        login_showPassword.textProperty().bindBidirectional(login_password.textProperty());
     }
 
     private void registerClearFields() {

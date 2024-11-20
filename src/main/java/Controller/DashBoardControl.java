@@ -86,46 +86,50 @@ public class DashBoardControl  {
         updateCounts();
         setImageView();
 
+        // Create a timeline to implement smooth scrolling effect
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(20), e -> scroll())
+                new KeyFrame(Duration.millis(20), e -> scroll())  // Scroll every 20 milliseconds
         );
-        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.setCycleCount(Timeline.INDEFINITE);  // Repeat the scroll indefinitely
         timeline.play();
     }
 
     private void setImageView() {
+        // Set the profile image in the circle profile
         Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
         circleProfile.setFill(new ImagePattern(image));
 
-        // Tạo một Task để tải dữ liệu từ cơ sở dữ liệu
+        // Create a Task to load image links from the database in the background
         Task<List<String>> loadImagesTask = new Task<>() {
             @Override
             protected List<String> call() throws Exception {
-                return getImageLinksFromDatabase();
+                return getImageLinksFromDatabase();  // Retrieve image URLs from the database
             }
         };
 
-        // Sau khi Task hoàn thành, load ảnh vào ImageViews
+        // Once the Task is complete, load the images into the ImageViews
         loadImagesTask.setOnSucceeded(event -> {
             List<ImageView> imageViews = Arrays.asList(
                     myImageView1, myImageView2, myImageView3, myImageView4, myImageView5,
                     myImageView6, myImageView7, myImageView8, myImageView9, myImageView10
             );
-            loadImagesToImageViews(imageViews);
+            loadImagesToImageViews(imageViews);  // Load images into the ImageViews
         });
 
-        // Bắt đầu Task
+        // Start the background task on a new thread
         new Thread(loadImagesTask).start();
     }
 
     public void loadImagesToImageViews(List<ImageView> imageViews) {
+        // Fetch image URLs from the database
         List<String> imageLinks = getImageLinksFromDatabase();
 
+        // Loop through the ImageViews and load the images from the links
         for (int i = 0; i < imageViews.size(); i++) {
             if (i < imageLinks.size()) {
                 String imageLink = imageLinks.get(i);
-                Image image = new Image(imageLink, true);
-                imageViews.get(i).setImage(image);
+                Image image = new Image(imageLink, true);  // Load the image
+                imageViews.get(i).setImage(image);  // Set the image in the corresponding ImageView
             } else {
                 break;
             }
@@ -133,6 +137,7 @@ public class DashBoardControl  {
     }
 
     private List<String> getImageLinksFromDatabase() {
+        // Create a list to store the image URLs fetched from the database
         List<String> imageLinks = new ArrayList<>();
 
         try (Connection connection = DataBase.getConnection()) {
@@ -151,21 +156,25 @@ public class DashBoardControl  {
             e.printStackTrace();
         }
 
-        return imageLinks;
+        return imageLinks;  // Return the list of image links
     }
 
     private void scroll() {
+        // Get the current horizontal scroll position of the ScrollPane
         double hValue = scrollPane.getHvalue();
-        double increment = 0.001;
+        double increment = 0.001;  // Scroll increment for smooth scrolling
 
+        // If the scroll is not at the end, scroll by a small increment
         if (hValue < 1) {
             scrollPane.setHvalue(hValue + increment);
         } else {
+            // If at the end, reset the scroll to the beginning
             scrollPane.setHvalue(0);
         }
     }
 
     private void setUpInit() {
+        // Set up initial pie chart data for different categories
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                         new PieChart.Data("Science", 40),
@@ -173,15 +182,16 @@ public class DashBoardControl  {
                         new PieChart.Data("Technology", 20),
                         new PieChart.Data("Sports", 70)
                 );
+
         pieChartData.forEach(data -> data.nameProperty().bind(
-                        Bindings.concat(
-                                data.getName(), ": ", data.pieValueProperty()
-                        )
+                Bindings.concat(
+                        data.getName(), ": ", data.pieValueProperty()  // Bind name and value for display
                 )
-        );
+        ));
 
         pieChart.getData().addAll(pieChartData);
 
+        // Set up the initial state for navigation and buttons
         nav_from.setTranslateX(-320);
         bars_btn.setVisible(true);
         arrow_btn.setVisible(false);

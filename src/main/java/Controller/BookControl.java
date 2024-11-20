@@ -91,10 +91,12 @@ public class BookControl {
 
     @FXML
     public void initialize() {
+        // Set initial translation for the navigation pane and visibility for buttons
         nav_from.setTranslateX(-320);
         bars_btn.setVisible(true);
         arrow_btn.setVisible(false);
 
+        // Set up table columns, load books, and create QR code directory
         setUpTableColumns();
         setUpBookSelectionListener();
         loadBooks();
@@ -103,47 +105,57 @@ public class BookControl {
 
     @FXML
     private void loadBooks() {
+        // Load books in a background thread to keep the UI responsive
         Task<Void> loadBooksTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
+                // Fetch all books from the database
                 bookList = FXCollections.observableArrayList(bookDAO.getAllBooks());
                 return null;
             }
 
             @Override
             protected void succeeded() {
+                // Set the book list to the table view once data is loaded
                 bookTable.setItems(bookList);
             }
 
             @Override
             protected void failed() {
+                // Show an error alert if loading books fails
                 showAlert(Alert.AlertType.ERROR, "Load Books", "Failed to load books.");
             }
         };
 
+        // Start the task in a separate thread
         Thread loadBooksThread = new Thread(loadBooksTask);
         loadBooksThread.setDaemon(true);
         loadBooksThread.start();
     }
 
     private void setUpTableColumns() {
+        // Define how each column will fetch data from the Book object
         idColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
 
+        // Set a default profile image to the profile circle
         Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
         circleProfile.setFill(new ImagePattern(image));
     }
 
     private void setUpBookSelectionListener() {
+        // Set a listener for book selection in the table
         bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            // If no book is selected, set a default image
             if (newSelection == null) {
                 bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
                 return;
             }
 
+            // Fetch selected book details and update the image
             int bookId = newSelection.getBookID();
             Book selectedBook = bookDAO.getBookByID(bookId);
 
@@ -152,23 +164,32 @@ public class BookControl {
                 return;
             }
 
-            String imageLink = selectedBook.getImage();
-            Image image = (imageLink != null && !imageLink.isEmpty())
-                    ? new Image(imageLink)
-                    : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
-            bookImageView.setImage(image);
+            // Update the image for the selected book
+            updateBookImage(selectedBook);
         });
+    }
+
+    private void updateBookImage(Book book) {
+        // Update the image of the selected book
+        String imageLink = book.getImage();
+        Image image = (imageLink != null && !imageLink.isEmpty())
+                ? new Image(imageLink)
+                : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
+        bookImageView.setImage(image);
     }
 
     @FXML
     private void insertBook() {
+        // Validate fields before proceeding with insertion
         if (isAnyFieldEmpty(bookTitleField, bookAuthorField, bookPublisherField, bookYearField)) {
             showAlert(Alert.AlertType.ERROR, "Insert Book", "All fields are required.");
             return;
         }
 
+        // Confirm insertion
         Optional<ButtonType> result = showConfirmationAlert("Confirm Insert", "Are you sure you want to insert the book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Create new Book object with data from fields
             Book newBook = new Book(
                     bookTitleField.getText(),
                     bookAuthorField.getText(),
@@ -177,6 +198,7 @@ public class BookControl {
                     null
             );
 
+            // Insert the book and update the list
             if (bookDAO.insertBook(newBook)) {
                 loadBooks();
                 showAlert(Alert.AlertType.INFORMATION, "Insert Success", "Book inserted successfully.");
@@ -188,45 +210,52 @@ public class BookControl {
 
     @FXML
     private void updateBook() {
-            if (isAnyFieldEmpty(bookIDAdjField)) {
-                showAlert(Alert.AlertType.ERROR, "Update Book", "Please enter a valid book ID and Information you want to update.");
-                return;
-            }
-            int bookId = Integer.parseInt(bookIDAdjField.getText());
-            Book selectedBook = bookDAO.getBookByID(bookId);
-            if (selectedBook == null) {
-                showAlert(Alert.AlertType.ERROR, "Update Book", "No book selected for update.");
-                return;
-            }
+        // Check if book ID field is empty
+        if (isAnyFieldEmpty(bookIDAdjField)) {
+            showAlert(Alert.AlertType.ERROR, "Update Book", "Please enter a valid book ID and Information you want to update.");
+            return;
+        }
 
-            Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update the book?");
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                Book updatedBook = new Book(
-                        selectedBook.getBookID(),
-                        bookTitleAdjField.getText().isEmpty() ? selectedBook.getName() : bookTitleAdjField.getText(),
-                        bookAuthorAdjField.getText().isEmpty() ? selectedBook.getAuthor() : bookAuthorAdjField.getText(),
-                        bookPublisherAdjField.getText().isEmpty() ? selectedBook.getPublisher() : bookPublisherAdjField.getText(),
-                        bookYearAdjField.getText().isEmpty() ? selectedBook.getPublishedDate() : bookYearAdjField.getText(),
-                        selectedBook.getImage()
-                );
+        int bookId = Integer.parseInt(bookIDAdjField.getText());
+        Book selectedBook = bookDAO.getBookByID(bookId);
 
-                if (bookDAO.updateBook(updatedBook)) {
-                    loadBooks();
-                    showAlert(Alert.AlertType.INFORMATION, "Update Success", "Book updated successfully.");
-                } else {
-                    showAlert(Alert.AlertType.ERROR, "Update Error", "Error updating book. Please try again.");
-                }
+        if (selectedBook == null) {
+            showAlert(Alert.AlertType.ERROR, "Update Book", "No book selected for update.");
+            return;
+        }
+
+        // Confirm update
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update the book?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Create an updated Book object with values from fields
+            Book updatedBook = new Book(
+                    selectedBook.getBookID(),
+                    bookTitleAdjField.getText().isEmpty() ? selectedBook.getName() : bookTitleAdjField.getText(),
+                    bookAuthorAdjField.getText().isEmpty() ? selectedBook.getAuthor() : bookAuthorAdjField.getText(),
+                    bookPublisherAdjField.getText().isEmpty() ? selectedBook.getPublisher() : bookPublisherAdjField.getText(),
+                    bookYearAdjField.getText().isEmpty() ? selectedBook.getPublishedDate() : bookYearAdjField.getText(),
+                    selectedBook.getImage()
+            );
+
+            // Update the book and refresh the list
+            if (bookDAO.updateBook(updatedBook)) {
+                loadBooks();
+                showAlert(Alert.AlertType.INFORMATION, "Update Success", "Book updated successfully.");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Update Error", "Error updating book. Please try again.");
             }
+        }
     }
-
 
     @FXML
     private void deleteBook() {
+        // Validate book ID before deletion
         if (bookIDField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Delete Book", "Please enter Book ID you want to delete.");
             return;
         }
 
+        // Confirm deletion
         Optional<ButtonType> result = showConfirmationAlert("Confirm Delete", "Are you sure you want to delete this Book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             int bookId = Integer.parseInt(bookIDField.getText());
@@ -241,10 +270,11 @@ public class BookControl {
 
     @FXML
     private void searchBookByName() {
+        // Fetch books based on the search term
         String bookFindName = findBookField.getText();
 
         if (bookFindName.isEmpty()) {
-            loadBooks();
+            loadBooks(); // If no search term, reload all books
             return;
         }
 
@@ -260,6 +290,7 @@ public class BookControl {
 
     @FXML
     private void generateQRCode() {
+        // Get selected book to generate QR Code
         Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
 
         if (selectedBook == null) {
@@ -267,9 +298,11 @@ public class BookControl {
             return;
         }
 
+        // Generate QR Code in a background thread
         Task<Void> generateQRCodeTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
+                // Format book data as JSON for the QR Code
                 String qrData = String.format(
                         "{ \"bookID\": %d, \"title\": \"%s\", \"author\": \"%s\", \"publisher\": \"%s\", \"publishedDate\": \"%s\" }",
                         selectedBook.getBookID(),
@@ -279,6 +312,7 @@ public class BookControl {
                         selectedBook.getPublishedDate()
                 );
 
+                // Generate QR Code and save it to the specified file path
                 String filePath = "src/main/resources/qr_codes/book_" + selectedBook.getBookID() + ".png";
 
                 try {
@@ -295,11 +329,13 @@ public class BookControl {
 
             @Override
             protected void succeeded() {
+                // Show success message once the QR Code is generated
                 showAlert(Alert.AlertType.INFORMATION, "QR Code Generated", "QR Code saved successfully.");
             }
 
             @Override
             protected void failed() {
+                // Show error message if QR Code generation fails
                 showAlert(Alert.AlertType.ERROR, "Generate QR Code", "Error generating QR Code.");
             }
         };
