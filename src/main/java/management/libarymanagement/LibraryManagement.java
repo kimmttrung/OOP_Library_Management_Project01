@@ -15,7 +15,7 @@ public class LibraryManagement extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginForm.fxml"));
         Scene scene = new Scene(root);
 
         root.setOnMousePressed((MouseEvent event) -> {
@@ -26,6 +26,7 @@ public class LibraryManagement extends Application {
         root.setOnMouseDragged((MouseEvent event) -> {
             stage.setX(event.getScreenX() - x);
             stage.setY(event.getScreenY() - y);
+
         });
 
         stage.initStyle(StageStyle.TRANSPARENT);
