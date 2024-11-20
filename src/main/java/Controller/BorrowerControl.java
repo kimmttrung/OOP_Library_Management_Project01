@@ -32,7 +32,6 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import static Controller.AlertHelper.showAlert;
@@ -107,6 +106,7 @@ public class BorrowerControl {
     }
 
     private void setUpTableColumn() {
+        // Set up table columns with PropertyValueFactory to map fields to columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         bookIdColumn.setCellValueFactory(new PropertyValueFactory<>("bookid"));
@@ -115,9 +115,11 @@ public class BorrowerControl {
         fromColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_from"));
         toColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_to"));
 
+        // Set default profile image in the table
         Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
         circleProfile.setFill(new ImagePattern(image));
 
+        // Set custom styling for the status column based on the status value
         statusColumn.setCellFactory(column -> new TableCell<>() {
             @Override
             protected void updateItem(String status, boolean empty) {
@@ -141,26 +143,32 @@ public class BorrowerControl {
         String bookId = bookIDField.getText();
         LocalDate borrowToDate = toDatePicker.getValue();
 
+        // Validate input fields
         if (borrowerId.isEmpty() || bookId.isEmpty() || borrowToDate == null) {
             showAlert(Alert.AlertType.ERROR, "Borrow Book", "Please enter both user's ID, Book's ID and return Day.");
             return;
         }
 
+        // Ensure the return date is after today
         LocalDate today = LocalDate.now();
         if (!borrowToDate.isAfter(today)) {
             showAlert(Alert.AlertType.ERROR, "Borrow Book", "Return date must be after today.");
             return;
         }
 
+        // Format the return date
         String formattedReturnDate = dateFormatter.formatDate(borrowToDate);
 
+        // Confirm borrowing action
         Optional<ButtonType> result = showConfirmationAlert("Confirm Borrow", "Are you sure you want to borrow this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Check if the borrower and book exist, and if the book is available
             BookDAO bookDAO = new BookDAO();
             UserDAO userBorrow = new UserDAO();
             Book borrowBook = bookDAO.getBookByID(Integer.parseInt(bookId));
-            User borrower = userBorrow.findUserbyID(Integer.parseInt(borrowerId));
+            User borrower = userBorrow.findUserById(Integer.parseInt(borrowerId));
 
+            // Handle various error scenarios
             if (borrower == null) {
                 showAlert(Alert.AlertType.ERROR, "Borrow Book", "User not found.");
                 return;
@@ -174,9 +182,10 @@ public class BorrowerControl {
                 showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book limit reached.");
                 return;
             }
+
+            // Add borrower record to the database and reload borrowers
             String username = borrower.getUserName();
             String bookName = borrowBook.getName();
-
             borrowerDAO.insertBorrower(username, bookId, bookName, dateFormatter.formatDate(today), formattedReturnDate);
             loadBorrowers();
 
@@ -195,6 +204,7 @@ public class BorrowerControl {
 
         Optional<ButtonType> result = showConfirmationAlert("Confirm Return", "Are you sure you want to return this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Update borrower's status to "returned"
             Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
             if (borrower != null) {
                 borrower.setStatus("returned");
@@ -209,7 +219,7 @@ public class BorrowerControl {
 
     @FXML
     private void renewBook() {
-        String borrowerId = findBorrowerField.getText();
+        String borrowerId = borrowerIDField.getText();
         int additionalDays = 7;
 
         if (borrowerId.isEmpty()) {
@@ -219,6 +229,7 @@ public class BorrowerControl {
 
         Optional<ButtonType> result = showConfirmationAlert("Confirm Renewal", "Are you sure you want to renew this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Renew the borrower's book
             Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
             if (borrower != null && "processing".equals(borrower.getStatus())) {
                 try {
@@ -246,6 +257,7 @@ public class BorrowerControl {
             return;
         }
 
+        // Search for the borrower by ID
         Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
 
         if (borrower != null) {
@@ -257,6 +269,7 @@ public class BorrowerControl {
     }
 
     private void markOverdueBorrowers() {
+        // Iterate through borrowers and mark overdue ones
         for (Borrower borrower : borrowerList) {
             LocalDate dueDate = dateFormatter.parseDate(borrower.getBorrow_to());
             if (dueDate.isBefore(LocalDate.now())) {
@@ -268,12 +281,14 @@ public class BorrowerControl {
     }
 
     private void setUpBookSelectionListener() {
+        // Set up a listener to change the book image when a borrower is selected
         borrowerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection == null) {
                 bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
                 return;
             }
 
+            // Retrieve the selected book and set the image
             int bookId = newSelection.getBookid();
             BookDAO bookDAO = new BookDAO();
             Book borrowBook = bookDAO.getBookByID(bookId);
@@ -292,13 +307,14 @@ public class BorrowerControl {
 
     @FXML
     private void setUpFilter() {
+        // Set up the filter combo box with statuses
         filterComboBox.getItems().addAll("All", "Processing", "Returned", "Overdue");
         filterComboBox.setValue("All");
 
-        // Khởi tạo FilteredList dựa trên borrowerList
+        // Initialize FilteredList based on borrowerList
         filteredList = new FilteredList<>(borrowerList, p -> true);
 
-        // Lắng nghe thay đổi giá trị trong ComboBox để cập nhật bộ lọc
+        // Listen for value changes in ComboBox to update filter
         filterComboBox.valueProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue == null || "All".equals(newValue)) {
                 filteredList.setPredicate(p -> true);

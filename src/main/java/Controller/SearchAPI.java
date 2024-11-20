@@ -83,10 +83,12 @@ public class SearchAPI {
 
     @FXML
     public void initialize() {
+        // Set initial UI state for navigation panel and buttons
         nav_from.setTranslateX(-320);
         bars_btn.setVisible(true);
         arrow_btn.setVisible(false);
 
+        // Set up the table columns, listener for book selection, and load initial search results
         setUpTableColumns();
         setUpBookSelectionListener();
         loadSearchResults();
@@ -101,17 +103,20 @@ public class SearchAPI {
     }
 
     private void setUpBookSelectionListener() {
+        // Add a listener for when a book is selected from the table
         searchBookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection == null) {
                 bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
                 return;
             }
 
+            // If a book is selected, update the book details in the UI
             titleLabel.setText(newSelection.getName());
             authorLabel.setText(newSelection.getAuthor());
             publisherLabel.setText(newSelection.getPublisher());
             categoriesLabel.setText(newSelection.getCategory());
 
+            // Set the image of the selected book, or default if not available
             String imageLink = newSelection.getImage();
             Image image = (imageLink != null && !imageLink.isEmpty())
                     ? new Image(imageLink)
@@ -121,37 +126,48 @@ public class SearchAPI {
     }
 
     private void loadSearchResults() {
+        // Populate the table with the list of search results
         searchBookTable.setItems(FXCollections.observableArrayList(searchResults));
     }
 
     @FXML
     private void searchBook() {
+        // Search for books based on the user's query
         String query = searchField.getText();
         if (query.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Search Book", "Please enter a search query.");
             return;
         }
 
+        // Proceed with searching books based on the query and update the results
         searchBooks(query);
         loadSearchResults();
     }
 
     private void searchBooks(String query) {
+        // Perform the search operation asynchronously using a background task
         Task<Void> searchBooksTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
+                // Use the GoogleBooksAPI to fetch book data based on the query
                 GoogleBooksAPI googleBooksAPI = new GoogleBooksAPI();
                 try {
+                    // Fetch JSON data from the API
                     String jsonData = googleBooksAPI.fetchBooksData(query);
                     JsonObject jsonObject = JsonParser.parseString(jsonData).getAsJsonObject();
                     JsonArray items = jsonObject.has("items") ? jsonObject.getAsJsonArray("items") : null;
 
+                    // If no books found, exit early
                     if (items == null || items.isEmpty()) return null;
 
+                    // Clear previous search results and populate new results
                     searchResults.clear();
 
+                    // Loop through each book item in the JSON response
                     for (JsonElement item : items) {
                         JsonObject volumeInfo = item.getAsJsonObject().getAsJsonObject("volumeInfo");
+
+                        // Extract book details from the JSON data
                         String title = volumeInfo.has("title") ? volumeInfo.get("title").getAsString() : "Unknown";
                         String authors = volumeInfo.has("authors") ? volumeInfo.getAsJsonArray("authors").get(0).getAsString() : "Unknown";
                         String publisher = volumeInfo.has("publisher") ? volumeInfo.get("publisher").getAsString() : "Unknown";
@@ -164,11 +180,12 @@ public class SearchAPI {
                                 ? volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString()
                                 : null;
 
+                        // Create a Book object and add it to the search results list
                         Book book = new Book(title, authors, publisher, publishedDate, imageLink, category);
                         searchResults.add(book);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    e.printStackTrace();  // Log any exceptions
                 }
                 return null;
             }
@@ -176,31 +193,38 @@ public class SearchAPI {
             @Override
             protected void succeeded() {
                 super.succeeded();
-                loadSearchResults(); // Update UI with new data
+                // Once the search is complete, update the UI with the new search results
+                loadSearchResults();
             }
 
             @Override
             protected void failed() {
                 super.failed();
+                // Show an error alert if the search operation fails
                 showAlert(Alert.AlertType.ERROR, "Search Error", "Error occurred while searching for books.");
             }
         };
 
+        // Execute the search task in a new thread (background operation)
         Thread searchBooksThread = new Thread(searchBooksTask);
-        searchBooksThread.setDaemon(true); // Daemon thread to allow app to exit without waiting for this task
+        searchBooksThread.setDaemon(true); // Make it a daemon thread so it doesn't block application exit
         searchBooksThread.start();
     }
 
     @FXML
     private void saveSelectedBook() {
+        // Attempt to save the selected book to the database
         Book selectedBook = searchBookTable.getSelectionModel().getSelectedItem();
         if (selectedBook == null) {
             showAlert(Alert.AlertType.WARNING, "Save Book", "Please select a book to save.");
             return;
         }
+
+        // Perform the save operation asynchronously using a background task
         Task<Void> saveBookTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
+                // Insert the selected book into the database
                 boolean isSaved = bookDAO.insertBook(selectedBook);
                 if (!isSaved) {
                     throw new Exception("Failed to save the book.");
@@ -221,8 +245,9 @@ public class SearchAPI {
             }
         };
 
+        // Execute the save task in a new thread
         Thread saveBookThread = new Thread(saveBookTask);
-        saveBookThread.setDaemon(true); // Daemon thread to allow app to exit without waiting for this task
+        saveBookThread.setDaemon(true); // Daemon thread so it doesn't block app exit
         saveBookThread.start();
     }
 

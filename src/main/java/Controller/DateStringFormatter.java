@@ -9,26 +9,27 @@ public class DateStringFormatter {
     private DateTimeFormatter formatter;
 
     /**
-     * Constructor với định dạng mặc định "dd/MM/yyyy".
+     * Default constructor with the date format "dd/MM/yyyy".
      */
     public DateStringFormatter() {
         this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     }
 
     /**
-     * Constructor với định dạng tùy chỉnh.
+     * Constructor with a custom date format.
      *
-     * @param pattern Định dạng ngày (ví dụ: "yyyy-MM-dd", "MM/dd/yyyy").
+     * @param pattern The date format (e.g., "yyyy-MM-dd", "MM/dd/yyyy").
      */
     public DateStringFormatter(String pattern) {
         this.formatter = DateTimeFormatter.ofPattern(pattern);
     }
 
     /**
-     * Chuyển đổi LocalDate thành chuỗi ngày tháng theo định dạng đã thiết lập.
+     * Converts a LocalDate to a formatted string according to the specified date format.
      *
-     * @param date LocalDate cần định dạng.
-     * @return Chuỗi ngày đã định dạng.
+     * @param date The LocalDate object to be formatted.
+     * @return The formatted date string.
+     * @throws IllegalArgumentException if the date is null.
      */
     public String formatDate(LocalDate date) {
         if (date == null) {
@@ -38,11 +39,12 @@ public class DateStringFormatter {
     }
 
     /**
-     * Phân tích chuỗi ngày tháng thành LocalDate.
+     * Parses a date string into a LocalDate object according to the specified date format.
      *
-     * @param dateString Chuỗi ngày cần phân tích.
-     * @return LocalDate đã phân tích.
-     * @throws DateTimeParseException Nếu chuỗi không đúng định dạng.
+     * @param dateString The date string to be parsed.
+     * @return The parsed LocalDate object.
+     * @throws DateTimeParseException if the date string does not match the expected format.
+     * @throws IllegalArgumentException if the date string is null or empty.
      */
     public LocalDate parseDate(String dateString) throws DateTimeParseException {
         if (dateString == null || dateString.trim().isEmpty()) {
@@ -52,10 +54,10 @@ public class DateStringFormatter {
     }
 
     /**
-     * Kiểm tra xem chuỗi ngày có hợp lệ với định dạng hay không.
+     * Checks if a date string is valid according to the specified date format.
      *
-     * @param dateString Chuỗi ngày cần kiểm tra.
-     * @return true nếu hợp lệ, false nếu không.
+     * @param dateString The date string to be checked.
+     * @return true if the date string is valid, false otherwise.
      */
     public boolean isValidDate(String dateString) {
         try {
@@ -67,9 +69,9 @@ public class DateStringFormatter {
     }
 
     /**
-     * Thay đổi định dạng ngày tháng của đối tượng này.
+     * Changes the date format pattern of this DateStringFormatter instance.
      *
-     * @param pattern Định dạng mới.
+     * @param pattern The new date format pattern.
      */
     public void setPattern(String pattern) {
         this.formatter = DateTimeFormatter.ofPattern(pattern);
