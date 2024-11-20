@@ -87,7 +87,8 @@ public class LoginControl {
                     ZoomOut zoomOut = new ZoomOut (rootNode);
                     zoomOut.setOnFinished(event -> {
                         try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardView.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardUser.fxml"));
+//                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin.fxml"));
                             Parent root = loader.load();
 
                             Stage stage = new Stage();

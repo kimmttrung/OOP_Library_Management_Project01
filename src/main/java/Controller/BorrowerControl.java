@@ -77,6 +77,8 @@ public class BorrowerControl {
     private Button userAll_btn;
     @FXML
     private Circle circleProfile;
+    @FXML
+    private Button backLeft_btn;
 
     private double x = 0;
     private double y = 0;
@@ -283,6 +285,8 @@ public class BorrowerControl {
                 applySceneTransition(bookAll_btn, "/fxml/BookView.fxml");
             } else if (event.getSource() == userAll_btn) {
                 applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
+            } else if (event.getSource() == backLeft_btn) {
+                applySceneTransition(backLeft_btn, "/fxml/admin.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

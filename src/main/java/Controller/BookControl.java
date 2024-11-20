@@ -38,6 +38,8 @@ import static Controller.AlertHelper.showConfirmationAlert;
 
 public class BookControl {
     @FXML
+    private Button backLeft_btn;
+    @FXML
     private Button borrowerBook_btn;
     @FXML
     private Button arrow_btn;
@@ -337,6 +339,8 @@ public class BookControl {
                 applySceneTransition(borrowerBook_btn, "/fxml/BorrowerView.fxml");
             } else if (event.getSource() == userAll_btn) {
                 applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
+            } else if (event.getSource() == backLeft_btn) {
+                applySceneTransition(backLeft_btn, "/fxml/admin.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

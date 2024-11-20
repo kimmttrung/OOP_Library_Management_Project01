@@ -1,0 +1,43 @@
+.profile-layout{
+    -fx-background-color: #EBC95E;
+    -fx-background-radius: 0 0 50 50;
+}
+.button_edit{
+    -fx-background-color: #EBC95E;
+    -fx-background-radius: 50;
+}
+.button_edit:hover{
+    -fx-background-color: #16a34c;
+    -fx-background-radius: 50;
+}
+.white_background{
+    -fx-background-color: #fff;
+}
+.transparent{
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+.most-contacted-layout{
+    -fx-background-radius: 0 50 50 50;
+}
+.light-gray-background{
+    -fx-background-color: #F3F3F3;
+}
+.nav-form1 {
+    -fx-background-color: linear-gradient(to bottom right, #A0C4FF, #BDE0FE);
+}
+.nav-form{
+    -fx-background-color: #2bb341;
+}
+
+.nav-btn{
+    -fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);
+    -fx-background-radius:5px;
+    -fx-cursor:hand;
+    -fx-text-fill:#fff;
+    -fx-font-family:"Microsoft Sans Serif";
+    -fx-font-size: 15px;
+}
+.nav-btn:hover{
+    -fx-background-color:linear-gradient(to bottom right, #46589a, #4278a7);
+    -fx-background-radius:5px;
+}

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Member">
+    <left>
+        <VBox prefHeight="850.0" prefWidth="185.0" styleClass="nav-form1" stylesheets="@../css/Member.css" BorderPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" prefHeight="309.0" prefWidth="157.0" styleClass="profile-layout" stylesheets="@../css/admin.css">
+                    <children>
+                        <ImageView fitHeight="146.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../image/admin.jpg" />
+                            </image>
+                        </ImageView>
+                        <Label text="MemBer" textFill="WHITE">
+                            <font>
+                                <Font name="Corbel Bold" size="24.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                    </VBox.margin>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="515.0" prefWidth="145.0" styleClass="nav-form1" stylesheets="@../css/Member.css">
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                    </VBox.margin>
+               <children>
+                  <HBox alignment="CENTER" prefHeight="55.0" prefWidth="165.0">
+                     <children>
+                        <Button fx:id="BookLibrary_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="nav-btn" stylesheets="@../css/Member.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="BOOK" size="40" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="46.0" prefWidth="165.0">
+                     <children>
+                        <Label text="Book Library" textFill="#fdfdfd">
+                           <font>
+                              <Font name="Corbel Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="214.0" prefHeight="55.0" prefWidth="165.0">
+                     <children>
+                        <Button fx:id="SerachAPIUser_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="nav-btn" stylesheets="@../css/Member.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="SEARCH" size="40" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="242.0" prefHeight="46.0" prefWidth="165.0">
+                     <children>
+                        <Label text="Search API" textFill="#fdfdfd">
+                           <font>
+                              <Font name="Corbel Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="265.0" prefHeight="55.0" prefWidth="165.0">
+                     <children>
+                        <Button fx:id="DashBoardUser_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="nav-btn" stylesheets="@../css/Member.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="HOME" size="40" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="293.0" prefHeight="46.0" prefWidth="165.0">
+                     <children>
+                        <Label text="DashBoard Member" textFill="#fdfdfd">
+                           <font>
+                              <Font name="Corbel Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+                </VBox>
+                <Button fx:id="signOut_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/DashBoard.css">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="SIGN_OUT" size="30" />
+                    </graphic>
+                </Button>
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="white_background" stylesheets="@../css/admin.css" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="white_background" stylesheets="@../css/admin.css">
+                    <children>
+                        <Label prefHeight="28.0" prefWidth="200.0" text="Book Library" textFill="#2bb341">
+                            <HBox.margin>
+                                <Insets left="30.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="Corbel Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Pane prefHeight="100.0" prefWidth="326.0" HBox.hgrow="ALWAYS" />
+                        <TextField promptText="serch" />
+                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" styleClass="button_edit" stylesheets="@../css/admin.css">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="SEARCH" size="30" />
+                            </graphic>
+                            <HBox.margin>
+                                <Insets left="30.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../css/DashBoard.css">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="MINUS" size="30" />
+                            </graphic>
+                        </Button>
+                        <Button fx:id="close_btn" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/DashBoard.css">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="CLOSE" size="30" />
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_RIGHT" prefHeight="223.0" prefWidth="909.0">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+               <children>
+                  <AnchorPane prefHeight="223.0" prefWidth="290.0">
+                     <children>
+                        <Button layoutX="130.0" layoutY="1.0" mnemonicParsing="false" text="QR Code" />
+                        <AnchorPane layoutX="60.0" layoutY="29.0" prefHeight="185.0" prefWidth="200.0" styleClass="image-card" stylesheets="@../css/Book.css">
+                           <children>
+                              <ImageView fitHeight="190.0" fitWidth="197.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="223.0" prefWidth="338.0">
+                     <children>
+                        <AnchorPane layoutX="99.0" layoutY="25.0" prefHeight="191.0" prefWidth="147.0" styleClass="image-card" stylesheets="@../css/Book.css">
+                           <children>
+                              <ImageView fitHeight="187.0" fitWidth="163.0" layoutX="3.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                        <Button layoutX="157.0" layoutY="1.0" mnemonicParsing="false" text="IMAGE" />
+                     </children>
+                  </AnchorPane>
+                  <Button fx:id="borrowUser_btn" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="58.0" prefWidth="71.0" styleClass="iconUser" stylesheets="@../css/User.css">
+                     <HBox.margin>
+                        <Insets top="100.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="CLIPBOARD" size="50" />
+                     </graphic>
+                  </Button>
+                  <Label text="Borow">
+                     <HBox.margin>
+                        <Insets left="30.0" right="-167.0" top="100.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Corbel Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="commentUser_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="iconUser" stylesheets="@../css/User.css">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="COMMENT" size="50" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="15.0" top="-100.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Label text="Commnets">
+                     <font>
+                        <Font name="Corbel Bold" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="-100.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+                </HBox>
+                <HBox prefHeight="263.0" prefWidth="909.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <ScrollPane prefHeight="420.0" prefWidth="909.0" styleClass="transparent" stylesheets="@../css/admin.css">
+                     <content>
+                        <TableView prefHeight="574.0" prefWidth="896.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="ID BOOK" />
+                            <TableColumn prefWidth="310.0000305175781" text="Title Book" />
+                              <TableColumn minWidth="0.0" prefWidth="152.0" text="Author" />
+                              <TableColumn prefWidth="170.6666259765625" text="Publisher" />
+                              <TableColumn prefWidth="181.99993896484375" text="Published Date" />
+                          </columns>
+                        </TableView>
+                     </content>
+                        </ScrollPane>
+                    </children>
+                </HBox>
+            </children>
+            <BorderPane.margin>
+                <Insets left="5.0" />
+            </BorderPane.margin>
+        </VBox>
+    </center>
+</BorderPane>

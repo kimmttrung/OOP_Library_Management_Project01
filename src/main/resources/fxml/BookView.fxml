@@ -59,17 +59,17 @@
                               <TableColumn fx:id="publishedDateColumn" prefWidth="151.0" text="Published Date" />
                            </columns>
                         </TableView>
-                        <Button layoutX="12.0" layoutY="479.0" mnemonicParsing="false" onAction="#insertBook" styleClass="iconBook" stylesheets="@../css/Book.css">
+                        <Button layoutX="12.0" layoutY="479.0" mnemonicParsing="false" onAction="#insertBook" styleClass="iconBookInfor" stylesheets="@../css/Book.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="PLUS_SQUARE" size="30" text="" />
                            </graphic>
                         </Button>
-                        <Button layoutX="11.0" layoutY="616.0" mnemonicParsing="false" onAction="#updateBook" styleClass="iconBook" stylesheets="@../css/Book.css">
+                        <Button layoutX="11.0" layoutY="616.0" mnemonicParsing="false" onAction="#updateBook" styleClass="iconBookInfor" stylesheets="@../css/Book.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="EDIT" size="25" text="" />
                            </graphic>
                         </Button>
-                        <Button layoutX="12.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteBook" styleClass="iconBook" stylesheets="@../css/Book.css">
+                        <Button layoutX="12.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteBook" styleClass="iconBookInfor" stylesheets="@../css/Book.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="TRASH" size="30" />
                            </graphic>
@@ -109,7 +109,7 @@
                      <children>
                         <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/DashBoard.css">
                            <graphic>
-                              <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
+                              <FontAwesomeIconView glyphName="SIGN_OUT" size="30" />
                            </graphic>
                         </Button>
                         <Label layoutX="66.0" layoutY="108.0" prefHeight="61.0" prefWidth="183.0" styleClass="edit-label" stylesheets="@../css/DashBoard.css" text="Welcome" textFill="WHITE">
@@ -195,6 +195,11 @@
                               </Button>
                            </children>
                         </AnchorPane>
+                        <Button fx:id="backLeft_btn" layoutX="234.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="38.0" prefWidth="67.0" styleClass="button_edit" stylesheets="@../css/admin.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="CHEVRON_RIGHT" size="30" />
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children>

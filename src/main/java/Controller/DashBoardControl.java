@@ -37,6 +37,8 @@ import static Controller.AlertHelper.showConfirmationAlert;
 public class DashBoardControl  {
 
     @FXML
+    private Button backLeft_btn;
+    @FXML
     private PieChart pieChart;
     @FXML
     private Button borrowerBook_btn;
@@ -45,7 +47,7 @@ public class DashBoardControl  {
     @FXML
     private Button arrow_btn;
     @FXML
-    private Button signOut_btn;
+    private Button signOut_btn, take_btn;
     @FXML
     private Button bookAll_btn;
     @FXML
@@ -201,6 +203,8 @@ public class DashBoardControl  {
                 applySceneTransition(borrowerBook_btn, "/fxml/BorrowerView.fxml");
             } else if (event.getSource() == userAll_btn || event.getSource() == userAll_dashBoard_btn) {
                 applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
+            } else if (event.getSource() == backLeft_btn) {
+                applySceneTransition(backLeft_btn, "/fxml/admin.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

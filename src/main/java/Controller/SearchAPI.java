@@ -80,6 +80,8 @@ public class SearchAPI {
     private Label titleLabel, authorLabel, publisherLabel, categoriesLabel;
     @FXML
     private BarChart<String, Double> chart;
+    @FXML
+    private Button backLeft_btn;
 
     private double x = 0;
     private double y = 0;
@@ -261,6 +263,8 @@ public class SearchAPI {
                 applySceneTransition(borrowerBook_btn, "/fxml/BorrowerView.fxml");
             } else if (event.getSource() == userAll_btn) {
                 applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
+            } else if (event.getSource() == backLeft_btn) {
+                applySceneTransition(backLeft_btn, "/fxml/admin.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

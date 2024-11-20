@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
@@ -19,30 +21,40 @@ import java.util.Optional;
 
 import static Controller.AlertHelper.showConfirmationAlert;
 
-public class Admin {
-    @FXML
-    private Button backLeft_btn;
-
-    @FXML
-    private Button bookAll_dashBoard_btn;
-
-    @FXML
-    private Button borrowerDashBoard_btn;
-
-    @FXML
-    private Button minus_btn;
-
-    @FXML
-    private Button userAll_dashBoard_btn;
-
-    @FXML
-    private Button signOut_btn;
+public class DashBoardUserControl {
 
     @FXML
     private Button close_btn;
+    @FXML
+    private Button minus_btn;
+    @FXML
+    private Button signOut_btn;
+    @FXML
+    private Button BookLibrary_btn;
+    @FXML
+    private Button SerachAPIUser_btn;
+    @FXML
+    private BarChart<String, Double> chartUser;
+    @FXML
+    private Button backRight_btn;
 
     private double x = 0;
     private double y = 0;
+
+    public void initialize() {
+        XYChart.Series<String, Double> series2 = new XYChart.Series<>();
+        series2.setName("Happy New Year 2027");
+        series2.getData().add(new XYChart.Data("Mystery ", 500));
+        series2.getData().add(new XYChart.Data("Sport ", 300));
+        series2.getData().add(new XYChart.Data("History ", 200));
+        series2.getData().add(new XYChart.Data("Poetry ", 400));
+        series2.getData().add(new XYChart.Data("Health ", 700));
+        series2.getData().add(new XYChart.Data("Romance  ", 100));
+        series2.getData().add(new XYChart.Data("Biography  ", 150));
+        series2.getData().add(new XYChart.Data("Trung  ", 250));
+
+        chartUser.getData().add(series2);
+    }
 
     @FXML
     public void DownloadPages(ActionEvent event) {
@@ -52,14 +64,12 @@ public class Admin {
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
                 }
-            } else if (event.getSource() == bookAll_dashBoard_btn) {
-                applySceneTransition(bookAll_dashBoard_btn, "/fxml/BookView.fxml");
-            } else if (event.getSource() == userAll_dashBoard_btn) {
-                applySceneTransition(userAll_dashBoard_btn, "/fxml/UserView.fxml");
-            } else if (event.getSource() == borrowerDashBoard_btn) {
-                applySceneTransition(borrowerDashBoard_btn, "/fxml/BorrowerView.fxml");
-            } else if (event.getSource() == backLeft_btn) {
-                applySceneTransition(backLeft_btn, "/fxml/DashBoardUser.fxml");
+            } else if (event.getSource() == BookLibrary_btn) {
+                applySceneTransition(BookLibrary_btn, "/fxml/MemberView.fxml");
+            } else if (event.getSource() == SerachAPIUser_btn) {
+                applySceneTransition(SerachAPIUser_btn, "/fxml/SearchAPIUser.fxml");
+            } else if (event.getSource() == backRight_btn) {
+                applySceneTransition(backRight_btn, "/fxml/admin.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();
