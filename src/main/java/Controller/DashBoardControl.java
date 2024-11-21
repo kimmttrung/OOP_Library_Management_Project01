@@ -214,7 +214,7 @@ public class DashBoardControl  {
             } else if (event.getSource() == userAll_btn || event.getSource() == userAll_dashBoard_btn) {
                 applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
             } else if (event.getSource() == backLeft_btn) {
-                applySceneTransition(backLeft_btn, "/fxml/admin.fxml");
+                applySceneTransition(backLeft_btn, "/fxml/DashBoardUser.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

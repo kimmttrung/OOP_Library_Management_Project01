@@ -69,7 +69,7 @@ public class DashBoardUserControl {
             } else if (event.getSource() == SerachAPIUser_btn) {
                 applySceneTransition(SerachAPIUser_btn, "/fxml/SearchAPIUser.fxml");
             } else if (event.getSource() == backRight_btn) {
-                applySceneTransition(backRight_btn, "/fxml/admin.fxml");
+                applySceneTransition(backRight_btn, "/fxml/DashBoardView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -233,8 +233,6 @@ public class UserControl {
                 applySceneTransition(borrowerBook_btn, "/fxml/BorrowerView.fxml");
             } else if (event.getSource() == bookAll_btn) {
                 applySceneTransition(bookAll_btn, "/fxml/BookView.fxml");
-            } else if (event.getSource() == backLeft_btn) {
-                applySceneTransition(backLeft_btn, "/fxml/admin.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

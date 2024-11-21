@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
+<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
     <top>
         <AnchorPane prefHeight="633.0" prefWidth="1121.0" BorderPane.alignment="CENTER">
             <AnchorPane layoutX="3.0" layoutY="474.0" prefHeight="285.0" prefWidth="1117.0">
@@ -116,7 +116,7 @@
                     </Label>
                 </children>
             </AnchorPane>
-            <TitledPane expanded="true" layoutY="134.0" prefHeight="340.0" prefWidth="1009.0" text="Borrower List">
+            <TitledPane expanded="true" layoutX="104.0" layoutY="134.0" prefHeight="340.0" prefWidth="1009.0" text="Borrower List">
                 <content>
                     <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="327.0" prefWidth="1008.0" vbarPolicy="ALWAYS">
                         <content>
@@ -245,11 +245,6 @@
                             </Button>
                         </children>
                     </AnchorPane>
-               <Button fx:id="backLeft_btn" layoutX="243.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="38.0" prefWidth="60.0" styleClass="button_edit" stylesheets="@../css/admin.css">
-                  <graphic>
-                     <FontAwesomeIconView glyphName="CHEVRON_RIGHT" size="30" />
-                  </graphic>
-               </Button>
                 </children>
             </AnchorPane>
             <TextField fx:id="findBorrowerField" layoutX="393.0" layoutY="65.0" prefHeight="41.0" prefWidth="329.0" promptText="Enter Borrower's ID" />
@@ -258,7 +253,7 @@
                     <FontAwesomeIconView glyphName="SEARCH" size="30" />
                 </graphic>
             </Button>
-         <ComboBox fx:id="filterComboBox" layoutX="844.0" layoutY="64.0" prefHeight="44.0" prefWidth="149.0" promptText="Select Status" />
+         <ComboBox fx:id="filterComboBox" layoutX="853.0" layoutY="64.0" prefHeight="44.0" prefWidth="149.0" promptText="Select Status" />
         </AnchorPane>
     </top>
 </BorderPane>

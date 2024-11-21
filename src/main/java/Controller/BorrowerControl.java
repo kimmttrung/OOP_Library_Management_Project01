@@ -344,8 +344,6 @@ public class BorrowerControl {
                 applySceneTransition(bookAll_btn, "/fxml/BookView.fxml");
             } else if (event.getSource() == userAll_btn) {
                 applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
-            } else if (event.getSource() == backLeft_btn) {
-                applySceneTransition(backLeft_btn, "/fxml/admin.fxml");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
