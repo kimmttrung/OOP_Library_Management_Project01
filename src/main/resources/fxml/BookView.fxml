@@ -11,11 +11,11 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookControl">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookControl">
    <children>
       <AnchorPane fx:id="main_from" layoutX="5.0" onDragDetected="#DownloadPages" prefHeight="788.0" prefWidth="1108.0">
          <children>
-            <Button fx:id="bars_btn" layoutY="1.0" mnemonicParsing="false" onAction="#sliderBars" stylesheets="@../css/dashbordDesign.css">
+            <Button fx:id="bars_btn" layoutY="1.0" mnemonicParsing="false" onAction="#sliderBars" stylesheets="@../css/DashBoard.css">
                <graphic>
                   <FontAwesomeIconView glyphName="BARS" size="30" />
                </graphic>

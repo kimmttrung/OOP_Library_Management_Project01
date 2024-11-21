@@ -8,6 +8,7 @@ public class Book {
     private String publishedDate;
     private String image;
     private String categories;
+    private String language;
 
     public Book() {
     }
@@ -37,6 +38,17 @@ public class Book {
         this.publishedDate = publishedDate;
         this.image = image;
         this.categories = categories;
+    }
+
+    public Book(String name, String author,String publisher, String publishedDate, String image, String categories, String language) {
+        this.bookID = bookID;
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+        this.publishedDate = publishedDate;
+        this.image = image;
+        this.categories = categories;
+        this.language = language;
     }
 
     public int getBookID() {
@@ -90,6 +102,12 @@ public class Book {
     public void setCategory(String categories) {
         this.categories = categories;
     }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {}
 
     @Override
     public String toString() {

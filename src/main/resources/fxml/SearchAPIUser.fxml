@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SearchAPIUser">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SearchAPIUser">
     <left>
         <VBox prefHeight="850.0" prefWidth="185.0" styleClass="nav-form1" stylesheets="@../css/Member.css" BorderPane.alignment="CENTER">
             <children>
@@ -144,8 +144,8 @@
                             </font>
                         </Label>
                         <Pane prefHeight="100.0" prefWidth="326.0" HBox.hgrow="ALWAYS" />
-                        <TextField prefHeight="25.0" prefWidth="165.0" promptText="search" />
-                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" styleClass="button_edit" stylesheets="@../css/admin.css">
+                        <TextField fx:id="searchField" prefHeight="48.0" prefWidth="360.0" promptText="Enter Book's Name" />
+                        <Button mnemonicParsing="false" onAction="#searchBook" prefHeight="38.0" prefWidth="70.0" styleClass="button_edit" stylesheets="@../css/admin.css">
                             <graphic>
                                 <FontAwesomeIconView glyphName="SEARCH" size="30" />
                             </graphic>
@@ -169,11 +169,15 @@
                <children>
                   <ScrollPane prefHeight="492.0" prefWidth="907.0">
                      <content>
-                        <TableView prefHeight="491.0" prefWidth="906.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
+                        <TableView fx:id="searchBookTable" prefHeight="491.0" prefWidth="901.0" styleClass="card-form" stylesheets="@../css/DashBoard.css">
+                           <columns>
+                              <TableColumn fx:id="categoryColumn" prefWidth="118.0" text="Categories" />
+                              <TableColumn fx:id="titleColumn" prefWidth="272.0" text="Title" />
+                              <TableColumn fx:id="authorColumn" prefWidth="130.0" text="Author" />
+                              <TableColumn fx:id="publisherColumn" prefWidth="128.0" text="Publisher" />
+                              <TableColumn fx:id="publishedDateColumn" prefWidth="119.0" text="Published Date" />
+                              <TableColumn fx:id="languageColumn" prefWidth="122.0" text="Language" />
+                           </columns>
                         </TableView>
                      </content>
                   </ScrollPane>
@@ -183,7 +187,7 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="image-card" stylesheets="@../css/Book.css">
                      <children>
-                        <ImageView fitHeight="257.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="bookImageView" fitHeight="257.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                   <BarChart fx:id="chartAPIUser2" prefHeight="260.0" prefWidth="713.0">
