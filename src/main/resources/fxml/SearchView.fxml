@@ -181,11 +181,6 @@
                                                         </Button>
                                                     </children>
                                                 </AnchorPane>
-                                    <Button fx:id="backLeft_btn" layoutX="244.0" layoutY="630.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="43.0" prefWidth="75.0" styleClass="button_edit" stylesheets="@../css/admin.css">
-                                       <graphic>
-                                          <FontAwesomeIconView glyphName="CHEVRON_RIGHT" size="30" />
-                                       </graphic>
-                                    </Button>
                                             </children>
                                         </AnchorPane>
                                     </children>

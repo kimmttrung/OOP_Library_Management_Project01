@@ -35,8 +35,6 @@ public class DashBoardUserControl {
     private Button SerachAPIUser_btn;
     @FXML
     private BarChart<String, Double> chartUser;
-    @FXML
-    private Button backRight_btn;
 
     private double x = 0;
     private double y = 0;
@@ -68,8 +66,6 @@ public class DashBoardUserControl {
                 applySceneTransition(BookLibrary_btn, "/fxml/MemberView.fxml");
             } else if (event.getSource() == SerachAPIUser_btn) {
                 applySceneTransition(SerachAPIUser_btn, "/fxml/SearchAPIUser.fxml");
-            } else if (event.getSource() == backRight_btn) {
-                applySceneTransition(backRight_btn, "/fxml/admin.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

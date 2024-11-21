@@ -97,7 +97,7 @@ public class LoginControl {
 
                             if ("Admin".equalsIgnoreCase(role)) {
                                 // Nếu vai trò là admin, chuyển đến trang admin
-                                loader = new FXMLLoader(getClass().getResource("/fxml/admin.fxml"));
+                                loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardView.fxml"));
                             } else if ("User".equalsIgnoreCase(role)){
                                 // Nếu vai trò là user, chuyển đến trang user
                                 loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardUser.fxml"));

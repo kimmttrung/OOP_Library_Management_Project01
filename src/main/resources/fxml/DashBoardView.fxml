@@ -46,34 +46,11 @@
                 </AnchorPane>
                 <AnchorPane layoutX="2.0" layoutY="70.0" prefHeight="679.0" prefWidth="1101.0">
                     <children>
-                        <AnchorPane layoutX="72.0" layoutY="65.0" prefHeight="177.0" prefWidth="268.0" styleClass="dardBordBook-form" stylesheets="@../css/DashBoard.css">
-                            <children>
-                                <AnchorPane layoutX="15.0" layoutY="13.0" prefHeight="151.0" prefWidth="238.0" styleClass="dardBord1" stylesheets="@../css/DashBoard.css">
-                                    <children>
-                                        <Button fx:id="bookAll_dashBoard_btn" layoutX="88.0" layoutY="14.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/DashBoard.css">
-                                            <graphic>
-                                                <FontAwesomeIconView glyphName="BOOK" size="50" />
-                                            </graphic>
-                                        </Button>
-                                        <Label layoutX="47.0" layoutY="76.0" text="ALL VIEW BOOK">
-                                            <font>
-                                                <Font name="Segoe UI Black" size="18.0" />
-                                            </font>
-                                        </Label>
-                                        <Label fx:id="bookCountLabel" layoutX="112.0" layoutY="89.0" prefHeight="69.0" prefWidth="34.0">
-                                            <font>
-                                                <Font name="Segoe UI Black" size="18.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </AnchorPane>
-                            </children>
-                        </AnchorPane>
                         <AnchorPane layoutX="33.0" layoutY="273.0" prefHeight="390.0" prefWidth="1033.0" styleClass="mainCenter" stylesheets="@../css/DashBoard.css">
                             <children>
                                 <AnchorPane layoutX="-22.0" layoutY="10.0" prefHeight="367.0" prefWidth="638.0" stylesheets="@../css/DashBoard.css">
                                     <children>
-                                        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="27.0" layoutY="184.0" prefHeight="177.0" prefWidth="567.0" vbarPolicy="NEVER">
+                                        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="27.0" layoutY="131.0" prefHeight="177.0" prefWidth="567.0" vbarPolicy="NEVER">
                                             <content>
                                                 <HBox fx:id="imageContainer" alignment="CENTER" prefHeight="176.0" prefWidth="1266.0">
                                                     <children>
@@ -91,7 +68,7 @@
                                                 </HBox>
                                             </content>
                                         </ScrollPane>
-                                        <Label layoutX="27.0" layoutY="131.0" prefHeight="35.0" prefWidth="218.0" text="Suggested books:">
+                                        <Label layoutX="27.0" layoutY="43.0" prefHeight="35.0" prefWidth="218.0" text="Suggested books:">
                                             <font>
                                                 <Font name="Segoe UI Black Italic" size="24.0" />
                                             </font>
@@ -100,6 +77,25 @@
                                 <AnchorPane layoutX="694.0" layoutY="7.0" prefHeight="373.0" prefWidth="330.0">
                            <children>
                               <PieChart fx:id="pieChart" layoutX="-128.0" layoutY="-64.0" prefHeight="445.0" prefWidth="474.0" AnchorPane.bottomAnchor="-8.0" AnchorPane.leftAnchor="-128.0" AnchorPane.rightAnchor="-16.0" AnchorPane.topAnchor="-64.0" />
+                              <AnchorPane layoutX="37.0" layoutY="-229.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="-2.0" layoutY="-5.0" prefHeight="180.0" prefWidth="236.0" style="-fx-background-color: #F9A885;" styleClass="most-contacted-layout" stylesheets="@../css/admin.css" text="Borrower management" textFill="WHITE">
+                                       <font>
+                                          <Font name="Corbel" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="borrowerDashBoard_btn" layoutX="78.0" layoutY="14.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/DashBoard.css">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="USER_CIRCLE" size="50" />
+                                       </graphic>
+                                    </Button>
+                                    <Label fx:id="borrowerCountLabel" layoutX="107.0" layoutY="100.0" prefHeight="69.0" prefWidth="34.0">
+                                       <font>
+                                          <Font name="Segoe UI Black" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
                            </children>
                                 </AnchorPane>
                             </children>
@@ -109,149 +105,136 @@
                                 <Font name="Segoe UI Black" size="24.0" />
                             </font>
                         </Label>
-                        <AnchorPane layoutX="427.0" layoutY="65.0" prefHeight="177.0" prefWidth="268.0" styleClass="dardBordBook-form" stylesheets="@../css/DashBoard.css">
-                            <children>
-                                <AnchorPane layoutX="15.0" layoutY="13.0" prefHeight="151.0" prefWidth="238.0" styleClass="dardBord1" stylesheets="@../css/DashBoard.css">
-                                    <children>
-                                        <Button fx:id="userAll_dashBoard_btn" layoutX="93.0" layoutY="14.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/DashBoard.css">
-                                            <graphic>
-                                                <FontAwesomeIconView glyphName="USER" size="50" />
-                                            </graphic>
-                                        </Button>
-                                        <Label layoutX="77.0" layoutY="76.0" text="ALL USER">
-                                            <font>
-                                                <Font name="Segoe UI Black" size="18.0" />
-                                            </font>
-                                        </Label>
-                                        <Label fx:id="userCountLabel" layoutX="112.0" layoutY="89.0" prefHeight="69.0" prefWidth="34.0">
-                                            <font>
-                                                <Font name="Segoe UI Black" size="18.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </AnchorPane>
-                            </children>
-                        </AnchorPane>
-                        <AnchorPane layoutX="777.0" layoutY="65.0" prefHeight="177.0" prefWidth="268.0" styleClass="dardBordBook-form" stylesheets="@../css/DashBoard.css">
-                            <children>
-                                <AnchorPane layoutX="15.0" layoutY="13.0" prefHeight="151.0" prefWidth="238.0" styleClass="dardBord1" stylesheets="@../css/DashBoard.css">
-                                    <children>
-                                        <Button fx:id="borrowerDashBoard_btn" layoutX="92.0" layoutY="14.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/DashBoard.css">
-                                            <graphic>
-                                                <FontAwesomeIconView glyphName="USER_CIRCLE" size="50" />
-                                            </graphic>
-                                        </Button>
-                                        <Label layoutX="72.0" layoutY="76.0" text="BORROWER">
-                                            <font>
-                                                <Font name="Segoe UI Black" size="18.0" />
-                                            </font>
-                                        </Label>
-                                        <Label fx:id="borrowerCountLabel" layoutX="118.0" layoutY="89.0" prefHeight="69.0" prefWidth="34.0">
-                                            <font>
-                                                <Font name="Segoe UI Black" size="18.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </AnchorPane>
-                            </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="nav_from" layoutX="-3.0" prefHeight="679.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/DashBoard.css">
-                            <children>
-                                <Button fx:id="signOut_btn" layoutX="4.0" layoutY="636.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/DashBoard.css">
-                                    <graphic>
-                                        <FontAwesomeIconView glyphName="SIGN_OUT" size="30" />
-                                    </graphic>
-                                </Button>
-                                <Label layoutX="66.0" layoutY="108.0" prefHeight="61.0" prefWidth="183.0" styleClass="edit-label" stylesheets="@../css/DashBoard.css" text="Welcome" textFill="WHITE">
-                                    <font>
-                                        <Font name="Segoe UI Black" size="72.0" />
-                                    </font>
-                                </Label>
-                                <AnchorPane layoutX="31.0" layoutY="169.0" prefHeight="92.0" prefWidth="254.0">
-                                    <children>
-                                        <Button fx:id="bookAll_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
-                                            <font>
-                                                <Font name="Microsoft Sans Serif" size="12.0" />
-                                            </font>
-                                            <graphic>
-                                                <FontAwesomeIconView glyphName="BOOK" size="50" />
-                                            </graphic>
-                                        </Button>
-                                        <Label layoutX="127.0" layoutY="30.0" text="ALL BOOKS" textFill="#c0c0c0">
-                                            <font>
-                                                <Font size="18.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane layoutX="31.0" layoutY="261.0" prefHeight="92.0" prefWidth="254.0">
-                                    <children>
-                                        <Label layoutX="127.0" layoutY="30.0" text="ALL USER" textFill="#c0c0c0">
-                                            <font>
-                                                <Font size="18.0" />
-                                            </font>
-                                        </Label>
-                                        <Button fx:id="userAll_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
-                                            <graphic>
-                                                <FontAwesomeIconView glyphName="USER" size="50" />
-                                            </graphic>
-                                        </Button>
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane layoutX="31.0" layoutY="353.0" prefHeight="92.0" prefWidth="254.0">
-                                    <children>
-                                        <Label layoutX="127.0" layoutY="30.0" text="SEARCH API" textFill="#c0c0c0">
-                                            <font>
-                                                <Font size="18.0" />
-                                            </font>
-                                        </Label>
-                                        <Button fx:id="searchAPI_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
-                                            <graphic>
-                                                <FontAwesomeIconView glyphName="SEARCH" size="50" />
-                                            </graphic>
-                                        </Button>
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane layoutX="23.0" layoutY="537.0" prefHeight="92.0" prefWidth="254.0">
-                                    <children>
-                                        <Label layoutX="127.0" layoutY="30.0" text="DASHBOARD" textFill="#c0c0c0">
-                                            <font>
-                                                <Font size="18.0" />
-                                            </font>
-                                        </Label>
-                                        <Button fx:id="dashBoard_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
-                                            <graphic>
-                                                <FontAwesomeIconView glyphName="HOME" size="50" />
-                                            </graphic>
-                                        </Button>
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane layoutX="90.0" layoutY="-10.0" prefHeight="112.0" prefWidth="120.0">
-                                    <children>
-                                        <Circle fx:id="circleProfile" fill="DODGERBLUE" layoutX="62.0" layoutY="72.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane layoutX="23.0" layoutY="445.0" prefHeight="92.0" prefWidth="254.0">
-                                    <children>
-                                        <Label layoutX="127.0" layoutY="30.0" text="BORROWER" textFill="#c0c0c0">
-                                            <font>
-                                                <Font size="18.0" />
-                                            </font>
-                                        </Label>
-                                        <Button fx:id="borrowerBook_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
-                                            <graphic>
-                                                <FontAwesomeIconView glyphName="USER_CIRCLE" size="50" text="" />
-                                            </graphic>
-                                        </Button>
-                                    </children>
-                                </AnchorPane>
-                        <Button fx:id="backLeft_btn" layoutX="226.0" layoutY="636.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="38.0" prefWidth="70.0" styleClass="button_edit" stylesheets="@../css/admin.css">
+                  <AnchorPane layoutX="434.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="CENTER" layoutX="-2.0" layoutY="-5.0" prefHeight="180.0" prefWidth="236.0" style="-fx-background-color: #70B8D5;" styleClass="most-contacted-layout" stylesheets="@../css/admin.css" text="User management" textFill="WHITE">
+                           <font>
+                              <Font name="Corbel" size="24.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="userAll_dashBoard_btn" layoutX="90.0" layoutY="14.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="58.0" prefWidth="58.0" styleClass="dardBordIcon" stylesheets="@../css/DashBoard.css">
                            <graphic>
-                              <FontAwesomeIconView glyphName="CHEVRON_RIGHT" size="30" />
+                              <FontAwesomeIconView glyphName="USER" size="50" />
                            </graphic>
                         </Button>
-                            </children>
+                        <Label fx:id="userCountLabel" layoutX="102.0" layoutY="100.0" prefHeight="69.0" prefWidth="34.0">
+                           <font>
+                              <Font name="Segoe UI Black" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="124.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="CENTER" layoutX="-2.0" layoutY="-5.0" prefHeight="180.0" prefWidth="236.0" style="-fx-background-color: #32c077;" styleClass="most-contacted-layout" stylesheets="@../css/admin.css" text="Book management" textFill="WHITE">
+                           <font>
+                              <Font name="Corbel" size="24.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="bookAll_dashBoard_btn" layoutX="84.0" layoutY="14.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="dardBordIcon" stylesheets="@../css/DashBoard.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="BOOK" size="50" />
+                           </graphic>
+                        </Button>
+                        <Label fx:id="bookCountLabel" layoutX="100.0" layoutY="100.0" prefHeight="69.0" prefWidth="34.0">
+                           <font>
+                              <Font name="Segoe UI Black" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="nav_from" prefHeight="679.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/DashBoard.css">
+                     <children>
+                        <Button fx:id="signOut_btn" layoutX="4.0" layoutY="636.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/DashBoard.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="SIGN_OUT" size="30" />
+                           </graphic>
+                        </Button>
+                        <Label layoutX="66.0" layoutY="108.0" prefHeight="61.0" prefWidth="183.0" styleClass="edit-label" stylesheets="@../css/DashBoard.css" text="Welcome" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI Black" size="72.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane layoutX="31.0" layoutY="169.0" prefHeight="92.0" prefWidth="254.0">
+                           <children>
+                              <Button fx:id="bookAll_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                                 <font>
+                                    <Font name="Microsoft Sans Serif" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="BOOK" size="50" />
+                                 </graphic>
+                              </Button>
+                              <Label layoutX="127.0" layoutY="30.0" text="ALL BOOKS" textFill="#c0c0c0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
                         </AnchorPane>
+                        <AnchorPane layoutX="31.0" layoutY="261.0" prefHeight="92.0" prefWidth="254.0">
+                           <children>
+                              <Label layoutX="127.0" layoutY="30.0" text="ALL USER" textFill="#c0c0c0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="userAll_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="USER" size="50" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="31.0" layoutY="353.0" prefHeight="92.0" prefWidth="254.0">
+                           <children>
+                              <Label layoutX="127.0" layoutY="30.0" text="SEARCH API" textFill="#c0c0c0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="searchAPI_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="SEARCH" size="50" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="23.0" layoutY="537.0" prefHeight="92.0" prefWidth="254.0">
+                           <children>
+                              <Label layoutX="127.0" layoutY="30.0" text="DASHBOARD" textFill="#c0c0c0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="dashBoard_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="HOME" size="50" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="90.0" layoutY="-10.0" prefHeight="112.0" prefWidth="120.0">
+                           <children>
+                              <Circle fx:id="circleProfile" fill="DODGERBLUE" layoutX="62.0" layoutY="72.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="23.0" layoutY="445.0" prefHeight="92.0" prefWidth="254.0">
+                           <children>
+                              <Label layoutX="127.0" layoutY="30.0" text="BORROWER" textFill="#c0c0c0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="borrowerBook_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="USER_CIRCLE" size="50" text="" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
                     </children>
                 </AnchorPane>
             </children>

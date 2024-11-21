@@ -20,8 +20,6 @@ import java.util.Optional;
 import static Controller.AlertHelper.showConfirmationAlert;
 
 public class Admin {
-    @FXML
-    private Button backLeft_btn;
 
     @FXML
     private Button bookAll_dashBoard_btn;
@@ -58,8 +56,6 @@ public class Admin {
                 applySceneTransition(userAll_dashBoard_btn, "/fxml/UserView.fxml");
             } else if (event.getSource() == borrowerDashBoard_btn) {
                 applySceneTransition(borrowerDashBoard_btn, "/fxml/BorrowerView.fxml");
-            } else if (event.getSource() == backLeft_btn) {
-                applySceneTransition(backLeft_btn, "/fxml/DashBoardUser.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

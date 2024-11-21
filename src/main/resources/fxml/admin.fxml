@@ -140,11 +140,6 @@
                      </font>
                   </Label>
                   <Pane prefHeight="100.0" prefWidth="326.0" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="backLeft_btn" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="39.0" prefWidth="101.0" styleClass="button_edit" stylesheets="@../css/admin.css">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="CHEVRON_LEFT" size="30" />
-                     </graphic>
-                  </Button>
                   <TextField promptText="serch" />
                   <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" styleClass="button_edit" stylesheets="@../css/admin.css">
                      <graphic>

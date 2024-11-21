@@ -106,7 +106,6 @@ public class SearchAPI {
 
         nav_from.setTranslateX(-335);
         // Set initial UI state for navigation panel and buttons
-        nav_from.setTranslateX(-320);
         bars_btn.setVisible(true);
         arrow_btn.setVisible(false);
 

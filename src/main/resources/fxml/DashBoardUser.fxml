@@ -142,14 +142,7 @@
                                 <Font name="Corbel Bold" size="24.0" />
                             </font>
                         </Label>
-                        <Pane prefHeight="67.0" prefWidth="301.0" HBox.hgrow="SOMETIMES">
-                     <children>
-                        <Button fx:id="backRight_btn" layoutX="236.0" layoutY="14.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="39.0" prefWidth="75.0" styleClass="button_edit" stylesheets="@../css/admin.css">
-                           <graphic>
-                              <FontAwesomeIconView glyphName="CHEVRON_RIGHT" size="30" />
-                           </graphic>
-                        </Button>
-                     </children></Pane>
+                        <Pane prefHeight="67.0" prefWidth="301.0" HBox.hgrow="SOMETIMES" />
                         <TextField promptText="serch" />
                         <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" styleClass="button_edit" stylesheets="@../css/admin.css">
                             <graphic>

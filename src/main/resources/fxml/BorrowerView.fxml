@@ -245,11 +245,6 @@
                             </Button>
                         </children>
                     </AnchorPane>
-               <Button fx:id="backLeft_btn" layoutX="243.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="38.0" prefWidth="60.0" styleClass="button_edit" stylesheets="@../css/admin.css">
-                  <graphic>
-                     <FontAwesomeIconView glyphName="CHEVRON_RIGHT" size="30" />
-                  </graphic>
-               </Button>
                 </children>
             </AnchorPane>
             <TextField fx:id="findBorrowerField" layoutX="393.0" layoutY="65.0" prefHeight="41.0" prefWidth="329.0" promptText="Enter Borrower's ID" />
