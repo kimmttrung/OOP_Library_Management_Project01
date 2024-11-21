@@ -6,19 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="63531a95-e8f3-4cea-9323-8598e099f883" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardUserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DashBoardUserControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/BookView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/BookView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/BorrowerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/BorrowerView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/DashBoardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/DashBoardView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/SearchView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/SearchView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/UserView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/UserView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,12 +29,12 @@
     &quot;assignee&quot;: &quot;kimmttrung&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/kimmttrung/OOP_Library_Management_Project01.git",
-    "accountId": "ec4ca4ad-fa99-4f13-b6e8-042d4199200e"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kimmttrung/OOP_Library_Management_Project01.git&quot;,
+    &quot;accountId&quot;: &quot;ec4ca4ad-fa99-4f13-b6e8-042d4199200e&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -89,6 +77,7 @@
       <workItem from="1732122594639" duration="344000" />
       <workItem from="1732182378301" duration="4022000" />
       <workItem from="1732186461463" duration="1896000" />
+      <workItem from="1732190054944" duration="752000" />
     </task>
     <servers />
   </component>

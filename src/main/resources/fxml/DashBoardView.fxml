@@ -96,7 +96,7 @@
                                                 </HBox>
                                             </content>
                                         </ScrollPane>
-                                        <Label layoutX="27.0" layoutY="131.0" prefHeight="35.0" prefWidth="218.0" text="Suggested books:">
+                                        <Label layoutX="34.0" layoutY="131.0" prefHeight="35.0" prefWidth="279.0" text="Most Borrowed Books:">
                                             <font>
                                                 <Font name="Segoe UI Black Italic" size="24.0" />
                                             </font>
@@ -160,7 +160,7 @@
                                 </AnchorPane>
                             </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="nav_from" layoutX="-3.0" prefHeight="679.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/DashBoard.css">
+                        <AnchorPane fx:id="nav_from" layoutX="-3.0" prefHeight="679.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/DashBoard.css" visible="false">
                             <children>
                                 <Button fx:id="signOut_btn" layoutX="4.0" layoutY="636.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/DashBoard.css">
                                     <graphic>

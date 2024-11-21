@@ -1,5 +1,7 @@
 package Controller;
 
+import DataAccessObject.BookDAO;
+import Entity.Book;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -80,6 +82,8 @@ public class DashBoardControl  {
     private double x = 0;
     private double y = 0;
 
+    BookDAO bookDAO = new BookDAO();
+
     @FXML
     public void initialize() {
         setUpInit();
@@ -139,14 +143,17 @@ public class DashBoardControl  {
     private List<String> getImageLinksFromDatabase() {
         // Create a list to store the image URLs fetched from the database
         List<String> imageLinks = new ArrayList<>();
+        Book book = new Book();
 
         try (Connection connection = DataBase.getConnection()) {
-            String sql = "SELECT image FROM books";
+            String sql = "SELECT book_id FROM borrower GROUP BY book_id ORDER BY COUNT(*) DESC";
             try (Statement statement = connection.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
 
                 while (resultSet.next()) {
-                    String imageUrl = resultSet.getString("image");
+                    String bookId = resultSet.getString("book_id");
+                    book = bookDAO.getBookByID(Integer.parseInt(bookId));
+                    String imageUrl = book.getImage();
                     if (imageUrl != null && !imageUrl.isEmpty()) {
                         imageLinks.add(imageUrl);
                     }
