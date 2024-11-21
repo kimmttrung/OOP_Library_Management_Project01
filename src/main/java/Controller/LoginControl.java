@@ -91,7 +91,7 @@ public class LoginControl {
                     zoomOut.setOnFinished(event -> {
                         try {
 //                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardUser.fxml"));
-//                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin.fxml"));
+//                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardView.fxml"));
 
                             FXMLLoader loader = null;
 

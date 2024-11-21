@@ -37,6 +37,8 @@ import static Controller.AlertHelper.showConfirmationAlert;
 public class DashBoardControl  {
 
     @FXML
+    private Button backLeft_btn;
+    @FXML
     private PieChart pieChart;
     @FXML
     private Button borrowerBook_btn;
@@ -45,7 +47,7 @@ public class DashBoardControl  {
     @FXML
     private Button arrow_btn;
     @FXML
-    private Button signOut_btn;
+    private Button signOut_btn, take_btn;
     @FXML
     private Button bookAll_btn;
     @FXML
@@ -203,14 +205,16 @@ public class DashBoardControl  {
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
                 }
-            } else if (event.getSource() == bookAll_btn || event.getSource() == bookAll_dashBoard_btn) {
-                applySceneTransition(bookAll_dashBoard_btn, "/fxml/BookView.fxml");
-            } else if (event.getSource() == borrowerBook_btn || event.getSource() == borrowerDashBoard_btn) {
-                applySceneTransition(borrowerDashBoard_btn, "/fxml/BorrowerView.fxml");
-            } else if (event.getSource() == userAll_btn || event.getSource() == userAll_dashBoard_btn) {
-                applySceneTransition(userAll_dashBoard_btn, "/fxml/UserView.fxml");
             } else if (event.getSource() == searchAPI_btn) {
                 applySceneTransition(searchAPI_btn, "/fxml/SearchView.fxml");
+            } else if (event.getSource() == bookAll_btn || event.getSource() == bookAll_dashBoard_btn) {
+                applySceneTransition(bookAll_btn, "/fxml/BookView.fxml");
+            } else if (event.getSource() == borrowerBook_btn || event.getSource() == borrowerDashBoard_btn) {
+                applySceneTransition(borrowerBook_btn, "/fxml/BorrowerView.fxml");
+            } else if (event.getSource() == userAll_btn || event.getSource() == userAll_dashBoard_btn) {
+                applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
+            } else if (event.getSource() == backLeft_btn) {
+                applySceneTransition(backLeft_btn, "/fxml/DashBoardUser.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

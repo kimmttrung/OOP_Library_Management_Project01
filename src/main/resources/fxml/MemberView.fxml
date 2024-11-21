@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Member">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Member">
     <left>
         <VBox prefHeight="850.0" prefWidth="185.0" styleClass="nav-form1" stylesheets="@../css/Member.css" BorderPane.alignment="CENTER">
             <children>
@@ -142,8 +142,8 @@
                             </font>
                         </Label>
                         <Pane prefHeight="100.0" prefWidth="326.0" HBox.hgrow="ALWAYS" />
-                        <TextField promptText="serch" />
-                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" styleClass="button_edit" stylesheets="@../css/admin.css">
+                        <TextField fx:id="findBookField" prefHeight="38.0" prefWidth="358.0" promptText="Enter Book's Name" />
+                        <Button mnemonicParsing="false" onAction="#searchBookByName" prefHeight="38.0" prefWidth="70.0" styleClass="button_edit" stylesheets="@../css/admin.css">
                             <graphic>
                                 <FontAwesomeIconView glyphName="SEARCH" size="30" />
                             </graphic>
@@ -170,10 +170,10 @@
                <children>
                   <AnchorPane prefHeight="223.0" prefWidth="290.0">
                      <children>
-                        <Button layoutX="130.0" layoutY="1.0" mnemonicParsing="false" text="QR Code" />
+                        <Button layoutX="130.0" layoutY="1.0" mnemonicParsing="false" onAction="#generateQRCode" text="QR Code" />
                         <AnchorPane layoutX="60.0" layoutY="29.0" prefHeight="185.0" prefWidth="200.0" styleClass="image-card" stylesheets="@../css/Book.css">
                            <children>
-                              <ImageView fitHeight="190.0" fitWidth="197.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="qrCodeImageView" fitHeight="190.0" fitWidth="197.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -182,7 +182,7 @@
                      <children>
                         <AnchorPane layoutX="99.0" layoutY="25.0" prefHeight="191.0" prefWidth="147.0" styleClass="image-card" stylesheets="@../css/Book.css">
                            <children>
-                              <ImageView fitHeight="187.0" fitWidth="163.0" layoutX="3.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="bookImageView" fitHeight="187.0" fitWidth="163.0" layoutX="3.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                         <Button layoutX="157.0" layoutY="1.0" mnemonicParsing="false" text="IMAGE" />
@@ -226,13 +226,13 @@
                     <children>
                         <ScrollPane prefHeight="420.0" prefWidth="909.0" styleClass="transparent" stylesheets="@../css/admin.css">
                      <content>
-                        <TableView prefHeight="574.0" prefWidth="896.0">
+                        <TableView fx:id="bookTable" prefHeight="574.0" prefWidth="896.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="ID BOOK" />
-                            <TableColumn prefWidth="310.0000305175781" text="Title Book" />
-                              <TableColumn minWidth="0.0" prefWidth="152.0" text="Author" />
-                              <TableColumn prefWidth="170.6666259765625" text="Publisher" />
-                              <TableColumn prefWidth="181.99993896484375" text="Published Date" />
+                            <TableColumn fx:id="idColumn" prefWidth="72.0" text="ID BOOK" />
+                            <TableColumn fx:id="titleColumn" prefWidth="314.0" text="Title Book" />
+                              <TableColumn fx:id="authorColumn" minWidth="0.0" prefWidth="152.0" text="Author" />
+                              <TableColumn fx:id="publisherColumn" prefWidth="170.6666259765625" text="Publisher" />
+                              <TableColumn fx:id="publishedDateColumn" prefWidth="181.99993896484375" text="Published Date" />
                           </columns>
                         </TableView>
                      </content>

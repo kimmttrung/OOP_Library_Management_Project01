@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashBoardControl">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashBoardControl">
     <children>
         <AnchorPane layoutX="217.0" layoutY="73.0" prefHeight="750.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -42,6 +42,11 @@
                                 <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
                             </graphic>
                         </Button>
+                  <Button fx:id="backLeft_btn" layoutX="850.0" layoutY="8.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="39.0" prefWidth="101.0" styleClass="button_edit" stylesheets="@../css/admin.css">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="CHEVRON_LEFT" size="30" />
+                     </graphic>
+                  </Button>
                     </children>
                 </AnchorPane>
                 <AnchorPane layoutX="2.0" layoutY="70.0" prefHeight="679.0" prefWidth="1101.0">
