@@ -110,8 +110,8 @@ public class BorrowerControl {
     private void setUpTableColumn() {
         // Set up table columns with PropertyValueFactory to map fields to columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-        bookIdColumn.setCellValueFactory(new PropertyValueFactory<>("bookid"));
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        bookIdColumn.setCellValueFactory(new PropertyValueFactory<>("bookId"));
         bookNameColumn.setCellValueFactory(new PropertyValueFactory<>("bookName"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         fromColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_from"));
@@ -186,9 +186,8 @@ public class BorrowerControl {
             }
 
             // Add borrower record to the database and reload borrowers
-            String username = borrower.getUserName();
             String bookName = borrowBook.getName();
-            borrowerDAO.insertBorrower(username, bookId, bookName, dateFormatter.formatDate(today), formattedReturnDate);
+            borrowerDAO.insertBorrower(Integer.parseInt(borrowerId), Integer.parseInt(bookId), bookName, dateFormatter.formatDate(today), formattedReturnDate);
             loadBorrowers();
 
             showAlert(Alert.AlertType.INFORMATION, "Success", "Book borrowed successfully.");
@@ -207,7 +206,7 @@ public class BorrowerControl {
         Optional<ButtonType> result = showConfirmationAlert("Confirm Return", "Are you sure you want to return this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             // Update borrower's status to "returned"
-            Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
+            Borrower borrower = borrowerDAO.getBorrowerById(Integer.parseInt(borrowerId));
             if (borrower != null) {
                 borrower.setStatus("returned");
                 borrowerDAO.updateBorrower(borrower);
@@ -232,7 +231,7 @@ public class BorrowerControl {
         Optional<ButtonType> result = showConfirmationAlert("Confirm Renewal", "Are you sure you want to renew this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             // Renew the borrower's book
-            Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
+            Borrower borrower = borrowerDAO.getBorrowerById(Integer.parseInt(borrowerId));
             if (borrower != null && "processing".equals(borrower.getStatus())) {
                 try {
                     LocalDate currentDueDate = dateFormatter.parseDate(borrower.getBorrow_to());
@@ -260,7 +259,7 @@ public class BorrowerControl {
         }
 
         // Search for the borrower by ID
-        Borrower borrower = borrowerDAO.getBorrowerById(borrowerId);
+        Borrower borrower = borrowerDAO.getBorrowerById(Integer.parseInt(borrowerId));
 
         if (borrower != null) {
             ObservableList<Borrower> foundBorrowers = FXCollections.observableArrayList(borrower);
@@ -291,7 +290,7 @@ public class BorrowerControl {
             }
 
             // Retrieve the selected book and set the image
-            int bookId = newSelection.getBookid();
+            int bookId = newSelection.getBookId();
             BookDAO bookDAO = new BookDAO();
             Book borrowBook = bookDAO.getBookByID(bookId);
 

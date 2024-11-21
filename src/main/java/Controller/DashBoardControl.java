@@ -146,7 +146,7 @@ public class DashBoardControl  {
         Book book = new Book();
 
         try (Connection connection = DataBase.getConnection()) {
-            String sql = "SELECT book_id FROM borrower GROUP BY book_id ORDER BY COUNT(*) DESC";
+            String sql = "SELECT book_id FROM borrowers GROUP BY book_id ORDER BY COUNT(*) DESC";
             try (Statement statement = connection.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
 
@@ -324,8 +324,8 @@ public class DashBoardControl  {
 
     public void updateCounts() {
         int bookCount = DataBase.getCount("books");
-        int userCount = DataBase.getCount("user");
-        int borrowerCount = DataBase.getCount("borrower");
+        int userCount = DataBase.getCount("users");
+        int borrowerCount = DataBase.getCount("borrowers");
 
         bookCountLabel.setText("" + bookCount);
         userCountLabel.setText("" + userCount);

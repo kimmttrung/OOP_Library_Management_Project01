@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static Controller.AlertHelper.showAlert;
@@ -247,6 +248,39 @@ public class Member {
         File directory = new File("src/main/resources/qr_codes");
         if (!directory.exists()) {
             directory.mkdirs();
+        }
+    }
+
+    @FXML
+    private Button showCommentsButton;    // Nút để hiển thị bình luận
+    @FXML
+    private ListView<String> commentListView; // ListView để hiển thị danh sách bình luận
+
+    @FXML
+    private void showComments() {
+        // Lấy cuốn sách được chọn từ TableView
+        Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
+        if (selectedBook == null) {
+            // Hiển thị thông báo nếu không có sách nào được chọn
+            showAlert(Alert.AlertType.ERROR, "Comments", "Please select a book to view comments.");
+            return;
+        }
+
+        int bookID = selectedBook.getBookID(); // Giả sử lớp Book có phương thức getId()
+        try {
+            // Lấy danh sách bình luận từ cơ sở dữ liệu
+            List<String> comments = bookDAO.getCommentsForBook(bookID);
+
+            // Cập nhật danh sách bình luận trong ListView
+            commentListView.getItems().setAll(comments);
+
+            if (comments.isEmpty()) {
+                showAlert(Alert.AlertType.INFORMATION, "Comments", "No comments found for this book.");
+            }
+        } catch (Exception e) {
+            // Hiển thị lỗi nếu có vấn đề xảy ra
+            showAlert(Alert.AlertType.ERROR, "Comments", "An error occurred: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

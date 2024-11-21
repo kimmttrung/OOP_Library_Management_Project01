@@ -19,17 +19,26 @@ public class BorrowerDAO {
     // Get all borrowers from the database
     public ObservableList<Borrower> getAllBorrowers() {
         ObservableList<Borrower> list = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM borrower";
+        String sql = "SELECT * FROM borrowers";
 
         try {
             conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                // Add borrower to the list
-                Borrower b = new Borrower(rs.getInt("id"), rs.getString("username"),
-                        rs.getInt("book_id"), rs.getString("bookName"),
-                        rs.getString("borrow_from"), rs.getString("borrow_to"), rs.getString("status"));
+                int userId = rs.getInt("user_id");
+                String username = getUsernameById(userId);
+
+                Borrower b = new Borrower(
+                        rs.getInt("id"),
+                        username,
+                        userId,
+                        rs.getInt("book_id"),
+                        rs.getString("bookName"),
+                        rs.getString("borrow_from"),
+                        rs.getString("borrow_to"),
+                        rs.getString("status")
+                );
                 list.add(b);
             }
         } catch (Exception e) {
@@ -41,12 +50,12 @@ public class BorrowerDAO {
     }
 
     // Delete borrower by ID
-    public void deleteBorrower(String id) {
-        String sql = "DELETE FROM borrower WHERE id = ?";
+    public void deleteBorrower(int id) {
+        String sql = "DELETE FROM borrowers WHERE id = ?";
         try {
             conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error in deleteBorrower: " + e.getMessage());
@@ -55,27 +64,27 @@ public class BorrowerDAO {
         }
     }
 
-    // Get borrowers by status and username
-    public ArrayList<Borrower> getBorrowerByStatusAndUsername(String status, String username) {
+    // Get borrowers by status and user_id
+    public ArrayList<Borrower> getBorrowerByStatusAndUserId(String status, int user_id) {
         ArrayList<Borrower> list = new ArrayList<>();
-        String sql = "SELECT * FROM borrower WHERE status = ? AND username = ?";
+        String sql = "SELECT * FROM borrowers WHERE status = ? AND user_id = ?";
 
         try {
             conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, status);
-            ps.setString(2, username);
+            ps.setInt(2, user_id);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     // Add borrower to the list
-                    Borrower b = new Borrower(rs.getInt("id"), rs.getString("username"),
+                    Borrower b = new Borrower(rs.getInt("id"), rs.getInt("user_id"),
                             rs.getInt("book_id"), rs.getString("bookName"),
                             rs.getString("borrow_from"), rs.getString("borrow_to"), rs.getString("status"));
                     list.add(b);
                 }
             }
         } catch (Exception e) {
-            System.err.println("Error in getBorrowerByStatusAndUsername: " + e.getMessage());
+            System.err.println("Error in getBorrowerByStatusAndUserId: " + e.getMessage());
         } finally {
             closeResources();
         }
@@ -85,7 +94,7 @@ public class BorrowerDAO {
     // Get borrowers by status
     public ArrayList<Borrower> getBorrowerByStatus(String status) {
         ArrayList<Borrower> list = new ArrayList<>();
-        String sql = "SELECT * FROM borrower WHERE status = ?";
+        String sql = "SELECT * FROM borrowers WHERE status = ?";
 
         try {
             conn = DataBase.getConnection();
@@ -94,7 +103,7 @@ public class BorrowerDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     // Add borrower to the list
-                    Borrower b = new Borrower(rs.getInt("id"), rs.getString("username"),
+                    Borrower b = new Borrower(rs.getInt("id"), rs.getInt("user_id"),
                             rs.getInt("book_id"), rs.getString("bookName"),
                             rs.getString("borrow_from"), rs.getString("borrow_to"), rs.getString("status"));
                     list.add(b);
@@ -109,17 +118,17 @@ public class BorrowerDAO {
     }
 
     // Get borrower by ID
-    public Borrower getBorrowerById(String id) {
-        String sql = "SELECT * FROM borrower WHERE id = ?";
+    public Borrower getBorrowerById(int id) {
+        String sql = "SELECT * FROM borrowers WHERE id = ?";
         Borrower b = null;
 
         try {
             conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    b = new Borrower(rs.getInt("id"), rs.getString("username"),
+                    b = new Borrower(rs.getInt("id"), rs.getInt("user_id"),
                             rs.getInt("book_id"), rs.getString("bookName"),
                             rs.getString("borrow_from"), rs.getString("borrow_to"), rs.getString("status"));
                 }
@@ -132,14 +141,33 @@ public class BorrowerDAO {
         return b;
     }
 
+    private String getUsernameById(int userId) {
+        String username = null;
+        String sql = "SELECT username FROM users WHERE id = ?";
+
+        try (Connection conn = DataBase.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    username = rs.getString("username");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return username;
+    }
+
     // Update borrower details
     public void updateBorrower(Borrower borrower) {
-        String sql = "UPDATE borrower SET username = ?, book_id = ?, bookName = ?, borrow_from = ?, borrow_to = ?, status = ? WHERE id = ?";
+        String sql = "UPDATE borrowers SET user_id = ?, book_id = ?, bookName = ?, borrow_from = ?, borrow_to = ?, status = ? WHERE id = ?";
         try {
             conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, borrower.getUsername());
-            ps.setInt(2, borrower.getBookid());
+            ps.setInt(1, borrower.getUser_id());
+            ps.setInt(2, borrower.getBookId());
             ps.setString(3, borrower.getBookName());
             ps.setString(4, borrower.getBorrow_from());
             ps.setString(5, borrower.getBorrow_to());
@@ -154,13 +182,13 @@ public class BorrowerDAO {
     }
 
     // Insert a new borrower record
-    public void insertBorrower(String username, String bookid, String bookName, String borrow_from, String borrow_to) {
-        String sql = "INSERT INTO borrower (username, book_id, bookName, borrow_from, borrow_to, status) VALUES (?, ?, ?, ?, ?, 'processing')";
+    public void insertBorrower(int user_id, int book_id, String bookName, String borrow_from, String borrow_to) {
+        String sql = "INSERT INTO borrowers (user_id, book_id, bookName, borrow_from, borrow_to, status) VALUES (?, ?, ?, ?, ?, 'processing')";
         try {
             conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            ps.setString(2, bookid);
+            ps.setInt(1, user_id);
+            ps.setInt(2, book_id);
             ps.setString(3, bookName);
             ps.setString(4, borrow_from);
             ps.setString(5, borrow_to);
@@ -174,7 +202,7 @@ public class BorrowerDAO {
 
     // Check if the book is already borrowed and being processed
     public boolean checkBookExists(int bookID) {
-        String sql = "SELECT COUNT(*) FROM borrower WHERE book_id = ? AND status = 'processing'";
+        String sql = "SELECT COUNT(*) FROM borrowers WHERE book_id = ? AND status = 'processing'";
         try (Connection conn = DataBase.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, bookID);
             try (ResultSet rs = ps.executeQuery()) {
@@ -187,10 +215,10 @@ public class BorrowerDAO {
     }
 
     // Check if a user has reached the borrowing limit
-    public boolean checkLimitStmt(String userName) {
-        String sql = "SELECT COUNT(*) FROM borrower WHERE username = ? AND status = 'processing'";
+    public boolean checkLimitStmt(String username) {
+        String sql = "SELECT COUNT(*) FROM borrowers WHERE user_id = (SELECT id FROM users WHERE username = ?) AND status = 'processing'";
         try (Connection conn = DataBase.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, userName);
+            ps.setString(1, username);
             try (ResultSet rs = ps.executeQuery()) {
                 return rs.next() && rs.getInt(1) > 3;
             }
