@@ -83,33 +83,52 @@ public class LoginControl {
                 showAlert(Alert.AlertType.ERROR, "Error", "Please enter all the fields");
             } else {
                 if (resultSet.next()) {
+                    String role = resultSet.getString("role");
+
+
                     Parent rootNode = (Parent) login_Btn.getScene().getRoot();
                     ZoomOut zoomOut = new ZoomOut (rootNode);
                     zoomOut.setOnFinished(event -> {
                         try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardUser.fxml"));
+//                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardUser.fxml"));
 //                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin.fxml"));
-                            Parent root = loader.load();
 
-                            Stage stage = new Stage();
-                            Scene scene = new Scene(root);
+                            FXMLLoader loader = null;
 
-                            root.setOnMousePressed(e -> {
-                                x = e.getSceneX();
-                                y = e.getSceneY();
-                            });
-                            root.setOnMouseDragged(e -> {
-                                stage.setX(e.getScreenX() - x);
-                                stage.setY(e.getScreenY() - y);
-                            });
+                            if ("Admin".equalsIgnoreCase(role)) {
+                                // Nếu vai trò là admin, chuyển đến trang admin
+                                loader = new FXMLLoader(getClass().getResource("/fxml/admin.fxml"));
+                            } else if ("User".equalsIgnoreCase(role)){
+                                // Nếu vai trò là user, chuyển đến trang user
+                                loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardUser.fxml"));
+                            }
 
-                            stage.initStyle(StageStyle.TRANSPARENT);
-                            stage.setScene(scene);
+                            if (loader != null) {
+                                Parent root = loader.load();
 
-                            new ZoomIn (root).play();
+                                Stage stage = new Stage();
+                                Scene scene = new Scene(root);
 
-                            stage.show();
-                            ((Stage) login_Btn.getScene().getWindow()).close();
+                                root.setOnMousePressed(e -> {
+                                    x = e.getSceneX();
+                                    y = e.getSceneY();
+                                });
+                                root.setOnMouseDragged(e -> {
+                                    stage.setX(e.getScreenX() - x);
+                                    stage.setY(e.getScreenY() - y);
+                                });
+
+                                stage.initStyle(StageStyle.TRANSPARENT);
+                                stage.setScene(scene);
+
+                                new ZoomIn (root).play();
+
+                                stage.show();
+                                ((Stage) login_Btn.getScene().getWindow()).close();
+                            } else {
+                                showAlert(Alert.AlertType.ERROR, "Error", "Role is not recognized");
+                            }
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
