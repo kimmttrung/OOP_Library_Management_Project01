@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SearchAPIUser">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SearchAPIUser">
     <left>
         <VBox prefHeight="850.0" prefWidth="185.0" styleClass="nav-form1" stylesheets="@../css/Member.css" BorderPane.alignment="CENTER">
             <children>
@@ -190,7 +190,7 @@
                         <ImageView fx:id="bookImageView" fitHeight="257.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
-                  <BarChart fx:id="chartAPIUser2" prefHeight="260.0" prefWidth="713.0">
+                  <BarChart fx:id="chartAPIUser2" prefHeight="260.0" prefWidth="724.0" styleClass="chart-bar" stylesheets="@../css/searchAPI.css">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>

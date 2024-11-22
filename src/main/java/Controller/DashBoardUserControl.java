@@ -49,9 +49,9 @@ public class DashBoardUserControl {
         series2.getData().add(new XYChart.Data("History ", 200));
         series2.getData().add(new XYChart.Data("Poetry ", 400));
         series2.getData().add(new XYChart.Data("Health ", 700));
-        series2.getData().add(new XYChart.Data("Romance  ", 100));
+        series2.getData().add(new XYChart.Data("Romance ", 100));
         series2.getData().add(new XYChart.Data("Biography  ", 150));
-        series2.getData().add(new XYChart.Data("Trung  ", 250));
+        series2.getData().add(new XYChart.Data("Python ", 250));
 
         chartUser.getData().add(series2);
     }

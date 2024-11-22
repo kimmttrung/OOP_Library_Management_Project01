@@ -24,6 +24,7 @@ public class UserDAO {
                 User user = new User();
                 user.setUserName(rs.getString("username"));
                 user.setId(rs.getInt("id"));
+                user.setPassword(rs.getString("password"));
                 user.setPhoneNumber(rs.getString("phoneNumber"));
                 user.setRegistrationDate(rs.getString("registrationDate"));
                 users.add(user);
@@ -74,12 +75,13 @@ public class UserDAO {
 
     // Add a new user
     public boolean addUser(User user) {
-        String sql = "INSERT INTO user(username, phoneNumber, registrationDate) VALUES(?,?,?)";
+        String sql = "INSERT INTO user(username, password, phoneNumber, registrationDate) VALUES(?,?,?,?)";
         try (Connection connect = DataBase.getConnection();
              PreparedStatement pst = connect.prepareStatement(sql)) {
             pst.setString(1, user.getUserName());
-            pst.setString(2, user.getPhoneNumber());
-            pst.setString(3, user.getRegistrationDate());
+            pst.setString(2, user.getPassword());
+            pst.setString(3, user.getPhoneNumber());
+            pst.setString(4, user.getRegistrationDate());
 
             int affectedRows = pst.executeUpdate();
             return affectedRows > 0;
@@ -106,12 +108,13 @@ public class UserDAO {
 
     // Update a user's details
     public boolean updateUser(User user) {
-        String sql = "UPDATE user SET username = ?, phoneNumber = ? WHERE id = ?";
+        String sql = "UPDATE user SET username = ?, password = ?, phoneNumber = ? WHERE id = ?";
         try (Connection connect = DataBase.getConnection();
              PreparedStatement pst = connect.prepareStatement(sql)) {
             pst.setString(1, user.getUserName());
-            pst.setString(2, user.getPhoneNumber());
-            pst.setInt(3, user.getId());
+            pst.setString(2, user.getPassword());
+            pst.setString(3, user.getPhoneNumber());
+            pst.setInt(4, user.getId());
 
             return pst.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -125,6 +128,7 @@ public class UserDAO {
         User user = new User();
         user.setUserName(rs.getString("username"));
         user.setId(rs.getInt("id"));
+        user.setPassword(rs.getString("password"));
         user.setPhoneNumber(rs.getString("phoneNumber"));
         user.setRegistrationDate(rs.getString("registrationDate"));
         return user;

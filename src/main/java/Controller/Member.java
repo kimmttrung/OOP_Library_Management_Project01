@@ -59,8 +59,6 @@ public class Member {
     @FXML
     private Button cancel_btn;
     @FXML
-    private Button cancel_btn1;
-    @FXML
     private TableColumn<?, ?> authorColumn;
     @FXML
     private TableView<Book> bookTable;
@@ -266,8 +264,6 @@ public class Member {
                 applySceneTransition1(commentUser_btn, "/fxml/CommentBook.fxml");
             } else if (event.getSource() == cancel_btn) {
                 applySceneTransition(cancel_btn, "/fxml/MemberView.fxml");
-            } else if (event.getSource() == cancel_btn1) {
-                applySceneTransition(cancel_btn1, "/fxml/MemberView.fxml");
             } else if (event.getSource() == DashBoardUser_btn) {
                 applySceneTransition(DashBoardUser_btn, "/fxml/DashBoardUser.fxml");
             }

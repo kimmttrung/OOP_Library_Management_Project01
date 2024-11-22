@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserControl">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserControl">
    <children>
       <AnchorPane prefHeight="788.0" prefWidth="1108.6666666666667" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -55,7 +55,7 @@
                               <TableColumn fx:id="nameColumn" prefWidth="170.6667251586914" text="Full Name" />
                               <TableColumn fx:id="phoneColumn" prefWidth="169.3333740234375" text="Phone Number" />
                               <TableColumn fx:id="registrationDateColumn" prefWidth="185.99984741210938" text="Registration Date" />
-                              <TableColumn fx:id="publishedDateColumn" prefWidth="145.33331298828125" text="Status" />
+                              <TableColumn fx:id="passwordColumn" prefWidth="145.33331298828125" text="Password" />
                            </columns>
                         </TableView>
                      </children>
@@ -93,7 +93,9 @@
                               <FontAwesomeIconView glyphName="EDIT" size="25" text="" />
                            </graphic>
                         </Button>
-                        <AnchorPane fx:id="nav_from" layoutX="1.0" layoutY="1.0" prefHeight="679.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/DashBoard.css">
+                        <Label layoutX="34.0" layoutY="506.0" text="Password" />
+                        <TextField fx:id="passWordField" layoutX="34.0" layoutY="536.0" prefHeight="27.0" prefWidth="249.0" />
+                        <AnchorPane fx:id="nav_from" prefHeight="679.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/DashBoard.css">
                            <children>
                               <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/DashBoard.css">
                                  <graphic>

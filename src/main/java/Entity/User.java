@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class User {
     private Integer id;
     private String userName;
+    private String password;
     private String phoneNumber;
     private String registrationDate;
 
@@ -13,14 +14,22 @@ public class User {
         this.registrationDate = getCurrentDate();
     }
 
-    public User(String userName, String phoneNumber) {
+//    public User(String userName, String password) {
+//        this.userName = userName;
+//        this.password = password;
+//        this.registrationDate = getCurrentDate();
+//    }
+
+    public User(String userName, String password, String phoneNumber) {
         this.userName = userName;
+        this.password = password;
         this.phoneNumber = phoneNumber;
         this.registrationDate = getCurrentDate();
     }
 
-    public User(String userName, String phoneNumber, String registrationDate) {
+    public User(String userName, String password, String phoneNumber, String registrationDate) {
         this.userName = userName;
+        this.password = password;
         this.phoneNumber = phoneNumber;
         this.registrationDate = registrationDate;
     }
@@ -29,6 +38,14 @@ public class User {
         this.id = userId;
         this.userName = userName;
         this.phoneNumber = phoneNumber;
+    }
+
+    public User(Integer userId, String userName, String password, String phoneNumber) {
+        this.id = userId;
+        this.password = password;
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.registrationDate = getCurrentDate();
     }
 
     public int getId() {
@@ -46,6 +63,10 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public String getPassword() {return this.password; }
+
+    public void setPassword(String password) {this.password = password; }
 
     public String getPhoneNumber() {
         return phoneNumber;

@@ -51,6 +51,8 @@ public class UserControl {
     @FXML
     private TableColumn<User, String> registrationDateColumn;
     @FXML
+    private TableColumn<User, String> passwordColumn;
+    @FXML
     private Button minus_btn;
     @FXML
     private Button close_btn;
@@ -70,6 +72,8 @@ public class UserControl {
     private Circle circleProfile;
     @FXML
     private TextField usernameSearchField;
+    @FXML
+    private TextField passWordField;
 
     private double x = 0;
     private double y = 0;
@@ -99,7 +103,7 @@ public class UserControl {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         registrationDateColumn.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
-
+        passwordColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
         // Set the default profile image for users
         Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
         circleProfile.setFill(new ImagePattern(image));
@@ -114,14 +118,19 @@ public class UserControl {
             showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter Phone Number");
             return;
         }
+        if (passWordField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter Password");
+            return;
+        }
 
         Optional<ButtonType> result = showConfirmationAlert("Confirm Addition", "Are you sure you want to add this User?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             String userName = userNameField.getText();
+            String passWord = passWordField.getText();
             String phoneNumber = phoneNumberField.getText();
             String registrationDate = LocalDate.now().toString(); // Set registration date to current date
 
-            User newUser = new User(userName, phoneNumber, registrationDate);
+            User newUser = new User(userName, passWord, phoneNumber, registrationDate);
 
             if (userDAO.addUser(newUser)) {
                 loadUsers();
@@ -183,8 +192,9 @@ public class UserControl {
 
         String updatedName = userNameField.getText().isEmpty() ? existingUser.getUserName() : userNameField.getText();
         String updatedPhone = phoneNumberField.getText().isEmpty() ? existingUser.getPhoneNumber() : phoneNumberField.getText();
+        String updatePassword = passWordField.getText().isEmpty() ? existingUser.getPassword() : passWordField.getText();
 
-        User updatedUser = new User(userId, updatedName, updatedPhone);
+        User updatedUser = new User(userId, updatedName, updatePassword, updatedPhone);
 
         // Attempt to update the user in the database
         if (userDAO.updateUser(updatedUser)) {
@@ -288,6 +298,7 @@ public class UserControl {
         scaleDown.setToX(0.5);
         scaleDown.setFromY(1.0);
         scaleDown.setToY(0.5);
+
 
         fadeOut.setOnFinished(event -> Platform.exit());
 
