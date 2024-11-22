@@ -128,7 +128,9 @@ public class BorrowerDAO {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    b = new Borrower(rs.getInt("id"), rs.getInt("user_id"),
+                    int userId = rs.getInt("user_id");
+                    String username = getUsernameById(userId);
+                    b = new Borrower(rs.getInt("id"), username, id,
                             rs.getInt("book_id"), rs.getString("bookName"),
                             rs.getString("borrow_from"), rs.getString("borrow_to"), rs.getString("status"));
                 }

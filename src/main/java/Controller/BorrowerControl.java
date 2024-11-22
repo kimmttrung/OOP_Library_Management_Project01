@@ -249,23 +249,36 @@ public class BorrowerControl {
 
     @FXML
     private void searchBorrowerById() {
-        String borrowerId = findBorrowerField.getText();
+        String borrowerId = findBorrowerField.getText().trim();
 
         if (borrowerId.isEmpty()) {
             loadBorrowers();
             return;
         }
 
-        // Search for the borrower by ID
-        Borrower borrower = borrowerDAO.getBorrowerById(Integer.parseInt(borrowerId));
+        try {
+            int id = Integer.parseInt(borrowerId);
 
-        if (borrower != null) {
-            ObservableList<Borrower> foundBorrowers = FXCollections.observableArrayList(borrower);
-            borrowerTable.setItems(foundBorrowers);
-        } else {
-            showAlert(Alert.AlertType.INFORMATION, "Search Borrower", "No borrower found with the provided ID.");
+            if (borrowerDAO == null) {
+                showAlert(Alert.AlertType.ERROR, "System Error", "The borrower data access object is not initialized.");
+                return;
+            }
+
+            Borrower borrower = borrowerDAO.getBorrowerById(id);
+
+            if (borrower != null) {
+                ObservableList<Borrower> foundBorrowers = FXCollections.observableArrayList(borrower);
+                borrowerTable.setItems(foundBorrowers);
+            } else {
+                showAlert(Alert.AlertType.INFORMATION, "Search Borrower", "No borrower found with the provided ID.");
+            }
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please enter a valid numeric ID.");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "An unexpected error occurred: " + e.getMessage());
         }
     }
+
 
     private void markOverdueBorrowers() {
         // Iterate through borrowers and mark overdue ones
