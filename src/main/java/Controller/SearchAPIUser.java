@@ -80,15 +80,14 @@ public class SearchAPIUser {
 
     public void initialize() {
         XYChart.Series<String, Double> series2 = new XYChart.Series<>();
-        series2.setName("Happy New Year 2027");
-        series2.getData().add(new XYChart.Data("Mystery ", 500));
-        series2.getData().add(new XYChart.Data("Sport ", 300));
-        series2.getData().add(new XYChart.Data("History ", 200));
-        series2.getData().add(new XYChart.Data("Poetry ", 400));
-        series2.getData().add(new XYChart.Data("Health ", 700));
-        series2.getData().add(new XYChart.Data("Romance  ", 100));
-        series2.getData().add(new XYChart.Data("Biography  ", 150));
-        series2.getData().add(new XYChart.Data("Trung  ", 250));
+        series2.getData().add(new XYChart.Data("Fiction", 600));
+        series2.getData().add(new XYChart.Data("Adventure", 450));
+        series2.getData().add(new XYChart.Data("Science", 300));
+        series2.getData().add(new XYChart.Data("Fantasy", 800));
+        series2.getData().add(new XYChart.Data("Cooking", 500));
+        series2.getData().add(new XYChart.Data("Travel", 350));
+        series2.getData().add(new XYChart.Data("Self-Help", 400));
+        series2.getData().add(new XYChart.Data("Technology", 550));
 
         chartAPIUser2.getData().add(series2);
 

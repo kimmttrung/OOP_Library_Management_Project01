@@ -42,7 +42,6 @@ public class LoginControl {
     private Button login_createAccount, signup_loginAccount;
     @FXML
     private AnchorPane login_form, signup_form;
-
     @FXML
     private Button minimizeBtn;
     @FXML
@@ -64,78 +63,58 @@ public class LoginControl {
 
     @FXML
     private void login() {
-        String sql = "SELECT * FROM accounts WHERE username = ? AND password= ?";
+        String username = login_username.getText();
+        String password = login_password.getText();
+
+        // Kiểm tra username và password trước khi truy vấn CSDL
+        if (!isValidUsername(username)) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Username cannot be empty and must be valid.");
+            return;
+        }
+        if (!isValidPassword(password)) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Password must be at least 8 characters long, contain 1 uppercase letter, 1 special character, and 1 digit.");
+            return;
+        }
+
+        String sqlAccounts = "SELECT role FROM accounts WHERE username = ? AND password = ?";
+        String sqlUsers = "SELECT id, phoneNumber, registrationDate FROM user WHERE username = ? AND password = ?";
 
         try {
             connect = DataBase.getConnection();
-            pst = connect.prepareStatement(sql);
+
+            // Kiểm tra bảng `accounts`
+            pst = connect.prepareStatement(sqlAccounts);
             pst.setString(1, login_username.getText());
             pst.setString(2, login_password.getText());
             resultSet = pst.executeQuery();
 
-            if (login_username.getText().isEmpty() || login_password.getText().isEmpty()) {
-
-                if (login_selectShowPassword.isSelected()) {
-                    login_password.setText(login_showPassword.getText());
+            if (resultSet.next()) {
+                // Nếu tìm thấy trong `accounts`
+                String role = resultSet.getString("role");
+                if ("Admin".equalsIgnoreCase(role)) {
+                    openDashboard("/fxml/DashBoardView.fxml");
+                } else if ("User".equalsIgnoreCase(role)) {
+                    openDashboard("/fxml/DashBoardUser.fxml");
                 } else {
-                    login_showPassword.setText(login_password.getText());
+                    showAlert(Alert.AlertType.ERROR, "Error", "Unknown role");
                 }
-                showAlert(Alert.AlertType.ERROR, "Error", "Please enter all the fields");
             } else {
+                // Không tìm thấy trong `accounts`, kiểm tra bảng `user`
+                pst = connect.prepareStatement(sqlUsers);
+                pst.setString(1, login_username.getText());
+                pst.setString(2, login_password.getText());
+                resultSet = pst.executeQuery();
+
                 if (resultSet.next()) {
-                    String role = resultSet.getString("role");
+                    // Nếu tìm thấy trong `user`
+                    String id = resultSet.getString("id");
+                    String phoneNumber = resultSet.getString("phoneNumber");
 
-
-                    Parent rootNode = (Parent) login_Btn.getScene().getRoot();
-                    ZoomOut zoomOut = new ZoomOut (rootNode);
-                    zoomOut.setOnFinished(event -> {
-                        try {
-//                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardUser.fxml"));
-//                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardView.fxml"));
-
-                            FXMLLoader loader = null;
-
-                            if ("Admin".equalsIgnoreCase(role)) {
-                                // Nếu vai trò là admin, chuyển đến trang admin
-                                loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardView.fxml"));
-                            } else if ("User".equalsIgnoreCase(role)){
-                                // Nếu vai trò là user, chuyển đến trang user
-                                loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardUser.fxml"));
-                            }
-
-                            if (loader != null) {
-                                Parent root = loader.load();
-
-                                Stage stage = new Stage();
-                                Scene scene = new Scene(root);
-
-                                root.setOnMousePressed(e -> {
-                                    x = e.getSceneX();
-                                    y = e.getSceneY();
-                                });
-                                root.setOnMouseDragged(e -> {
-                                    stage.setX(e.getScreenX() - x);
-                                    stage.setY(e.getScreenY() - y);
-                                });
-
-                                stage.initStyle(StageStyle.TRANSPARENT);
-                                stage.setScene(scene);
-
-                                new ZoomIn (root).play();
-
-                                stage.show();
-                                ((Stage) login_Btn.getScene().getWindow()).close();
-                            } else {
-                                showAlert(Alert.AlertType.ERROR, "Error", "Role is not recognized");
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    });
-                    zoomOut.play();
-
+                    // Chuyển đến giao diện User
+                    showAlert(Alert.AlertType.INFORMATION, "Welcome", "Login successful!\nID: " + id + "\nPhone: " + phoneNumber);
+                    openDashboard("/fxml/DashBoardUser.fxml");
                 } else {
+                    // Không tìm thấy trong cả hai bảng
                     showAlert(Alert.AlertType.ERROR, "Error", "Username or Password is Incorrect");
                 }
             }
@@ -152,6 +131,44 @@ public class LoginControl {
         }
     }
 
+    // Hàm mở giao diện
+    private void openDashboard(String fxmlPath) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+
+            // Đóng cửa sổ hiện tại
+            ((Stage) login_Btn.getScene().getWindow()).close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Hàm hiển thị thông báo
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    // Kiểm tra username hợp lệ
+    private boolean isValidUsername(String username) {
+        return username != null && !username.trim().isEmpty();
+    }
+
+    // Kiểm tra password hợp lệ
+    private boolean isValidPassword(String password) {
+        // Regex kiểm tra điều kiện
+        String passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
+        return password != null && password.matches(passwordRegex);
+    }
+
     @FXML
     private void register() {
 
@@ -161,6 +178,8 @@ public class LoginControl {
             showAlert(Alert.AlertType.ERROR, "Error", "Please enter all the fields");
         } else if (!signup_password.getText().equals(signup_cPassword.getText())) {
             showAlert(Alert.AlertType.ERROR, "Error", "Passwords do not match");
+        } else if (!isValidPassword(signup_password.getText())) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Password must be at least 8 characters long, contain 1 uppercase letter, 1 special character, and 1 digit.");
         } else if (signup_password.getText().length() < 4) {
             showAlert(Alert.AlertType.ERROR, "Error", "Passwords must be at least 4 characters");
         } else {
