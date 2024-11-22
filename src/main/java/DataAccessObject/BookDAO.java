@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BookDAO {
 
@@ -210,6 +211,44 @@ public class BookDAO {
             closeResources(conn, pst, null);
         }
         return false;
+    }
+
+    public void addComment(int bookId, String comment) {
+        String sql = "INSERT INTO comments (book_id, comment_text) VALUES (?, ?)";
+
+        Connection conn = null;
+        PreparedStatement pst = null;
+
+        try {
+            conn = DataBase.getConnection();
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, bookId);
+            pst.setString(2, comment);
+            pst.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<String> getCommentsForBook(int bookId) {
+        List<String> comments = new ArrayList<>();
+        String sql = "SELECT comment_text FROM comments WHERE book_id = ? ORDER BY created_at DESC";
+
+        try (Connection connection = DataBase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, bookId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    comments.add(resultSet.getString("comment_text"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return comments;
     }
 
     // Utility method for closing resources

@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashBoardControl">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashBoardControl">
     <children>
         <AnchorPane layoutX="217.0" layoutY="73.0" prefHeight="750.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -55,7 +55,7 @@
                             <children>
                                 <AnchorPane layoutX="-22.0" layoutY="10.0" prefHeight="367.0" prefWidth="638.0" stylesheets="@../css/DashBoard.css">
                                     <children>
-                                        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="27.0" layoutY="131.0" prefHeight="177.0" prefWidth="567.0" vbarPolicy="NEVER">
+                                        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="22.0" layoutY="121.0" prefHeight="177.0" prefWidth="567.0" vbarPolicy="NEVER">
                                             <content>
                                                 <HBox fx:id="imageContainer" alignment="CENTER" prefHeight="176.0" prefWidth="1266.0">
                                                     <children>
@@ -73,7 +73,7 @@
                                                 </HBox>
                                             </content>
                                         </ScrollPane>
-                                        <Label layoutX="27.0" layoutY="43.0" prefHeight="35.0" prefWidth="218.0" text="Suggested books:">
+                                        <Label layoutX="27.0" layoutY="60.0" prefHeight="35.0" prefWidth="279.0" text="Most Borrowed Books:">
                                             <font>
                                                 <Font name="Segoe UI Black Italic" size="24.0" />
                                             </font>

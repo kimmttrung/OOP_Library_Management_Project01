@@ -31,11 +31,16 @@ public class MemberBorrowControl {
     private TextField borrowerIDField;
     @FXML
     private DatePicker toDatePicker;
+    @FXML
+    private TextField commentField;
+
     private double x = 0;
     private double y = 0;
 
     private BorrowerDAO borrowerDAO = new BorrowerDAO();
     private DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
+    BookDAO bookDAO = new BookDAO();
+
     @FXML
     private void borrowBook() {
         String borrowerId = borrowerIDField.getText();
@@ -83,9 +88,8 @@ public class MemberBorrowControl {
             }
 
             // Add borrower record to the database and reload borrowers
-            String username = borrower.getUserName();
             String bookName = borrowBook.getName();
-            borrowerDAO.insertBorrower(username, bookId, bookName, dateFormatter.formatDate(today), formattedReturnDate);
+            borrowerDAO.insertBorrower(Integer.parseInt(borrowerId), Integer.parseInt(bookId), bookName, dateFormatter.formatDate(today), formattedReturnDate);
             checkBookInformation();
             showAlert(Alert.AlertType.INFORMATION, "Success", "Book borrowed successfully.");
         }
@@ -122,6 +126,46 @@ public class MemberBorrowControl {
                 ? new Image(imageLink)
                 : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
         bookImageView.setImage(image);
+    }
+
+    @FXML
+    private void writeComment() {
+        try {
+            String comment = commentField.getText();
+            String bookIDText = bookIDField.getText();
+
+            if (comment == null || comment.trim().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Comment", "Comment is empty.");
+                return;
+            }
+
+            if (bookIDText == null || bookIDText.trim().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Comment", "Book ID is empty.");
+                return;
+            }
+
+            Integer bookID = Integer.parseInt(bookIDText);
+
+            // Check if book exits
+            Book book = bookDAO.getBookByID(bookID);
+            if (book == null) {
+                showAlert(Alert.AlertType.ERROR, "Comment", "Book not found.");
+                return;
+            }
+
+            // Add comment to database
+            bookDAO.addComment(bookID, comment);
+            showAlert(Alert.AlertType.INFORMATION, "Comment", "Comment added successfully!");
+
+            commentField.clear();
+            bookIDField.clear();
+
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Comment", "Invalid Book ID. Please enter a valid number.");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Comment", "An error occurred: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML
