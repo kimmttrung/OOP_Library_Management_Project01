@@ -31,7 +31,6 @@ public class Book {
     }
 
     public Book(String name, String author,String publisher, String publishedDate, String image, String categories) {
-        this.bookID = bookID;
         this.name = name;
         this.author = author;
         this.publisher = publisher;
@@ -41,7 +40,6 @@ public class Book {
     }
 
     public Book(String name, String author,String publisher, String publishedDate, String image, String categories, String language) {
-        this.bookID = bookID;
         this.name = name;
         this.author = author;
         this.publisher = publisher;

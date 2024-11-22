@@ -75,6 +75,8 @@ public class Member {
     private ImageView bookImageView, qrCodeImageView;
     @FXML
     private TextField findBookField;
+    @FXML
+    private ListView<String> commentListView;
 
     private double x = 0;
     private double y = 0;
@@ -248,11 +250,6 @@ public class Member {
             directory.mkdirs();
         }
     }
-
-    @FXML
-    private Button showCommentsButton;    // Nút để hiển thị bình luận
-    @FXML
-    private ListView<String> commentListView; // ListView để hiển thị danh sách bình luận
 
     @FXML
     private void showComments() {

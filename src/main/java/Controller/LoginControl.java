@@ -77,7 +77,7 @@ public class LoginControl {
         }
 
         String sqlAccounts = "SELECT role FROM accounts WHERE username = ? AND password = ?";
-        String sqlUsers = "SELECT id, phoneNumber, registrationDate FROM user WHERE username = ? AND password = ?";
+        String sqlUsers = "SELECT id, phoneNumber, registrationDate FROM users WHERE username = ? AND password = ?";
 
         try {
             connect = DataBase.getConnection();
