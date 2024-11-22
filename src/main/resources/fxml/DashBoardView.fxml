@@ -94,7 +94,7 @@
                                           <FontAwesomeIconView glyphName="USER_CIRCLE" size="50" />
                                        </graphic>
                                     </Button>
-                                    <Label fx:id="borrowerCountLabel" layoutX="107.0" layoutY="100.0" prefHeight="69.0" prefWidth="34.0">
+                                    <Label fx:id="borrowerCountLabel" layoutX="107.0" layoutY="100.0" onDragDetected="#updateCounts" prefHeight="69.0" prefWidth="34.0">
                                        <font>
                                           <Font name="Segoe UI Black" size="18.0" />
                                        </font>
@@ -122,7 +122,7 @@
                               <FontAwesomeIconView glyphName="USER" size="50" />
                            </graphic>
                         </Button>
-                        <Label fx:id="userCountLabel" layoutX="102.0" layoutY="100.0" prefHeight="69.0" prefWidth="34.0">
+                        <Label fx:id="userCountLabel" layoutX="102.0" layoutY="100.0" onDragDetected="#updateCounts" prefHeight="69.0" prefWidth="34.0">
                            <font>
                               <Font name="Segoe UI Black" size="18.0" />
                            </font>
@@ -141,7 +141,7 @@
                               <FontAwesomeIconView glyphName="BOOK" size="50" />
                            </graphic>
                         </Button>
-                        <Label fx:id="bookCountLabel" layoutX="100.0" layoutY="100.0" prefHeight="69.0" prefWidth="34.0">
+                        <Label fx:id="bookCountLabel" layoutX="100.0" layoutY="100.0" onDragDetected="#updateCounts" prefHeight="69.0" prefWidth="34.0">
                            <font>
                               <Font name="Segoe UI Black" size="18.0" />
                            </font>
