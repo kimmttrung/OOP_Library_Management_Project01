@@ -14,6 +14,7 @@ module management.libarymanagement {
     opens API;
     opens Entity;
     opens Database;
+    opens Animation to javafx.fxml;
 
     exports management.libarymanagement;
     exports Controller;
@@ -22,5 +23,4 @@ module management.libarymanagement {
     exports Entity;
     exports Database;
     exports Animation;
-    opens Animation to javafx.fxml;
 }

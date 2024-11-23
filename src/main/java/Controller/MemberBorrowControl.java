@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -18,7 +17,7 @@ import java.util.Optional;
 import static Controller.AlertHelper.showAlert;
 import static Controller.AlertHelper.showConfirmationAlert;
 
-public class MemberBorrowControl {
+public class MemberBorrowControl extends BaseDashBoardControl {
     @FXML
     private Button cancel_btn;
     @FXML
@@ -172,15 +171,10 @@ public class MemberBorrowControl {
     public void DownloadPages(ActionEvent event) {
         try {
             if (event.getSource() == cancel_btn) {
-                applySceneTransition(cancel_btn, "/fxml/MemberView.fxml");
+                applySceneTransition2(cancel_btn, "/fxml/MemberView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void applySceneTransition(Button sourceButton, String fxmlPath) {
-        Stage currentStage = (Stage) sourceButton.getScene().getWindow();
-        currentStage.hide();
     }
 }

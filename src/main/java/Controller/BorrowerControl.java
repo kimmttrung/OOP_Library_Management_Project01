@@ -19,18 +19,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -39,7 +34,7 @@ import static Controller.AlertHelper.showAlert;
 import static Controller.AlertHelper.showConfirmationAlert;
 import static Animation.ColorTransitionExample.addColorTransition;
 
-public class BorrowerControl {
+public class BorrowerControl extends BaseDashBoardControl{
 
     @FXML
     private TextField borrowerIDField, bookIDField, findBorrowerField, borrowID;
@@ -375,45 +370,6 @@ public class BorrowerControl {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private void applySceneTransition(Button sourceButton, String fxmlPath) {
-        Stage currentStage = (Stage) sourceButton.getScene().getWindow();
-
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), currentStage.getScene().getRoot());
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.0);
-
-        fadeOut.setOnFinished(event -> {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-                Scene newScene = new Scene(root);
-                Stage newStage = new Stage();
-
-                root.setOnMousePressed((javafx.scene.input.MouseEvent e) -> {
-                    x = e.getSceneX();
-                    y = e.getSceneY();
-                });
-                root.setOnMouseDragged((javafx.scene.input.MouseEvent e) -> {
-                    newStage.setX(e.getScreenX() - x);
-                    newStage.setY(e.getScreenY() - y);
-                });
-
-                newStage.initStyle(StageStyle.TRANSPARENT);
-                newStage.setScene(newScene);
-
-                FadeTransition fadeIn = new FadeTransition(Duration.millis(500), root);
-                fadeIn.setFromValue(0.0);
-                fadeIn.setToValue(1.0);
-                fadeIn.play();
-
-                newStage.show();
-                currentStage.hide();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        fadeOut.play();
     }
 
     public void exit() {
