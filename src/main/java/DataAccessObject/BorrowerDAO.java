@@ -49,19 +49,27 @@ public class BorrowerDAO {
         return list;
     }
 
-    // Delete borrower by ID
-    public void deleteBorrower(int id) {
-        String sql = "DELETE FROM borrowers WHERE id = ?";
+    public boolean hasBorrowingBook(String status, int bookId) {
+        String sql = "SELECT 1 FROM borrowers WHERE status = ? AND book_id = ? LIMIT 1";
+
         try {
-            conn = DataBase.getConnection();
+            conn = DataBase.getConnection(); // Kết nối tới cơ sở dữ liệu
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.executeUpdate();
+            ps.setString(1, status);
+            ps.setInt(2, bookId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return true; // Nếu tìm thấy ít nhất 1 dòng, trả về true
+                }
+            }
         } catch (Exception e) {
-            System.err.println("Error in deleteBorrower: " + e.getMessage());
+            System.err.println("Error in hasBorrowerByStatusAndUserId: " + e.getMessage());
         } finally {
-            closeResources();
+            closeResources(); // Đóng kết nối và các tài nguyên
         }
+
+        return false; // Nếu không tìm thấy, trả về false
     }
 
     // Check if any borrower exists with the given status and user_id

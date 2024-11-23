@@ -82,9 +82,9 @@ public class UserControl {
     private double x = 0;
     private double y = 0;
 
-    private ObservableList<User> userList = FXCollections.observableArrayList();
-    private UserDAO userDAO = new UserDAO();
-    private BorrowerDAO borrowerDAO = new BorrowerDAO();
+    private final ObservableList<User> userList = FXCollections.observableArrayList();
+    private final UserDAO userDAO = new UserDAO();
+    private final BorrowerDAO borrowerDAO = new BorrowerDAO();
 
     @FXML
     public void initialize() {

@@ -1,6 +1,7 @@
 package Controller;
 
 import API.QRCodeGenerator;
+import DataAccessObject.BorrowerDAO;
 import Entity.Book;
 import DataAccessObject.BookDAO;
 import com.google.zxing.WriterException;
@@ -29,6 +30,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -73,7 +75,9 @@ public class BookControl {
     @FXML
     private ImageView bookImageView, qrCodeImageView;
     @FXML
-    private TextField bookIDField, bookTitleField, bookAuthorField, bookYearField, bookPublisherField;
+    private DatePicker toDatePicker;
+    @FXML
+    private TextField bookIDField, bookTitleField, bookAuthorField, bookPublisherField;
     @FXML
     private TextField bookIDAdjField, bookTitleAdjField, bookAuthorAdjField, bookYearAdjField, bookPublisherAdjField;
     @FXML
@@ -87,8 +91,9 @@ public class BookControl {
     private double y = 0;
 
     private final BookDAO bookDAO = new BookDAO();
-    private final ObservableList<Book> searchResults = FXCollections.observableArrayList();
+    private final BorrowerDAO borrowerDAO = new BorrowerDAO();
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
+    private DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
 
     @FXML
     public void initialize() {
@@ -162,6 +167,7 @@ public class BookControl {
             bookAuthorAdjField.setText(newSelection.getAuthor());
             bookPublisherAdjField.setText(newSelection.getPublisher());
             bookYearAdjField.setText(newSelection.getPublishedDate());
+            bookIDField.setText(String.valueOf(newSelection.getBookID()));
 
             // Fetch selected book details and update the image
             int bookId = newSelection.getBookID();
@@ -189,10 +195,13 @@ public class BookControl {
     @FXML
     private void insertBook() {
         // Validate fields before proceeding with insertion
-        if (isAnyFieldEmpty(bookTitleField, bookAuthorField, bookPublisherField, bookYearField)) {
+        LocalDate bookYearField = toDatePicker.getValue();
+        if (isAnyFieldEmpty(bookTitleField, bookAuthorField, bookPublisherField) || bookYearField == null) {
             showAlert(Alert.AlertType.ERROR, "Insert Book", "All fields are required.");
             return;
         }
+
+        String formattedBookDate = dateFormatter.formatDate(bookYearField);
 
         // Confirm insertion
         Optional<ButtonType> result = showConfirmationAlert("Confirm Insert", "Are you sure you want to insert the book?");
@@ -202,7 +211,7 @@ public class BookControl {
                     bookTitleField.getText(),
                     bookAuthorField.getText(),
                     bookPublisherField.getText(),
-                    bookYearField.getText(),
+                    formattedBookDate,
                     null
             );
 
@@ -210,6 +219,9 @@ public class BookControl {
             if (bookDAO.insertBook(newBook)) {
                 loadBooks();
                 showAlert(Alert.AlertType.INFORMATION, "Insert Success", "Book inserted successfully.");
+                bookTitleField.clear();
+                bookAuthorField.clear();
+                bookPublisherField.clear();
             } else {
                 showAlert(Alert.AlertType.ERROR, "Insert Error", "Error inserting book. Please try again.");
             }
@@ -263,10 +275,14 @@ public class BookControl {
             return;
         }
 
+        int bookId = Integer.parseInt(bookIDField.getText());
+        if (borrowerDAO.hasBorrowingBook("processing", bookId)) {
+            showAlert(Alert.AlertType.ERROR, "Delete Book", "Book are being borrowed.");
+            return;
+        }
         // Confirm deletion
         Optional<ButtonType> result = showConfirmationAlert("Confirm Delete", "Are you sure you want to delete this Book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            int bookId = Integer.parseInt(bookIDField.getText());
             if (bookDAO.deleteBook(bookId)) {
                 loadBooks();
                 showAlert(Alert.AlertType.INFORMATION, "Delete Success", "Book deleted successfully.");
