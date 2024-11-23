@@ -5,29 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63531a95-e8f3-4cea-9323-8598e099f883" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Animation/ColorTransitionExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Animation/VBoxColorTransition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SearchAPIUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/SearchAPIUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/Member.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/Member.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/BookView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/BookView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/BorrowerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/BorrowerView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/DashBoardUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/DashBoardUser.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/DashBoardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/DashBoardView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MemberView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MemberView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/SearchAPIUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/SearchAPIUser.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/SearchView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/SearchView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/UserView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/UserView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/qr_codes/book_22.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/qr_codes/book_22.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/background" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/craiyon_005602_Library_management_system_background_1920x1080.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/pexels-ann-marie-kennon-547933-1296000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/pexels-donghuangmingde-2177482.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/pexels-gesel-757855.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/pexels-nguyendesigner-244134.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/pexels-pixabay-159711.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/pexels-rafael-cosquiere-1059286-2041540.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/pexels-tiana-18128-2898170.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/pexels-y-d-179881567-13141295.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (10).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (11).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (12).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (13).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (14).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (15).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (16).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (17).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (18).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (19).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (2).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (20).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (21).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (3).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (4).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (5).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (6).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (7).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (8).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper (9).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/image/background not selected/wallpaperflare.com_wallpaper.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,12 +60,12 @@
     &quot;assignee&quot;: &quot;kimmttrung&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/kimmttrung/OOP_Library_Management_Project01.git",
-    "accountId": "20d4a28f-ec06-4c74-8526-5cf1ad8a2292"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kimmttrung/OOP_Library_Management_Project01.git&quot;,
+    &quot;accountId&quot;: &quot;20d4a28f-ec06-4c74-8526-5cf1ad8a2292&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -70,7 +80,7 @@
     "Application.LibraryManagement.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "MaiTrung",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
