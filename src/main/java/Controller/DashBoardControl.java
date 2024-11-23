@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static Controller.AlertHelper.showConfirmationAlert;
+import static Animation.ColorTransitionExample.addColorTransition;
 
 public class DashBoardControl  {
 
@@ -49,7 +50,7 @@ public class DashBoardControl  {
     @FXML
     private Button arrow_btn;
     @FXML
-    private Button signOut_btn, take_btn;
+    private Button signOut_btn;
     @FXML
     private Button bookAll_btn;
     @FXML
@@ -57,7 +58,7 @@ public class DashBoardControl  {
     @FXML
     private Button close_btn;
     @FXML
-    private AnchorPane nav_from;
+    private AnchorPane nav_from, dashBoardView_from;
     @FXML
     private Button searchAPI_btn;
     @FXML
@@ -89,6 +90,7 @@ public class DashBoardControl  {
         setUpInit();
         updateCounts();
         setImageView();
+        addColorTransition(dashBoardView_from);
 
         // Create a timeline to implement smooth scrolling effect
         Timeline timeline = new Timeline(

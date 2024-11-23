@@ -28,6 +28,10 @@
 .nav-form{
     -fx-background-color: #2bb341;
 }
+.nav-form2 {
+    -fx-background-color: #A8D5BA;
+}
+
 
 .nav-btn{
     -fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);

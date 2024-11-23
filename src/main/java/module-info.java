@@ -21,4 +21,6 @@ module management.libarymanagement {
     exports API;
     exports Entity;
     exports Database;
+    exports Animation;
+    opens Animation to javafx.fxml;
 }

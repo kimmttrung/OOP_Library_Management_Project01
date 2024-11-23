@@ -20,9 +20,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
+<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
     <top>
-        <AnchorPane prefHeight="633.0" prefWidth="1121.0" BorderPane.alignment="CENTER">
+        <AnchorPane fx:id="borrower_from_animation" prefHeight="633.0" prefWidth="1121.0" BorderPane.alignment="CENTER">
             <AnchorPane layoutX="3.0" layoutY="474.0" prefHeight="285.0" prefWidth="1117.0">
 
                 <Button layoutX="433.0" layoutY="212.0" onAction="#borrowBook" prefHeight="38.0" prefWidth="51.0" styleClass="iconBookInfor" stylesheets="@../css/Borrower.css" AnchorPane.leftAnchor="433.0" AnchorPane.topAnchor="212.0">

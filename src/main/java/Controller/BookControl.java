@@ -34,6 +34,7 @@ import java.util.Optional;
 
 import static Controller.AlertHelper.showAlert;
 import static Controller.AlertHelper.showConfirmationAlert;
+import static Animation.ColorTransitionExample.addColorTransition;
 
 
 public class BookControl {
@@ -79,6 +80,8 @@ public class BookControl {
     private Circle circleProfile;
     @FXML
     private TextField findBookField;
+    @FXML
+    private AnchorPane main_from;
 
     private double x = 0;
     private double y = 0;
@@ -99,6 +102,7 @@ public class BookControl {
         setUpBookSelectionListener();
         loadBooks();
         createQRCodeDirectory();
+        addColorTransition(main_from);
     }
 
     @FXML

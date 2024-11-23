@@ -28,6 +28,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import static Controller.AlertHelper.*;
+import static Animation.ColorTransitionExample.addColorTransition;
 
 public class UserControl {
     @FXML
@@ -74,6 +75,8 @@ public class UserControl {
     private TextField usernameSearchField;
     @FXML
     private TextField passWordField;
+    @FXML
+    private AnchorPane userBook_from;
 
     private double x = 0;
     private double y = 0;
@@ -89,6 +92,7 @@ public class UserControl {
 
         setUpTableColumn();
         loadUsers();
+        addColorTransition(userBook_from);
     }
 
     private void loadUsers() {

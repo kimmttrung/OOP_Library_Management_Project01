@@ -132,7 +132,7 @@
     <center>
         <VBox prefHeight="200.0" prefWidth="100.0" styleClass="white_background" stylesheets="@../css/admin.css" BorderPane.alignment="CENTER">
             <children>
-                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="white_background" stylesheets="@../css/admin.css">
+                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="nav-form1" stylesheets="@../css/Member.css">
                     <children>
                         <Label prefHeight="28.0" prefWidth="216.0" text="DashBoard Member" textFill="#2bb341">
                             <HBox.margin>
@@ -171,7 +171,7 @@
                         </Button>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_LEFT" prefHeight="365.0" prefWidth="909.0">
+                <HBox alignment="CENTER_LEFT" prefHeight="365.0" prefWidth="909.0" styleClass="nav-form2" stylesheets="@../css/Member.css">
                     <VBox.margin>
                         <Insets />
                     </VBox.margin>

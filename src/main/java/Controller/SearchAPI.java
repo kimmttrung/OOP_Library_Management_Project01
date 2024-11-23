@@ -35,6 +35,7 @@ import java.util.Optional;
 
 import static Controller.AlertHelper.showAlert;
 import static Controller.AlertHelper.showConfirmationAlert;
+import static Animation.ColorTransitionExample.addColorTransition;
 
 
 public class SearchAPI {
@@ -81,7 +82,7 @@ public class SearchAPI {
     @FXML
     private BarChart<String, Double> chart;
     @FXML
-    private Button backLeft_btn;
+    private AnchorPane searchAPI_from;
 
     private double x = 0;
     private double y = 0;
@@ -113,6 +114,7 @@ public class SearchAPI {
         setUpTableColumns();
         setUpBookSelectionListener();
         loadSearchResults();
+        addColorTransition(searchAPI_from);
     }
 
     private void setUpTableColumns() {

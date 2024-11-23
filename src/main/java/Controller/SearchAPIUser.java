@@ -24,7 +24,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -38,19 +37,14 @@ import static Controller.AlertHelper.showConfirmationAlert;
 public class SearchAPIUser {
     @FXML
     private Button BookLibrary_btn;
-
     @FXML
     private Button DashBoardUser_btn;
-
     @FXML
     private BarChart<String, Double> chartAPIUser2;
-
     @FXML
     private Button close_btn;
-
     @FXML
     private Button minus_btn;
-
     @FXML
     private Button signOut_btn;
     @FXML
@@ -71,6 +65,7 @@ public class SearchAPIUser {
     private TableColumn<?, ?> languageColumn;
     @FXML
     private TextField searchField;
+
 
     private double x = 0;
     private double y = 0;

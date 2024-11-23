@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashBoardControl">
     <children>
-        <AnchorPane layoutX="217.0" layoutY="73.0" prefHeight="750.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane fx:id="dashBoardView_from" layoutX="217.0" layoutY="73.0" prefHeight="750.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <AnchorPane layoutX="1.0" prefHeight="69.0" prefWidth="1101.0">
                     <children>

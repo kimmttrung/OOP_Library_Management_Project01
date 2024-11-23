@@ -36,6 +36,7 @@ import java.util.Optional;
 
 import static Controller.AlertHelper.showAlert;
 import static Controller.AlertHelper.showConfirmationAlert;
+import static Animation.ColorTransitionExample.addColorTransition;
 
 public class BorrowerControl {
 
@@ -77,6 +78,9 @@ public class BorrowerControl {
     private Circle circleProfile;
     @FXML
     private ComboBox<String> filterComboBox;
+    @FXML
+    private AnchorPane borrower_from_animation;
+
 
     private double x = 0;
     private double y = 0;
@@ -98,6 +102,7 @@ public class BorrowerControl {
         markOverdueBorrowers();
         setUpBookSelectionListener();
         setUpFilter();
+        addColorTransition(borrower_from_animation);
     }
 
     @FXML
