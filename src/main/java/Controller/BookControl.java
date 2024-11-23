@@ -157,6 +157,12 @@ public class BookControl {
                 return;
             }
 
+            bookIDAdjField.setText(String.valueOf(newSelection.getBookID()));
+            bookTitleAdjField.setText(newSelection.getName());
+            bookAuthorAdjField.setText(newSelection.getAuthor());
+            bookPublisherAdjField.setText(newSelection.getPublisher());
+            bookYearAdjField.setText(newSelection.getPublishedDate());
+
             // Fetch selected book details and update the image
             int bookId = newSelection.getBookID();
             Book selectedBook = bookDAO.getBookByID(bookId);

@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
+<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
     <top>
         <AnchorPane fx:id="borrower_from_animation" prefHeight="633.0" prefWidth="1121.0" BorderPane.alignment="CENTER">
             <AnchorPane layoutX="3.0" layoutY="474.0" prefHeight="285.0" prefWidth="1117.0">
@@ -248,7 +248,7 @@
                 </children>
             </AnchorPane>
             <TextField fx:id="findBorrowerField" layoutX="393.0" layoutY="65.0" prefHeight="41.0" prefWidth="329.0" promptText="Enter Borrower's ID" />
-            <Button layoutX="738.0" layoutY="66.0" mnemonicParsing="false" onAction="#searchBorrowerById" styleClass="find_btn" stylesheets="@../css/Borrower.css">
+            <Button layoutX="738.0" layoutY="66.0" mnemonicParsing="false" onAction="#searchBorrowerByUserName" styleClass="find_btn" stylesheets="@../css/Borrower.css">
                 <graphic>
                     <FontAwesomeIconView glyphName="SEARCH" size="30" />
                 </graphic>

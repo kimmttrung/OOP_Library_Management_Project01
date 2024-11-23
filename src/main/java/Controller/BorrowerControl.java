@@ -32,6 +32,7 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static Controller.AlertHelper.showAlert;
@@ -108,6 +109,7 @@ public class BorrowerControl {
     @FXML
     private void loadBorrowers() {
         borrowerList.setAll(borrowerDAO.getAllBorrowers());
+        borrowerTable.setItems(borrowerList);
     }
 
     private void setUpTableColumn() {
@@ -253,25 +255,24 @@ public class BorrowerControl {
     }
 
     @FXML
-    private void searchBorrowerById() {
-        String borrowerId = findBorrowerField.getText().trim();
+    private void searchBorrowerByUserName() {
+        String borrowerName = findBorrowerField.getText().trim();
 
-        if (borrowerId.isEmpty()) {
+        if (borrowerName.isEmpty()) {
             loadBorrowers();
             return;
         }
 
         try {
-            int id = Integer.parseInt(borrowerId);
 
             if (borrowerDAO == null) {
                 showAlert(Alert.AlertType.ERROR, "System Error", "The borrower data access object is not initialized.");
                 return;
             }
 
-            Borrower borrower = borrowerDAO.getBorrowerById(id);
+            ArrayList<Borrower> borrower = borrowerDAO.getBorrowerByUsername(borrowerName);
 
-            if (borrower != null) {
+            if (borrower != null && !borrower.isEmpty()) {
                 ObservableList<Borrower> foundBorrowers = FXCollections.observableArrayList(borrower);
                 borrowerTable.setItems(foundBorrowers);
             } else {

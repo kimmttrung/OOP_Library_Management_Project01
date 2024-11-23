@@ -1,5 +1,6 @@
 package Controller;
 
+import DataAccessObject.BorrowerDAO;
 import Entity.User;
 import DataAccessObject.UserDAO;
 import javafx.animation.FadeTransition;
@@ -64,7 +65,7 @@ public class UserControl {
     @FXML
     private Button signOut_btn;
     @FXML
-    private TextField userID;
+    private TextField userIdField;
     @FXML
     private TextField userNameField;
     @FXML
@@ -83,6 +84,7 @@ public class UserControl {
 
     private ObservableList<User> userList = FXCollections.observableArrayList();
     private UserDAO userDAO = new UserDAO();
+    private BorrowerDAO borrowerDAO = new BorrowerDAO();
 
     @FXML
     public void initialize() {
@@ -92,6 +94,7 @@ public class UserControl {
 
         setUpTableColumn();
         loadUsers();
+        setUpSelectionUser();
         addColorTransition(userBook_from);
     }
 
@@ -113,6 +116,16 @@ public class UserControl {
         circleProfile.setFill(new ImagePattern(image));
     }
 
+    private void setUpSelectionUser() {
+        userTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            // If a book is selected, update the book details in the UI
+            userIdField.setText(String.valueOf(newSelection.getId()));
+            userNameField.setText(newSelection.getUserName());
+            phoneNumberField.setText(newSelection.getPhoneNumber());
+            passWordField.setText(newSelection.getPassword());
+        } );
+    }
+
     public void addUser() {
         if (userNameField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter User's Name");
@@ -126,7 +139,6 @@ public class UserControl {
             showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter Password");
             return;
         }
-
         Optional<ButtonType> result = showConfirmationAlert("Confirm Addition", "Are you sure you want to add this User?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             String userName = userNameField.getText();
@@ -135,7 +147,6 @@ public class UserControl {
             String registrationDate = LocalDate.now().toString(); // Set registration date to current date
 
             User newUser = new User(userName, passWord, phoneNumber, registrationDate);
-
             if (userDAO.addUser(newUser)) {
                 loadUsers();
                 showSuccessAlert("Add User", "User added successfully!");
@@ -146,16 +157,18 @@ public class UserControl {
     }
 
     public void deleteUser() {
-
-
-        if (userID.getText().isEmpty()) {
+        if (userIdField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "DELETE USER", "Please enter User ID");
             return;
         }
-
+        int userId = Integer.parseInt(userIdField.getText());
+        //Check if user are borrowing book
+        if (borrowerDAO.getBorrowerByStatusAndUserId("processing", userId)) {
+            showAlert(Alert.AlertType.ERROR, "DELETE USER", "User is already borrowed. Please return book first!");
+            return;
+        }
         Optional<ButtonType> result = showConfirmationAlert("Confirm Deletion", "Are you sure you want to delete this User?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            int userId = Integer.parseInt(userID.getText());
 
             if (userDAO.deleteUser(userId)) {
                 loadUsers();
@@ -168,38 +181,33 @@ public class UserControl {
 
     @FXML
     public void updateUser() {
-        if (userID.getText().isEmpty()) {
+        if (userIdField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Update User", "Please enter User ID to update.");
             return;
         }
-
         int userId;
         try {
             // Try to parse the user ID
-            userId = Integer.parseInt(userID.getText());
+            userId = Integer.parseInt(userIdField.getText());
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Update User", "User ID must be a valid number.");
             return;
         }
-
         Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update this user?");
         if (result.isEmpty() || result.get() != ButtonType.OK) {
             return;
         }
-
         // Find the existing user with the given ID
         User existingUser = userDAO.findUserById(userId);
         if (existingUser == null) {
             showAlert(Alert.AlertType.ERROR, "Update User", "User not found with ID: " + userId);
             return;
         }
-
         String updatedName = userNameField.getText().isEmpty() ? existingUser.getUserName() : userNameField.getText();
         String updatedPhone = phoneNumberField.getText().isEmpty() ? existingUser.getPhoneNumber() : phoneNumberField.getText();
         String updatePassword = passWordField.getText().isEmpty() ? existingUser.getPassword() : passWordField.getText();
 
         User updatedUser = new User(userId, updatedName, updatePassword, updatedPhone);
-
         // Attempt to update the user in the database
         if (userDAO.updateUser(updatedUser)) {
             loadUsers();

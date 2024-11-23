@@ -65,7 +65,7 @@ public class BorrowerDAO {
     }
 
     // Get borrowers by status and user_id
-    public ArrayList<Borrower> getBorrowerByStatusAndUserId(String status, int user_id) {
+    public boolean getBorrowerByStatusAndUserId(String status, int user_id) {
         ArrayList<Borrower> list = new ArrayList<>();
         String sql = "SELECT * FROM borrowers WHERE status = ? AND user_id = ?";
 
@@ -88,29 +88,38 @@ public class BorrowerDAO {
         } finally {
             closeResources();
         }
-        return list;
+        return list.isEmpty();
     }
 
-    // Get borrowers by status
-    public ArrayList<Borrower> getBorrowerByStatus(String status) {
+    // Get borrowers by username
+    public ArrayList<Borrower> getBorrowerByUsername(String username) {
         ArrayList<Borrower> list = new ArrayList<>();
-        String sql = "SELECT * FROM borrowers WHERE status = ?";
+        String sql = "SELECT * FROM borrowers b JOIN users U ON B.user_id = U.id WHERE U.username LIKE ?";
 
         try {
             conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, status);
+            ps.setString(1,'%' + username + '%');
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    // Add borrower to the list
-                    Borrower b = new Borrower(rs.getInt("id"), rs.getInt("user_id"),
-                            rs.getInt("book_id"), rs.getString("bookName"),
-                            rs.getString("borrow_from"), rs.getString("borrow_to"), rs.getString("status"));
+                    int userId = rs.getInt("user_id");
+                    String usernames = getUsernameById(userId);
+
+                    Borrower b = new Borrower(
+                            rs.getInt("id"),
+                            usernames,
+                            userId,
+                            rs.getInt("book_id"),
+                            rs.getString("bookName"),
+                            rs.getString("borrow_from"),
+                            rs.getString("borrow_to"),
+                            rs.getString("status")
+                    );
                     list.add(b);
                 }
             }
         } catch (Exception e) {
-            System.err.println("Error in getBorrowerByStatus: " + e.getMessage());
+            System.err.println("Error in getBorrowerByUsername: " + e.getMessage());
         } finally {
             closeResources();
         }
