@@ -64,31 +64,28 @@ public class BorrowerDAO {
         }
     }
 
-    // Get borrowers by status and user_id
-    public boolean getBorrowerByStatusAndUserId(String status, int user_id) {
-        ArrayList<Borrower> list = new ArrayList<>();
-        String sql = "SELECT * FROM borrowers WHERE status = ? AND user_id = ?";
+    // Check if any borrower exists with the given status and user_id
+    public boolean hasBorrowerByStatusAndUserId(String status, int userId) {
+        String sql = "SELECT 1 FROM borrowers WHERE status = ? AND user_id = ? LIMIT 1";
 
         try {
-            conn = DataBase.getConnection();
+            conn = DataBase.getConnection(); // Kết nối tới cơ sở dữ liệu
             ps = conn.prepareStatement(sql);
             ps.setString(1, status);
-            ps.setInt(2, user_id);
+            ps.setInt(2, userId);
+
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    // Add borrower to the list
-                    Borrower b = new Borrower(rs.getInt("id"), rs.getInt("user_id"),
-                            rs.getInt("book_id"), rs.getString("bookName"),
-                            rs.getString("borrow_from"), rs.getString("borrow_to"), rs.getString("status"));
-                    list.add(b);
+                if (rs.next()) {
+                    return true; // Nếu tìm thấy ít nhất 1 dòng, trả về true
                 }
             }
         } catch (Exception e) {
-            System.err.println("Error in getBorrowerByStatusAndUserId: " + e.getMessage());
+            System.err.println("Error in hasBorrowerByStatusAndUserId: " + e.getMessage());
         } finally {
-            closeResources();
+            closeResources(); // Đóng kết nối và các tài nguyên
         }
-        return list.isEmpty();
+
+        return false; // Nếu không tìm thấy, trả về false
     }
 
     // Get borrowers by username

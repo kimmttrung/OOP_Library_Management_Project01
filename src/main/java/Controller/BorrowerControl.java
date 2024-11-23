@@ -42,7 +42,7 @@ import static Animation.ColorTransitionExample.addColorTransition;
 public class BorrowerControl {
 
     @FXML
-    private TextField borrowerIDField, bookIDField, findBorrowerField;
+    private TextField borrowerIDField, bookIDField, findBorrowerField, borrowID;
     @FXML
     private DatePicker toDatePicker;
     @FXML
@@ -99,11 +99,11 @@ public class BorrowerControl {
         arrow_btn.setVisible(false);
 
         setUpTableColumn();
-        loadBorrowers();
+        setUpFilter();
         markOverdueBorrowers();
         setUpBookSelectionListener();
-        setUpFilter();
         addColorTransition(borrower_from_animation);
+        loadBorrowers();
     }
 
     @FXML
@@ -201,7 +201,7 @@ public class BorrowerControl {
 
     @FXML
     private void returnBook() {
-        String borrowerId = borrowerIDField.getText();
+        String borrowerId = borrowID.getText();
 
         if (borrowerId.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Return Book", "Please enter Borrower ID.");
@@ -211,7 +211,14 @@ public class BorrowerControl {
         Optional<ButtonType> result = showConfirmationAlert("Confirm Return", "Are you sure you want to return this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             // Update borrower's status to "returned"
+
             Borrower borrower = borrowerDAO.getBorrowerById(Integer.parseInt(borrowerId));
+            String status = borrower.getStatus();
+            if (status.equals("returned")) {
+                showAlert(Alert.AlertType.INFORMATION, "Return Book", "This Book has been returned before.");
+                return;
+            }
+
             if (borrower != null) {
                 borrower.setStatus("returned");
                 borrowerDAO.updateBorrower(borrower);
@@ -225,7 +232,7 @@ public class BorrowerControl {
 
     @FXML
     private void renewBook() {
-        String borrowerId = borrowerIDField.getText();
+        String borrowerId = borrowID.getText();
         int additionalDays = 7;
 
         if (borrowerId.isEmpty()) {
@@ -305,6 +312,10 @@ public class BorrowerControl {
                 bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
                 return;
             }
+
+            borrowID.setText(String.valueOf(newSelection.getId()));
+            borrowerIDField.setText(String.valueOf(newSelection.getUser_id()));
+            bookIDField.setText(String.valueOf(newSelection.getBookId()));
 
             // Retrieve the selected book and set the image
             int bookId = newSelection.getBookId();

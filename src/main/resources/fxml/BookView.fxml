@@ -11,9 +11,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookControl">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookControl">
    <children>
-      <AnchorPane fx:id="main_from" onDragDetected="#DownloadPages" prefHeight="788.0" prefWidth="1114.0">
+      <AnchorPane fx:id="main_from" layoutX="5.0" onDragDetected="#DownloadPages" prefHeight="788.0" prefWidth="1108.0">
          <children>
             <Button fx:id="bars_btn" layoutY="1.0" mnemonicParsing="false" onAction="#sliderBars" stylesheets="@../css/DashBoard.css">
                <graphic>
@@ -36,12 +36,12 @@
                   <FontAwesomeIconView glyphName="SEARCH" size="30" text="" />
                </graphic>
             </Button>
-            <Button fx:id="close_btn" layoutX="1068.0" layoutY="1.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/Book.css">
+            <Button fx:id="close_btn" layoutX="1058.0" layoutY="1.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/Book.css">
                <graphic>
                   <FontAwesomeIconView glyphName="CLOSE" size="30" />
                </graphic>
             </Button>
-            <Button fx:id="minus_btn" layoutX="1028.0" layoutY="1.0" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../css/Book.css">
+            <Button fx:id="minus_btn" layoutX="1018.0" layoutY="1.0" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../css/Book.css">
                <graphic>
                   <FontAwesomeIconView glyphName="MINUS" size="30" />
                </graphic>
@@ -86,7 +86,7 @@
                         <TextField fx:id="bookAuthorField" layoutX="351.0" layoutY="479.0" prefHeight="43.0" prefWidth="106.0" promptText="Author" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="-11.0" prefHeight="679.0" prefWidth="315.0" styleClass="nav-form1" stylesheets="@../css/Member.css">
+                  <AnchorPane layoutX="-11.0" prefHeight="679.0" prefWidth="308.0" styleClass="mainCenter" stylesheets="@../css/Book.css">
                      <children>
                         <AnchorPane layoutX="57.0" layoutY="36.0" prefHeight="276.0" prefWidth="202.0" styleClass="image-card" stylesheets="@../css/Book.css">
                            <children>
@@ -105,7 +105,7 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="nav_from" layoutX="-12.0" layoutY="-1.0" prefHeight="683.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/DashBoard.css">
+                  <AnchorPane fx:id="nav_from" layoutX="-12.0" layoutY="3.0" prefHeight="679.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/DashBoard.css">
                      <children>
                         <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/DashBoard.css">
                            <graphic>

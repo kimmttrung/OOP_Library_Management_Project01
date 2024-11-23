@@ -100,8 +100,8 @@ public class BookControl {
         // Set up table columns, load books, and create QR code directory
         setUpTableColumns();
         setUpBookSelectionListener();
-        loadBooks();
         createQRCodeDirectory();
+        loadBooks();
         addColorTransition(main_from);
     }
 

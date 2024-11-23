@@ -93,8 +93,8 @@ public class UserControl {
         arrow_btn.setVisible(false);
 
         setUpTableColumn();
-        loadUsers();
         setUpSelectionUser();
+        loadUsers();
         addColorTransition(userBook_from);
     }
 
@@ -119,10 +119,17 @@ public class UserControl {
     private void setUpSelectionUser() {
         userTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             // If a book is selected, update the book details in the UI
-            userIdField.setText(String.valueOf(newSelection.getId()));
-            userNameField.setText(newSelection.getUserName());
-            phoneNumberField.setText(newSelection.getPhoneNumber());
-            passWordField.setText(newSelection.getPassword());
+            if (newSelection != null) {
+                userIdField.setText(String.valueOf(newSelection.getId()));
+                userNameField.setText(newSelection.getUserName());
+                phoneNumberField.setText(newSelection.getPhoneNumber());
+                passWordField.setText(newSelection.getPassword());
+            } else {
+                userIdField.setText("");
+                userNameField.setText("");
+                phoneNumberField.setText("");
+                passWordField.setText("");
+            }
         } );
     }
 
@@ -163,11 +170,12 @@ public class UserControl {
         }
         int userId = Integer.parseInt(userIdField.getText());
         //Check if user are borrowing book
-        if (borrowerDAO.getBorrowerByStatusAndUserId("processing", userId)) {
-            showAlert(Alert.AlertType.ERROR, "DELETE USER", "User is already borrowed. Please return book first!");
+        if (borrowerDAO.hasBorrowerByStatusAndUserId("processing", userId)) {
+            showAlert(Alert.AlertType.ERROR, "DELETE USER", "User is borrowing. Please return book first!");
             return;
         }
-        Optional<ButtonType> result = showConfirmationAlert("Confirm Deletion", "Are you sure you want to delete this User?");
+
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Deletion", "Are you sure want to delete this User?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
 
             if (userDAO.deleteUser(userId)) {

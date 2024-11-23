@@ -29,11 +29,11 @@
                     <graphic>
                         <FontAwesomeIconView glyphName="CLIPBOARD" size="40" />
                     </graphic></Button>
-                <Button layoutX="561.0" layoutY="212.0" mnemonicParsing="false" onAction="#returnBook" styleClass="iconBookInfor" stylesheets="@../css/Borrower.css">
+                <Button layoutX="561.0" layoutY="212.0" mnemonicParsing="false" onAction="#renewBook" styleClass="iconBookInfor" stylesheets="@../css/Borrower.css">
                     <graphic>
                         <FontAwesomeIconView glyphName="ARROW_CIRCLE_LEFT" size="40" />
                     </graphic></Button>
-                <Button layoutX="682.0" layoutY="212.0" mnemonicParsing="false" onAction="#renewBook" styleClass="iconBookInfor" stylesheets="@../css/Borrower.css">
+                <Button layoutX="682.0" layoutY="212.0" mnemonicParsing="false" onAction="#returnBook" styleClass="iconBookInfor" stylesheets="@../css/Borrower.css">
                     <graphic>
                         <FontAwesomeIconView glyphName="ARROW_CIRCLE_RIGHT" size="40" text="" />
                     </graphic></Button>
@@ -43,8 +43,8 @@
                     </children>
                 </AnchorPane>
                 <Label layoutX="436.0" layoutY="267.0" text="BORROW" />
-                <Label layoutX="564.0" layoutY="267.0" text="RETURN" />
-                <Label layoutX="687.0" layoutY="267.0" text="RENEW" />
+                <Label layoutX="564.0" layoutY="267.0" text="RENEW" />
+                <Label layoutX="687.0" layoutY="267.0" text="RETURN" />
                 <AnchorPane layoutX="52.0" layoutY="33.0" prefHeight="200.0" prefWidth="200.0">
                     <children>
                         <Circle fill="#769fc5" layoutX="100.0" layoutY="100.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
@@ -86,6 +86,7 @@
                         <DatePicker fx:id="toDatePicker" prefHeight="42.0" prefWidth="302.0" promptText="Select Return Date" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     </children>
                 </GridPane>
+            <TextField fx:id="borrowID" layoutX="767.0" layoutY="212.0" prefHeight="50.0" prefWidth="76.0" promptText="Enter ID" />
             </AnchorPane>
             <AnchorPane layoutX="2.0" layoutY="2.0" prefHeight="61.0" prefWidth="1111.0">
                 <children>

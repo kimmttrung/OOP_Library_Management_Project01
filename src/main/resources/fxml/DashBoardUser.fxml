@@ -188,7 +188,7 @@
                 </HBox>
                 <HBox prefHeight="483.0" prefWidth="909.0" VBox.vgrow="ALWAYS">
                <children>
-                  <BarChart fx:id="chartUser" prefHeight="451.0" prefWidth="954.0" styleClass="chart-bar" stylesheets="@../css/searchAPI.css">
+                  <BarChart fx:id="chartUser" prefHeight="416.0" prefWidth="910.0" styleClass="chart-bar" stylesheets="@../css/searchAPI.css">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
