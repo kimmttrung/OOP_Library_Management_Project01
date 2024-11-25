@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Member">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Member">
     <left>
         <VBox prefHeight="850.0" prefWidth="185.0" styleClass="nav-form1" stylesheets="@../css/Member.css" BorderPane.alignment="CENTER">
             <children>
@@ -175,62 +175,64 @@
                         </Button>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_RIGHT" prefHeight="253.0" prefWidth="909.0" styleClass="nav-form2" stylesheets="@../css/Member.css">
+                <HBox alignment="CENTER_LEFT" prefHeight="253.0" prefWidth="909.0" styleClass="nav-form2" stylesheets="@../css/Member.css">
                     <VBox.margin>
                         <Insets />
                     </VBox.margin>
                <children>
-                  <ListView fx:id="commentListView" prefHeight="225.0" prefWidth="200.0" />
+                  <ListView fx:id="commentListView" prefHeight="261.0" prefWidth="278.0" />
                   <AnchorPane prefHeight="223.0" prefWidth="178.0">
                      <children>
-                        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="247.0" prefWidth="216.0" styleClass="image-card" stylesheets="@../css/Book.css">
+                        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="247.0" prefWidth="248.0" styleClass="image-card" stylesheets="@../css/Book.css">
                            <children>
                               <ImageView fx:id="qrCodeImageView" fitHeight="219.0" fitWidth="197.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="223.0" prefWidth="254.0">
+                  <AnchorPane prefHeight="261.0" prefWidth="282.0">
                      <children>
-                        <AnchorPane layoutX="49.0" layoutY="7.0" prefHeight="248.0" prefWidth="169.0" styleClass="image-card" stylesheets="@../css/Book.css">
+                        <AnchorPane layoutX="44.0" layoutY="6.0" prefHeight="248.0" prefWidth="169.0" styleClass="image-card" stylesheets="@../css/Book.css">
                            <children>
                               <ImageView fx:id="bookImageView" fitHeight="245.0" fitWidth="179.0" layoutX="-2.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="borrowUser_btn" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="58.0" prefWidth="71.0" styleClass="iconUser" stylesheets="@../css/User.css">
-                     <HBox.margin>
-                        <Insets top="100.0" />
-                     </HBox.margin>
-                     <graphic>
-                        <FontAwesomeIconView glyphName="CLIPBOARD" size="50" />
-                     </graphic>
-                  </Button>
-                  <Label text="Borow">
-                     <HBox.margin>
-                        <Insets left="30.0" right="-167.0" top="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Corbel Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="commentUser_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="iconUser" stylesheets="@../css/User.css">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="COMMENT" size="50" />
-                     </graphic>
-                     <HBox.margin>
-                        <Insets right="15.0" top="-100.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Label text="Commnets">
-                     <font>
-                        <Font name="Corbel Bold" size="24.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="-100.0" />
-                     </HBox.margin>
-                  </Label>
+                  <AnchorPane prefHeight="261.0" prefWidth="222.0">
+                     <children>
+                        <Button fx:id="commentUser_btn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="iconUser" stylesheets="@../css/User.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="COMMENT" size="50" />
+                           </graphic>
+                        </Button>
+                        <Label layoutX="87.0" layoutY="30.0" prefHeight="28.0" prefWidth="137.0" text="Commnets">
+                           <font>
+                              <Font name="Corbel Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="borrowUser_btn" layoutX="15.0" layoutY="186.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="58.0" prefWidth="71.0" styleClass="iconUser" stylesheets="@../css/User.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="CLIPBOARD" size="50" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="Return_btn" layoutX="15.0" layoutY="94.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="58.0" prefWidth="71.0" styleClass="iconUser" stylesheets="@../css/User.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="ARROW_CIRCLE_LEFT" size="50" />
+                           </graphic>
+                        </Button>
+                        <Label layoutX="89.0" layoutY="202.0" text="Borow">
+                           <font>
+                              <Font name="Corbel Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="88.0" layoutY="110.0" prefHeight="28.0" prefWidth="101.0" text="Return">
+                           <font>
+                              <Font name="Corbel Bold" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                </children>
                 </HBox>
                 <HBox prefHeight="423.0" prefWidth="910.0" VBox.vgrow="ALWAYS">
