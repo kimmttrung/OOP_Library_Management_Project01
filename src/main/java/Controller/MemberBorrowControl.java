@@ -33,11 +33,8 @@ public class MemberBorrowControl extends BaseDashBoardControl {
     @FXML
     private TextField commentField;
 
-    private double x = 0;
-    private double y = 0;
-
-    private BorrowerDAO borrowerDAO = new BorrowerDAO();
-    private DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
+    private final BorrowerDAO borrowerDAO = new BorrowerDAO();
+    private final DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
     BookDAO bookDAO = new BookDAO();
 
     @FXML

@@ -32,9 +32,6 @@ public class DashBoardUserControl extends BaseDashBoardControl{
     @FXML
     private Button backRight_btn;
 
-    private double x = 0;
-    private double y = 0;
-
     public void initialize() {
         XYChart.Series<String, Double> series2 = new XYChart.Series<>();
         series2.setName("Happy New Year 2027");

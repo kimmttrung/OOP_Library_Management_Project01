@@ -74,9 +74,6 @@ public class UserControl extends BaseDashBoardControl {
     @FXML
     private AnchorPane userBook_from;
 
-    private double x = 0;
-    private double y = 0;
-
     private final ObservableList<User> userList = FXCollections.observableArrayList();
     private final UserDAO userDAO = new UserDAO();
     private final BorrowerDAO borrowerDAO = new BorrowerDAO();

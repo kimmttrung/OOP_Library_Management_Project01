@@ -1,6 +1,5 @@
 package Controller;
 
-import animatefx.animation.*;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -21,8 +20,6 @@ import javafx.util.Duration;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static Controller.AlertHelper.*;
 
 public class LoginControl {
 
@@ -47,14 +44,10 @@ public class LoginControl {
     @FXML
     private Button exitBtn;
 
-    private double x = 0;
-    private double y = 0;
-
-    private String[] questionList = {"Admin", "User"};
+    private final String[] questionList = {"Admin", "User"};
 
     private Connection connect;
     private PreparedStatement pst;
-    private Statement statement;
     private ResultSet resultSet;
 
     public void initialize() {

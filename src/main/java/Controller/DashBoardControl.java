@@ -75,9 +75,6 @@ public class DashBoardControl extends BaseDashBoardControl {
     @FXML
     private ImageView myImageView6, myImageView7, myImageView8, myImageView9, myImageView10;
 
-    private double x = 0;
-    private double y = 0;
-
     BookDAO bookDAO = new BookDAO();
 
     @FXML

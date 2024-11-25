@@ -60,10 +60,6 @@ public class SearchAPIUser extends BaseDashBoardControl {
     @FXML
     private TextField searchField;
 
-
-    private double x = 0;
-    private double y = 0;
-
     private final BookDAO bookDAO = new BookDAO();
     private final ObservableList<Book> searchResults = FXCollections.observableArrayList();
 

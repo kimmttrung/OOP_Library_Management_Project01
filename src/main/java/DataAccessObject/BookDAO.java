@@ -44,37 +44,6 @@ public class BookDAO {
         return books;
     }
 
-    // Fetch all books and return them as an ArrayList
-    public ArrayList<Book> getListBook() {
-        ArrayList<Book> listBook = new ArrayList<>();
-        String sql = "SELECT * FROM books";
-        Connection conn = null;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-
-        try {
-            conn = DataBase.getConnection();
-            pst = conn.prepareStatement(sql);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                listBook.add(new Book(
-                        rs.getInt("bookID"),
-                        rs.getString("name"),
-                        rs.getString("author"),
-                        rs.getString("publisher"),
-                        rs.getString("publishedDate"),
-                        rs.getString("image")
-                ));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            closeResources(conn, pst, rs);
-        }
-
-        return listBook;
-    }
-
     // Fetch books by name using LIKE search
     public ArrayList<Book> getBooksByName(String name) {
         ArrayList<Book> listBook = new ArrayList<>();

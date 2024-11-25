@@ -77,15 +77,10 @@ public class BorrowerControl extends BaseDashBoardControl{
     @FXML
     private AnchorPane borrower_from_animation;
 
-
-    private double x = 0;
-    private double y = 0;
-
-    private ObservableList<Borrower> borrowerList = FXCollections.observableArrayList();
-    private BorrowerDAO borrowerDAO = new BorrowerDAO();
-    private DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
+    private final ObservableList<Borrower> borrowerList = FXCollections.observableArrayList();
+    private final BorrowerDAO borrowerDAO = new BorrowerDAO();
+    private final DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
     private FilteredList<Borrower> filteredList;
-
 
     @FXML
     public void initialize() {
@@ -104,7 +99,8 @@ public class BorrowerControl extends BaseDashBoardControl{
     @FXML
     private void loadBorrowers() {
         borrowerList.setAll(borrowerDAO.getAllBorrowers());
-        borrowerTable.setItems(borrowerList);
+        filteredList = new FilteredList<>(borrowerList, p -> true); // Cập nhật danh sách đã lọc
+        borrowerTable.setItems(filteredList); // Đặt lại bảng
     }
 
     private void setUpTableColumn() {
@@ -158,39 +154,38 @@ public class BorrowerControl extends BaseDashBoardControl{
             return;
         }
 
-        // Format the return date
-        String formattedReturnDate = dateFormatter.formatDate(borrowToDate);
-
         // Confirm borrowing action
-        Optional<ButtonType> result = showConfirmationAlert("Confirm Borrow", "Are you sure you want to borrow this book?");
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Borrow", "Do you want to borrow this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            // Check if the borrower and book exist, and if the book is available
-            BookDAO bookDAO = new BookDAO();
-            UserDAO userBorrow = new UserDAO();
-            Book borrowBook = bookDAO.getBookByID(Integer.parseInt(bookId));
-            User borrower = userBorrow.findUserById(Integer.parseInt(borrowerId));
+            try {
+                BookDAO bookDAO = new BookDAO();
+                UserDAO userDAO = new UserDAO();
 
-            // Handle various error scenarios
-            if (borrower == null) {
-                showAlert(Alert.AlertType.ERROR, "Borrow Book", "User not found.");
-                return;
-            } else if (borrowBook == null) {
-                showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book not found.");
-                return;
-            } else if (borrowerDAO.checkBookExists(borrowBook.getBookID())) {
-                showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book already being borrowed.");
-                return;
-            } else if (borrowerDAO.checkLimitStmt(borrower.getUserName())) {
-                showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book limit reached.");
-                return;
+                Book borrowBook = bookDAO.getBookByID(Integer.parseInt(bookId));
+                User borrower = userDAO.findUserById(Integer.parseInt(borrowerId));
+
+                if (borrower == null || borrowBook == null) {
+                    showAlert(Alert.AlertType.ERROR, "Borrow Book", borrower == null ? "User not found." : "Book not found.");
+                    return;
+                }
+
+                if (borrowerDAO.checkBookExists(borrowBook.getBookID())) {
+                    showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book is already borrowed.");
+                    return;
+                }
+
+                if (borrowerDAO.checkLimitStmt(borrower.getUserName())) {
+                    showAlert(Alert.AlertType.ERROR, "Borrow Book", "User has reached the borrowing limit.");
+                    return;
+                }
+
+                borrowerDAO.insertBorrower(Integer.parseInt(borrowerId), Integer.parseInt(bookId), borrowBook.getName(),
+                        dateFormatter.formatDate(today), dateFormatter.formatDate(borrowToDate));
+                loadBorrowers();
+                showAlert(Alert.AlertType.INFORMATION, "Borrow Book", "Book borrowed successfully.");
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "An error occurred: " + e.getMessage());
             }
-
-            // Add borrower record to the database and reload borrowers
-            String bookName = borrowBook.getName();
-            borrowerDAO.insertBorrower(Integer.parseInt(borrowerId), Integer.parseInt(bookId), bookName, dateFormatter.formatDate(today), formattedReturnDate);
-            loadBorrowers();
-
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Book borrowed successfully.");
         }
     }
 
@@ -287,17 +282,20 @@ public class BorrowerControl extends BaseDashBoardControl{
         }
     }
 
-
+    @FXML
     private void markOverdueBorrowers() {
-        // Iterate through borrowers and mark overdue ones
-        for (Borrower borrower : borrowerList) {
-            LocalDate dueDate = dateFormatter.parseDate(borrower.getBorrow_to());
-            if (dueDate.isBefore(LocalDate.now())) {
-                borrower.setStatus("overdue");
-                borrowerDAO.updateBorrower(borrower);
+        try {
+            for (Borrower borrower : borrowerList) {
+                LocalDate dueDate = dateFormatter.parseDate(borrower.getBorrow_to());
+                if (dueDate != null && !dueDate.isAfter(LocalDate.now()) && borrower.getStatus().equals("processing")) {
+                    borrower.setStatus("overdue");
+                    borrowerDAO.updateBorrower(borrower);
+                }
             }
+            loadBorrowers();
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to mark overdue borrowers: " + e.getMessage());
         }
-        loadBorrowers();
     }
 
     private void setUpBookSelectionListener() {
@@ -340,13 +338,12 @@ public class BorrowerControl extends BaseDashBoardControl{
 
         // Listen for value changes in ComboBox to update filter
         filterComboBox.valueProperty().addListener((obs, oldValue, newValue) -> {
-            if (newValue == null || "All".equals(newValue)) {
+            if ("All".equals(newValue)) {
                 filteredList.setPredicate(p -> true);
             } else {
                 filteredList.setPredicate(borrower -> newValue.equalsIgnoreCase(borrower.getStatus()));
             }
         });
-
         borrowerTable.setItems(filteredList);
     }
 

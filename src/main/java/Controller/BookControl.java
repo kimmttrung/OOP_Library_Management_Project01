@@ -83,13 +83,10 @@ public class BookControl extends BaseDashBoardControl {
     @FXML
     private AnchorPane main_from;
 
-    private double x = 0;
-    private double y = 0;
-
     private final BookDAO bookDAO = new BookDAO();
     private final BorrowerDAO borrowerDAO = new BorrowerDAO();
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
-    private DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
+    private final DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
 
     @FXML
     public void initialize() {

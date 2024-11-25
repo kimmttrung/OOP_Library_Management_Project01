@@ -76,9 +76,6 @@ public class SearchAPI extends BaseDashBoardControl {
     @FXML
     private AnchorPane searchAPI_from;
 
-    private double x = 0;
-    private double y = 0;
-
     private final BookDAO bookDAO = new BookDAO();
     private final ObservableList<Book> searchResults = FXCollections.observableArrayList();
 
