@@ -65,10 +65,6 @@ public class Member extends BaseDashBoardControl {
     private TextField findBookField;
     @FXML
     private ListView<String> commentListView;
-    @FXML
-    private Button Return_btn;
-    @FXML
-    private Button Back_btn;
 
     private double x = 0;
     private double y = 0;
@@ -271,7 +267,7 @@ public class Member extends BaseDashBoardControl {
         }
     }
 
-    @FXML
+        @FXML
     public void DownloadPages(ActionEvent event) {
         try {
             if (event.getSource() == signOut_btn) {
@@ -289,10 +285,6 @@ public class Member extends BaseDashBoardControl {
                 applySceneTransition(cancel_btn, "/fxml/MemberView.fxml");
             } else if (event.getSource() == DashBoardUser_btn) {
                 applySceneTransition(DashBoardUser_btn, "/fxml/DashBoardUser.fxml");
-            } else if (event.getSource() == Return_btn) {
-                applySceneTransition(Return_btn, "/fxml/ListBookBorrowed.fxml");
-            } else if (event.getSource() == Back_btn) {
-                applySceneTransition(Back_btn, "/fxml/MemberView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();
