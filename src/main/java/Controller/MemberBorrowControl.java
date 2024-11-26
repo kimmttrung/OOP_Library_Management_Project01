@@ -4,9 +4,11 @@ import DataAccessObject.BookDAO;
 import DataAccessObject.BorrowerDAO;
 import DataAccessObject.UserDAO;
 import Entity.Book;
+import Entity.Borrower;
 import Entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,7 +29,7 @@ public class MemberBorrowControl extends BaseDashBoardControl {
     @FXML
     private Label nameLabel, bookNameLabel;
     @FXML
-    private TextField borrowerIDField;
+    private Label borrowerIDLabel;
     @FXML
     private DatePicker toDatePicker;
     @FXML
@@ -38,8 +40,13 @@ public class MemberBorrowControl extends BaseDashBoardControl {
     BookDAO bookDAO = new BookDAO();
 
     @FXML
+    public void initialize() {
+        borrowerIDLabel.setText(String.valueOf(Session.getInstance().getUserID()));
+    }
+
+    @FXML
     private void borrowBook() {
-        String borrowerId = borrowerIDField.getText();
+        String borrowerId = borrowerIDLabel.getText();
         String bookId = bookIDField.getText();
         LocalDate borrowToDate = toDatePicker.getValue();
 
@@ -93,7 +100,7 @@ public class MemberBorrowControl extends BaseDashBoardControl {
 
     @FXML
     private void checkBookInformation() {
-        String borrowerId = borrowerIDField.getText();
+        String borrowerId = borrowerIDLabel.getText();
         String bookId = bookIDField.getText();
 
         // Validate input fields

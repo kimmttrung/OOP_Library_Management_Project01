@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BorrowerDAO {
     // Database connection variables
@@ -155,6 +156,41 @@ public class BorrowerDAO {
             closeResources();
         }
         return b;
+    }
+
+    // Get borrower by ID
+    public List<Borrower> getBorrowerListByUserId(int id) {
+        List<Borrower> list = new ArrayList<>();
+        String sql = "SELECT * FROM borrowers WHERE user_id = ?";
+
+        try {
+            conn = DataBase.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,String.valueOf(id));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int userId = rs.getInt("user_id");
+                    String usernames = getUsernameById(userId);
+
+                    Borrower b = new Borrower(
+                            rs.getInt("id"),
+                            usernames,
+                            userId,
+                            rs.getInt("book_id"),
+                            rs.getString("bookName"),
+                            rs.getString("borrow_from"),
+                            rs.getString("borrow_to"),
+                            rs.getString("status")
+                    );
+                    list.add(b);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error in getBorrowerById: " + e.getMessage());
+        } finally {
+            closeResources();
+        }
+        return list;
     }
 
     private String getUsernameById(int userId) {

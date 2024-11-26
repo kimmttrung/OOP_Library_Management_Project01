@@ -5,6 +5,7 @@ import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,10 +65,6 @@ public class LoginControl {
             showAlert(Alert.AlertType.ERROR, "Error", "Username cannot be empty and must be valid.");
             return;
         }
-        if (!isValidPassword(password)) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Password must be at least 8 characters long, contain 1 uppercase letter, 1 special character, and 1 digit.");
-            return;
-        }
 
         String sqlAccounts = "SELECT role FROM accounts WHERE username = ? AND password = ?";
         String sqlUsers = "SELECT id, phoneNumber, registrationDate FROM users WHERE username = ? AND password = ?";
@@ -75,33 +72,43 @@ public class LoginControl {
         try {
             connect = DataBase.getConnection();
 
-            // Kiểm tra bảng `accounts`
+            // Kiểm tra bảng accounts
             pst = connect.prepareStatement(sqlAccounts);
             pst.setString(1, login_username.getText());
             pst.setString(2, login_password.getText());
             resultSet = pst.executeQuery();
-
             if (resultSet.next()) {
-                // Nếu tìm thấy trong `accounts`
+                // Nếu tìm thấy trong accounts
                 String role = resultSet.getString("role");
                 if ("Admin".equalsIgnoreCase(role)) {
                     openDashboard("/fxml/DashBoardView.fxml");
                 } else if ("User".equalsIgnoreCase(role)) {
-                    openDashboard("/fxml/DashBoardUser.fxml");
+                    // Khi là User, truyền userID vào controller
+                    String userId = resultSet.getString("id");
+
+                    Session.getInstance().setUserID(Integer.parseInt(userId));
+
+                    // Chuyển đến giao diện User
+                    openDashboard("/fxml/DashBoardUser.fxml");  // Mở giao diện DashBoardUser
+
+                    // Sau khi truyền userID, mở dashboard và hiển thị thông tin người dùng
+                    showAlert(Alert.AlertType.INFORMATION, "Welcome", "Login successful!\nID: " + userId);
                 } else {
                     showAlert(Alert.AlertType.ERROR, "Error", "Unknown role");
                 }
             } else {
-                // Không tìm thấy trong `accounts`, kiểm tra bảng `user`
+                // Không tìm thấy trong accounts, kiểm tra bảng users
                 pst = connect.prepareStatement(sqlUsers);
                 pst.setString(1, login_username.getText());
                 pst.setString(2, login_password.getText());
                 resultSet = pst.executeQuery();
 
                 if (resultSet.next()) {
-                    // Nếu tìm thấy trong `user`
+                    // Nếu tìm thấy trong users
                     String id = resultSet.getString("id");
                     String phoneNumber = resultSet.getString("phoneNumber");
+
+                    Session.getInstance().setUserID(Integer.parseInt(id));
 
                     // Chuyển đến giao diện User
                     showAlert(Alert.AlertType.INFORMATION, "Welcome", "Login successful!\nID: " + id + "\nPhone: " + phoneNumber);
@@ -122,44 +129,6 @@ public class LoginControl {
                 e.printStackTrace();
             }
         }
-    }
-
-    // Hàm mở giao diện
-    private void openDashboard(String fxmlPath) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.setScene(scene);
-            stage.show();
-
-            // Đóng cửa sổ hiện tại
-            ((Stage) login_Btn.getScene().getWindow()).close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Hàm hiển thị thông báo
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-    // Kiểm tra username hợp lệ
-    private boolean isValidUsername(String username) {
-        return username != null && !username.trim().isEmpty();
-    }
-
-    // Kiểm tra password hợp lệ
-    private boolean isValidPassword(String password) {
-        // Regex kiểm tra điều kiện
-        String passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
-        return password != null && password.matches(passwordRegex);
     }
 
     @FXML
@@ -210,6 +179,44 @@ public class LoginControl {
                 e.printStackTrace();
             }
         }
+    }
+
+    // Hàm mở giao diện
+    private void openDashboard(String fxmlPath) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+
+            // Đóng cửa sổ hiện tại
+            ((Stage) login_Btn.getScene().getWindow()).close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Hàm hiển thị thông báo
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    // Kiểm tra username hợp lệ
+    private boolean isValidUsername(String username) {
+        return username != null && !username.trim().isEmpty();
+    }
+
+    // Kiểm tra password hợp lệ
+    private boolean isValidPassword(String password) {
+        // Regex kiểm tra điều kiện
+        String passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
+        return password != null && password.matches(passwordRegex);
     }
 
     @FXML
