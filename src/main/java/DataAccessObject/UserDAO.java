@@ -10,9 +10,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Data Access Object (DAO) for performing database operations related to the User entity.
+ * Provides methods to fetch, add, update, and delete user records from the database.
+ */
 public class UserDAO {
 
-    // Get all users from the database
+    /**
+     * Retrieves all users from the database.
+     *
+     * @return an ObservableList containing all User objects from the database.
+     */
     public ObservableList<User> getAllUsers() {
         ObservableList<User> users = FXCollections.observableArrayList();
         String sql = "SELECT * FROM users";
@@ -35,7 +43,12 @@ public class UserDAO {
         return users;
     }
 
-    // Find a user by their username
+    /**
+     * Finds a user by their username.
+     *
+     * @param username the username to search for.
+     * @return the User object if found; otherwise, null.
+     */
     public User findUser(String username) {
         User user = null;
         String sql = "SELECT * FROM users WHERE username = ?";
@@ -54,7 +67,12 @@ public class UserDAO {
         return user;
     }
 
-    // Find a user by their ID
+    /**
+     * Finds a user by their ID.
+     *
+     * @param id the ID of the user to search for.
+     * @return the User object if found; otherwise, null.
+     */
     public User findUserById(int id) {
         User user = null;
         String sql = "SELECT * FROM users WHERE id = ?";
@@ -73,7 +91,12 @@ public class UserDAO {
         return user;
     }
 
-    // Add a new user
+    /**
+     * Adds a new user to the database.
+     *
+     * @param user the User object to add.
+     * @return true if the user was successfully added; false otherwise.
+     */
     public boolean addUser(User user) {
         String sql = "INSERT INTO users(username, password, phoneNumber, registrationDate) VALUES(?,?,?,?)";
         try (Connection connect = DataBase.getConnection();
@@ -91,7 +114,12 @@ public class UserDAO {
         return false;
     }
 
-    // Delete a user by ID
+    /**
+     * Deletes a user from the database by their ID.
+     *
+     * @param id the ID of the user to delete.
+     * @return true if the user was successfully deleted; false otherwise.
+     */
     public boolean deleteUser(int id) {
         String sql = "DELETE FROM users WHERE id = ?";
         try (Connection connect = DataBase.getConnection();
@@ -106,7 +134,12 @@ public class UserDAO {
         return false;
     }
 
-    // Update a user's details
+    /**
+     * Updates an existing user's details in the database.
+     *
+     * @param user the User object containing updated details.
+     * @return true if the user was successfully updated; false otherwise.
+     */
     public boolean updateUser(User user) {
         String sql = "UPDATE users SET username = ?, password = ?, phoneNumber = ? WHERE id = ?";
         try (Connection connect = DataBase.getConnection();
@@ -123,7 +156,13 @@ public class UserDAO {
         return false;
     }
 
-    // Helper method to map ResultSet to User object
+    /**
+     * Helper method to map a ResultSet to a User object.
+     *
+     * @param rs the ResultSet containing user data.
+     * @return a User object populated with data from the ResultSet.
+     * @throws SQLException if an SQL error occurs during mapping.
+     */
     private User mapResultSetToUser(ResultSet rs) throws SQLException {
         User user = new User();
         user.setUserName(rs.getString("username"));

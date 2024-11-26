@@ -6,36 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="63531a95-e8f3-4cea-9323-8598e099f883" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/AlertHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tools/AlertHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/BookControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/BorrowerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/DashBoardControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardUserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UsersDashBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DateStringFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tools/DateStringFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EditInfor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/EditInfor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBookList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/MemberBorrowControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBorrow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ReturnBookMemberHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UserReturnBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/SearchAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SearchAPIUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/SearchAPIUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Singleton/Session.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/UserControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/WriteComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/WriteComment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/BookView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Admin/BookView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/BorrowUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Users/BorrowUser.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/BorrowerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Admin/BorrowerView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/CommentBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Users/CommentBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/DashBoardUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Users/DashBoardUser.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/DashBoardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Admin/DashBoardView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/EditInfor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Users/EditInfor.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/ListBookBorrowed.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Users/ListBookBorrowed.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MemberView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Users/MemberView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/SearchAPIUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Users/SearchAPIUser.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/SearchView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Admin/SearchView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/UserView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Admin/UserView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/DataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Singleton/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Singleton/Session.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Tools/AlertHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tools/AlertHelper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +55,7 @@
     &quot;Application.LibraryManagement.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.AlertHelperTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.BookControlTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BorrowerDAOTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.GoogleBooksAPITest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.SearchAPIUserTest.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -154,7 +128,8 @@
       <workItem from="1732627405411" duration="1819000" />
       <workItem from="1732629274486" duration="2172000" />
       <workItem from="1732634670214" duration="79000" />
-      <workItem from="1732634768745" duration="1235000" />
+      <workItem from="1732634768745" duration="1780000" />
+      <workItem from="1732636571385" duration="448000" />
     </task>
     <servers />
   </component>
