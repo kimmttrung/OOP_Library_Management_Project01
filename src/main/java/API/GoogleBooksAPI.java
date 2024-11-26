@@ -13,9 +13,7 @@ public class GoogleBooksAPI {
     private static final int MAX_RETRIES = 3;
     private static final int INITIAL_RETRY_DELAY = 1000; // 1 second
 
-
     public String fetchBooksData(String query) throws IOException {
-        // Mã hóa truy vấn
         String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8.toString());
         String fullURL = API_URL + encodedQuery;
         int attempt = 0;
@@ -23,8 +21,7 @@ public class GoogleBooksAPI {
         while (attempt < MAX_RETRIES) {
             HttpURLConnection connection = null;
             try {
-                URL url = new URL(fullURL);
-                connection = (HttpURLConnection) url.openConnection();
+                connection = createConnection(fullURL);
                 connection.setRequestMethod("GET");
 
                 int responseCode = connection.getResponseCode();
@@ -54,6 +51,12 @@ public class GoogleBooksAPI {
         throw new IOException("Unable to fetch data after retries.");
     }
 
+    // Thêm phương thức này để có thể ghi đè trong bài test
+    protected HttpURLConnection createConnection(String fullURL) throws IOException {
+        URL url = new URL(fullURL);
+        return (HttpURLConnection) url.openConnection();
+    }
+
     private String readResponse(HttpURLConnection connection) throws IOException {
         try (InputStream inputStream = connection.getInputStream();
              InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
@@ -68,3 +71,4 @@ public class GoogleBooksAPI {
         }
     }
 }
+

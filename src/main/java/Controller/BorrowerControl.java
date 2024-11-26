@@ -201,22 +201,21 @@ public class BorrowerControl extends BaseDashBoardControl{
         Optional<ButtonType> result = showConfirmationAlert("Confirm Return", "Are you sure you want to return this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             // Update borrower's status to "returned"
-
             Borrower borrower = borrowerDAO.getBorrowerById(Integer.parseInt(borrowerId));
-            String status = borrower.getStatus();
-            if (status.equals("returned")) {
-                showAlert(Alert.AlertType.INFORMATION, "Return Book", "This Book has been returned before.");
+            if (borrower == null) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Borrower not found.");
                 return;
             }
 
-            if (borrower != null) {
-                borrower.setStatus("returned");
-                borrowerDAO.updateBorrower(borrower);
-                loadBorrowers();
-                showAlert(Alert.AlertType.INFORMATION, "Success", "Book returned successfully.");
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Error", "Borrower not found.");
+            if ("returned".equalsIgnoreCase(borrower.getStatus())) {
+                showAlert(Alert.AlertType.INFORMATION, "Return Book", "This book has already been returned.");
+                return;
             }
+
+            borrower.setStatus("returned");
+            borrowerDAO.updateBorrower(borrower);
+            loadBorrowers();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Book returned successfully.");
         }
     }
 
@@ -232,21 +231,23 @@ public class BorrowerControl extends BaseDashBoardControl{
 
         Optional<ButtonType> result = showConfirmationAlert("Confirm Renewal", "Are you sure you want to renew this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            // Renew the borrower's book
             Borrower borrower = borrowerDAO.getBorrowerById(Integer.parseInt(borrowerId));
-            if (borrower != null && "processing".equals(borrower.getStatus())) {
-                try {
-                    LocalDate currentDueDate = dateFormatter.parseDate(borrower.getBorrow_to());
-                    LocalDate newDueDate = currentDueDate.plusDays(additionalDays);
-                    borrower.setBorrow_to(dateFormatter.formatDate(newDueDate));
-                    borrowerDAO.updateBorrower(borrower);
-                    loadBorrowers();
-                    showAlert(Alert.AlertType.INFORMATION, "Success", "Book renewed successfully.");
-                } catch (Exception e) {
-                    showAlert(Alert.AlertType.ERROR, "Error", "Unable to renew book: " + e.getMessage());
-                }
-            } else {
+
+            if (borrower == null || !"processing".equalsIgnoreCase(borrower.getStatus())) {
                 showAlert(Alert.AlertType.ERROR, "Error", "Borrower record not found or book not eligible for renewal.");
+                return;
+            }
+
+            try {
+                LocalDate currentDueDate = dateFormatter.parseDate(borrower.getBorrow_to());
+                LocalDate newDueDate = currentDueDate.plusDays(additionalDays);
+                borrower.setBorrow_to(dateFormatter.formatDate(newDueDate));
+                borrower.setUser_id(Session.getInstance().getUserID());
+                borrowerDAO.updateBorrower(borrower);
+                loadBorrowers();
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Book renewed successfully.");
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Unable to renew book: " + e.getMessage());
             }
         }
     }

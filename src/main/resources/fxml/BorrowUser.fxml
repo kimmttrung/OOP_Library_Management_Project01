@@ -29,7 +29,6 @@
                   <Font name="Segoe UI Black Italic" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="borrowerIDField" prefHeight="39.0" prefWidth="312.0" promptText="Enter User ID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <Label text="Book ID:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="1">
                <font>
                   <Font name="Segoe UI Black Italic" size="18.0" />
@@ -42,6 +41,11 @@
                </font>
             </Label>
             <DatePicker fx:id="toDatePicker" prefHeight="42.0" prefWidth="302.0" promptText="Select Return Date" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="borrowerIDLabel" prefHeight="126.0" prefWidth="290.0" textFill="WHITE" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Segoe UI Black Italic" size="22.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
       <Button layoutX="503.0" layoutY="450.0" mnemonicParsing="false" onAction="#borrowBook" prefHeight="39.0" prefWidth="93.0" styleClass="close-btn" stylesheets="@../css/DashBoard.css" text="SUBMIT">

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="513.0" prefWidth="728.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MemberBorrowControl">
+<AnchorPane prefHeight="513.0" prefWidth="728.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.WriteComment">
     <children>
         <Button layoutX="223.0" layoutY="430.0" mnemonicParsing="false" onAction="#writeComment" prefHeight="39.0" prefWidth="77.0" styleClass="close-btn" stylesheets="@../css/DashBoard.css" text="SUBMIT" />
         <Button fx:id="cancel_btn" layoutX="421.0" layoutY="430.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="39.0" prefWidth="81.0" styleClass="find_btn" stylesheets="@../css/DashBoard.css" text="CANCEL" />

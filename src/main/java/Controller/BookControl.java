@@ -237,6 +237,13 @@ public class BookControl extends BaseDashBoardControl {
             return;
         }
 
+        // Validate date format if the date field is not empty
+        String newDate = bookYearAdjField.getText();
+        if (!newDate.isEmpty() && !dateFormatter.isValidDate(newDate)) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Date", "The date format must be yyyy-MM-dd.");
+            return;
+        }
+
         // Confirm update
         Optional<ButtonType> result = showConfirmationAlert("Confirm Update", "Are you sure you want to update the book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -246,7 +253,7 @@ public class BookControl extends BaseDashBoardControl {
                     bookTitleAdjField.getText().isEmpty() ? selectedBook.getName() : bookTitleAdjField.getText(),
                     bookAuthorAdjField.getText().isEmpty() ? selectedBook.getAuthor() : bookAuthorAdjField.getText(),
                     bookPublisherAdjField.getText().isEmpty() ? selectedBook.getPublisher() : bookPublisherAdjField.getText(),
-                    bookYearAdjField.getText().isEmpty() ? selectedBook.getPublishedDate() : bookYearAdjField.getText(),
+                    newDate.isEmpty() ? selectedBook.getPublishedDate() : newDate,
                     selectedBook.getImage()
             );
 
