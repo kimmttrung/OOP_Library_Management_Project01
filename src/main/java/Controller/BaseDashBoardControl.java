@@ -78,10 +78,5 @@ public class BaseDashBoardControl {
             e.printStackTrace();
         }
     }
-
-    protected void applySceneTransition2(Button sourceButton, String fxmlPath) {
-        Stage currentStage = (Stage) sourceButton.getScene().getWindow();
-        currentStage.hide();
-    }
 }
 

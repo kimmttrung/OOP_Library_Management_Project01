@@ -142,9 +142,9 @@
                             </font>
                         </Label>
                         <Pane prefHeight="67.0" prefWidth="301.0" HBox.hgrow="SOMETIMES" />
-                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" styleClass="button_edit" stylesheets="@../css/admin.css">
+                        <Button fx:id="edit_btn" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="48.0" prefWidth="85.0" styleClass="button_edit" stylesheets="@../css/admin.css">
                             <graphic>
-                                <FontAwesomeIconView glyphName="SEARCH" size="30" />
+                                <FontAwesomeIconView glyphName="EDIT" size="30" wrappingWidth="42.0" />
                             </graphic>
                             <HBox.margin>
                                 <Insets left="30.0" />
