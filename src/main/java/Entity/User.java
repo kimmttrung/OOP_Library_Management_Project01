@@ -14,12 +14,6 @@ public class User {
         this.registrationDate = getCurrentDate();
     }
 
-//    public User(String userName, String password) {
-//        this.userName = userName;
-//        this.password = password;
-//        this.registrationDate = getCurrentDate();
-//    }
-
     public User(String userName, String password, String phoneNumber) {
         this.userName = userName;
         this.password = password;
