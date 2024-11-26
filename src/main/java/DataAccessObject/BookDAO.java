@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -236,4 +237,33 @@ public class BookDAO {
             e.printStackTrace();
         }
     }
+
+    public boolean updateBook(Book book, int bookID) {
+        String sql = "UPDATE books SET name = ?, author = ?, publisher = ?, publishedDate = ? WHERE bookID = ?";
+        Connection conn = null;
+        PreparedStatement pst = null;
+
+        try {
+            conn = DataBase.getConnection();
+            pst = conn.prepareStatement(sql);
+
+            // Cập nhật thông tin sách trong câu lệnh SQL
+            pst.setString(1, book.getName());
+            pst.setString(2, book.getAuthor());
+            pst.setString(3, book.getPublisher());
+            pst.setString(4, book.getPublishedDate());
+            pst.setInt(5, bookID);  // Thay vì lấy book.getBookID(), sử dụng tham số bookID
+
+            // Execute the update and check if any rows were affected
+            int affectedRows = pst.executeUpdate();
+            return affectedRows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, pst, null); // Đảm bảo đóng các tài nguyên
+        }
+        return false;
+    }
+
+
 }
