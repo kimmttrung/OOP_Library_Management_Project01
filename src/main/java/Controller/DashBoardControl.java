@@ -35,8 +35,6 @@ import static Animation.ColorTransitionExample.addColorTransition;
 public class DashBoardControl extends BaseDashBoardControl {
 
     @FXML
-    private Button backLeft_btn;
-    @FXML
     private PieChart pieChart;
     @FXML
     private Button borrowerBook_btn;
@@ -214,8 +212,6 @@ public class DashBoardControl extends BaseDashBoardControl {
                 applySceneTransition(borrowerBook_btn, "/fxml/BorrowerView.fxml");
             } else if (event.getSource() == userAll_btn || event.getSource() == userAll_dashBoard_btn) {
                 applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
-            } else if (event.getSource() == backLeft_btn) {
-                applySceneTransition(backLeft_btn, "/fxml/DashBoardUser.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -29,8 +29,6 @@ public class DashBoardUserControl extends BaseDashBoardControl{
     private Button SerachAPIUser_btn;
     @FXML
     private BarChart<String, Double> chartUser;
-    @FXML
-    private Button backRight_btn;
 
     public void initialize() {
         XYChart.Series<String, Double> series2 = new XYChart.Series<>();
@@ -59,8 +57,6 @@ public class DashBoardUserControl extends BaseDashBoardControl{
                 applySceneTransition(BookLibrary_btn, "/fxml/MemberView.fxml");
             } else if (event.getSource() == SerachAPIUser_btn) {
                 applySceneTransition(SerachAPIUser_btn, "/fxml/SearchAPIUser.fxml");
-            } else if (event.getSource() == backRight_btn) {
-                applySceneTransition(backRight_btn, "/fxml/DashBoardView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

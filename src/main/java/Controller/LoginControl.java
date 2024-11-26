@@ -185,7 +185,7 @@ public class LoginControl {
                     e.printStackTrace();
                 }
             } else if (role.equals("User")) {
-                User user = new User(signup_username.getText(), signup_password.getText(), "Click to edit PhoneNumber", LocalDate.now().toString());
+                User user = new User(signup_username.getText(), signup_password.getText(), "Updating!!!", LocalDate.now().toString());
                 UserDAO userDAO = new UserDAO();
                 userDAO.addUser(user);
                 showAlert(Alert.AlertType.INFORMATION, "Info", "Account registered successfully");

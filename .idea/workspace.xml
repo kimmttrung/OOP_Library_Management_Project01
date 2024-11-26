@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63531a95-e8f3-4cea-9323-8598e099f883" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/WriteComment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardUserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DashBoardUserControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Member.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/MemberBorrowControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/MemberBorrowControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/CommentBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/CommentBook.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/DashBoardUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/DashBoardUser.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -119,7 +117,7 @@
       <workItem from="1732546143567" duration="1292000" />
       <workItem from="1732547451697" duration="4849000" />
       <workItem from="1732603880399" duration="15000" />
-      <workItem from="1732610784867" duration="11881000" />
+      <workItem from="1732610784867" duration="12206000" />
     </task>
     <servers />
   </component>
