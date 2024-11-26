@@ -1,5 +1,7 @@
 package Controller;
 
+import DataAccessObject.UserDAO;
+import Entity.User;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -19,6 +21,7 @@ import Database.DataBase;
 import javafx.util.Duration;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,7 +114,7 @@ public class LoginControl {
                     Session.getInstance().setUserID(Integer.parseInt(id));
 
                     // Chuyển đến giao diện User
-                    showAlert(Alert.AlertType.INFORMATION, "Welcome", "Login successful!\nID: " + id + "\nPhone: " + phoneNumber);
+                    showAlert(Alert.AlertType.INFORMATION, "Welcome", "Login successful!\nID: " + id);
                     openDashboard("/fxml/DashBoardUser.fxml");
                 } else {
                     // Không tìm thấy trong cả hai bảng
@@ -145,38 +148,51 @@ public class LoginControl {
         } else if (signup_password.getText().length() < 4) {
             showAlert(Alert.AlertType.ERROR, "Error", "Passwords must be at least 4 characters");
         } else {
-            String checkUsername = "SELECT * FROM accounts WHERE username = ?";
-            connect = DataBase.getConnection();
-            try {
-                pst = connect.prepareStatement(checkUsername);
-                pst.setString(1, signup_username.getText());
-                resultSet = pst.executeQuery();
-
-                if (resultSet.next()) {
-                    showAlert(Alert.AlertType.ERROR, "Error", signup_username.getText() + " is already taken");
-                } else {
-
-                    String insertData = "INSERT INTO accounts "
-                            + "(username, password, role) "
-                            + "VALUES(?,?,?)";
-
-                    pst = connect.prepareStatement(insertData);
+            String role = String.valueOf(signup_selectQuestion.getSelectionModel().getSelectedItem());
+            if (role.equals("Admin")) {
+                String checkUsername = "SELECT * FROM accounts WHERE username = ?";
+                connect = DataBase.getConnection();
+                try {
+                    pst = connect.prepareStatement(checkUsername);
                     pst.setString(1, signup_username.getText());
-                    pst.setString(2, signup_password.getText());
-                    pst.setString(3, (String) signup_selectQuestion.getSelectionModel().getSelectedItem());
+                    resultSet = pst.executeQuery();
 
-                    int affectedRows = pst.executeUpdate();
-                    if (affectedRows > 0) {
-                        showAlert(Alert.AlertType.INFORMATION, "Info", "Account registered successfully");
+                    if (resultSet.next()) {
+                        showAlert(Alert.AlertType.ERROR, "Error", signup_username.getText() + " is already taken");
+                    } else {
+
+                        String insertData = "INSERT INTO accounts "
+                                + "(username, password, role) "
+                                + "VALUES(?,?,?)";
+
+                        pst = connect.prepareStatement(insertData);
+                        pst.setString(1, signup_username.getText());
+                        pst.setString(2, signup_password.getText());
+                        pst.setString(3, (String) signup_selectQuestion.getSelectionModel().getSelectedItem());
+
+                        int affectedRows = pst.executeUpdate();
+                        if (affectedRows > 0) {
+                            showAlert(Alert.AlertType.INFORMATION, "Info", "Account registered successfully");
+                        }
+
+                        registerClearFields();
+
+                        signup_form.setVisible(false);
+                        login_form.setVisible(true);
                     }
 
-                    registerClearFields();
-
-                    signup_form.setVisible(false);
-                    login_form.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } else if (role.equals("User")) {
+                User user = new User(signup_username.getText(), signup_password.getText(), "Click to edit PhoneNumber", LocalDate.now().toString());
+                UserDAO userDAO = new UserDAO();
+                userDAO.addUser(user);
+                showAlert(Alert.AlertType.INFORMATION, "Info", "Account registered successfully");
+                registerClearFields();
+
+                signup_form.setVisible(false);
+                login_form.setVisible(true);
             }
         }
     }

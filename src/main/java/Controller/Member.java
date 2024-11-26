@@ -2,7 +2,6 @@ package Controller;
 
 import API.QRCodeGenerator;
 import DataAccessObject.BookDAO;
-import DataAccessObject.BorrowerDAO;
 import Entity.Book;
 import com.google.zxing.WriterException;
 import javafx.animation.FadeTransition;
@@ -70,14 +69,8 @@ public class Member extends BaseDashBoardControl {
     @FXML
     private Button Back_btn;
 
-    private double x = 0;
-    private double y = 0;
-
     private final BookDAO bookDAO = new BookDAO();
-    private BorrowerDAO borrowerDAO = new BorrowerDAO();
-    private final ObservableList<Book> searchResults = FXCollections.observableArrayList();
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
-    private DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
 
     @FXML
     public void initialize() {

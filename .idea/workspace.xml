@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63531a95-e8f3-4cea-9323-8598e099f883" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/ReturnBookMemberHandle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/Session.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/ListBookBorrowed.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/WriteComment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/API/GoogleBooksAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/API/GoogleBooksAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Member.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/MemberBorrowControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/MemberBorrowControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/BorrowUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/BorrowUser.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MemberView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MemberView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/CommentBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/CommentBook.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,7 +119,7 @@
       <workItem from="1732546143567" duration="1292000" />
       <workItem from="1732547451697" duration="4849000" />
       <workItem from="1732603880399" duration="15000" />
-      <workItem from="1732610784867" duration="9675000" />
+      <workItem from="1732610784867" duration="11881000" />
     </task>
     <servers />
   </component>

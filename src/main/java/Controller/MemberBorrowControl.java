@@ -4,14 +4,13 @@ import DataAccessObject.BookDAO;
 import DataAccessObject.BorrowerDAO;
 import DataAccessObject.UserDAO;
 import Entity.Book;
-import Entity.Borrower;
 import Entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -131,51 +130,57 @@ public class MemberBorrowControl extends BaseDashBoardControl {
         bookImageView.setImage(image);
     }
 
-    @FXML
-    private void writeComment() {
-        try {
-            String comment = commentField.getText();
-            String bookIDText = bookIDField.getText();
+//    @FXML
+//    private void writeComment() {
+//        try {
+//            String comment = commentField.getText();
+//            String bookIDText = bookIDField.getText();
+//
+//            if (comment == null || comment.trim().isEmpty()) {
+//                showAlert(Alert.AlertType.ERROR, "Comment", "Comment is empty.");
+//                return;
+//            }
+//
+//            if (bookIDText == null || bookIDText.trim().isEmpty()) {
+//                showAlert(Alert.AlertType.ERROR, "Comment", "Book ID is empty.");
+//                return;
+//            }
+//
+//            Integer bookID = Integer.parseInt(bookIDText);
+//
+//            // Check if book exits
+//            Book book = bookDAO.getBookByID(bookID);
+//            if (book == null) {
+//                showAlert(Alert.AlertType.ERROR, "Comment", "Book not found.");
+//                return;
+//            }
+//
+//            // Add comment to database
+//            bookDAO.addComment(bookID, comment);
+//            showAlert(Alert.AlertType.INFORMATION, "Comment", "Comment added successfully!");
+//
+//            commentField.clear();
+//            bookIDField.clear();
+//
+//        } catch (NumberFormatException e) {
+//            showAlert(Alert.AlertType.ERROR, "Comment", "Invalid Book ID. Please enter a valid number.");
+//        } catch (Exception e) {
+//            showAlert(Alert.AlertType.ERROR, "Comment", "An error occurred: " + e.getMessage());
+//            e.printStackTrace();
+//        }
+//    }
 
-            if (comment == null || comment.trim().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Comment", "Comment is empty.");
-                return;
-            }
-
-            if (bookIDText == null || bookIDText.trim().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Comment", "Book ID is empty.");
-                return;
-            }
-
-            Integer bookID = Integer.parseInt(bookIDText);
-
-            // Check if book exits
-            Book book = bookDAO.getBookByID(bookID);
-            if (book == null) {
-                showAlert(Alert.AlertType.ERROR, "Comment", "Book not found.");
-                return;
-            }
-
-            // Add comment to database
-            bookDAO.addComment(bookID, comment);
-            showAlert(Alert.AlertType.INFORMATION, "Comment", "Comment added successfully!");
-
-            commentField.clear();
-            bookIDField.clear();
-
-        } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Comment", "Invalid Book ID. Please enter a valid number.");
-        } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Comment", "An error occurred: " + e.getMessage());
-            e.printStackTrace();
-        }
+    @Override
+    protected void applySceneTransition(Button sourceButton, String fxmlPath) {
+        Stage currentStage = (Stage) sourceButton.getScene().getWindow();
+        currentStage.hide();
     }
 
     @FXML
     public void DownloadPages(ActionEvent event) {
         try {
             if (event.getSource() == cancel_btn) {
-                applySceneTransition2(cancel_btn, "/fxml/MemberView.fxml");
+                applySceneTransition(cancel_btn, "/fxml/MemberView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();
