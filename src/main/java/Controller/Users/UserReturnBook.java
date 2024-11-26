@@ -1,8 +1,11 @@
-package Controller;
+package Controller.Users;
+import Controller.BaseDashBoardControl;
 import DataAccessObject.BookDAO;
 import DataAccessObject.BorrowerDAO;
 import Entity.Book;
 import Entity.Borrower;
+import Singleton.Session;
+import Tools.DateStringFormatter;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,9 +21,9 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static Controller.AlertHelper.showAlert;
-import static Controller.AlertHelper.showConfirmationAlert;
-public class ReturnBookMemberHandle extends BaseDashBoardControl{
+import static Tools.AlertHelper.showAlert;
+import static Tools.AlertHelper.showConfirmationAlert;
+public class UserReturnBook extends BaseDashBoardControl {
     @FXML
     private Button Back_btn;
     @FXML
@@ -228,7 +231,7 @@ public class ReturnBookMemberHandle extends BaseDashBoardControl{
                     applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
                 }
             } else if (event.getSource() == Back_btn) {
-                applySceneTransition(Back_btn, "/fxml/MemberView.fxml");
+                applySceneTransition(Back_btn, "/fxml/Users/MemberView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

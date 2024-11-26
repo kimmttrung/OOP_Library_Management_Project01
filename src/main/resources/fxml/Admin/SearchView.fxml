@@ -14,23 +14,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SearchAPI">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.SearchAPI">
     <children>
         <AnchorPane fx:id="searchAPI_from" layoutX="217.0" layoutY="73.0" prefHeight="750.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <AnchorPane layoutX="1.0" prefHeight="69.0" prefWidth="1101.0">
                     <children>
-                        <Button fx:id="bars_btn" layoutY="1.0" mnemonicParsing="false" onAction="#sliderBars" stylesheets="@../css/DashBoard.css">
+                        <Button fx:id="bars_btn" layoutY="1.0" mnemonicParsing="false" onAction="#sliderBars" stylesheets="@../../css/DashBoard.css">
                             <graphic>
                                 <FontAwesomeIconView glyphName="BARS" size="30" />
                             </graphic>
                         </Button>
-                        <Button fx:id="close_btn" layoutX="1061.0" layoutY="1.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/DashBoard.css">
+                        <Button fx:id="close_btn" layoutX="1061.0" layoutY="1.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../../css/DashBoard.css">
                             <graphic>
                                 <FontAwesomeIconView glyphName="CLOSE" size="30" />
                             </graphic>
                         </Button>
-                        <Button fx:id="minus_btn" layoutX="1021.0" layoutY="1.0" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../css/DashBoard.css">
+                        <Button fx:id="minus_btn" layoutX="1021.0" layoutY="1.0" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../../css/DashBoard.css">
                             <graphic>
                                 <FontAwesomeIconView glyphName="MINUS" size="30" />
                             </graphic>
@@ -51,16 +51,16 @@
                     <children>
                         <AnchorPane layoutX="-6.0" prefHeight="687.0" prefWidth="296.0">
                             <children>
-                                <AnchorPane layoutX="1.0" layoutY="87.0" prefHeight="662.0" prefWidth="335.0" styleClass="mainCenter" stylesheets="@../css/DashBoard.css">
+                                <AnchorPane layoutX="1.0" layoutY="87.0" prefHeight="662.0" prefWidth="335.0" styleClass="mainCenter" stylesheets="@../../css/DashBoard.css">
                                     <children>
-                                        <AnchorPane layoutX="10.0" layoutY="11.0" prefHeight="667.0" prefWidth="318.0" styleClass="nav-form1" stylesheets="@../css/Member.css">
+                                        <AnchorPane layoutX="10.0" layoutY="11.0" prefHeight="667.0" prefWidth="318.0" styleClass="nav-form1" stylesheets="@../../css/Member.css">
                                             <children>
                                     <Label layoutX="23.0" layoutY="264.0" text="Title:">
                                        <font>
                                           <Font name="Segoe UI Black Italic" size="18.0" />
                                        </font>
                                     </Label>
-                                                <AnchorPane layoutX="86.0" layoutY="21.0" prefHeight="201.0" prefWidth="145.0" styleClass="image-card" stylesheets="@../css/DashBoard.css">
+                                                <AnchorPane layoutX="86.0" layoutY="21.0" prefHeight="201.0" prefWidth="145.0" styleClass="image-card" stylesheets="@../../css/DashBoard.css">
                                                     <children>
                                                         <ImageView fx:id="bookImageView" fitHeight="201.0" fitWidth="155.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                                                     </children>
@@ -71,7 +71,7 @@
                                        </font>
                                     </Label>
                                     <Label fx:id="categoriesLabel" layoutX="23.0" layoutY="362.0" prefHeight="44.0" prefWidth="249.0" text="..." />
-                                                <Button layoutX="92.0" layoutY="591.0" mnemonicParsing="false" onAction="#saveSelectedBook" prefHeight="49.0" prefWidth="134.0" styleClass="save-btn" stylesheets="@../css/DashBoard.css" text="Save To Library" />
+                                                <Button layoutX="92.0" layoutY="591.0" mnemonicParsing="false" onAction="#saveSelectedBook" prefHeight="49.0" prefWidth="134.0" styleClass="save-btn" stylesheets="@../../css/DashBoard.css" text="Save To Library" />
                                     <Label fx:id="titleLabel" layoutX="23.0" layoutY="291.0" prefHeight="44.0" prefWidth="249.0" text="..." />
                                     <Label layoutX="23.0" layoutY="410.0" text="Name of author:">
                                        <font>
@@ -87,21 +87,21 @@
                                     <Label fx:id="publisherLabel" layoutX="23.0" layoutY="508.0" prefHeight="44.0" prefWidth="249.0" text="..." />
                                             </children>
                                         </AnchorPane>
-                                        <AnchorPane fx:id="nav_from" layoutY="-3.0" prefHeight="693.0" prefWidth="335.0" styleClass="nav-form" stylesheets="@../css/DashBoard.css">
+                                        <AnchorPane fx:id="nav_from" layoutY="-3.0" prefHeight="693.0" prefWidth="335.0" styleClass="nav-form" stylesheets="@../../css/DashBoard.css">
                                             <children>
-                                                <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/DashBoard.css">
+                                                <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../../css/DashBoard.css">
                                                     <graphic>
                                                         <FontAwesomeIconView glyphName="SIGN_OUT" size="30" />
                                                     </graphic>
                                                 </Button>
-                                                <Label layoutX="66.0" layoutY="108.0" prefHeight="61.0" prefWidth="183.0" styleClass="edit-label" stylesheets="@../css/DashBoard.css" text="Welcome" textFill="WHITE">
+                                                <Label layoutX="66.0" layoutY="108.0" prefHeight="61.0" prefWidth="183.0" styleClass="edit-label" stylesheets="@../../css/DashBoard.css" text="Welcome" textFill="WHITE">
                                                     <font>
                                                         <Font name="Segoe UI Black" size="72.0" />
                                                     </font>
                                                 </Label>
                                                 <AnchorPane layoutX="31.0" layoutY="169.0" prefHeight="92.0" prefWidth="254.0">
                                                     <children>
-                                                        <Button fx:id="bookAll_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                                                        <Button fx:id="bookAll_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../css/DashBoard.css">
                                                             <font>
                                                                 <Font name="Microsoft Sans Serif" size="12.0" />
                                                             </font>
@@ -123,7 +123,7 @@
                                                                 <Font size="18.0" />
                                                             </font>
                                                         </Label>
-                                                        <Button fx:id="userAll_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                                                        <Button fx:id="userAll_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../css/DashBoard.css">
                                                             <graphic>
                                                                 <FontAwesomeIconView glyphName="USER" size="50" />
                                                             </graphic>
@@ -137,7 +137,7 @@
                                                                 <Font size="18.0" />
                                                             </font>
                                                         </Label>
-                                                        <Button fx:id="searchAPI_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                                                        <Button fx:id="searchAPI_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../css/DashBoard.css">
                                                             <graphic>
                                                                 <FontAwesomeIconView glyphName="SEARCH" size="50" />
                                                             </graphic>
@@ -151,7 +151,7 @@
                                                                 <Font size="18.0" />
                                                             </font>
                                                         </Label>
-                                                        <Button fx:id="dashBoard_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                                                        <Button fx:id="dashBoard_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../css/DashBoard.css">
                                                             <graphic>
                                                                 <FontAwesomeIconView glyphName="HOME" size="50" />
                                                             </graphic>
@@ -162,7 +162,7 @@
                                        <children>
                                           <ImageView fitHeight="105.0" fitWidth="120.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../image/profile.png" />
+                                                <Image url="@../../image/profile.png" />
                                              </image>
                                           </ImageView>
                                        </children>
@@ -174,7 +174,7 @@
                                                                 <Font size="18.0" />
                                                             </font>
                                                         </Label>
-                                                        <Button fx:id="borrowerBook_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                                                        <Button fx:id="borrowerBook_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../css/DashBoard.css">
                                                             <graphic>
                                                                 <FontAwesomeIconView glyphName="USER_CIRCLE" size="50" />
                                                             </graphic>
@@ -185,7 +185,7 @@
                                         </AnchorPane>
                                     </children>
                                 </AnchorPane>
-                                <Label layoutX="80.0" layoutY="14.0" stylesheets="@../css/DashBoard.css" text="SEARCH API">
+                                <Label layoutX="80.0" layoutY="14.0" stylesheets="@../../css/DashBoard.css" text="SEARCH API">
                                     <font>
                                         <Font name="Segoe UI Black" size="24.0" />
                                     </font>
@@ -200,16 +200,16 @@
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <Button layoutX="679.0" layoutY="37.0" mnemonicParsing="false" onAction="#searchBook" styleClass="find_btn" stylesheets="@../css/DashBoard.css">
+                                <Button layoutX="679.0" layoutY="37.0" mnemonicParsing="false" onAction="#searchBook" styleClass="find_btn" stylesheets="@../../css/DashBoard.css">
                                     <graphic>
                                         <FontAwesomeIconView glyphName="SEARCH" size="30" />
                                     </graphic>
                                 </Button>
-                                <AnchorPane layoutX="11.0" layoutY="83.0" prefHeight="693.0" prefWidth="773.0" styleClass="mainCenter" stylesheets="@../css/DashBoard.css">
+                                <AnchorPane layoutX="11.0" layoutY="83.0" prefHeight="693.0" prefWidth="773.0" styleClass="mainCenter" stylesheets="@../../css/DashBoard.css">
                            <children>
                               <AnchorPane layoutX="21.0" layoutY="392.0" prefHeight="291.0" prefWidth="742.0">
                                  <children>
-                                    <BarChart fx:id="chart" layoutX="121.0" layoutY="-45.0" prefHeight="355.3333333333333" prefWidth="742.0" styleClass="chart-bar" stylesheets="@../css/searchAPI.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <BarChart fx:id="chart" layoutX="121.0" layoutY="-45.0" prefHeight="355.3333333333333" prefWidth="742.0" styleClass="chart-bar" stylesheets="@../../css/searchAPI.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
@@ -220,7 +220,7 @@
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>
-                                <TableView fx:id="searchBookTable" layoutX="21.0" layoutY="91.0" prefHeight="377.0" prefWidth="756.0" styleClass="card-form" stylesheets="@../css/DashBoard.css">
+                                <TableView fx:id="searchBookTable" layoutX="21.0" layoutY="91.0" prefHeight="377.0" prefWidth="756.0" styleClass="card-form" stylesheets="@../../css/DashBoard.css">
                                     <columns>
                                         <TableColumn fx:id="categoryColumn" prefWidth="118.0" text="Categories" />
                                         <TableColumn fx:id="titleColumn" prefWidth="272.0" text="Title" />

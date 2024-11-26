@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="513.0" prefWidth="728.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.WriteComment">
+<AnchorPane prefHeight="513.0" prefWidth="728.0" styleClass="nav-btn" stylesheets="@../../css/DashBoard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Users.WriteComment">
     <children>
-        <Button layoutX="223.0" layoutY="430.0" mnemonicParsing="false" onAction="#writeComment" prefHeight="39.0" prefWidth="77.0" styleClass="close-btn" stylesheets="@../css/DashBoard.css" text="SUBMIT" />
-        <Button fx:id="cancel_btn" layoutX="421.0" layoutY="430.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="39.0" prefWidth="81.0" styleClass="find_btn" stylesheets="@../css/DashBoard.css" text="CANCEL" />
+        <Button layoutX="223.0" layoutY="430.0" mnemonicParsing="false" onAction="#writeComment" prefHeight="39.0" prefWidth="77.0" styleClass="close-btn" stylesheets="@../../css/DashBoard.css" text="SUBMIT" />
+        <Button fx:id="cancel_btn" layoutX="421.0" layoutY="430.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="39.0" prefWidth="81.0" styleClass="find_btn" stylesheets="@../../css/DashBoard.css" text="CANCEL" />
         <Label layoutX="36.0" layoutY="116.0" prefHeight="35.0" prefWidth="112.0" text="Book ID:" textFill="WHITE">
             <font>
                 <Font name="Segoe UI Black Italic" size="24.0" />

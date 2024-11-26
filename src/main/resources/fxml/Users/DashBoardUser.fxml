@@ -8,29 +8,28 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SearchAPIUser">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Users.UsersDashBoard">
     <left>
-        <VBox prefHeight="850.0" prefWidth="185.0" styleClass="nav-form1" stylesheets="@../css/Member.css" BorderPane.alignment="CENTER">
+        <VBox prefHeight="850.0" prefWidth="185.0" styleClass="nav-form1" stylesheets="@../../css/Member.css" BorderPane.alignment="CENTER">
             <children>
-                <VBox alignment="CENTER" prefHeight="309.0" prefWidth="157.0" styleClass="profile-layout" stylesheets="@../css/admin.css">
+                <VBox alignment="CENTER" prefHeight="309.0" prefWidth="157.0" styleClass="profile-layout" stylesheets="@../../css/admin.css">
                     <children>
                         <ImageView fitHeight="146.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../image/admin.jpg" />
+                                <Image url="@../../image/admin.jpg" />
                             </image>
                         </ImageView>
-                        <Label fx:id="UID" textFill="WHITE">
+                        <Label fx:id="UID" text="MemBer" textFill="WHITE">
                             <font>
                                 <Font name="Corbel Bold" size="24.0" />
                             </font>
@@ -43,14 +42,14 @@
                         <Insets left="5.0" right="5.0" />
                     </VBox.margin>
                 </VBox>
-                <VBox alignment="CENTER" prefHeight="515.0" prefWidth="145.0" styleClass="nav-form1" stylesheets="@../css/Member.css">
+                <VBox alignment="CENTER" prefHeight="515.0" prefWidth="145.0" styleClass="nav-form1" stylesheets="@../../css/Member.css">
                     <VBox.margin>
                         <Insets left="10.0" right="10.0" />
                     </VBox.margin>
                     <children>
                         <HBox alignment="CENTER" prefHeight="55.0" prefWidth="165.0">
                             <children>
-                                <Button fx:id="BookLibrary_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="nav-btn" stylesheets="@../css/Member.css">
+                                <Button fx:id="BookLibrary_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="nav-btn" stylesheets="@../../css/Member.css">
                                     <graphic>
                                         <FontAwesomeIconView glyphName="BOOK" size="40" />
                                     </graphic>
@@ -74,7 +73,7 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="214.0" prefHeight="55.0" prefWidth="165.0">
                             <children>
-                                <Button fx:id="SerachAPIUser_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="nav-btn" stylesheets="@../css/Member.css">
+                                <Button fx:id="SerachAPIUser_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="nav-btn" stylesheets="@../../css/Member.css">
                                     <graphic>
                                         <FontAwesomeIconView glyphName="SEARCH" size="40" />
                                     </graphic>
@@ -98,7 +97,7 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="265.0" prefHeight="55.0" prefWidth="165.0">
                             <children>
-                                <Button fx:id="DashBoardUser_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="nav-btn" stylesheets="@../css/Member.css">
+                                <Button fx:id="BookUser_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="nav-btn" stylesheets="@../../css/Member.css">
                                     <graphic>
                                         <FontAwesomeIconView glyphName="HOME" size="40" />
                                     </graphic>
@@ -110,7 +109,7 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="293.0" prefHeight="46.0" prefWidth="165.0">
                             <children>
-                                <Label text="DashBoard" textFill="#fdfdfd">
+                                <Label text="DashBoard Member" textFill="#fdfdfd">
                                     <font>
                                         <Font name="Corbel Bold" size="18.0" />
                                     </font>
@@ -122,7 +121,7 @@
                         </HBox>
                     </children>
                 </VBox>
-                <Button fx:id="signOut_btn" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/DashBoard.css">
+                <Button fx:id="signOut_btn" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="56.0" prefWidth="59.0" styleClass="logout-btn" stylesheets="@../../css/DashBoard.css">
                     <graphic>
                         <FontAwesomeIconView glyphName="SIGN_OUT" size="30" />
                     </graphic>
@@ -131,11 +130,11 @@
         </VBox>
     </left>
     <center>
-        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="white_background" stylesheets="@../css/admin.css" BorderPane.alignment="CENTER">
+        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="white_background" stylesheets="@../../css/admin.css" BorderPane.alignment="CENTER">
             <children>
-                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="nav-form2" stylesheets="@../css/Member.css">
+                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="nav-form1" stylesheets="@../../css/Member.css">
                     <children>
-                        <Label prefHeight="28.0" prefWidth="200.0" text="Search API" textFill="#2bb341">
+                        <Label prefHeight="28.0" prefWidth="216.0" text="DashBoard Member" textFill="#2bb341">
                             <HBox.margin>
                                 <Insets left="30.0" />
                             </HBox.margin>
@@ -143,54 +142,38 @@
                                 <Font name="Corbel Bold" size="24.0" />
                             </font>
                         </Label>
-                        <Pane prefHeight="100.0" prefWidth="326.0" HBox.hgrow="ALWAYS" />
-                        <TextField fx:id="searchField" prefHeight="48.0" prefWidth="360.0" promptText="Enter Book's Name" />
-                        <Button mnemonicParsing="false" onAction="#searchBook" prefHeight="38.0" prefWidth="70.0" styleClass="button_edit" stylesheets="@../css/admin.css">
+                        <Pane prefHeight="67.0" prefWidth="301.0" HBox.hgrow="SOMETIMES" />
+                        <Button fx:id="edit_btn" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="48.0" prefWidth="85.0" styleClass="button_edit" stylesheets="@../../css/admin.css">
                             <graphic>
-                                <FontAwesomeIconView glyphName="SEARCH" size="30" />
+                                <FontAwesomeIconView glyphName="EDIT" size="30" wrappingWidth="42.0" />
                             </graphic>
                             <HBox.margin>
                                 <Insets left="30.0" />
                             </HBox.margin>
                         </Button>
-                        <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../css/DashBoard.css">
+                        <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../../css/DashBoard.css">
                             <graphic>
                                 <FontAwesomeIconView glyphName="MINUS" size="30" />
                             </graphic>
                         </Button>
-                        <Button fx:id="close_btn" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/DashBoard.css">
+                        <Button fx:id="close_btn" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../../css/DashBoard.css">
                             <graphic>
                                 <FontAwesomeIconView glyphName="CLOSE" size="30" />
                             </graphic>
                         </Button>
                     </children>
                 </HBox>
-            <HBox prefHeight="492.0" prefWidth="909.0">
-               <children>
-                  <ScrollPane prefHeight="492.0" prefWidth="907.0">
-                     <content>
-                        <TableView fx:id="searchBookTable" prefHeight="491.0" prefWidth="901.0" styleClass="card-form" stylesheets="@../css/DashBoard.css">
-                           <columns>
-                              <TableColumn fx:id="categoryColumn" prefWidth="118.0" text="Categories" />
-                              <TableColumn fx:id="titleColumn" prefWidth="272.0" text="Title" />
-                              <TableColumn fx:id="authorColumn" prefWidth="130.0" text="Author" />
-                              <TableColumn fx:id="publisherColumn" prefWidth="128.0" text="Publisher" />
-                              <TableColumn fx:id="publishedDateColumn" prefWidth="119.0" text="Published Date" />
-                              <TableColumn fx:id="languageColumn" prefWidth="122.0" text="Language" />
-                           </columns>
-                        </TableView>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </HBox>
-            <HBox prefHeight="259.0" prefWidth="909.0">
-               <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="image-card" stylesheets="@../css/Book.css">
+                <HBox alignment="CENTER_LEFT" prefHeight="365.0" prefWidth="909.0" styleClass="nav-form2" stylesheets="@../../css/Member.css">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <children>
+                        <AnchorPane prefHeight="308.0" prefWidth="459.0">
                      <children>
-                        <ImageView fx:id="bookImageView" fitHeight="257.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Circle fill="DODGERBLUE" layoutX="177.0" layoutY="183.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                      </children>
-                  </HBox>
-                  <BarChart fx:id="chartAPIUser2" prefHeight="260.0" prefWidth="724.0" styleClass="chart-bar" stylesheets="@../css/searchAPI.css">
+                        </AnchorPane>
+                  <BarChart fx:id="chartUser" prefHeight="365.0" prefWidth="661.0" styleClass="chart-bar" stylesheets="@../../css/searchAPI.css">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -198,8 +181,30 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </BarChart>
+                    </children>
+                </HBox>
+                <HBox prefHeight="325.0" prefWidth="910.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="385.0" prefWidth="983.0" vbarPolicy="NEVER">
+                     <content>
+                        <HBox fx:id="imageContainer" alignment="CENTER" prefHeight="376.0" prefWidth="1351.0">
+                           <children>
+                              <ImageView fx:id="myImageView1" fitHeight="338.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="myImageView2" fitHeight="338.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="myImageView3" fitHeight="338.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="myImageView4" fitHeight="338.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="myImageView5" fitHeight="338.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="myImageView6" fitHeight="338.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="myImageView7" fitHeight="338.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="myImageView8" fitHeight="338.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="myImageView9" fitHeight="338.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="myImageView10" fitHeight="338.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </HBox>
+                     </content>
+                  </ScrollPane>
                </children>
-            </HBox>
+                </HBox>
             </children>
             <BorderPane.margin>
                 <Insets left="5.0" />

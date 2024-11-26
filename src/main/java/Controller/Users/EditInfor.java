@@ -1,7 +1,9 @@
-package Controller;
+package Controller.Users;
 
+import Controller.BaseDashBoardControl;
 import DataAccessObject.UserDAO;
 import Entity.User;
+import Singleton.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,10 +11,10 @@ import javafx.stage.Stage;
 
 import java.util.Optional;
 
-import static Controller.AlertHelper.showAlert;
-import static Controller.AlertHelper.showConfirmationAlert;
+import static Tools.AlertHelper.showAlert;
+import static Tools.AlertHelper.showConfirmationAlert;
 
-public class EditInfor extends BaseDashBoardControl{
+public class EditInfor extends BaseDashBoardControl {
     @FXML
     private Label RegDateLabel;
     @FXML
@@ -69,7 +71,7 @@ public class EditInfor extends BaseDashBoardControl{
     public void DownloadPages(ActionEvent event) {
         try {
             if (event.getSource() == cancel_btn) {
-                applySceneTransition(cancel_btn, "/fxml/MemberView.fxml");
+                applySceneTransition(cancel_btn, "/fxml/Users/MemberView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

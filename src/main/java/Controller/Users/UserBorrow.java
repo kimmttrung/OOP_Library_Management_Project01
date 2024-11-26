@@ -1,10 +1,13 @@
-package Controller;
+package Controller.Users;
 
+import Controller.BaseDashBoardControl;
 import DataAccessObject.BookDAO;
 import DataAccessObject.BorrowerDAO;
 import DataAccessObject.UserDAO;
 import Entity.Book;
 import Entity.User;
+import Singleton.Session;
+import Tools.DateStringFormatter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,10 +18,10 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static Controller.AlertHelper.showAlert;
-import static Controller.AlertHelper.showConfirmationAlert;
+import static Tools.AlertHelper.showAlert;
+import static Tools.AlertHelper.showConfirmationAlert;
 
-public class MemberBorrowControl extends BaseDashBoardControl {
+public class UserBorrow extends BaseDashBoardControl {
     @FXML
     private Button cancel_btn;
     @FXML
@@ -140,7 +143,7 @@ public class MemberBorrowControl extends BaseDashBoardControl {
     public void DownloadPages(ActionEvent event) {
         try {
             if (event.getSource() == cancel_btn) {
-                applySceneTransition(cancel_btn, "/fxml/MemberView.fxml");
+                applySceneTransition(cancel_btn, "/fxml/Users/MemberView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

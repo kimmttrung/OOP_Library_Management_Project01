@@ -1,9 +1,11 @@
-package Controller;
+package Controller.Admin;
 
 import API.QRCodeGenerator;
+import Controller.BaseDashBoardControl;
 import DataAccessObject.BorrowerDAO;
 import Entity.Book;
 import DataAccessObject.BookDAO;
+import Tools.DateStringFormatter;
 import com.google.zxing.WriterException;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -30,8 +32,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import static Controller.AlertHelper.showAlert;
-import static Controller.AlertHelper.showConfirmationAlert;
+import static Tools.AlertHelper.showAlert;
+import static Tools.AlertHelper.showConfirmationAlert;
 import static Animation.ColorTransitionExample.addColorTransition;
 
 
@@ -392,13 +394,13 @@ public class BookControl extends BaseDashBoardControl {
                     applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
                 }
             } else if (event.getSource() == searchAPI_btn) {
-                applySceneTransition(searchAPI_btn, "/fxml/SearchView.fxml");
+                applySceneTransition(searchAPI_btn, "/fxml/Admin/SearchView.fxml");
             } else if (event.getSource() == dashBoard_btn) {
-                applySceneTransition(dashBoard_btn, "/fxml/DashBoardView.fxml");
+                applySceneTransition(dashBoard_btn, "/fxml/Admin/DashBoardView.fxml");
             } else if (event.getSource() == borrowerBook_btn) {
-                applySceneTransition(borrowerBook_btn, "/fxml/BorrowerView.fxml");
+                applySceneTransition(borrowerBook_btn, "/fxml/Admin/BorrowerView.fxml");
             } else if (event.getSource() == userAll_btn) {
-                applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
+                applySceneTransition(userAll_btn, "/fxml/Admin/UserView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

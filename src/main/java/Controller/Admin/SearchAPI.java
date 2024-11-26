@@ -1,6 +1,7 @@
-package Controller;
+package Controller.Admin;
 
 import API.GoogleBooksAPI;
+import Controller.BaseDashBoardControl;
 import DataAccessObject.BookDAO;
 import Entity.Book;
 import com.google.gson.JsonArray;
@@ -9,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,57 +23,88 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.util.Optional;
 
-import static Controller.AlertHelper.showAlert;
-import static Controller.AlertHelper.showConfirmationAlert;
+import static Tools.AlertHelper.showAlert;
+import static Tools.AlertHelper.showConfirmationAlert;
+import static Animation.ColorTransitionExample.addColorTransition;
 
-public class SearchAPIUser extends BaseDashBoardControl {
+
+public class SearchAPI extends BaseDashBoardControl {
     @FXML
-    private Button BookLibrary_btn;
-    @FXML
-    private Button DashBoardUser_btn;
-    @FXML
-    private BarChart<String, Double> chartAPIUser2;
-    @FXML
-    private Button close_btn;
-    @FXML
-    private Button minus_btn;
-    @FXML
-    private Button signOut_btn;
+    private Button arrow_btn;
     @FXML
     private TableColumn<?, ?> authorColumn;
+    @FXML
+    private Button bars_btn;
+    @FXML
+    private Button bookAll_btn;
     @FXML
     private ImageView bookImageView;
     @FXML
     private TableView<Book> searchBookTable;
     @FXML
+    private Button dashBoard_btn;
+    @FXML
     private TableColumn<?, ?> categoryColumn;
+    @FXML
+    private Button minus_btn;
+    @FXML
+    private Button close_btn;
+    @FXML
+    private AnchorPane nav_from;
     @FXML
     private TableColumn<?, ?> publishedDateColumn;
     @FXML
     private TableColumn<?, ?> publisherColumn;
     @FXML
+    private Button signOut_btn;
+    @FXML
     private TableColumn<?, ?> titleColumn;
     @FXML
-    private TableColumn<?, ?> languageColumn;
+    private Button userAll_btn;
+    @FXML
+    private Button borrowerBook_btn;
     @FXML
     private TextField searchField;
     @FXML
-    private Label UID;
+    private Label titleLabel, authorLabel, publisherLabel, categoriesLabel;
+    @FXML
+    private BarChart<String, Double> chart;
+    @FXML
+    private AnchorPane searchAPI_from;
 
     private final BookDAO bookDAO = new BookDAO();
     private final ObservableList<Book> searchResults = FXCollections.observableArrayList();
 
+    @FXML
     public void initialize() {
+        XYChart.Series<String, Double> series1 = new XYChart.Series<>();
+        series1.setName("Happy New Year 2025");
+        series1.getData().add(new XYChart.Data("Mystery ", 500));
+        series1.getData().add(new XYChart.Data("Sport ", 300));
+        series1.getData().add(new XYChart.Data("History ", 200));
+        series1.getData().add(new XYChart.Data("Poetry ", 400));
+        series1.getData().add(new XYChart.Data("Health ", 700));
+        series1.getData().add(new XYChart.Data("Romance  ", 100));
+        series1.getData().add(new XYChart.Data("Biography  ", 150));
+        series1.getData().add(new XYChart.Data("Travel  ", 250));
+
+        chart.getData().add(series1);
+
+        nav_from.setTranslateX(-335);
+        // Set initial UI state for navigation panel and buttons
+        bars_btn.setVisible(true);
+        arrow_btn.setVisible(false);
+
         // Set up the table columns, listener for book selection, and load initial search results
         setUpTableColumns();
         setUpBookSelectionListener();
         loadSearchResults();
-        setUpChart();
-        UID.setText("UID: " + Session.getInstance().getUserID());
+        addColorTransition(searchAPI_from);
     }
 
     private void setUpTableColumns() {
@@ -80,7 +113,6 @@ public class SearchAPIUser extends BaseDashBoardControl {
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
-        languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
     }
 
     private void setUpBookSelectionListener() {
@@ -90,6 +122,13 @@ public class SearchAPIUser extends BaseDashBoardControl {
                 bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
                 return;
             }
+
+            // If a book is selected, update the book details in the UI
+            titleLabel.setText(newSelection.getName());
+            authorLabel.setText(newSelection.getAuthor());
+            publisherLabel.setText(newSelection.getPublisher());
+            categoriesLabel.setText(newSelection.getCategory());
+
             // Set the image of the selected book, or default if not available
             String imageLink = newSelection.getImage();
             Image image = (imageLink != null && !imageLink.isEmpty())
@@ -97,20 +136,6 @@ public class SearchAPIUser extends BaseDashBoardControl {
                     : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
             bookImageView.setImage(image);
         });
-    }
-
-    private void setUpChart() {
-        XYChart.Series<String, Double> series2 = new XYChart.Series<>();
-        series2.getData().add(new XYChart.Data("Fiction", 600));
-        series2.getData().add(new XYChart.Data("Adventure", 450));
-        series2.getData().add(new XYChart.Data("Science", 300));
-        series2.getData().add(new XYChart.Data("Fantasy", 800));
-        series2.getData().add(new XYChart.Data("Cooking", 500));
-        series2.getData().add(new XYChart.Data("Travel", 350));
-        series2.getData().add(new XYChart.Data("Self-Help", 400));
-        series2.getData().add(new XYChart.Data("Technology", 550));
-
-        chartAPIUser2.getData().add(series2);
     }
 
     private void loadSearchResults() {
@@ -164,13 +189,12 @@ public class SearchAPIUser extends BaseDashBoardControl {
                         if (volumeInfo.has("categories") && volumeInfo.get("categories").isJsonArray() && volumeInfo.getAsJsonArray("categories").size() > 0) {
                             category = volumeInfo.getAsJsonArray("categories").get(0).getAsString();
                         }
-                        String language = volumeInfo.has("language") ? volumeInfo.get("language").getAsString() : "Unknown";
                         String imageLink = volumeInfo.has("imageLinks") && volumeInfo.getAsJsonObject("imageLinks").has("thumbnail")
                                 ? volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString()
                                 : null;
 
                         // Create a Book object and add it to the search results list
-                        Book book = new Book(title, authors, publisher, publishedDate, imageLink, category, language);
+                        Book book = new Book(title, authors, publisher, publishedDate, imageLink, category);
                         searchResults.add(book);
                     }
                 } catch (Exception e) {
@@ -248,10 +272,14 @@ public class SearchAPIUser extends BaseDashBoardControl {
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
                 }
-            } else if (event.getSource() == BookLibrary_btn) {
-                applySceneTransition(BookLibrary_btn, "/fxml/MemberView.fxml");
-            } else if (event.getSource() == DashBoardUser_btn) {
-                applySceneTransition(DashBoardUser_btn, "/fxml/DashBoardUser.fxml");
+            } else if (event.getSource() == bookAll_btn) {
+                applySceneTransition(bookAll_btn, "/fxml/Admin/BookView.fxml");
+            } else if (event.getSource() == dashBoard_btn) {
+                applySceneTransition(dashBoard_btn, "/fxml/Admin/DashBoardView.fxml");
+            } else if (event.getSource() == borrowerBook_btn) {
+                applySceneTransition(borrowerBook_btn, "/fxml/Admin/BorrowerView.fxml");
+            } else if (event.getSource() == userAll_btn) {
+                applySceneTransition(userAll_btn, "/fxml/Admin/UserView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -280,5 +308,36 @@ public class SearchAPIUser extends BaseDashBoardControl {
     public void minimize(){
         Stage stage = (Stage)minus_btn.getScene().getWindow();
         stage.setIconified(true);
+    }
+
+    public void sliderArrow() {
+
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(.5));
+        slide.setNode(nav_from);
+        slide.setToX(-335);
+
+        slide.setOnFinished((ActionEvent event) -> {
+            bars_btn.setVisible(true);
+            arrow_btn.setVisible(false);
+        });
+
+        slide.play();
+    }
+
+    public void sliderBars() {
+
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(.5));
+        slide.setNode(nav_from);
+        slide.setToX(0);
+
+
+        slide.setOnFinished((ActionEvent event) -> {
+            arrow_btn.setVisible(true);
+            bars_btn.setVisible(false);
+        });
+
+        slide.play();
     }
 }

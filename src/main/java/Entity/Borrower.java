@@ -1,9 +1,6 @@
 package Entity;
 
-import Controller.DateStringFormatter;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import Tools.DateStringFormatter;
 
 public class Borrower {
     private int id;

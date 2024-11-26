@@ -20,30 +20,30 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BorrowerControl">
+<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.BorrowerControl">
     <top>
         <AnchorPane fx:id="borrower_from_animation" prefHeight="633.0" prefWidth="1121.0" BorderPane.alignment="CENTER">
             <AnchorPane layoutX="3.0" layoutY="474.0" prefHeight="285.0" prefWidth="1117.0">
 
-                <Button layoutX="433.0" layoutY="212.0" onAction="#borrowBook" prefHeight="38.0" prefWidth="51.0" styleClass="iconBookInfor" stylesheets="@../css/Borrower.css" AnchorPane.leftAnchor="433.0" AnchorPane.topAnchor="212.0">
+                <Button layoutX="433.0" layoutY="212.0" onAction="#borrowBook" prefHeight="38.0" prefWidth="51.0" styleClass="iconBookInfor" stylesheets="@../../css/Borrower.css" AnchorPane.leftAnchor="433.0" AnchorPane.topAnchor="212.0">
                     <graphic>
                         <FontAwesomeIconView glyphName="CLIPBOARD" size="40" />
                     </graphic></Button>
-                <Button layoutX="561.0" layoutY="212.0" mnemonicParsing="false" onAction="#renewBook" styleClass="iconBookInfor" stylesheets="@../css/Borrower.css">
+                <Button layoutX="561.0" layoutY="212.0" mnemonicParsing="false" onAction="#renewBook" styleClass="iconBookInfor" stylesheets="@../../css/Borrower.css">
                     <graphic>
                         <FontAwesomeIconView glyphName="ARROW_CIRCLE_LEFT" size="40" />
                     </graphic></Button>
-                <Button layoutX="682.0" layoutY="212.0" mnemonicParsing="false" onAction="#returnBook" styleClass="iconBookInfor" stylesheets="@../css/Borrower.css">
+                <Button layoutX="682.0" layoutY="212.0" mnemonicParsing="false" onAction="#returnBook" styleClass="iconBookInfor" stylesheets="@../../css/Borrower.css">
                     <graphic>
                         <FontAwesomeIconView glyphName="ARROW_CIRCLE_RIGHT" size="40" text="" />
                     </graphic></Button>
-                <AnchorPane layoutX="899.0" layoutY="38.0" prefHeight="224.0" prefWidth="172.0" styleClass="image-card" stylesheets="@../css/DashBoard.css">
+                <AnchorPane layoutX="899.0" layoutY="38.0" prefHeight="224.0" prefWidth="172.0" styleClass="image-card" stylesheets="@../../css/DashBoard.css">
                     <children>
                         <ImageView fx:id="bookImageView" fitHeight="222.0" fitWidth="169.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
                     </children>
                 </AnchorPane>
                 <Label layoutX="436.0" layoutY="267.0" text="BORROW" />
-                <Label layoutX="564.0" layoutY="267.0" text="RENEW" />
+                <Label layoutX="564.0" layoutY="267.0" text="EXTEND" />
                 <Label layoutX="687.0" layoutY="267.0" text="RETURN" />
                 <AnchorPane layoutX="52.0" layoutY="33.0" prefHeight="200.0" prefWidth="200.0">
                     <children>
@@ -90,7 +90,7 @@
             </AnchorPane>
             <AnchorPane layoutX="2.0" layoutY="2.0" prefHeight="61.0" prefWidth="1111.0">
                 <children>
-                    <Button fx:id="bars_btn" mnemonicParsing="false" onAction="#sliderBars" stylesheets="@../css/DashBoard.css">
+                    <Button fx:id="bars_btn" mnemonicParsing="false" onAction="#sliderBars" stylesheets="@../../css/DashBoard.css">
                         <graphic>
                             <FontAwesomeIconView glyphName="BARS" size="30" />
                         </graphic>
@@ -100,17 +100,17 @@
                             <FontAwesomeIconView glyphName="ARROW_LEFT" size="30" />
                         </graphic>
                     </Button>
-                    <Button fx:id="close_btn" layoutX="1071.0" layoutY="-1.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../css/DashBoard.css">
+                    <Button fx:id="close_btn" layoutX="1071.0" layoutY="-1.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../../css/DashBoard.css">
                         <graphic>
                             <FontAwesomeIconView glyphName="CLOSE" size="30" />
                         </graphic>
                     </Button>
-                    <Button fx:id="minus_btn" layoutX="1031.0" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../css/DashBoard.css">
+                    <Button fx:id="minus_btn" layoutX="1031.0" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../../css/DashBoard.css">
                         <graphic>
                             <FontAwesomeIconView glyphName="MINUS" size="30" />
                         </graphic>
                     </Button>
-                    <Label layoutX="452.0" layoutY="13.0" stylesheets="@../css/DashBoard.css" text="BORROWER INFO" textFill="#56c59e">
+                    <Label layoutX="452.0" layoutY="13.0" stylesheets="@../../css/DashBoard.css" text="BORROWER INFO" textFill="#56c59e">
                         <font>
                             <Font name="Segoe UI Black" size="24.0" />
                         </font>
@@ -121,7 +121,7 @@
                 <content>
                     <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="327.0" prefWidth="1008.0" vbarPolicy="ALWAYS">
                         <content>
-                            <TableView fx:id="borrowerTable" prefHeight="375.0" prefWidth="1024.0" styleClass="card-form" stylesheets="@../css/DashBoard.css">
+                            <TableView fx:id="borrowerTable" prefHeight="375.0" prefWidth="1024.0" styleClass="card-form" stylesheets="@../../css/DashBoard.css">
                                 <columns>
                                     <TableColumn fx:id="idColumn" editable="false" prefWidth="82.0" style="-fx-alignment: CENTER;" text="      List">
                                         <cellValueFactory>
@@ -156,21 +156,21 @@
                     </ScrollPane>
                 </content>
             </TitledPane>
-            <AnchorPane fx:id="nav_from" layoutY="74.0" prefHeight="684.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../css/DashBoard.css">
+            <AnchorPane fx:id="nav_from" layoutY="74.0" prefHeight="684.0" prefWidth="315.0" styleClass="nav-form" stylesheets="@../../css/DashBoard.css">
                 <children>
-                    <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../css/DashBoard.css">
+                    <Button fx:id="signOut_btn" layoutX="8.0" layoutY="634.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../../css/DashBoard.css">
                         <graphic>
                             <FontAwesomeIconView glyphName="SIGN_OUT" size="30" />
                         </graphic>
                     </Button>
-                    <Label layoutX="66.0" layoutY="108.0" prefHeight="61.0" prefWidth="183.0" styleClass="edit-label" stylesheets="@../css/DashBoard.css" text="Welcome" textFill="WHITE">
+                    <Label layoutX="66.0" layoutY="108.0" prefHeight="61.0" prefWidth="183.0" styleClass="edit-label" stylesheets="@../../css/DashBoard.css" text="Welcome" textFill="WHITE">
                         <font>
                             <Font name="Segoe UI Black" size="72.0" />
                         </font>
                     </Label>
                     <AnchorPane layoutX="31.0" layoutY="169.0" prefHeight="92.0" prefWidth="254.0">
                         <children>
-                            <Button fx:id="bookAll_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                            <Button fx:id="bookAll_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../css/DashBoard.css">
                                 <font>
                                     <Font name="Microsoft Sans Serif" size="12.0" />
                                 </font>
@@ -192,7 +192,7 @@
                                     <Font size="18.0" />
                                 </font>
                             </Label>
-                            <Button fx:id="userAll_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                            <Button fx:id="userAll_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../css/DashBoard.css">
                                 <graphic>
                                     <FontAwesomeIconView glyphName="USER" size="50" text="" />
                                 </graphic>
@@ -206,7 +206,7 @@
                                     <Font size="18.0" />
                                 </font>
                             </Label>
-                            <Button fx:id="searchAPI_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                            <Button fx:id="searchAPI_btn" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../css/DashBoard.css">
                                 <graphic>
                                     <FontAwesomeIconView glyphName="SEARCH" size="50" />
                                 </graphic>
@@ -220,7 +220,7 @@
                                     <Font size="18.0" />
                                 </font>
                             </Label>
-                            <Button fx:id="dashBoard_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                            <Button fx:id="dashBoard_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../css/DashBoard.css">
                                 <graphic>
                                     <FontAwesomeIconView glyphName="HOME" size="50" text="" />
                                 </graphic>
@@ -239,7 +239,7 @@
                                     <Font size="18.0" />
                                 </font>
                             </Label>
-                            <Button fx:id="borrowerBook_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../css/DashBoard.css">
+                            <Button fx:id="borrowerBook_btn" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="60.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../css/DashBoard.css">
                                 <graphic>
                                     <FontAwesomeIconView glyphName="USER_CIRCLE" size="50" />
                                 </graphic>
@@ -249,7 +249,7 @@
                 </children>
             </AnchorPane>
             <TextField fx:id="findBorrowerField" layoutX="393.0" layoutY="65.0" prefHeight="41.0" prefWidth="329.0" promptText="Enter Borrower's Name" />
-            <Button layoutX="738.0" layoutY="66.0" mnemonicParsing="false" onAction="#searchBorrowerByUserName" styleClass="find_btn" stylesheets="@../css/Borrower.css">
+            <Button layoutX="738.0" layoutY="66.0" mnemonicParsing="false" onAction="#searchBorrowerByUserName" styleClass="find_btn" stylesheets="@../../css/Borrower.css">
                 <graphic>
                     <FontAwesomeIconView glyphName="SEARCH" size="30" />
                 </graphic>

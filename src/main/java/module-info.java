@@ -23,4 +23,12 @@ module management.libarymanagement {
     exports Entity;
     exports Database;
     exports Animation;
+    exports Tools;
+    opens Tools to javafx.fxml;
+    exports Singleton;
+    opens Singleton to javafx.fxml;
+    exports Controller.Admin;
+    opens Controller.Admin to javafx.fxml;
+    exports Controller.Users;
+    opens Controller.Users to javafx.fxml;
 }

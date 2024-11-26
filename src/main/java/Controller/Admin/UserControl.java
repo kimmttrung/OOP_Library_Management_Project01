@@ -1,5 +1,6 @@
-package Controller;
+package Controller.Admin;
 
+import Controller.BaseDashBoardControl;
 import DataAccessObject.BorrowerDAO;
 import Entity.User;
 import DataAccessObject.UserDAO;
@@ -23,7 +24,7 @@ import javafx.util.Duration;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static Controller.AlertHelper.*;
+import static Tools.AlertHelper.*;
 import static Animation.ColorTransitionExample.addColorTransition;
 
 public class UserControl extends BaseDashBoardControl {
@@ -246,13 +247,13 @@ public class UserControl extends BaseDashBoardControl {
                     applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
                 }
             } else if (event.getSource() == searchAPI_btn) {
-                applySceneTransition(searchAPI_btn, "/fxml/SearchView.fxml");
+                applySceneTransition(searchAPI_btn, "/fxml/Admin/SearchView.fxml");
             } else if (event.getSource() == dashBoard_btn) {
-                applySceneTransition(dashBoard_btn, "/fxml/DashBoardView.fxml");
+                applySceneTransition(dashBoard_btn, "/fxml/Admin/DashBoardView.fxml");
             } else if (event.getSource() == borrowerBook_btn) {
-                applySceneTransition(borrowerBook_btn, "/fxml/BorrowerView.fxml");
+                applySceneTransition(borrowerBook_btn, "/fxml/Admin/BorrowerView.fxml");
             } else if (event.getSource() == bookAll_btn) {
-                applySceneTransition(bookAll_btn, "/fxml/BookView.fxml");
+                applySceneTransition(bookAll_btn, "/fxml/Admin/BookView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

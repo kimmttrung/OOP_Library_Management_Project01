@@ -2,12 +2,12 @@ package Controller;
 
 import DataAccessObject.UserDAO;
 import Entity.User;
+import Singleton.Session;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -84,7 +84,7 @@ public class LoginControl {
                 // Nếu tìm thấy trong accounts
                 String role = resultSet.getString("role");
                 if ("Admin".equalsIgnoreCase(role)) {
-                    openDashboard("/fxml/DashBoardView.fxml");
+                    openDashboard("/fxml/Admin/DashBoardView.fxml");
                 } else if ("User".equalsIgnoreCase(role)) {
                     // Khi là User, truyền userID vào controller
                     String userId = resultSet.getString("id");
@@ -92,7 +92,7 @@ public class LoginControl {
                     Session.getInstance().setUserID(Integer.parseInt(userId));
 
                     // Chuyển đến giao diện User
-                    openDashboard("/fxml/DashBoardUser.fxml");  // Mở giao diện DashBoardUser
+                    openDashboard("/fxml/Users/DashBoardUser.fxml");  // Mở giao diện DashBoardUser
 
                     // Sau khi truyền userID, mở dashboard và hiển thị thông tin người dùng
                     showAlert(Alert.AlertType.INFORMATION, "Welcome", "Login successful!\nID: " + userId);
@@ -109,13 +109,12 @@ public class LoginControl {
                 if (resultSet.next()) {
                     // Nếu tìm thấy trong users
                     String id = resultSet.getString("id");
-                    String phoneNumber = resultSet.getString("phoneNumber");
 
                     Session.getInstance().setUserID(Integer.parseInt(id));
 
                     // Chuyển đến giao diện User
                     showAlert(Alert.AlertType.INFORMATION, "Welcome", "Login successful!\nID: " + id);
-                    openDashboard("/fxml/DashBoardUser.fxml");
+                    openDashboard("/fxml/Users/DashBoardUser.fxml");
                 } else {
                     // Không tìm thấy trong cả hai bảng
                     showAlert(Alert.AlertType.ERROR, "Error", "Username or Password is Incorrect");

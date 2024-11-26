@@ -1,5 +1,6 @@
-package Controller;
+package Controller.Admin;
 
+import Controller.BaseDashBoardControl;
 import DataAccessObject.BookDAO;
 import DataAccessObject.BorrowerDAO;
 import DataAccessObject.UserDAO;
@@ -7,6 +8,8 @@ import Entity.Book;
 import Entity.Borrower;
 import Entity.User;
 
+import Singleton.Session;
+import Tools.DateStringFormatter;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -30,11 +33,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import static Controller.AlertHelper.showAlert;
-import static Controller.AlertHelper.showConfirmationAlert;
+import static Tools.AlertHelper.showAlert;
+import static Tools.AlertHelper.showConfirmationAlert;
 import static Animation.ColorTransitionExample.addColorTransition;
 
-public class BorrowerControl extends BaseDashBoardControl{
+public class BorrowerControl extends BaseDashBoardControl {
 
     @FXML
     private TextField borrowerIDField, bookIDField, findBorrowerField, borrowID;
@@ -357,13 +360,13 @@ public class BorrowerControl extends BaseDashBoardControl{
                     applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
                 }
             } else if (event.getSource() == searchAPI_btn) {
-                applySceneTransition(searchAPI_btn, "/fxml/SearchView.fxml");
+                applySceneTransition(searchAPI_btn, "/fxml/Admin/SearchView.fxml");
             } else if (event.getSource() == dashBoard_btn) {
-                applySceneTransition(dashBoard_btn, "/fxml/DashBoardView.fxml");
+                applySceneTransition(dashBoard_btn, "/fxml/Admin/DashBoardView.fxml");
             } else if (event.getSource() == bookAll_btn) {
-                applySceneTransition(bookAll_btn, "/fxml/BookView.fxml");
+                applySceneTransition(bookAll_btn, "/fxml/Admin/BookView.fxml");
             } else if (event.getSource() == userAll_btn) {
-                applySceneTransition(userAll_btn, "/fxml/UserView.fxml");
+                applySceneTransition(userAll_btn, "/fxml/Admin/UserView.fxml");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

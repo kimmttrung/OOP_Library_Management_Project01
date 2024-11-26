@@ -1,4 +1,4 @@
-package Controller;
+package Singleton;
 
 public class Session {
     private static Session instance;

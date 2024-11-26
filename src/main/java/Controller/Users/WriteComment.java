@@ -1,5 +1,6 @@
-package Controller;
+package Controller.Users;
 
+import Controller.BaseDashBoardControl;
 import DataAccessObject.BookDAO;
 import Entity.Book;
 import javafx.event.ActionEvent;
@@ -7,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import static Controller.AlertHelper.showAlert;
+import static Tools.AlertHelper.showAlert;
 
 public class WriteComment extends BaseDashBoardControl {
     @FXML
@@ -69,7 +70,7 @@ public class WriteComment extends BaseDashBoardControl {
     public void DownloadPages(ActionEvent event) {
         try {
             if (event.getSource() == cancel_btn) {
-                applySceneTransition(cancel_btn, "/fxml/MemberView.fxml");
+                applySceneTransition(cancel_btn, "/fxml/Users/MemberView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

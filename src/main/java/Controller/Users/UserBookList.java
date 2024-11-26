@@ -1,8 +1,10 @@
-package Controller;
+package Controller.Users;
 
 import API.QRCodeGenerator;
+import Controller.BaseDashBoardControl;
 import DataAccessObject.BookDAO;
 import Entity.Book;
+import Singleton.Session;
 import com.google.zxing.WriterException;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -25,10 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static Controller.AlertHelper.showAlert;
-import static Controller.AlertHelper.showConfirmationAlert;
+import static Tools.AlertHelper.showAlert;
+import static Tools.AlertHelper.showConfirmationAlert;
 
-public class Member extends BaseDashBoardControl {
+public class UserBookList extends BaseDashBoardControl {
 
     @FXML
     private Button borrowUser_btn;
@@ -276,19 +278,19 @@ public class Member extends BaseDashBoardControl {
                     applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
                 }
             } else if (event.getSource() == SerachAPIUser_btn) {
-                applySceneTransition(SerachAPIUser_btn, "/fxml/SearchAPIUser.fxml");
+                applySceneTransition(SerachAPIUser_btn, "/fxml/Users/SearchAPIUser.fxml");
             } else if (event.getSource() == borrowUser_btn) {
-                applySceneTransition1(borrowUser_btn, "/fxml/BorrowUser.fxml");
+                applySceneTransition1(borrowUser_btn, "/fxml/Users/BorrowUser.fxml");
             } else if (event.getSource() == commentUser_btn) {
-                applySceneTransition1(commentUser_btn, "/fxml/CommentBook.fxml");
+                applySceneTransition1(commentUser_btn, "/fxml/Users/CommentBook.fxml");
             } else if (event.getSource() == cancel_btn) {
-                applySceneTransition(cancel_btn, "/fxml/MemberView.fxml");
+                applySceneTransition(cancel_btn, "/fxml/Users/MemberView.fxml");
             } else if (event.getSource() == DashBoardUser_btn) {
-                applySceneTransition(DashBoardUser_btn, "/fxml/DashBoardUser.fxml");
+                applySceneTransition(DashBoardUser_btn, "/fxml/Users/DashBoardUser.fxml");
             } else if (event.getSource() == Return_btn) {
-                applySceneTransition(Return_btn, "/fxml/ListBookBorrowed.fxml");
+                applySceneTransition(Return_btn, "/fxml/Users/ListBookBorrowed.fxml");
             } else if (event.getSource() == Back_btn) {
-                applySceneTransition(Back_btn, "/fxml/MemberView.fxml");
+                applySceneTransition(Back_btn, "/fxml/Users/MemberView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();

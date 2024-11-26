@@ -1,27 +1,26 @@
-package Controller;
+package Controller.Admin;
 
+import Controller.BaseDashBoardControl;
 import DataAccessObject.BookDAO;
-import Database.DataBase;
 import Entity.Book;
-import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.ScaleTransition;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import Database.DataBase;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -31,28 +30,45 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static Controller.AlertHelper.showConfirmationAlert;
+import static Tools.AlertHelper.showConfirmationAlert;
+import static Animation.ColorTransitionExample.addColorTransition;
 
-public class DashBoardUserControl extends BaseDashBoardControl{
+public class DashBoardControl extends BaseDashBoardControl {
 
     @FXML
-    private Button close_btn;
+    private PieChart pieChart;
     @FXML
-    private Button minus_btn;
+    private Button borrowerBook_btn;
+    @FXML
+    private Button bars_btn;
+    @FXML
+    private Button arrow_btn;
     @FXML
     private Button signOut_btn;
     @FXML
-    private Button BookLibrary_btn;
+    private Button bookAll_btn;
     @FXML
-    private Button SerachAPIUser_btn;
+    private Button minus_btn;
     @FXML
-    private Button edit_btn;
+    private Button close_btn;
     @FXML
-    private Label UID;
+    private AnchorPane nav_from, dashBoardView_from;
     @FXML
-    private BarChart<String, Double> chartUser;
+    private Button searchAPI_btn;
+    @FXML
+    private Button userAll_btn;
+    @FXML
+    private Label bookCountLabel;
+    @FXML
+    private Label userCountLabel;
+    @FXML
+    private Label borrowerCountLabel;
+    @FXML
+    private Circle circleProfile;
     @FXML
     private ScrollPane scrollPane;
+    @FXML
+    private Button bookAll_dashBoard_btn, borrowerDashBoard_btn, userAll_dashBoard_btn;
     @FXML
     private ImageView myImageView1, myImageView2, myImageView3, myImageView4, myImageView5;
     @FXML
@@ -60,11 +76,12 @@ public class DashBoardUserControl extends BaseDashBoardControl{
 
     BookDAO bookDAO = new BookDAO();
 
-
+    @FXML
     public void initialize() {
+        setUpInit();
+        updateCounts();
         setImageView();
-        setChartUser();
-        UID.setText("UID: " + Session.getInstance().getUserID());
+        addColorTransition(dashBoardView_from);
 
         // Create a timeline to implement smooth scrolling effect
         Timeline timeline = new Timeline(
@@ -74,23 +91,12 @@ public class DashBoardUserControl extends BaseDashBoardControl{
         timeline.play();
     }
 
-    private void setChartUser() {
-        XYChart.Series<String, Double> series2 = new XYChart.Series<>();
-        series2.setName("Happy New Year 2027");
-        series2.getData().add(new XYChart.Data("Mystery ", 500));
-        series2.getData().add(new XYChart.Data("Sport ", 300));
-        series2.getData().add(new XYChart.Data("History ", 200));
-        series2.getData().add(new XYChart.Data("Poetry ", 400));
-        series2.getData().add(new XYChart.Data("Health ", 700));
-        series2.getData().add(new XYChart.Data("Romance ", 100));
-        series2.getData().add(new XYChart.Data("Biography  ", 150));
-        series2.getData().add(new XYChart.Data("Python ", 250));
-        chartUser.getData().add(series2);
-    }
-
     private void setImageView() {
         // Set the profile image in the circle profile
-        // Create  Task to load image links from the database in the background
+        Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
+        circleProfile.setFill(new ImagePattern(image));
+
+        // Create a Task to load image links from the database in the background
         Task<List<String>> loadImagesTask = new Task<>() {
             @Override
             protected List<String> call() throws Exception {
@@ -167,6 +173,30 @@ public class DashBoardUserControl extends BaseDashBoardControl{
         }
     }
 
+    private void setUpInit() {
+        // Set up initial pie chart data for different categories
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Science", 40),
+                        new PieChart.Data("History", 30),
+                        new PieChart.Data("Technology", 20),
+                        new PieChart.Data("Sports", 70)
+                );
+
+        pieChartData.forEach(data -> data.nameProperty().bind(
+                Bindings.concat(
+                        data.getName(), ": ", data.pieValueProperty()  // Bind name and value for display
+                )
+        ));
+
+        pieChart.getData().addAll(pieChartData);
+
+        // Set up the initial state for navigation and buttons
+        nav_from.setTranslateX(-320);
+        bars_btn.setVisible(true);
+        arrow_btn.setVisible(false);
+    }
+
     @FXML
     public void DownloadPages(ActionEvent event) {
         try {
@@ -175,12 +205,14 @@ public class DashBoardUserControl extends BaseDashBoardControl{
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
                 }
-            } else if (event.getSource() == BookLibrary_btn) {
-                applySceneTransition(BookLibrary_btn, "/fxml/MemberView.fxml");
-            } else if (event.getSource() == SerachAPIUser_btn) {
-                applySceneTransition(SerachAPIUser_btn, "/fxml/SearchAPIUser.fxml");
-            } else if (event.getSource() == edit_btn) {
-                applySceneTransition1(edit_btn, "/fxml/EditInfor.fxml");
+            } else if (event.getSource() == searchAPI_btn) {
+                applySceneTransition(searchAPI_btn, "/fxml/Admin/SearchView.fxml");
+            } else if (event.getSource() == bookAll_btn || event.getSource() == bookAll_dashBoard_btn) {
+                applySceneTransition(bookAll_btn, "/fxml/Admin/BookView.fxml");
+            } else if (event.getSource() == borrowerBook_btn || event.getSource() == borrowerDashBoard_btn) {
+                applySceneTransition(borrowerBook_btn, "/fxml/Admin/BorrowerView.fxml");
+            } else if (event.getSource() == userAll_btn || event.getSource() == userAll_dashBoard_btn) {
+                applySceneTransition(userAll_btn, "/fxml/Admin/UserView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -209,5 +241,46 @@ public class DashBoardUserControl extends BaseDashBoardControl{
     public void minimize(){
         Stage stage = (Stage)minus_btn.getScene().getWindow();
         stage.setIconified(true);
+    }
+
+    public void sliderArrow() {
+
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(.5));
+        slide.setNode(nav_from);
+        slide.setToX(-320);
+
+        slide.setOnFinished((ActionEvent event) -> {
+            bars_btn.setVisible(true);
+            arrow_btn.setVisible(false);
+        });
+
+        slide.play();
+    }
+
+    public void sliderBars() {
+
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(.5));
+        slide.setNode(nav_from);
+        slide.setToX(0);
+
+
+        slide.setOnFinished((ActionEvent event) -> {
+            arrow_btn.setVisible(true);
+            bars_btn.setVisible(false);
+        });
+
+        slide.play();
+    }
+
+    public void updateCounts() {
+        int bookCount = DataBase.getCount("books");
+        int userCount = DataBase.getCount("users");
+        int borrowerCount = DataBase.getCount("borrowers");
+
+        bookCountLabel.setText("" + bookCount);
+        userCountLabel.setText("" + userCount);
+        borrowerCountLabel.setText("" + borrowerCount);
     }
 }
