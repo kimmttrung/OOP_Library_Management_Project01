@@ -61,7 +61,7 @@ public class DateStringFormatter {
      */
     public boolean isValidDate(String dateString) {
         try {
-            parseDate(dateString);
+            LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             return true;
         } catch (DateTimeParseException e) {
             return false;
