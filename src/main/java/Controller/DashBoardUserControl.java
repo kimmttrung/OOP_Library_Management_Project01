@@ -15,6 +15,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -47,11 +48,11 @@ public class DashBoardUserControl extends BaseDashBoardControl{
     @FXML
     private Button edit_btn;
     @FXML
+    private Label UID;
+    @FXML
     private BarChart<String, Double> chartUser;
     @FXML
     private ScrollPane scrollPane;
-    @FXML
-    private Button bookAll_dashBoard_btn, borrowerDashBoard_btn, userAll_dashBoard_btn;
     @FXML
     private ImageView myImageView1, myImageView2, myImageView3, myImageView4, myImageView5;
     @FXML
@@ -63,6 +64,7 @@ public class DashBoardUserControl extends BaseDashBoardControl{
     public void initialize() {
         setImageView();
         setChartUser();
+        UID.setText("UID: " + Session.getInstance().getUserID());
 
         // Create a timeline to implement smooth scrolling effect
         Timeline timeline = new Timeline(

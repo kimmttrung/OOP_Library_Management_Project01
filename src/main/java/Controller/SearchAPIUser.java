@@ -59,27 +59,19 @@ public class SearchAPIUser extends BaseDashBoardControl {
     private TableColumn<?, ?> languageColumn;
     @FXML
     private TextField searchField;
+    @FXML
+    private Label UID;
 
     private final BookDAO bookDAO = new BookDAO();
     private final ObservableList<Book> searchResults = FXCollections.observableArrayList();
 
     public void initialize() {
-        XYChart.Series<String, Double> series2 = new XYChart.Series<>();
-        series2.getData().add(new XYChart.Data("Fiction", 600));
-        series2.getData().add(new XYChart.Data("Adventure", 450));
-        series2.getData().add(new XYChart.Data("Science", 300));
-        series2.getData().add(new XYChart.Data("Fantasy", 800));
-        series2.getData().add(new XYChart.Data("Cooking", 500));
-        series2.getData().add(new XYChart.Data("Travel", 350));
-        series2.getData().add(new XYChart.Data("Self-Help", 400));
-        series2.getData().add(new XYChart.Data("Technology", 550));
-
-        chartAPIUser2.getData().add(series2);
-
         // Set up the table columns, listener for book selection, and load initial search results
         setUpTableColumns();
         setUpBookSelectionListener();
         loadSearchResults();
+        setUpChart();
+        UID.setText("UID: " + Session.getInstance().getUserID());
     }
 
     private void setUpTableColumns() {
@@ -105,6 +97,20 @@ public class SearchAPIUser extends BaseDashBoardControl {
                     : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
             bookImageView.setImage(image);
         });
+    }
+
+    private void setUpChart() {
+        XYChart.Series<String, Double> series2 = new XYChart.Series<>();
+        series2.getData().add(new XYChart.Data("Fiction", 600));
+        series2.getData().add(new XYChart.Data("Adventure", 450));
+        series2.getData().add(new XYChart.Data("Science", 300));
+        series2.getData().add(new XYChart.Data("Fantasy", 800));
+        series2.getData().add(new XYChart.Data("Cooking", 500));
+        series2.getData().add(new XYChart.Data("Travel", 350));
+        series2.getData().add(new XYChart.Data("Self-Help", 400));
+        series2.getData().add(new XYChart.Data("Technology", 550));
+
+        chartAPIUser2.getData().add(series2);
     }
 
     private void loadSearchResults() {

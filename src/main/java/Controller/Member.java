@@ -68,6 +68,8 @@ public class Member extends BaseDashBoardControl {
     private Button Return_btn;
     @FXML
     private Button Back_btn;
+    @FXML
+    private Label UID;
 
     private final BookDAO bookDAO = new BookDAO();
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
@@ -79,6 +81,7 @@ public class Member extends BaseDashBoardControl {
         setUpBookSelectionListener();
         loadBooks();
         createQRCodeDirectory();
+        UID.setText("UID: " + Session.getInstance().getUserID());
     }
 
     @FXML

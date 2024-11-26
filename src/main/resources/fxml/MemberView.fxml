@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Member">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Member">
     <left>
         <VBox prefHeight="850.0" prefWidth="185.0" styleClass="nav-form1" stylesheets="@../css/Member.css" BorderPane.alignment="CENTER">
             <children>
@@ -37,7 +37,7 @@
                                 <Insets top="40.0" />
                             </VBox.margin>
                         </ImageView>
-                        <Label text="MemBer" textFill="WHITE">
+                        <Label fx:id="UID" text="MemBer" textFill="WHITE">
                             <font>
                                 <Font name="Corbel Bold" size="24.0" />
                             </font>
