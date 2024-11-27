@@ -34,7 +34,7 @@ public class EditInfor extends BaseDashBoardControl {
         userIdLabel.setText(String.valueOf(Session.getInstance().getUserID()));
         int userId = Integer.parseInt(userIdLabel.getText());
         User existingUser = userDAO.findUserById(userId);
-        RegDateLabel.setText(existingUser.getRegistrationDate());
+        RegDateLabel.setText(existingUser.getRegistrationDate().toString());
         userNameField.setText(existingUser.getUserName());
         passField.setText(existingUser.getPassword());
         numberField.setText(existingUser.getPhoneNumber());
