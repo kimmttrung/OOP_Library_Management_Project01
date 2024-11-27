@@ -37,6 +37,15 @@ import static Tools.AlertHelper.showAlert;
 import static Tools.AlertHelper.showConfirmationAlert;
 import static Animation.ColorTransitionExample.addColorTransition;
 
+/**
+ * BorrowerControl is a JavaFX controller class responsible for managing
+ * borrower-related actions in the library management system.
+ * It provides functionality to borrow, return, and renew books, as well as manage borrower data.
+ * <p>
+ * This controller interacts with the user interface components defined in the FXML file
+ * and uses DAO classes for database operations.
+ * </p>
+ */
 public class BorrowerControl extends BaseDashBoardControl {
 
     @FXML
@@ -85,6 +94,9 @@ public class BorrowerControl extends BaseDashBoardControl {
     private final DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
     private FilteredList<Borrower> filteredList;
 
+    /**
+     * Initializes the BorrowerControl class, sets up UI components, and loads data from the database.
+     */
     @FXML
     public void initialize() {
         nav_from.setTranslateX(-320);
@@ -99,13 +111,20 @@ public class BorrowerControl extends BaseDashBoardControl {
         loadBorrowers();
     }
 
+    /**
+     * Loads borrower data from the database and updates the table view.
+     */
     @FXML
     private void loadBorrowers() {
         borrowerList.setAll(borrowerDAO.getAllBorrowers());
         filteredList = new FilteredList<>(borrowerList, p -> true); // Cập nhật danh sách đã lọc
-        borrowerTable.setItems(filteredList); // Đặt lại bảng
+        borrowerTable.setItems(filteredList);
     }
 
+    /**
+     * Sets up table columns to display borrower properties.
+     * Maps data fields to their respective table columns and applies custom styling.
+     */
     private void setUpTableColumn() {
         // Set up table columns with PropertyValueFactory to map fields to columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -116,7 +135,6 @@ public class BorrowerControl extends BaseDashBoardControl {
         fromColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_from"));
         toColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_to"));
 
-        // Set default profile image in the table
         Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
         circleProfile.setFill(new ImagePattern(image));
 
@@ -138,6 +156,9 @@ public class BorrowerControl extends BaseDashBoardControl {
         });
     }
 
+    /**
+     * Handles the process of borrowing a book, validates input, and updates the database.
+     */
     @FXML
     private void borrowBook() {
         String borrowerId = borrowerIDField.getText();
@@ -192,6 +213,9 @@ public class BorrowerControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Handles the process of returning a book and updates the database.
+     */
     @FXML
     private void returnBook() {
         String borrowerId = borrowID.getText();
@@ -222,6 +246,9 @@ public class BorrowerControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Handles the process of renewing a borrowed book, extending the due date.
+     */
     @FXML
     private void renewBook() {
         String borrowerId = borrowID.getText();
@@ -255,6 +282,9 @@ public class BorrowerControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Searches for borrowers by username and updates the table view with the results.
+     */
     @FXML
     private void searchBorrowerByUserName() {
         String borrowerName = findBorrowerField.getText().trim();
@@ -265,14 +295,12 @@ public class BorrowerControl extends BaseDashBoardControl {
         }
 
         try {
-
             if (borrowerDAO == null) {
                 showAlert(Alert.AlertType.ERROR, "System Error", "The borrower data access object is not initialized.");
                 return;
             }
 
             ArrayList<Borrower> borrower = borrowerDAO.getBorrowerByUsername(borrowerName);
-
             if (borrower != null && !borrower.isEmpty()) {
                 ObservableList<Borrower> foundBorrowers = FXCollections.observableArrayList(borrower);
                 filteredList = new FilteredList<>(foundBorrowers, p -> true); // Cập nhật danh sách đã lọc
@@ -287,6 +315,9 @@ public class BorrowerControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Marks borrowers with overdue books and updates their status in the database.
+     */
     @FXML
     private void markOverdueBorrowers() {
         try {
@@ -303,6 +334,9 @@ public class BorrowerControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Sets up a listener to update the book image when a borrower is selected in the table view.
+     */
     private void setUpBookSelectionListener() {
         // Set up a listener to change the book image when a borrower is selected
         borrowerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -310,11 +344,9 @@ public class BorrowerControl extends BaseDashBoardControl {
                 bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
                 return;
             }
-
             borrowID.setText(String.valueOf(newSelection.getId()));
             borrowerIDField.setText(String.valueOf(newSelection.getUser_id()));
             bookIDField.setText(String.valueOf(newSelection.getBookId()));
-
             // Retrieve the selected book and set the image
             int bookId = newSelection.getBookId();
             BookDAO bookDAO = new BookDAO();
@@ -332,6 +364,10 @@ public class BorrowerControl extends BaseDashBoardControl {
         });
     }
 
+    /**
+     * Sets up a filter for borrowers based on their status.
+     * Updates the table view dynamically based on the selected filter.
+     */
     @FXML
     private void setUpFilter() {
         // Set up the filter combo box with statuses
@@ -352,6 +388,11 @@ public class BorrowerControl extends BaseDashBoardControl {
         borrowerTable.setItems(filteredList);
     }
 
+    /**
+     * Handles navigation between different pages in the application.
+     *
+     * @param event The triggered ActionEvent.
+     */
     @FXML
     public void DownloadPages(ActionEvent event) {
         try {
@@ -374,58 +415,46 @@ public class BorrowerControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Exits the application with a fade-out animation.
+     */
     public void exit() {
         Stage primaryStage = (Stage) close_btn.getScene().getWindow();
-
         FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
-
-        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
-        scaleDown.setFromX(1.0);
-        scaleDown.setToX(0.5);
-        scaleDown.setFromY(1.0);
-        scaleDown.setToY(0.5);
-
         fadeOut.setOnFinished(event -> Platform.exit());
-
         fadeOut.play();
-        scaleDown.play();
     }
 
-    public void minimize(){
-        Stage stage = (Stage)minus_btn.getScene().getWindow();
+    /**
+     * Minimizes the current application window.
+     */
+    public void minimize() {
+        Stage stage = (Stage) minus_btn.getScene().getWindow();
         stage.setIconified(true);
     }
 
+    /**
+     * Animates and hides the navigation bar.
+     */
     public void sliderArrow() {
-
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(.5));
-        slide.setNode(nav_from);
-        slide.setToX(-340);
-
-        slide.setOnFinished((ActionEvent event) -> {
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), nav_from);
+        slide.setToX(-320);
+        slide.setOnFinished(event -> {
             bars_btn.setVisible(true);
             arrow_btn.setVisible(false);
         });
-
         slide.play();
     }
 
     public void sliderBars() {
-
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(.5));
-        slide.setNode(nav_from);
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), nav_from);
         slide.setToX(0);
-
-
-        slide.setOnFinished((ActionEvent event) -> {
+        slide.setOnFinished(event -> {
             arrow_btn.setVisible(true);
             bars_btn.setVisible(false);
         });
-
         slide.play();
     }
 }

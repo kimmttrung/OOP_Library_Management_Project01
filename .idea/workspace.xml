@@ -6,18 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="63531a95-e8f3-4cea-9323-8598e099f883" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BaseDashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BaseDashBoardControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/EditInfor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/EditInfor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/SearchAPIUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/SearchAPIUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBookList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBookList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBorrow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBorrow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UserReturnBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UserReturnBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UsersDashBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UsersDashBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/WriteComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/WriteComment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/MockDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/MockDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/API/GoogleBooksAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/API/GoogleBooksAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/API/QRCodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/API/QRCodeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Animation/ColorTransitionExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Animation/ColorTransitionExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/BookControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/BookControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/BorrowerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/DashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/DashBoardControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/SearchAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/SearchAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/UserControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/qr_codes/book_17.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/qr_codes/book_17.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -187,7 +187,11 @@
       <workItem from="1732675155260" duration="1187000" />
       <workItem from="1732676987736" duration="261000" />
       <workItem from="1732679469957" duration="3953000" />
-      <workItem from="1732683961856" duration="386000" />
+      <workItem from="1732683961856" duration="992000" />
+      <workItem from="1732686523731" duration="58000" />
+      <workItem from="1732690571187" duration="500000" />
+      <workItem from="1732691608425" duration="2531000" />
+      <workItem from="1732694187993" duration="1000" />
     </task>
     <servers />
   </component>

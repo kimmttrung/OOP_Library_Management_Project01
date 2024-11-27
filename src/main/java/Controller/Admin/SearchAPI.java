@@ -32,7 +32,10 @@ import static Tools.AlertHelper.showAlert;
 import static Tools.AlertHelper.showConfirmationAlert;
 import static Animation.ColorTransitionExample.addColorTransition;
 
-
+/**
+ * Controller class for handling the search functionality using the Google Books API in the admin dashboard.
+ * Allows users to search for books, view book details, and save selected books to the database.
+ */
 public class SearchAPI extends BaseDashBoardControl {
     @FXML
     private Button arrow_btn;
@@ -80,21 +83,11 @@ public class SearchAPI extends BaseDashBoardControl {
     private final BookDAO bookDAO = new BookDAO();
     private final ObservableList<Book> searchResults = FXCollections.observableArrayList();
 
+    /**
+     * Initializes the UI components, sets up the bar chart, table columns, and navigation panel.
+     */
     @FXML
     public void initialize() {
-        XYChart.Series<String, Double> series1 = new XYChart.Series<>();
-        series1.setName("Happy New Year 2025");
-        series1.getData().add(new XYChart.Data("Mystery ", 500));
-        series1.getData().add(new XYChart.Data("Sport ", 300));
-        series1.getData().add(new XYChart.Data("History ", 200));
-        series1.getData().add(new XYChart.Data("Poetry ", 400));
-        series1.getData().add(new XYChart.Data("Health ", 700));
-        series1.getData().add(new XYChart.Data("Romance  ", 100));
-        series1.getData().add(new XYChart.Data("Biography  ", 150));
-        series1.getData().add(new XYChart.Data("Travel  ", 250));
-
-        chart.getData().add(series1);
-
         nav_from.setTranslateX(-335);
         // Set initial UI state for navigation panel and buttons
         bars_btn.setVisible(true);
@@ -103,10 +96,14 @@ public class SearchAPI extends BaseDashBoardControl {
         // Set up the table columns, listener for book selection, and load initial search results
         setUpTableColumns();
         setUpBookSelectionListener();
+        setUpChart();
         loadSearchResults();
         addColorTransition(searchAPI_from);
     }
 
+    /**
+     * Sets up the table columns for displaying book information.
+     */
     private void setUpTableColumns() {
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -115,6 +112,9 @@ public class SearchAPI extends BaseDashBoardControl {
         publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
     }
 
+    /**
+     * Adds a listener to handle book selection from the table and update the UI with book details.
+     */
     private void setUpBookSelectionListener() {
         // Add a listener for when a book is selected from the table
         searchBookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -138,25 +138,48 @@ public class SearchAPI extends BaseDashBoardControl {
         });
     }
 
+    private void setUpChart() {
+        XYChart.Series<String, Double> series1 = new XYChart.Series<>();
+        series1.setName("Happy New Year 2025");
+        series1.getData().add(new XYChart.Data("Mystery ", 500));
+        series1.getData().add(new XYChart.Data("Sport ", 300));
+        series1.getData().add(new XYChart.Data("History ", 200));
+        series1.getData().add(new XYChart.Data("Poetry ", 400));
+        series1.getData().add(new XYChart.Data("Health ", 700));
+        series1.getData().add(new XYChart.Data("Romance  ", 100));
+        series1.getData().add(new XYChart.Data("Biography  ", 150));
+        series1.getData().add(new XYChart.Data("Travel  ", 250));
+
+        chart.getData().add(series1);
+    }
+
+    /**
+     * Loads the search results into the table view.
+     */
     private void loadSearchResults() {
         // Populate the table with the list of search results
         searchBookTable.setItems(FXCollections.observableArrayList(searchResults));
     }
 
+    /**
+     * Handles the book search operation triggered by the user.
+     */
     @FXML
     private void searchBook() {
-        // Search for books based on the user's query
         String query = searchField.getText();
         if (query.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Search Book", "Please enter a search query.");
             return;
         }
-
         // Proceed with searching books based on the query and update the results
         searchBooks(query);
         loadSearchResults();
     }
 
+    /**
+     * Performs the search operation asynchronously using the Google Books API.
+     * @param query The search query entered by the user.
+     */
     private void searchBooks(String query) {
         // Perform the search operation asynchronously using a background task
         Task<Void> searchBooksTask = new Task<Void>() {
@@ -169,13 +192,10 @@ public class SearchAPI extends BaseDashBoardControl {
                     String jsonData = googleBooksAPI.fetchBooksData(query);
                     JsonObject jsonObject = JsonParser.parseString(jsonData).getAsJsonObject();
                     JsonArray items = jsonObject.has("items") ? jsonObject.getAsJsonArray("items") : null;
-
                     // If no books found, exit early
                     if (items == null || items.isEmpty()) return null;
-
                     // Clear previous search results and populate new results
                     searchResults.clear();
-
                     // Loop through each book item in the JSON response
                     for (JsonElement item : items) {
                         JsonObject volumeInfo = item.getAsJsonObject().getAsJsonObject("volumeInfo");
@@ -193,7 +213,6 @@ public class SearchAPI extends BaseDashBoardControl {
                                 ? volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString()
                                 : null;
 
-                        // Create a Book object and add it to the search results list
                         Book book = new Book(title, authors, publisher, publishedDate, imageLink, category);
                         searchResults.add(book);
                     }
@@ -224,6 +243,9 @@ public class SearchAPI extends BaseDashBoardControl {
         searchBooksThread.start();
     }
 
+    /**
+     * Saves the selected book to the database.
+     */
     @FXML
     private void saveSelectedBook() {
         // Attempt to save the selected book to the database
@@ -232,7 +254,6 @@ public class SearchAPI extends BaseDashBoardControl {
             showAlert(Alert.AlertType.WARNING, "Save Book", "Please select a book to save.");
             return;
         }
-
         // Perform the save operation asynchronously using a background task
         Task<Void> saveBookTask = new Task<Void>() {
             @Override
@@ -257,13 +278,17 @@ public class SearchAPI extends BaseDashBoardControl {
                 showAlert(Alert.AlertType.ERROR, "Save Book", "Failed to save the book.");
             }
         };
-
         // Execute the save task in a new thread
         Thread saveBookThread = new Thread(saveBookTask);
         saveBookThread.setDaemon(true); // Daemon thread so it doesn't block app exit
         saveBookThread.start();
     }
 
+    /**
+     * Handles navigation between different pages in the application.
+     *
+     * @param event The triggered ActionEvent.
+     */
     @FXML
     public void DownloadPages(ActionEvent event) {
         try {
@@ -286,58 +311,46 @@ public class SearchAPI extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Exits the application with a fade-out animation.
+     */
     public void exit() {
         Stage primaryStage = (Stage) close_btn.getScene().getWindow();
-
         FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
-
-        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
-        scaleDown.setFromX(1.0);
-        scaleDown.setToX(0.5);
-        scaleDown.setFromY(1.0);
-        scaleDown.setToY(0.5);
-
         fadeOut.setOnFinished(event -> Platform.exit());
-
         fadeOut.play();
-        scaleDown.play();
     }
 
-    public void minimize(){
-        Stage stage = (Stage)minus_btn.getScene().getWindow();
+    /**
+     * Minimizes the current application window.
+     */
+    public void minimize() {
+        Stage stage = (Stage) minus_btn.getScene().getWindow();
         stage.setIconified(true);
     }
 
+    /**
+     * Animates and hides the navigation bar.
+     */
     public void sliderArrow() {
-
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(.5));
-        slide.setNode(nav_from);
-        slide.setToX(-335);
-
-        slide.setOnFinished((ActionEvent event) -> {
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), nav_from);
+        slide.setToX(-320);
+        slide.setOnFinished(event -> {
             bars_btn.setVisible(true);
             arrow_btn.setVisible(false);
         });
-
         slide.play();
     }
 
     public void sliderBars() {
-
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(.5));
-        slide.setNode(nav_from);
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), nav_from);
         slide.setToX(0);
-
-
-        slide.setOnFinished((ActionEvent event) -> {
+        slide.setOnFinished(event -> {
             arrow_btn.setVisible(true);
             bars_btn.setVisible(false);
         });
-
         slide.play();
     }
 }
