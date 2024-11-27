@@ -6,35 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="63531a95-e8f3-4cea-9323-8598e099f883" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/API/GoogleBooksAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/API/GoogleBooksAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/API/QRCodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/API/QRCodeGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Animation/ColorTransitionExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Animation/ColorTransitionExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/BookControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/BookControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/BorrowerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/DashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/DashBoardControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/SearchAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/SearchAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/UserControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BaseDashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BaseDashBoardControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/EditInfor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/EditInfor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/SearchAPIUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/SearchAPIUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBookList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBookList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBorrow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBorrow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UserReturnBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UserReturnBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UsersDashBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UsersDashBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/WriteComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/WriteComment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Database/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/DataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/MockDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/MockDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Borrower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/qr_codes/book_17.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/qr_codes/book_17.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/SearchAPITest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/DataAccessObject/BookDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DataAccessObject/BookDAOTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,59 +51,62 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.LibraryManagement.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.AlertHelperTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookControlTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookDAOTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookTest.getAuthor.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BorrowerDAOTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BorrowerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.DashBoardControlTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoogleBooksAPITest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SearchAPITest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SearchAPIUserTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserTest.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Merging main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/ChatApplication/OOP_Library_Management_Project01&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.LibraryManagement.executor": "Run",
+    "JUnit.AlertHelperTest.executor": "Run",
+    "JUnit.BookControlTest.executor": "Run",
+    "JUnit.BookDAOTest.executor": "Run",
+    "JUnit.BookTest.executor": "Run",
+    "JUnit.BookTest.getAuthor.executor": "Run",
+    "JUnit.BorrowerDAOTest.executor": "Run",
+    "JUnit.BorrowerTest.executor": "Run",
+    "JUnit.DashBoardControlTest.executor": "Run",
+    "JUnit.GoogleBooksAPITest.executor": "Run",
+    "JUnit.SearchAPITest.executor": "Run",
+    "JUnit.SearchAPIUserTest.executor": "Run",
+    "JUnit.UserDAOTest.executor": "Run",
+    "JUnit.UserTest.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "settings.sync",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\fxml\Users" />
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\fxml\Admin" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="LibraryManagement" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="management.libarymanagement.LibraryManagement" />
+  <component name="RunManager" selected="JUnit.DateStringFormatterTest">
+    <configuration name="BookDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LibaryManagement" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="management.libarymanagement.*" />
+          <option name="PATTERN" value="DataAccessObject.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="DataAccessObject" />
+      <option name="MAIN_CLASS_NAME" value="DataAccessObject.BookDAOTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -151,7 +126,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BookTest.getAuthor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BorrowerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LibaryManagement" />
       <extension name="coverage">
         <pattern>
@@ -160,18 +135,49 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Entity" />
-      <option name="MAIN_CLASS_NAME" value="Entity.BookTest" />
-      <option name="METHOD_NAME" value="getAuthor" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="Entity.BorrowerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DateStringFormatterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibaryManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controller" />
+      <option name="MAIN_CLASS_NAME" value="Controller.DateStringFormatterTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibaryManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DataAccessObject.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DataAccessObject" />
+      <option name="MAIN_CLASS_NAME" value="DataAccessObject.UserDAOTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.LibraryManagement" />
+        <item itemvalue="JUnit.DateStringFormatterTest" />
+        <item itemvalue="JUnit.BookDAOTest" />
         <item itemvalue="JUnit.BookTest" />
-        <item itemvalue="JUnit.BookTest.getAuthor" />
+        <item itemvalue="JUnit.BorrowerTest" />
+        <item itemvalue="JUnit.UserDAOTest" />
       </list>
     </recent_temporary>
   </component>
@@ -232,6 +238,7 @@
       <workItem from="1732701918059" duration="25000" />
       <workItem from="1732702471665" duration="185000" />
       <workItem from="1732703523541" duration="620000" />
+      <workItem from="1732718877201" duration="670000" />
     </task>
     <servers />
   </component>

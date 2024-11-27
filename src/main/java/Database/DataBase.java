@@ -56,6 +56,15 @@ public class DataBase {
     }
 
     /**
+     * Returns the connection object for the SQLite database.
+     *
+     * @return the connection object
+     */
+    public Connection getConnection() {
+        return connection;
+    }
+
+    /**
      * Retrieves the total number of rows in the specified table.
      *
      * @param tableName the name of the table whose row count is to be retrieved
@@ -73,14 +82,5 @@ public class DataBase {
             e.printStackTrace();
         }
         return count;
-    }
-
-    /**
-     * Returns the connection object for the SQLite database.
-     *
-     * @return the connection object
-     */
-    public Connection getConnection() {
-        return connection;
     }
 }
