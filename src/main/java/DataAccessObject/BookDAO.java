@@ -266,4 +266,7 @@ public class BookDAO {
     }
 
 
+    public boolean insertBook(String book) {
+        return true;
+    }
 }

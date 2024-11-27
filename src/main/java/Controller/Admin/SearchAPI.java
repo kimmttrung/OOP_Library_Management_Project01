@@ -80,6 +80,11 @@ public class SearchAPI extends BaseDashBoardControl {
     private final BookDAO bookDAO = new BookDAO();
     private final ObservableList<Book> searchResults = FXCollections.observableArrayList();
 
+    // Getter cho searchResults
+    public ObservableList<Book> getSearchResults() {
+        return searchResults;
+    }
+
     @FXML
     public void initialize() {
         XYChart.Series<String, Double> series1 = new XYChart.Series<>();
@@ -157,7 +162,7 @@ public class SearchAPI extends BaseDashBoardControl {
         loadSearchResults();
     }
 
-    private void searchBooks(String query) {
+    public void searchBooks(String query) {
         // Perform the search operation asynchronously using a background task
         Task<Void> searchBooksTask = new Task<Void>() {
             @Override

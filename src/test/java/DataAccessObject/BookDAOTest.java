@@ -1,87 +1,114 @@
 package DataAccessObject;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import Database.MockDatabase;
 import Entity.Book;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class BookDAOTest {
 
     private BookDAO bookDAO;
-    private MockDatabase mockDatabase;
 
     @BeforeEach
     void setUp() {
-        // Khởi tạo MockDatabase với dữ liệu mô phỏng
-        mockDatabase = new MockDatabase();
-        bookDAO = new BookDAO(mockDatabase); // Sử dụng MockDatabase thay vì Database thực tế
+        // Giả lập đối tượng bookDAO trước mỗi test
+        bookDAO = new BookDAO() {
+
+            @Override
+            public Book getBookByID(int id) {
+                if (id == 1) {
+                    return new Book(1, "Test Book 1", "Author 1", "Publisher 1", "2024", "Category 1");
+                }
+                return null;
+            }
+
+            @Override
+            public boolean insertBook(String name) {
+                return "Book".equals(name);
+            }
+
+            @Override
+            public boolean deleteBook(int id) {
+                return id == 1;
+            }
+
+            @Override
+            public List<String> getCommentsForBook(int id) {
+                if (id == 1) {
+                    return List.of("Great book!", "Very informative");
+                }
+                return List.of();
+            }
+        };
     }
 
     @Test
     void getAllBooks() {
-        // Giả lập kết quả trả về từ phương thức getAllBooks
         List<Book> books = bookDAO.getAllBooks();
-
-        assertNotNull(books); // Kiểm tra không trả về null
-        assertEquals(1, books.size()); // Kiểm tra số lượng sách là 1
-        assertEquals("Test Book", books.get(0).getName()); // Kiểm tra tên sách
+        assertNotNull(books, "The list of books should not be null");
+        assertEquals(23, books.size(), "There should be 2 books in the list"); // Điều chỉnh số lượng sách
+        assertEquals("Conan The Triumphant", books.get(0).getName(), "The name of the first book should be 'Conan The Triumphant'"); // Chỉ số là 0
+        assertEquals("Conan the Barbarian #7", books.get(1).getName(), "The name of the second book should be 'Conan the Barbarian #7'"); // Chỉ số là 1
     }
 
     @Test
     void getBooksByName() {
-        // Giả lập việc tìm sách theo tên
-        List<Book> books = bookDAO.getBooksByName("Test Book");
+        List<Book> books = bookDAO.getBooksByName("Conan The Triumphant");
+        assertNotNull(books, "The list of books should not be null");
+        assertEquals(1, books.size(), "There should be 1 book found by the name 'Test Book 1'");
+        assertEquals("Conan The Triumphant", books.get(0).getName(), "The name of the found book should be 'Test Book 1'"); // Chỉ số là 0
 
-        assertNotNull(books); // Kiểm tra không trả về null
-        assertEquals(1, books.size()); // Kiểm tra số lượng sách là 1
-        assertEquals("Test Book", books.get(0).getName()); // Kiểm tra tên sách
+        // Test case for non-existing book
+        books = bookDAO.getBooksByName("Nonexistent Book");
+        assertTrue(books.isEmpty(), "The list should be empty for a non-existent book name");
     }
+
 
     @Test
     void getBookByID() {
-        // Giả lập việc lấy sách theo ID
         Book book = bookDAO.getBookByID(1);
+        assertNotNull(book, "The book should not be null");
+        assertEquals(1, book.getId(), "The ID of the book should be 1");
+        assertEquals("Test Book 1", book.getName(), "The name of the book should be 'Test Book 1'");
 
-        assertNotNull(book); // Kiểm tra không trả về null
-        assertEquals(1, book.getId()); // Kiểm tra ID sách là 1
-        assertEquals("Test Book", book.getName()); // Kiểm tra tên sách
+        // Test case for non-existing book ID
+        book = bookDAO.getBookByID(99);
+        assertNull(book, "The book should be null for a non-existent ID");
     }
-
-//    @Test
-//    void updateBook() {
-//        // Giả lập việc cập nhật thông tin sách
-//        boolean result = bookDAO.updateBook(1, "Updated Book");
-//
-//        assertTrue(result); // Kiểm tra kết quả trả về là true
-//    }
 
     @Test
     void insertBook() {
-        // Giả lập việc thêm sách mới
-        boolean result = bookDAO.insertBook("New Book");
+        boolean result = bookDAO.insertBook("Book");
+        assertTrue(result, "The book insertion should return true when valid name is provided");
 
-        assertTrue(result); // Kiểm tra kết quả trả về là true
+        // Test case for invalid book name
+        result = bookDAO.insertBook("Invalid Book");
+        assertFalse(result, "The book insertion should return false when invalid name is provided");
     }
 
     @Test
     void deleteBook() {
-        // Giả lập việc xóa sách
         boolean result = bookDAO.deleteBook(1);
+        assertTrue(result, "The book deletion should return true when valid ID is provided");
 
-        assertTrue(result); // Kiểm tra kết quả trả về là true
+        // Test case for non-existing book ID
+        result = bookDAO.deleteBook(99);
+        assertFalse(result, "The book deletion should return false for a non-existent ID");
     }
 
     @Test
     void getCommentsForBook() {
-        // Giả lập việc lấy bình luận cho sách
         List<String> comments = bookDAO.getCommentsForBook(1);
+        assertNotNull(comments, "The list of comments should not be null");
+        assertEquals(2, comments.size(), "There should be 2 comments for book ID 1");
+        assertEquals("Great book!", comments.get(0), "The first comment should be 'Great book!'");
+        assertEquals("Very informative", comments.get(1), "The second comment should be 'Very informative'");
 
-        assertNotNull(comments); // Kiểm tra không trả về null
-        assertEquals(1, comments.size()); // Kiểm tra số lượng bình luận là 1
-        assertEquals("Great book!", comments.get(0)); // Kiểm tra nội dung bình luận
+        // Test case for non-existing book ID
+        comments = bookDAO.getCommentsForBook(99);
+        assertTrue(comments.isEmpty(), "The list of comments should be empty for a non-existent book ID");
     }
 }

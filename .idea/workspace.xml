@@ -5,17 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63531a95-e8f3-4cea-9323-8598e099f883" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Database/MockDatabase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/SearchAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/SearchAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/Book.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/BaseDashBoardControlTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/SearchAPITest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/SearchAPITest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/DataAccessObject/BookDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DataAccessObject/BookDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Entity/BookTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Entity/BookTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Entity/BorrowerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Entity/BorrowerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Entity/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Entity/UserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/DataAccessObject/BorrowerDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DataAccessObject/BorrowerDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/DataAccessObject/UserDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DataAccessObject/UserDAOTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +24,7 @@
       <list>
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -39,12 +37,12 @@
     &quot;assignee&quot;: &quot;kimmttrung&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/kimmttrung/OOP_Library_Management_Project01.git&quot;,
-    &quot;accountId&quot;: &quot;ec4ca4ad-fa99-4f13-b6e8-042d4199200e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/kimmttrung/OOP_Library_Management_Project01.git",
+    "accountId": "20d4a28f-ec06-4c74-8526-5cf1ad8a2292"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -71,9 +69,12 @@
     "JUnit.GoogleBooksAPITest.executor": "Run",
     "JUnit.SearchAPITest.executor": "Run",
     "JUnit.SearchAPIUserTest.executor": "Run",
+    "JUnit.UserDAOTest.executor": "Run",
     "JUnit.UserTest.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "MaiTrung",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01",
@@ -98,6 +99,12 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\fxml\Users" />
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\fxml\Admin" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="DataAccessObject" />
     </key>
   </component>
   <component name="RunManager">
@@ -136,14 +143,6 @@
         <item itemvalue="JUnit.BookTest.getAuthor" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
