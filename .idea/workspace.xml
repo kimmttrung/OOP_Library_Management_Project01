@@ -4,248 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63531a95-e8f3-4cea-9323-8598e099f883" name="Changes" comment="">
+    <list default="true" id="56b3534e-f732-453e-9b71-afa9780db11d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/DataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/SearchAPIUserTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;kimmttrung&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/kimmttrung/OOP_Library_Management_Project01.git&quot;,
-    &quot;accountId&quot;: &quot;ec4ca4ad-fa99-4f13-b6e8-042d4199200e&quot;
-  }
-}</component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 6
-}</component>
-  <component name="ProjectId" id="2p7dzcl9wUQosZVrD2NfPLjut6Q" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.LibraryManagement.executor": "Run",
-    "JUnit.AlertHelperTest.executor": "Run",
-    "JUnit.BookControlTest.executor": "Run",
-    "JUnit.BookDAOTest.executor": "Run",
-    "JUnit.BookTest.executor": "Run",
-    "JUnit.BookTest.getAuthor.executor": "Run",
-    "JUnit.BorrowerDAOTest.executor": "Run",
-    "JUnit.BorrowerTest.executor": "Run",
-    "JUnit.DashBoardControlTest.executor": "Run",
-    "JUnit.GoogleBooksAPITest.executor": "Run",
-    "JUnit.SearchAPITest.executor": "Run",
-    "JUnit.SearchAPIUserTest.executor": "Run",
-    "JUnit.UserDAOTest.executor": "Run",
-    "JUnit.UserTest.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "settings.sync",
-    "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite"
-    ]
+    "git-widget-placeholder": "Merging main"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\fxml\Users" />
-      <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\fxml\Admin" />
-    </key>
-  </component>
-  <component name="RunManager" selected="JUnit.DateStringFormatterTest">
-    <configuration name="BookDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LibaryManagement" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="DataAccessObject.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="DataAccessObject" />
-      <option name="MAIN_CLASS_NAME" value="DataAccessObject.BookDAOTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BookTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LibaryManagement" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Entity.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Entity" />
-      <option name="MAIN_CLASS_NAME" value="Entity.BookTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BorrowerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LibaryManagement" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Entity.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Entity" />
-      <option name="MAIN_CLASS_NAME" value="Entity.BorrowerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DateStringFormatterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LibaryManagement" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Controller" />
-      <option name="MAIN_CLASS_NAME" value="Controller.DateStringFormatterTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LibaryManagement" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="DataAccessObject.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="DataAccessObject" />
-      <option name="MAIN_CLASS_NAME" value="DataAccessObject.UserDAOTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.DateStringFormatterTest" />
-        <item itemvalue="JUnit.BookDAOTest" />
-        <item itemvalue="JUnit.BookTest" />
-        <item itemvalue="JUnit.BorrowerTest" />
-        <item itemvalue="JUnit.UserDAOTest" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
-      </set>
-    </attachedChunks>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="63531a95-e8f3-4cea-9323-8598e099f883" name="Changes" comment="" />
-      <created>1732121311193</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1732121311193</updated>
-      <workItem from="1732122594639" duration="344000" />
-      <workItem from="1732182378301" duration="4022000" />
-      <workItem from="1732186461463" duration="1896000" />
-      <workItem from="1732264919492" duration="227000" />
-      <workItem from="1732265154165" duration="1885000" />
-      <workItem from="1732270121159" duration="494000" />
-      <workItem from="1732347884894" duration="7570000" />
-      <workItem from="1732356673659" duration="1289000" />
-      <workItem from="1732378298874" duration="1346000" />
-      <workItem from="1732421952817" duration="507000" />
-      <workItem from="1732465983866" duration="19000" />
-      <workItem from="1732467567908" duration="1191000" />
-      <workItem from="1732515265155" duration="1399000" />
-      <workItem from="1732521226660" duration="3145000" />
-      <workItem from="1732526083539" duration="954000" />
-      <workItem from="1732535626641" duration="14000" />
-      <workItem from="1732537161120" duration="821000" />
-      <workItem from="1732537999573" duration="1307000" />
-      <workItem from="1732539320735" duration="2575000" />
-      <workItem from="1732546143567" duration="1292000" />
-      <workItem from="1732547451697" duration="4849000" />
-      <workItem from="1732603880399" duration="15000" />
-      <workItem from="1732610784867" duration="12352000" />
-      <workItem from="1732627405411" duration="1819000" />
-      <workItem from="1732629274486" duration="2172000" />
-      <workItem from="1732634670214" duration="79000" />
-      <workItem from="1732634768745" duration="1780000" />
-      <workItem from="1732636571385" duration="448000" />
-      <workItem from="1732675155260" duration="1187000" />
-      <workItem from="1732676987736" duration="261000" />
-      <workItem from="1732679469957" duration="3953000" />
-      <workItem from="1732683961856" duration="992000" />
-      <workItem from="1732686523731" duration="58000" />
-      <workItem from="1732690571187" duration="500000" />
-      <workItem from="1732691608425" duration="2531000" />
-      <workItem from="1732694187993" duration="1000" />
-      <workItem from="1732700220824" duration="384000" />
-      <workItem from="1732701723092" duration="68000" />
-      <workItem from="1732701918059" duration="25000" />
-      <workItem from="1732702471665" duration="185000" />
-      <workItem from="1732703523541" duration="620000" />
-      <workItem from="1732718877201" duration="670000" />
-    </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>
