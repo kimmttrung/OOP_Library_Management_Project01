@@ -30,6 +30,12 @@ import java.util.Optional;
 import static Tools.AlertHelper.showAlert;
 import static Tools.AlertHelper.showConfirmationAlert;
 
+/**
+ * Controller class for managing the user interface and interactions
+ * in the "User Book List" view of the application.
+ * This view allows users to browse books, search by name, generate QR codes,
+ * and view comments for selected books. It also includes navigation controls.
+ */
 public class UserBookList extends BaseDashBoardControl {
 
     @FXML
@@ -73,12 +79,15 @@ public class UserBookList extends BaseDashBoardControl {
     @FXML
     private Label UID;
 
-    private final BookDAO bookDAO = new BookDAO();
-    private ObservableList<Book> bookList = FXCollections.observableArrayList();
+    private final BookDAO bookDAO = new BookDAO(); // Data access object for book data
+    private ObservableList<Book> bookList = FXCollections.observableArrayList(); // Observable list of books
 
+    /**
+     * Initializes the controller by setting up table columns, book selection listener,
+     * loading books into the table, and preparing the QR code directory.
+     */
     @FXML
     public void initialize() {
-        // Set up table columns, load books, and create QR code directory
         setUpTableColumns();
         setUpBookSelectionListener();
         loadBooks();
@@ -86,6 +95,10 @@ public class UserBookList extends BaseDashBoardControl {
         UID.setText("UID: " + Session.getInstance().getUserID());
     }
 
+    /**
+     * Loads books from the database into the table view in a background thread
+     * to ensure the UI remains responsive.
+     */
     @FXML
     private void loadBooks() {
         // Load books in a background thread to keep the UI responsive
@@ -116,6 +129,9 @@ public class UserBookList extends BaseDashBoardControl {
         loadBooksThread.start();
     }
 
+    /**
+     * Sets up table columns to display book attributes.
+     */
     private void setUpTableColumns() {
         // Define how each column will fetch data from the Book object
         idColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
@@ -125,31 +141,33 @@ public class UserBookList extends BaseDashBoardControl {
         publishedDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishedDate"));
     }
 
+    /**
+     * Sets up a listener for selecting a book in the table view
+     * to update the book image and details.
+     */
     private void setUpBookSelectionListener() {
-        // Set a listener for book selection in the table
         bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            // If no book is selected, set a default image
             if (newSelection == null) {
                 bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
                 return;
             }
 
-            // Fetch selected book details and update the image
-            int bookId = newSelection.getBookID();
-            Book selectedBook = bookDAO.getBookByID(bookId);
-
+            Book selectedBook = bookDAO.getBookByID(newSelection.getBookID());
             if (selectedBook == null) {
                 showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book not found.");
                 return;
             }
 
-            // Update the image for the selected book
             updateBookImage(selectedBook);
         });
     }
 
+    /**
+     * Updates the displayed book image for the selected book.
+     *
+     * @param book the selected book
+     */
     private void updateBookImage(Book book) {
-        // Update the image of the selected book
         String imageLink = book.getImage();
         Image image = (imageLink != null && !imageLink.isEmpty())
                 ? new Image(imageLink)
@@ -157,29 +175,32 @@ public class UserBookList extends BaseDashBoardControl {
         bookImageView.setImage(image);
     }
 
+    /**
+     * Searches for books by name based on user input and updates the table view.
+     */
     @FXML
     private void searchBookByName() {
-        // Fetch books based on the search term
         String bookFindName = findBookField.getText();
 
         if (bookFindName.isEmpty()) {
-            loadBooks(); // If no search term, reload all books
+            loadBooks();
             return;
         }
 
         ArrayList<Book> foundBooks = bookDAO.getBooksByName(bookFindName);
 
         if (foundBooks != null && !foundBooks.isEmpty()) {
-            ObservableList<Book> bookList = FXCollections.observableArrayList(foundBooks);
-            bookTable.setItems(bookList);
+            bookTable.setItems(FXCollections.observableArrayList(foundBooks));
         } else {
             showAlert(Alert.AlertType.INFORMATION, "Search Book", "No books found with the provided name.");
         }
     }
 
+    /**
+     * Generates a QR code for the selected book and displays it in the QR code image view.
+     */
     @FXML
     private void generateQRCode() {
-        // Get selected book to generate QR Code
         Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
 
         if (selectedBook == null) {
@@ -187,11 +208,9 @@ public class UserBookList extends BaseDashBoardControl {
             return;
         }
 
-        // Generate QR Code in a background thread
         Task<Void> generateQRCodeTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                // Format book data as JSON for the QR Code
                 String qrData = String.format(
                         "{ \"bookID\": %d, \"title\": \"%s\", \"author\": \"%s\", \"publisher\": \"%s\", \"publishedDate\": \"%s\" }",
                         selectedBook.getBookID(),
@@ -201,30 +220,22 @@ public class UserBookList extends BaseDashBoardControl {
                         selectedBook.getPublishedDate()
                 );
 
-                // Generate QR Code and save it to the specified file path
                 String filePath = "src/main/resources/qr_codes/book_" + selectedBook.getBookID() + ".png";
 
-                try {
-                    QRCodeGenerator.generateQRCodeImage(qrData, 200, 200, filePath);
-                    Image qrImage = new Image(new File(filePath).toURI().toString());
-                    qrCodeImageView.setImage(qrImage);
-                } catch (WriterException | IOException e) {
-                    e.printStackTrace();
-                    showAlert(Alert.AlertType.ERROR, "Generate QR Code", "Error generating QR Code: " + e.getMessage());
-                }
+                QRCodeGenerator.generateQRCodeImage(qrData, 200, 200, filePath);
+                Image qrImage = new Image(new File(filePath).toURI().toString());
+                qrCodeImageView.setImage(qrImage);
 
                 return null;
             }
 
             @Override
             protected void succeeded() {
-                // Show success message once the QR Code is generated
                 showAlert(Alert.AlertType.INFORMATION, "QR Code Generated", "QR Code saved successfully.");
             }
 
             @Override
             protected void failed() {
-                // Show error message if QR Code generation fails
                 showAlert(Alert.AlertType.ERROR, "Generate QR Code", "Error generating QR Code.");
             }
         };
@@ -234,6 +245,9 @@ public class UserBookList extends BaseDashBoardControl {
         qrCodeThread.start();
     }
 
+    /**
+     * Creates a directory for storing QR code images if it doesn't already exist.
+     */
     private void createQRCodeDirectory() {
         File directory = new File("src/main/resources/qr_codes");
         if (!directory.exists()) {
@@ -241,34 +255,36 @@ public class UserBookList extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Displays comments for the selected book in the list view.
+     */
     @FXML
     private void showComments() {
-        // Lấy cuốn sách được chọn từ TableView
         Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
         if (selectedBook == null) {
-            // Hiển thị thông báo nếu không có sách nào được chọn
             showAlert(Alert.AlertType.ERROR, "Comments", "Please select a book to view comments.");
             return;
         }
 
-        int bookID = selectedBook.getBookID(); // Giả sử lớp Book có phương thức getId()
+        int bookID = selectedBook.getBookID();
         try {
-            // Lấy danh sách bình luận từ cơ sở dữ liệu
             List<String> comments = bookDAO.getCommentsForBook(bookID);
-
-            // Cập nhật danh sách bình luận trong ListView
             commentListView.getItems().setAll(comments);
 
             if (comments.isEmpty()) {
                 showAlert(Alert.AlertType.INFORMATION, "Comments", "No comments found for this book.");
             }
         } catch (Exception e) {
-            // Hiển thị lỗi nếu có vấn đề xảy ra
             showAlert(Alert.AlertType.ERROR, "Comments", "An error occurred: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
+    /**
+     * Handles navigation actions for various buttons in the view.
+     *
+     * @param event the action event triggered by the button click
+     */
     @FXML
     public void DownloadPages(ActionEvent event) {
         try {
@@ -297,6 +313,9 @@ public class UserBookList extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Exits the application with a fade-out and scale-down animation.
+     */
     public void exit() {
         Stage primaryStage = (Stage) close_btn.getScene().getWindow();
 
@@ -316,8 +335,11 @@ public class UserBookList extends BaseDashBoardControl {
         scaleDown.play();
     }
 
-    public void minimize(){
-        Stage stage = (Stage)minus_btn.getScene().getWindow();
+    /**
+     * Minimizes the application window.
+     */
+    public void minimize() {
+        Stage stage = (Stage) minus_btn.getScene().getWindow();
         stage.setIconified(true);
     }
 }

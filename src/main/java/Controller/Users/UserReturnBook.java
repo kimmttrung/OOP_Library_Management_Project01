@@ -23,6 +23,13 @@ import java.util.Optional;
 
 import static Tools.AlertHelper.showAlert;
 import static Tools.AlertHelper.showConfirmationAlert;
+
+/**
+ * The {@code UserReturnBook} class is a controller for handling the return and renewal of books
+ * in the user dashboard. It extends the {@code BaseDashBoardControl} and interacts with the UI
+ * components to provide functionalities such as book return, renewal, filtering, and viewing
+ * borrowed book information.
+ */
 public class UserReturnBook extends BaseDashBoardControl {
     @FXML
     private Button Back_btn;
@@ -58,6 +65,10 @@ public class UserReturnBook extends BaseDashBoardControl {
     private final BorrowerDAO borrowerDAO = new BorrowerDAO();
     private final DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
 
+    /**
+     * Initializes the controller. Sets up table columns, selection listeners, filters,
+     * and loads the table with borrower data.
+     */
     @FXML
     public void initialize() {
         setUpTableColumns();
@@ -66,6 +77,9 @@ public class UserReturnBook extends BaseDashBoardControl {
         loadTable();
     }
 
+    /**
+     * Loads the list of borrowed books for the current user.
+     */
     private void loadTable() {
         Platform.runLater(() -> {
             Integer userID = Session.getInstance().getUserID(); // Lấy userID từ Session
@@ -77,6 +91,11 @@ public class UserReturnBook extends BaseDashBoardControl {
         });
     }
 
+    /**
+     * Loads the books borrowed by the specified user ID in a background thread.
+     *
+     * @param userID the ID of the user whose borrowed books are to be loaded.
+     */
     @FXML
     private void loadBooksByUserID(int userID) {
         Task<ObservableList<Borrower>> loadBooksTask = new Task<>() {
@@ -101,6 +120,9 @@ public class UserReturnBook extends BaseDashBoardControl {
         loadBooksThread.start();
     }
 
+    /**
+     * Sets up the table columns to map their data properties.
+     */
     private void setUpTableColumns() {
         // Define how each column will fetch data from the Book object
         idColumn.setCellValueFactory(new PropertyValueFactory<>("bookId"));
@@ -111,6 +133,9 @@ public class UserReturnBook extends BaseDashBoardControl {
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
+    /**
+     * Adds a listener to update the book image based on the selected borrower in the table.
+     */
     private void setUpBookSelectionListener() {
         // Set up a listener to change the book image when a borrower is selected
         borrowerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -139,6 +164,9 @@ public class UserReturnBook extends BaseDashBoardControl {
         });
     }
 
+    /**
+     * Returns the selected book and updates the database accordingly.
+     */
     @FXML
     private void returnBook() {
         String borrowerId = borrowerLabel.getText().trim();
@@ -170,6 +198,9 @@ public class UserReturnBook extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Renews the borrowing period of the selected book.
+     */
     @FXML
     private void renewBook() {
         String borrowerId = borrowerLabel.getText().trim();
@@ -203,6 +234,9 @@ public class UserReturnBook extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Sets up filtering of borrowers based on their status using a ComboBox.
+     */
     @FXML
     private void setUpFilter() {
         // Set up the filter combo box with statuses
@@ -223,6 +257,11 @@ public class UserReturnBook extends BaseDashBoardControl {
         borrowerTable.setItems(filteredList);
     }
 
+    /**
+     * Handles the navigation between different pages.
+     *
+     * @param event the {@code ActionEvent} triggered by a button click.
+     */
     public void DownloadPages(ActionEvent event) {
         try {
             if (event.getSource() == signOut_btn) {
@@ -238,11 +277,17 @@ public class UserReturnBook extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Closes the application window.
+     */
     public void exit() {
         Stage primaryStage = (Stage) close_btn.getScene().getWindow();
         primaryStage.close();
     }
 
+    /**
+     * Minimizes the application window.
+     */
     public void minimize() {
         Stage stage = (Stage) minus_btn.getScene().getWindow();
         stage.setIconified(true);

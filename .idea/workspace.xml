@@ -6,8 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="63531a95-e8f3-4cea-9323-8598e099f883" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BaseDashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BaseDashBoardControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/EditInfor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/EditInfor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/SearchAPIUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/SearchAPIUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBookList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBookList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBorrow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UserBorrow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UserReturnBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UserReturnBook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UsersDashBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UsersDashBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/WriteComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/WriteComment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Database/MockDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/MockDatabase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +103,7 @@
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\fxml\Admin" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.LibraryManagement">
     <configuration name="LibraryManagement" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="management.libarymanagement.LibraryManagement" />
       <module name="LibaryManagement" />
@@ -125,8 +135,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BookTest.getAuthor" />
         <item itemvalue="Application.LibraryManagement" />
+        <item itemvalue="JUnit.BookTest.getAuthor" />
       </list>
     </recent_temporary>
   </component>
@@ -175,6 +185,9 @@
       <workItem from="1732634768745" duration="1780000" />
       <workItem from="1732636571385" duration="448000" />
       <workItem from="1732675155260" duration="1187000" />
+      <workItem from="1732676987736" duration="261000" />
+      <workItem from="1732679469957" duration="3953000" />
+      <workItem from="1732683961856" duration="386000" />
     </task>
     <servers />
   </component>
