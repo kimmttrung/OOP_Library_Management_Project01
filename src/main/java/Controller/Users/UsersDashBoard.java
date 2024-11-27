@@ -221,21 +221,11 @@ public class UsersDashBoard extends BaseDashBoardControl {
      */
     public void exit() {
         Stage primaryStage = (Stage) close_btn.getScene().getWindow();
-
         FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
-
-        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
-        scaleDown.setFromX(1.0);
-        scaleDown.setToX(0.5);
-        scaleDown.setFromY(1.0);
-        scaleDown.setToY(0.5);
-
         fadeOut.setOnFinished(event -> Platform.exit());
-
         fadeOut.play();
-        scaleDown.play();
     }
 
     /**
