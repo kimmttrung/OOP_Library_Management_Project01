@@ -7,8 +7,8 @@ import java.sql.Statement;
 
 /**
  * The {@code DataBase} class provides utility methods for managing database connections
- * and executing common database operations in an SQLite database. It handles the connection
- * setup and simplifies tasks such as retrieving row counts from tables.
+ * and executing common database operations in an SQLite database. It follows the Singleton
+ * pattern to ensure only one instance of the database connection is used throughout the application.
  */
 public class DataBase {
 
@@ -19,19 +19,40 @@ public class DataBase {
     private static final String jdbcURL = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\sqlite\\library.db";
 
     /**
-     * Establishes and returns a connection to the SQLite database.
-     *
-     * @return a {@link Connection} object to interact with the SQLite database,
-     *         or {@code null} if the connection fails
+     * The single instance of the {@code DataBase} class.
      */
-    public static Connection getConnection() {
+    private static DataBase instance;
+
+    /**
+     * The connection object for the SQLite database.
+     */
+    private Connection connection;
+
+    /**
+     * Private constructor to prevent direct instantiation.
+     */
+    private DataBase() {
         try {
-            Connection connection = DriverManager.getConnection(jdbcURL);
-            return connection;
+            this.connection = DriverManager.getConnection(jdbcURL);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+    }
+
+    /**
+     * Returns the singleton instance of the {@code DataBase} class.
+     *
+     * @return the singleton instance of the {@code DataBase} class
+     */
+    public static DataBase getInstance() {
+        if (instance == null) {
+            synchronized (DataBase.class) {
+                if (instance == null) {
+                    instance = new DataBase();
+                }
+            }
+        }
+        return instance;
     }
 
     /**
@@ -40,11 +61,10 @@ public class DataBase {
      * @param tableName the name of the table whose row count is to be retrieved
      * @return the total number of rows in the table, or {@code 0} if an error occurs
      */
-    public static int getCount(String tableName) {
+    public int getCount(String tableName) {
         int count = 0;
         String query = "SELECT COUNT(*) AS count FROM " + tableName;
-        try (Connection conn = DriverManager.getConnection(jdbcURL);
-             Statement stmt = conn.createStatement();
+        try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             if (rs.next()) {
                 count = rs.getInt("count");
@@ -53,5 +73,14 @@ public class DataBase {
             e.printStackTrace();
         }
         return count;
+    }
+
+    /**
+     * Returns the connection object for the SQLite database.
+     *
+     * @return the connection object
+     */
+    public Connection getConnection() {
+        return connection;
     }
 }

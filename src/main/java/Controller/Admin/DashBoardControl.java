@@ -78,6 +78,8 @@ public class DashBoardControl extends BaseDashBoardControl {
     @FXML
     private ImageView myImageView6, myImageView7, myImageView8, myImageView9, myImageView10;
 
+    private final Connection connection = DataBase.getInstance().getConnection();
+
     BookDAO bookDAO = new BookDAO();
 
     /**
@@ -156,7 +158,7 @@ public class DashBoardControl extends BaseDashBoardControl {
     private List<String> getImageLinksFromDatabase() {
         List<String> imageLinks = new ArrayList<>();
 
-        try (Connection connection = DataBase.getConnection()) {
+        try {
             String sql = "SELECT book_id FROM borrowers GROUP BY book_id ORDER BY COUNT(*) DESC";
             try (Statement statement = connection.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
@@ -291,9 +293,9 @@ public class DashBoardControl extends BaseDashBoardControl {
     }
 
     public void updateCounts() {
-        int bookCount = DataBase.getCount("books");
-        int userCount = DataBase.getCount("users");
-        int borrowerCount = DataBase.getCount("borrowers");
+        int bookCount = DataBase.getInstance().getCount("books");
+        int userCount = DataBase.getInstance().getCount("users");
+        int borrowerCount = DataBase.getInstance().getCount("borrowers");
 
         bookCountLabel.setText("" + bookCount);
         userCountLabel.setText("" + userCount);

@@ -66,6 +66,8 @@ public class UsersDashBoard extends BaseDashBoardControl {
     @FXML
     private ImageView myImageView6, myImageView7, myImageView8, myImageView9, myImageView10;
 
+    private final Connection connection = DataBase.getInstance().getConnection();
+
     // DAO instance for book operations
     private final BookDAO bookDAO = new BookDAO();
 
@@ -154,7 +156,7 @@ public class UsersDashBoard extends BaseDashBoardControl {
         List<String> imageLinks = new ArrayList<>();
         Book book = new Book();
 
-        try (Connection connection = DataBase.getConnection()) {
+        try {
             String sql = "SELECT book_id FROM borrowers GROUP BY book_id ORDER BY COUNT(*) DESC";
             try (Statement statement = connection.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {

@@ -16,7 +16,7 @@ import java.util.List;
  * Provides methods for CRUD operations and additional functionalities such as searching and managing comments.
  */
 public class BookDAO {
-
+    private final Connection conn = DataBase.getInstance().getConnection();
     /**
      * Fetches all books from the database.
      *
@@ -25,12 +25,10 @@ public class BookDAO {
     public ObservableList<Book> getAllBooks() {
         ObservableList<Book> books = FXCollections.observableArrayList();
         String sql = "SELECT * FROM books";
-        Connection conn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -46,7 +44,7 @@ public class BookDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeResources(conn, pst, rs);
+            closeResources(pst, rs);
         }
 
         return books;
@@ -61,12 +59,10 @@ public class BookDAO {
     public ArrayList<Book> getBooksByName(String name) {
         ArrayList<Book> listBook = new ArrayList<>();
         String sql = "SELECT * FROM books WHERE name LIKE ?";
-        Connection conn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setString(1, "%" + name + "%"); // Wildcard search for book names
             rs = pst.executeQuery();
@@ -83,7 +79,7 @@ public class BookDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeResources(conn, pst, rs);
+            closeResources(pst, rs);
         }
 
         return listBook;
@@ -98,12 +94,10 @@ public class BookDAO {
     public Book getBookByID(int bookID) {
         Book book = null;
         String sql = "SELECT * FROM books WHERE bookID = ?";
-        Connection conn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setInt(1, bookID);
             rs = pst.executeQuery();
@@ -120,7 +114,7 @@ public class BookDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeResources(conn, pst, rs);
+            closeResources(pst, rs);
         }
 
         return book;
@@ -134,11 +128,9 @@ public class BookDAO {
      */
     public boolean updateBook(Book book) {
         String sql = "UPDATE books SET name = ?, author = ?, publisher = ?, publishedDate = ? WHERE bookID = ?";
-        Connection conn = null;
         PreparedStatement pst = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setString(1, book.getName());
             pst.setString(2, book.getAuthor());
@@ -151,7 +143,7 @@ public class BookDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeResources(conn, pst, null);
+            closeResources(pst, null);
         }
         return false;
     }
@@ -164,11 +156,9 @@ public class BookDAO {
      */
     public boolean insertBook(Book book) {
         String sql = "INSERT INTO books (name, author, publisher, publishedDate, image) VALUES (?, ?, ?, ?, ?)";
-        Connection conn = null;
         PreparedStatement pst = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setString(1, book.getName());
             pst.setString(2, book.getAuthor());
@@ -181,7 +171,7 @@ public class BookDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeResources(conn, pst, null);
+            closeResources(pst, null);
         }
         return false;
     }
@@ -194,11 +184,9 @@ public class BookDAO {
      */
     public boolean deleteBook(int bookID) {
         String sql = "DELETE FROM books WHERE bookID = ?";
-        Connection conn = null;
         PreparedStatement pst = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setInt(1, bookID);
 
@@ -207,7 +195,7 @@ public class BookDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeResources(conn, pst, null);
+            closeResources(pst, null);
         }
         return false;
     }
@@ -221,11 +209,9 @@ public class BookDAO {
     public void addComment(int bookId, String comment) {
         String sql = "INSERT INTO comments (book_id, comment_text) VALUES (?, ?)";
 
-        Connection conn = null;
         PreparedStatement pst = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setInt(1, bookId);
             pst.setString(2, comment);
@@ -246,8 +232,7 @@ public class BookDAO {
         List<String> comments = new ArrayList<>();
         String sql = "SELECT comment_text FROM comments WHERE book_id = ? ORDER BY created_at DESC";
 
-        try (Connection connection = DataBase.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
 
             statement.setInt(1, bookId);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -265,20 +250,16 @@ public class BookDAO {
     /**
      * Closes the database resources.
      *
-     * @param conn the Connection to be closed.
      * @param pst  the PreparedStatement to be closed.
      * @param rs   the ResultSet to be closed.
      */
-    private void closeResources(Connection conn, PreparedStatement pst, ResultSet rs) {
+    private void closeResources(PreparedStatement pst, ResultSet rs) {
         try {
             if (rs != null) {
                 rs.close();
             }
             if (pst != null) {
                 pst.close();
-            }
-            if (conn != null) {
-                conn.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

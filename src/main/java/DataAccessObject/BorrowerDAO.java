@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class BorrowerDAO {
     // Database connection variables
-    private Connection conn = null;
+    private final Connection conn = DataBase.getInstance().getConnection();
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
@@ -31,7 +31,6 @@ public class BorrowerDAO {
         String sql = "SELECT * FROM borrowers";
 
         try {
-            conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -69,7 +68,6 @@ public class BorrowerDAO {
         String sql = "SELECT 1 FROM borrowers WHERE status = ? AND book_id = ? LIMIT 1";
 
         try {
-            conn = DataBase.getConnection(); // Kết nối tới cơ sở dữ liệu
             ps = conn.prepareStatement(sql);
             ps.setString(1, status);
             ps.setInt(2, bookId);
@@ -99,7 +97,6 @@ public class BorrowerDAO {
         String sql = "SELECT 1 FROM borrowers WHERE status = ? AND user_id = ? LIMIT 1";
 
         try {
-            conn = DataBase.getConnection(); // Kết nối tới cơ sở dữ liệu
             ps = conn.prepareStatement(sql);
             ps.setString(1, status);
             ps.setInt(2, userId);
@@ -129,7 +126,6 @@ public class BorrowerDAO {
         String sql = "SELECT * FROM borrowers b JOIN users U ON B.user_id = U.id WHERE U.username LIKE ?";
 
         try {
-            conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1,'%' + username + '%');
             try (ResultSet rs = ps.executeQuery()) {
@@ -169,7 +165,6 @@ public class BorrowerDAO {
         Borrower b = null;
 
         try {
-            conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -200,7 +195,6 @@ public class BorrowerDAO {
         String sql = "SELECT * FROM borrowers WHERE user_id = ?";
 
         try {
-            conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1,String.valueOf(id));
             try (ResultSet rs = ps.executeQuery()) {
@@ -239,8 +233,7 @@ public class BorrowerDAO {
         String username = null;
         String sql = "SELECT username FROM users WHERE id = ?";
 
-        try (Connection conn = DataBase.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, userId);
             try (ResultSet rs = ps.executeQuery()) {
@@ -262,7 +255,6 @@ public class BorrowerDAO {
     public void updateBorrower(Borrower borrower) {
         String sql = "UPDATE borrowers SET user_id = ?, book_id = ?, bookName = ?, borrow_from = ?, borrow_to = ?, status = ? WHERE id = ?";
         try {
-            conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, borrower.getUser_id());
             ps.setInt(2, borrower.getBookId());
@@ -291,7 +283,6 @@ public class BorrowerDAO {
     public void insertBorrower(int user_id, int book_id, String bookName, String borrow_from, String borrow_to) {
         String sql = "INSERT INTO borrowers (user_id, book_id, bookName, borrow_from, borrow_to, status) VALUES (?, ?, ?, ?, ?, 'processing')";
         try {
-            conn = DataBase.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, user_id);
             ps.setInt(2, book_id);
@@ -314,7 +305,7 @@ public class BorrowerDAO {
      */
     public boolean checkBookExists(int bookID) {
         String sql = "SELECT COUNT(*) FROM borrowers WHERE book_id = ? AND status = 'processing'";
-        try (Connection conn = DataBase.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, bookID);
             try (ResultSet rs = ps.executeQuery()) {
                 return rs.next() && rs.getInt(1) > 0;
@@ -333,7 +324,7 @@ public class BorrowerDAO {
      */
     public boolean checkLimitStmt(String username) {
         String sql = "SELECT COUNT(*) FROM borrowers WHERE user_id = (SELECT id FROM users WHERE username = ?) AND status = 'processing'";
-        try (Connection conn = DataBase.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, username);
             try (ResultSet rs = ps.executeQuery()) {
                 return rs.next() && rs.getInt(1) > 3;
@@ -351,7 +342,6 @@ public class BorrowerDAO {
         try {
             if (rs != null) rs.close();
             if (ps != null) ps.close();
-            if (conn != null) conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

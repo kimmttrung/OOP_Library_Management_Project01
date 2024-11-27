@@ -57,7 +57,7 @@ public class LoginControl {
 
     private final String[] questionList = {"Admin", "User"};
 
-    private Connection connect;
+    private final Connection connect = DataBase.getInstance().getConnection();
     private PreparedStatement pst;
     private ResultSet resultSet;
 
@@ -87,8 +87,6 @@ public class LoginControl {
         String sqlUsers = "SELECT id, phoneNumber, registrationDate FROM users WHERE username = ? AND password = ?";
 
         try {
-            connect = DataBase.getConnection();
-
             // Check accounts table
             pst = connect.prepareStatement(sqlAccounts);
             pst.setString(1, username);
@@ -124,7 +122,6 @@ public class LoginControl {
             try {
                 if (resultSet != null) resultSet.close();
                 if (pst != null) pst.close();
-                if (connect != null) connect.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -157,7 +154,6 @@ public class LoginControl {
 
     private void registerAdmin() {
         String checkUsername = "SELECT * FROM accounts WHERE username = ?";
-        connect = DataBase.getConnection();
         try {
             pst = connect.prepareStatement(checkUsername);
             pst.setString(1, signup_username.getText());
