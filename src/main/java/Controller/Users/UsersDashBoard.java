@@ -10,10 +10,14 @@ import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -62,6 +66,8 @@ public class UsersDashBoard extends BaseDashBoardControl {
     @FXML
     private ScrollPane scrollPane;
     @FXML
+    private PieChart pieChartUser;
+    @FXML
     private ImageView myImageView1, myImageView2, myImageView3, myImageView4, myImageView5;
     @FXML
     private ImageView myImageView6, myImageView7, myImageView8, myImageView9, myImageView10;
@@ -76,6 +82,20 @@ public class UsersDashBoard extends BaseDashBoardControl {
      * profile images, and a smooth scrolling effect for the image carousel.
      */
     public void initialize() {
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("female", 50),
+                        new PieChart.Data("men", 50)
+                );
+
+        pieChartData.forEach(data -> data.nameProperty().bind(
+                Bindings.concat(
+                        data.getName(), ": ", data.pieValueProperty()  // Bind name and value for display
+                )
+        ));
+
+        pieChartUser.getData().addAll(pieChartData);
+
         setImageView();
         setChartUser();
         UID.setText("UID: " + Session.getInstance().getUserID());

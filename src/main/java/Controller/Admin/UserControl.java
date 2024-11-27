@@ -148,26 +148,40 @@ public class UserControl extends BaseDashBoardControl {
      * Adds a new user to the system based on the data entered in the fields.
      */
     public void addUser() {
+        // Kiểm tra tên người dùng
         if (userNameField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter User's Name");
             return;
         }
+
+        // Kiểm tra số điện thoại
         if (phoneNumberField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter Phone Number");
             return;
         }
-        if (passWordField.getText().isEmpty()) {
+
+        // Kiểm tra mật khẩu có đủ điều kiện
+        String password = passWordField.getText();
+        if (password.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter Password");
             return;
         }
+
+        // Kiểm tra mật khẩu có ít nhất 8 ký tự, bao gồm 1 chữ cái viết hoa, 1 chữ cái viết thường, 1 chữ số và 1 ký tự đặc biệt
+        String passwordPattern = "(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}";
+        if (!password.matches(passwordPattern)) {
+            showAlert(Alert.AlertType.ERROR, "ADD USER", "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+            return;
+        }
+
+        // Xác nhận thêm người dùng
         Optional<ButtonType> result = showConfirmationAlert("Confirm Addition", "Are you sure you want to add this User?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
             String userName = userNameField.getText();
-            String passWord = passWordField.getText();
             String phoneNumber = phoneNumberField.getText();
             String registrationDate = LocalDate.now().toString(); // Set registration date to current date
 
-            User newUser = new User(userName, passWord, phoneNumber, registrationDate);
+            User newUser = new User(userName, password, phoneNumber, registrationDate);
             if (userDAO.addUser(newUser)) {
                 loadUsers();
                 showSuccessAlert("Add User", "User added successfully!");
@@ -176,6 +190,38 @@ public class UserControl extends BaseDashBoardControl {
             }
         }
     }
+
+
+
+//    public void addUser() {
+//        if (userNameField.getText().isEmpty()) {
+//            showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter User's Name");
+//            return;
+//        }
+//        if (phoneNumberField.getText().isEmpty()) {
+//            showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter Phone Number");
+//            return;
+//        }
+//        if (passWordField.getText().isEmpty()) {
+//            showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter Password");
+//            return;
+//        }
+//        Optional<ButtonType> result = showConfirmationAlert("Confirm Addition", "Are you sure you want to add this User?");
+//        if (result.isPresent() && result.get() == ButtonType.OK) {
+//            String userName = userNameField.getText();
+//            String passWord = passWordField.getText();
+//            String phoneNumber = phoneNumberField.getText();
+//            String registrationDate = LocalDate.now().toString(); // Set registration date to current date
+//
+//            User newUser = new User(userName, passWord, phoneNumber, registrationDate);
+//            if (userDAO.addUser(newUser)) {
+//                loadUsers();
+//                showSuccessAlert("Add User", "User added successfully!");
+//            } else {
+//                showAlert(Alert.AlertType.ERROR, "ERROR", "Something went wrong");
+//            }
+//        }
+//    }
 
     /**
      * Deletes the selected user from the system.

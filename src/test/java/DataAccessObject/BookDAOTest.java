@@ -44,7 +44,7 @@ class BookDAOTest {
     void getAllBooks() {
         List<Book> books = bookDAO.getAllBooks();
         assertNotNull(books, "The list of books should not be null");
-        assertEquals(19, books.size(), "There should be 2 books in the list"); // Điều chỉnh số lượng sách
+        assertEquals(33, books.size(), "There should be 2 books in the list"); // Điều chỉnh số lượng sách
         assertEquals("Conan The Triumphant", books.get(0).getName(), "The name of the first book should be 'Conan The Triumphant'"); // Chỉ số là 0
         assertEquals("Conan the Barbarian #7", books.get(1).getName(), "The name of the second book should be 'Conan the Barbarian #7'"); // Chỉ số là 1
     }

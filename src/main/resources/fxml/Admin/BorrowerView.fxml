@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.BorrowerControl">
+<BorderPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin.BorrowerControl">
     <top>
         <AnchorPane fx:id="borrower_from_animation" prefHeight="633.0" prefWidth="1121.0" BorderPane.alignment="CENTER">
             <AnchorPane layoutX="3.0" layoutY="474.0" prefHeight="285.0" prefWidth="1117.0">
@@ -117,7 +117,7 @@
                     </Label>
                 </children>
             </AnchorPane>
-            <TitledPane expanded="true" layoutX="104.0" layoutY="134.0" prefHeight="340.0" prefWidth="1009.0" text="Borrower List">
+            <TitledPane expanded="true" layoutX="2.0" layoutY="134.0" prefHeight="340.0" prefWidth="1111.0" text="Borrower List">
                 <content>
                     <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="327.0" prefWidth="1008.0" vbarPolicy="ALWAYS">
                         <content>
@@ -128,28 +128,28 @@
                                             <PropertyValueFactory property="borrowerId" />
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="usernameColumn" editable="false" prefWidth="178.0" style="-fx-alignment: CENTER;" text="           Name">
+                                    <TableColumn fx:id="usernameColumn" editable="false" prefWidth="208.6666259765625" style="-fx-alignment: CENTER;" text="           Name">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="borrowerName" />
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="bookIdColumn" editable="false" prefWidth="97.0" style="-fx-alignment: CENTER;" text="   Book ID">
+                                    <TableColumn fx:id="bookIdColumn" editable="false" prefWidth="117.99993896484375" style="-fx-alignment: CENTER;" text="   Book ID">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="bookId" />
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="bookNameColumn" editable="false" prefWidth="259.0" style="-fx-alignment: CENTER;" text="               Book Name">
+                                    <TableColumn fx:id="bookNameColumn" editable="false" prefWidth="272.66668701171875" style="-fx-alignment: CENTER;" text="               Book Name">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="bookTitle" />
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="fromColumn" editable="false" prefWidth="135.0" style="-fx-alignment: CENTER;" text=" Borrow From">
+                                    <TableColumn fx:id="fromColumn" editable="false" prefWidth="137.33331298828125" style="-fx-alignment: CENTER;" text=" Borrow From">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="loanDate" />
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="toColumn" editable="false" prefWidth="128.6666259765625" style="-fx-alignment: CENTER;" text="    Borrow To" />
-                                    <TableColumn fx:id="statusColumn" editable="false" prefWidth="108.0" resizable="false" style="-fx-alignment: CENTER;" text="        Status" />
+                                    <TableColumn fx:id="toColumn" editable="false" prefWidth="120.0" style="-fx-alignment: CENTER;" text="    Borrow To" />
+                                    <TableColumn fx:id="statusColumn" editable="false" prefWidth="151.3333740234375" resizable="false" style="-fx-alignment: CENTER;" text="        Status" />
                                 </columns>
                             </TableView>
                         </content>
