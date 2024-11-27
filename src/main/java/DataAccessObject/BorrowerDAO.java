@@ -253,16 +253,15 @@ public class BorrowerDAO {
      * @param borrower the Borrower object with updated information.
      */
     public void updateBorrower(Borrower borrower) {
-        String sql = "UPDATE borrowers SET user_id = ?, book_id = ?, bookName = ?, borrow_from = ?, borrow_to = ?, status = ? WHERE id = ?";
+        String sql = "UPDATE borrowers SET book_id = ?, bookName = ?, borrow_from = ?, borrow_to = ?, status = ? WHERE id = ?";
         try {
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, borrower.getUser_id());
-            ps.setInt(2, borrower.getBookId());
-            ps.setString(3, borrower.getBookName());
-            ps.setString(4, borrower.getBorrow_from());
-            ps.setString(5, borrower.getBorrow_to());
-            ps.setString(6, borrower.getStatus());
-            ps.setInt(7, borrower.getId());
+            ps.setInt(1, borrower.getBookId());
+            ps.setString(2, borrower.getBookName());
+            ps.setString(3, borrower.getBorrow_from());
+            ps.setString(4, borrower.getBorrow_to());
+            ps.setString(5, borrower.getStatus());
+            ps.setInt(6, borrower.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error in updateBorrower: " + e.getMessage());

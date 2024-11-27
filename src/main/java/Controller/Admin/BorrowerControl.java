@@ -272,7 +272,6 @@ public class BorrowerControl extends BaseDashBoardControl {
                 LocalDate currentDueDate = dateFormatter.parseDate(borrower.getBorrow_to());
                 LocalDate newDueDate = currentDueDate.plusDays(additionalDays);
                 borrower.setBorrow_to(dateFormatter.formatDate(newDueDate));
-                borrower.setUser_id(Session.getInstance().getUserID());
                 borrowerDAO.updateBorrower(borrower);
                 loadBorrowers();
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Book renewed successfully.");
