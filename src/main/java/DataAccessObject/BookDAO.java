@@ -8,22 +8,27 @@ import javafx.collections.ObservableList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data Access Object (DAO) class for managing books in the database.
+ * Provides methods for CRUD operations and additional functionalities such as searching and managing comments.
+ */
 public class BookDAO {
-
-    // Fetch all books and return them as an ObservableList
+    private final Connection conn = DataBase.getInstance().getConnection();
+    /**
+     * Fetches all books from the database.
+     *
+     * @return an ObservableList of all books.
+     */
     public ObservableList<Book> getAllBooks() {
         ObservableList<Book> books = FXCollections.observableArrayList();
         String sql = "SELECT * FROM books";
-        Connection conn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -39,22 +44,25 @@ public class BookDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeResources(conn, pst, rs);
+            closeResources(pst, rs);
         }
 
         return books;
     }
 
-    // Fetch books by name using LIKE search
+    /**
+     * Fetches books from the database using a partial name match.
+     *
+     * @param name the partial or full name of the book(s) to search for.
+     * @return a list of books matching the search criteria.
+     */
     public ArrayList<Book> getBooksByName(String name) {
         ArrayList<Book> listBook = new ArrayList<>();
         String sql = "SELECT * FROM books WHERE name LIKE ?";
-        Connection conn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setString(1, "%" + name + "%"); // Wildcard search for book names
             rs = pst.executeQuery();
@@ -71,22 +79,25 @@ public class BookDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeResources(conn, pst, rs);
+            closeResources(pst, rs);
         }
 
         return listBook;
     }
 
-    // Fetch a book by its ID
+    /**
+     * Fetches a book by its ID.
+     *
+     * @param bookID the ID of the book to fetch.
+     * @return the Book object if found, or null if no such book exists.
+     */
     public Book getBookByID(int bookID) {
         Book book = null;
         String sql = "SELECT * FROM books WHERE bookID = ?";
-        Connection conn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setInt(1, bookID);
             rs = pst.executeQuery();
@@ -103,20 +114,23 @@ public class BookDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeResources(conn, pst, rs);
+            closeResources(pst, rs);
         }
 
         return book;
     }
 
-    // Update an existing book's details
+    /**
+     * Updates the details of an existing book in the database.
+     *
+     * @param book the Book object containing updated information.
+     * @return true if the update was successful, false otherwise.
+     */
     public boolean updateBook(Book book) {
         String sql = "UPDATE books SET name = ?, author = ?, publisher = ?, publishedDate = ? WHERE bookID = ?";
-        Connection conn = null;
         PreparedStatement pst = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setString(1, book.getName());
             pst.setString(2, book.getAuthor());
@@ -124,25 +138,27 @@ public class BookDAO {
             pst.setString(4, book.getPublishedDate());
             pst.setInt(5, book.getBookID());
 
-            // Execute the update and check if any rows were affected
             int affectedRows = pst.executeUpdate();
             return affectedRows > 0;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeResources(conn, pst, null);
+            closeResources(pst, null);
         }
         return false;
     }
 
-    // Insert a new book into the database
+    /**
+     * Inserts a new book into the database.
+     *
+     * @param book the Book object to be inserted.
+     * @return true if the insertion was successful, false otherwise.
+     */
     public boolean insertBook(Book book) {
         String sql = "INSERT INTO books (name, author, publisher, publishedDate, image) VALUES (?, ?, ?, ?, ?)";
-        Connection conn = null;
         PreparedStatement pst = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setString(1, book.getName());
             pst.setString(2, book.getAuthor());
@@ -150,47 +166,52 @@ public class BookDAO {
             pst.setString(4, book.getPublishedDate());
             pst.setString(5, book.getImage());
 
-            // Execute the insert and check if any rows were affected
             int affectedRows = pst.executeUpdate();
             return affectedRows > 0;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeResources(conn, pst, null);
+            closeResources(pst, null);
         }
         return false;
     }
 
-    // Delete a book by its ID
+    /**
+     * Deletes a book by its ID.
+     *
+     * @param bookID the ID of the book to be deleted.
+     * @return true if the deletion was successful, false otherwise.
+     */
     public boolean deleteBook(int bookID) {
         String sql = "DELETE FROM books WHERE bookID = ?";
-        Connection conn = null;
         PreparedStatement pst = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setInt(1, bookID);
 
-            // Execute the delete and check if any rows were affected
             int affectedRows = pst.executeUpdate();
             return affectedRows > 0;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeResources(conn, pst, null);
+            closeResources(pst, null);
         }
         return false;
     }
 
+    /**
+     * Adds a comment for a specific book.
+     *
+     * @param bookId  the ID of the book to which the comment belongs.
+     * @param comment the text of the comment.
+     */
     public void addComment(int bookId, String comment) {
         String sql = "INSERT INTO comments (book_id, comment_text) VALUES (?, ?)";
 
-        Connection conn = null;
         PreparedStatement pst = null;
 
         try {
-            conn = DataBase.getConnection();
             pst = conn.prepareStatement(sql);
             pst.setInt(1, bookId);
             pst.setString(2, comment);
@@ -201,12 +222,17 @@ public class BookDAO {
         }
     }
 
+    /**
+     * Fetches all comments for a specific book, ordered by creation date.
+     *
+     * @param bookId the ID of the book.
+     * @return a list of comments for the book.
+     */
     public List<String> getCommentsForBook(int bookId) {
         List<String> comments = new ArrayList<>();
         String sql = "SELECT comment_text FROM comments WHERE book_id = ? ORDER BY created_at DESC";
 
-        try (Connection connection = DataBase.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
 
             statement.setInt(1, bookId);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -221,8 +247,13 @@ public class BookDAO {
         return comments;
     }
 
-    // Utility method for closing resources
-    private void closeResources(Connection conn, PreparedStatement pst, ResultSet rs) {
+    /**
+     * Closes the database resources.
+     *
+     * @param pst  the PreparedStatement to be closed.
+     * @param rs   the ResultSet to be closed.
+     */
+    private void closeResources(PreparedStatement pst, ResultSet rs) {
         try {
             if (rs != null) {
                 rs.close();
@@ -230,43 +261,8 @@ public class BookDAO {
             if (pst != null) {
                 pst.close();
             }
-            if (conn != null) {
-                conn.close();
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public boolean updateBook(Book book, int bookID) {
-        String sql = "UPDATE books SET name = ?, author = ?, publisher = ?, publishedDate = ? WHERE bookID = ?";
-        Connection conn = null;
-        PreparedStatement pst = null;
-
-        try {
-            conn = DataBase.getConnection();
-            pst = conn.prepareStatement(sql);
-
-            // Cập nhật thông tin sách trong câu lệnh SQL
-            pst.setString(1, book.getName());
-            pst.setString(2, book.getAuthor());
-            pst.setString(3, book.getPublisher());
-            pst.setString(4, book.getPublishedDate());
-            pst.setInt(5, bookID);  // Thay vì lấy book.getBookID(), sử dụng tham số bookID
-
-            // Execute the update and check if any rows were affected
-            int affectedRows = pst.executeUpdate();
-            return affectedRows > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            closeResources(conn, pst, null); // Đảm bảo đóng các tài nguyên
-        }
-        return false;
-    }
-
-
-    public boolean insertBook(String book) {
-        return true;
     }
 }

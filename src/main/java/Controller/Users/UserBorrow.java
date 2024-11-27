@@ -21,63 +21,70 @@ import java.util.Optional;
 import static Tools.AlertHelper.showAlert;
 import static Tools.AlertHelper.showConfirmationAlert;
 
+/**
+ * Controller class for handling user book borrowing functionality in the library system.
+ */
 public class UserBorrow extends BaseDashBoardControl {
+
     @FXML
     private Button cancel_btn;
+
     @FXML
     private ImageView bookImageView;
+
     @FXML
     private TextField bookIDField;
+
     @FXML
     private Label nameLabel, bookNameLabel;
+
     @FXML
     private Label borrowerIDLabel;
+
     @FXML
     private DatePicker toDatePicker;
-    @FXML
-    private TextField commentField;
 
     private final BorrowerDAO borrowerDAO = new BorrowerDAO();
     private final DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
-    BookDAO bookDAO = new BookDAO();
+    private final BookDAO bookDAO = new BookDAO();
 
+    /**
+     * Initializes the controller after the FXML file has been loaded.
+     * Sets the borrower ID label with the current user's ID from the session.
+     */
     @FXML
     public void initialize() {
         borrowerIDLabel.setText(String.valueOf(Session.getInstance().getUserID()));
     }
 
+    /**
+     * Handles the borrowing of a book by a user.
+     * Validates input fields, checks user and book details, and adds a borrowing record to the database.
+     */
     @FXML
     private void borrowBook() {
         String borrowerId = borrowerIDLabel.getText();
         String bookId = bookIDField.getText();
         LocalDate borrowToDate = toDatePicker.getValue();
 
-        // Validate input fields
         if (borrowerId.isEmpty() || bookId.isEmpty() || borrowToDate == null) {
             showAlert(Alert.AlertType.ERROR, "Borrow Book", "Please enter both user's ID, Book's ID and return Day.");
             return;
         }
 
-        // Ensure the return date is after today
         LocalDate today = LocalDate.now();
         if (!borrowToDate.isAfter(today)) {
             showAlert(Alert.AlertType.ERROR, "Borrow Book", "Return date must be after today.");
             return;
         }
 
-        // Format the return date
         String formattedReturnDate = dateFormatter.formatDate(borrowToDate);
 
-        // Confirm borrowing action
         Optional<ButtonType> result = showConfirmationAlert("Confirm Borrow", "Are you sure you want to borrow this book?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            // Check if the borrower and book exist, and if the book is available
-            BookDAO bookDAO = new BookDAO();
-            UserDAO userBorrow = new UserDAO();
             Book borrowBook = bookDAO.getBookByID(Integer.parseInt(bookId));
-            User borrower = userBorrow.findUserById(Integer.parseInt(borrowerId));
+            User borrower = new UserDAO().findUserById(Integer.parseInt(borrowerId));
 
-            // Handle various error scenarios
             if (borrower == null) {
                 showAlert(Alert.AlertType.ERROR, "Borrow Book", "User not found.");
                 return;
@@ -92,29 +99,28 @@ public class UserBorrow extends BaseDashBoardControl {
                 return;
             }
 
-            // Add borrower record to the database and reload borrowers
-            String bookName = borrowBook.getName();
-            borrowerDAO.insertBorrower(Integer.parseInt(borrowerId), Integer.parseInt(bookId), bookName, dateFormatter.formatDate(today), formattedReturnDate);
+            borrowerDAO.insertBorrower(Integer.parseInt(borrowerId), Integer.parseInt(bookId), borrowBook.getName(), dateFormatter.formatDate(today), formattedReturnDate);
             checkBookInformation();
             showAlert(Alert.AlertType.INFORMATION, "Success", "Book borrowed successfully.");
         }
     }
 
+    /**
+     * Checks the information of the selected book and borrower.
+     * Updates UI with the retrieved details including book image, book name, and user name.
+     */
     @FXML
     private void checkBookInformation() {
         String borrowerId = borrowerIDLabel.getText();
         String bookId = bookIDField.getText();
 
-        // Validate input fields
         if (borrowerId.isEmpty() || bookId.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Borrow Book", "Please enter both user's ID, Book's ID.");
             return;
         }
 
-        BookDAO bookDAO = new BookDAO();
-        UserDAO userBorrow = new UserDAO();
         Book borrowBook = bookDAO.getBookByID(Integer.parseInt(bookId));
-        User borrower = userBorrow.findUserById(Integer.parseInt(borrowerId));
+        User borrower = new UserDAO().findUserById(Integer.parseInt(borrowerId));
 
         if (borrower == null) {
             showAlert(Alert.AlertType.ERROR, "Information", "User not found.");
@@ -133,12 +139,24 @@ public class UserBorrow extends BaseDashBoardControl {
         bookImageView.setImage(image);
     }
 
+    /**
+     * Handles the transition between scenes triggered by the given button.
+     *
+     * @param sourceButton The button that triggered the transition.
+     * @param fxmlPath     The path of the FXML file for the target scene.
+     */
     @Override
     protected void applySceneTransition(Button sourceButton, String fxmlPath) {
         Stage currentStage = (Stage) sourceButton.getScene().getWindow();
         currentStage.hide();
     }
 
+    /**
+     * Handles the action triggered by the "Cancel" button.
+     * Returns to the Member View scene.
+     *
+     * @param event The action event triggered by the button click.
+     */
     @FXML
     public void DownloadPages(ActionEvent event) {
         try {

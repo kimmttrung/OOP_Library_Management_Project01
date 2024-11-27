@@ -27,6 +27,11 @@ import java.util.Optional;
 import static Tools.AlertHelper.*;
 import static Animation.ColorTransitionExample.addColorTransition;
 
+/**
+ * This class is responsible for managing the User Control panel in the Admin dashboard.
+ * It provides functionality for adding, updating, deleting, and searching users in the system,
+ * along with UI navigation and animation features.
+ */
 public class UserControl extends BaseDashBoardControl {
     @FXML
     private Button arrow_btn;
@@ -79,6 +84,9 @@ public class UserControl extends BaseDashBoardControl {
     private final UserDAO userDAO = new UserDAO();
     private final BorrowerDAO borrowerDAO = new BorrowerDAO();
 
+    /**
+     * Initializes the User Control interface, setting up table columns, listeners, animations, and loading user data.
+     */
     @FXML
     public void initialize() {
         nav_from.setTranslateX(-320);
@@ -89,8 +97,12 @@ public class UserControl extends BaseDashBoardControl {
         setUpSelectionUser();
         loadUsers();
         addColorTransition(userBook_from);
+        setUpNumberPhoneField();
     }
 
+    /**
+     * Loads all users from the database and populates the user table.
+     */
     private void loadUsers() {
         // Clear the current list and load all users from the database into the table
         userList.clear();
@@ -98,6 +110,9 @@ public class UserControl extends BaseDashBoardControl {
         userTable.setItems(userList);
     }
 
+    /**
+     * Configures the table columns with property mappings for displaying user data.
+     */
     private void setUpTableColumn() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
@@ -109,6 +124,9 @@ public class UserControl extends BaseDashBoardControl {
         circleProfile.setFill(new ImagePattern(image));
     }
 
+    /**
+     * Sets up the table's selection listener to update the user details fields when a user is selected.
+     */
     private void setUpSelectionUser() {
         userTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             // If a book is selected, update the book details in the UI
@@ -126,6 +144,9 @@ public class UserControl extends BaseDashBoardControl {
         } );
     }
 
+    /**
+     * Adds a new user to the system based on the data entered in the fields.
+     */
     public void addUser() {
         if (userNameField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "ADD USER", "Please enter User's Name");
@@ -156,6 +177,9 @@ public class UserControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Deletes the selected user from the system.
+     */
     public void deleteUser() {
         if (userIdField.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "DELETE USER", "Please enter User ID");
@@ -180,6 +204,9 @@ public class UserControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Updates the selected user's information based on the data entered in the fields.
+     */
     @FXML
     public void updateUser() {
         if (userIdField.getText().isEmpty()) {
@@ -218,6 +245,9 @@ public class UserControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Searches for a user by their username and updates the table with the search results.
+     */
     @FXML
     private void searchUserByUsername() {
         String username = usernameSearchField.getText().trim();
@@ -238,6 +268,23 @@ public class UserControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Allow only number for phone number fields.
+     */
+    private void setUpNumberPhoneField() {
+        phoneNumberField.setTextFormatter(new TextFormatter<String>(change -> {
+            if (change.getText().matches("[0-9]*")) {
+                return change;
+            }
+            return null;
+        }));
+    }
+
+    /**
+     * Handles navigation between different pages in the application.
+     *
+     * @param event The triggered ActionEvent.
+     */
     @FXML
     public void DownloadPages(ActionEvent event) {
         try {
@@ -260,59 +307,46 @@ public class UserControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Exits the application with a fade-out animation.
+     */
     public void exit() {
         Stage primaryStage = (Stage) close_btn.getScene().getWindow();
-
         FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
-
-        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
-        scaleDown.setFromX(1.0);
-        scaleDown.setToX(0.5);
-        scaleDown.setFromY(1.0);
-        scaleDown.setToY(0.5);
-
-
         fadeOut.setOnFinished(event -> Platform.exit());
-
         fadeOut.play();
-        scaleDown.play();
     }
 
-    public void minimize(){
-        Stage stage = (Stage)minus_btn.getScene().getWindow();
+    /**
+     * Minimizes the current application window.
+     */
+    public void minimize() {
+        Stage stage = (Stage) minus_btn.getScene().getWindow();
         stage.setIconified(true);
     }
 
+    /**
+     * Animates and hides the navigation bar.
+     */
     public void sliderArrow() {
-
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(.5));
-        slide.setNode(nav_from);
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), nav_from);
         slide.setToX(-320);
-
-        slide.setOnFinished((ActionEvent event) -> {
+        slide.setOnFinished(event -> {
             bars_btn.setVisible(true);
             arrow_btn.setVisible(false);
         });
-
         slide.play();
     }
 
     public void sliderBars() {
-
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(.5));
-        slide.setNode(nav_from);
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), nav_from);
         slide.setToX(0);
-
-
-        slide.setOnFinished((ActionEvent event) -> {
+        slide.setOnFinished(event -> {
             arrow_btn.setVisible(true);
             bars_btn.setVisible(false);
         });
-
         slide.play();
     }
 }

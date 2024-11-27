@@ -34,8 +34,15 @@ import java.util.Optional;
 
 import static Tools.AlertHelper.showConfirmationAlert;
 
+/**
+ * The UsersDashBoard class represents the main dashboard for a user.
+ * It includes functionalities such as displaying a user profile,
+ * loading frequently borrowed books, generating a bar chart of book categories,
+ * and navigating to various sections of the application.
+ */
 public class UsersDashBoard extends BaseDashBoardControl {
 
+    // FXML UI elements
     @FXML
     private Button close_btn;
     @FXML
@@ -59,81 +66,97 @@ public class UsersDashBoard extends BaseDashBoardControl {
     @FXML
     private ImageView myImageView6, myImageView7, myImageView8, myImageView9, myImageView10;
 
-    BookDAO bookDAO = new BookDAO();
+    private final Connection connection = DataBase.getInstance().getConnection();
 
+    // DAO instance for book operations
+    private final BookDAO bookDAO = new BookDAO();
 
+    /**
+     * Initializes the dashboard by setting user information, chart data,
+     * profile images, and a smooth scrolling effect for the image carousel.
+     */
     public void initialize() {
         setImageView();
         setChartUser();
         UID.setText("UID: " + Session.getInstance().getUserID());
 
-        // Create a timeline to implement smooth scrolling effect
+        // Smooth scrolling effect for the scroll pane
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(20), e -> scroll())  // Scroll every 20 milliseconds
+                new KeyFrame(Duration.millis(20), e -> scroll())
         );
-        timeline.setCycleCount(Timeline.INDEFINITE);  // Repeat the scroll indefinitely
+        timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
 
+    /**
+     * Configures and populates the bar chart with sample data representing book categories and popularity.
+     */
     private void setChartUser() {
         XYChart.Series<String, Double> series2 = new XYChart.Series<>();
         series2.setName("Happy New Year 2027");
-        series2.getData().add(new XYChart.Data("Mystery ", 500));
-        series2.getData().add(new XYChart.Data("Sport ", 300));
-        series2.getData().add(new XYChart.Data("History ", 200));
-        series2.getData().add(new XYChart.Data("Poetry ", 400));
-        series2.getData().add(new XYChart.Data("Health ", 700));
-        series2.getData().add(new XYChart.Data("Romance ", 100));
-        series2.getData().add(new XYChart.Data("Biography  ", 150));
-        series2.getData().add(new XYChart.Data("Python ", 250));
+        series2.getData().add(new XYChart.Data<>("Mystery", 500.0));
+        series2.getData().add(new XYChart.Data<>("Sport", 300.0));
+        series2.getData().add(new XYChart.Data<>("History", 200.0));
+        series2.getData().add(new XYChart.Data<>("Poetry", 400.0));
+        series2.getData().add(new XYChart.Data<>("Health", 700.0));
+        series2.getData().add(new XYChart.Data<>("Romance", 100.0));
+        series2.getData().add(new XYChart.Data<>("Biography", 150.0));
+        series2.getData().add(new XYChart.Data<>("Python", 250.0));
         chartUser.getData().add(series2);
     }
 
+    /**
+     * Loads user profile images from the database and populates the ImageViews in the dashboard.
+     * Uses a background thread to fetch data and updates the UI upon completion.
+     */
     private void setImageView() {
-        // Set the profile image in the circle profile
-        // Create  Task to load image links from the database in the background
         Task<List<String>> loadImagesTask = new Task<>() {
             @Override
             protected List<String> call() throws Exception {
-                return getImageLinksFromDatabase();  // Retrieve image URLs from the database
+                return getImageLinksFromDatabase();
             }
         };
 
-        // Once the Task is complete, load the images into the ImageViews
         loadImagesTask.setOnSucceeded(event -> {
             List<ImageView> imageViews = Arrays.asList(
                     myImageView1, myImageView2, myImageView3, myImageView4, myImageView5,
                     myImageView6, myImageView7, myImageView8, myImageView9, myImageView10
             );
-            loadImagesToImageViews(imageViews);  // Load images into the ImageViews
+            loadImagesToImageViews(imageViews);
         });
 
-        // Start the background task on a new thread
         new Thread(loadImagesTask).start();
     }
 
+    /**
+     * Loads images into the specified list of ImageViews using URLs retrieved from the database.
+     *
+     * @param imageViews the list of ImageViews to populate with images.
+     */
     public void loadImagesToImageViews(List<ImageView> imageViews) {
-        // Fetch image URLs from the database
         List<String> imageLinks = getImageLinksFromDatabase();
 
-        // Loop through the ImageViews and load the images from the links
         for (int i = 0; i < imageViews.size(); i++) {
             if (i < imageLinks.size()) {
                 String imageLink = imageLinks.get(i);
-                Image image = new Image(imageLink, true);  // Load the image
-                imageViews.get(i).setImage(image);  // Set the image in the corresponding ImageView
+                Image image = new Image(imageLink, true);
+                imageViews.get(i).setImage(image);
             } else {
                 break;
             }
         }
     }
 
+    /**
+     * Fetches a list of image URLs from the database based on the most borrowed books.
+     *
+     * @return a list of image URLs.
+     */
     private List<String> getImageLinksFromDatabase() {
-        // Create a list to store the image URLs fetched from the database
         List<String> imageLinks = new ArrayList<>();
         Book book = new Book();
 
-        try (Connection connection = DataBase.getConnection()) {
+        try {
             String sql = "SELECT book_id FROM borrowers GROUP BY book_id ORDER BY COUNT(*) DESC";
             try (Statement statement = connection.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
@@ -151,23 +174,28 @@ public class UsersDashBoard extends BaseDashBoardControl {
             e.printStackTrace();
         }
 
-        return imageLinks;  // Return the list of image links
+        return imageLinks;
     }
 
+    /**
+     * Implements a smooth horizontal scrolling effect for the ScrollPane.
+     */
     private void scroll() {
-        // Get the current horizontal scroll position of the ScrollPane
         double hValue = scrollPane.getHvalue();
-        double increment = 0.001;  // Scroll increment for smooth scrolling
+        double increment = 0.001;
 
-        // If the scroll is not at the end, scroll by a small increment
         if (hValue < 1) {
             scrollPane.setHvalue(hValue + increment);
         } else {
-            // If at the end, reset the scroll to the beginning
             scrollPane.setHvalue(0);
         }
     }
 
+    /**
+     * Handles navigation and sign-out actions based on button clicks.
+     *
+     * @param event the action event triggered by the user.
+     */
     @FXML
     public void DownloadPages(ActionEvent event) {
         try {
@@ -188,27 +216,23 @@ public class UsersDashBoard extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Closes the application with a fade-out and scale-down transition.
+     */
     public void exit() {
         Stage primaryStage = (Stage) close_btn.getScene().getWindow();
-
         FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
-
-        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
-        scaleDown.setFromX(1.0);
-        scaleDown.setToX(0.5);
-        scaleDown.setFromY(1.0);
-        scaleDown.setToY(0.5);
-
         fadeOut.setOnFinished(event -> Platform.exit());
-
         fadeOut.play();
-        scaleDown.play();
     }
 
-    public void minimize(){
-        Stage stage = (Stage)minus_btn.getScene().getWindow();
+    /**
+     * Minimizes the application window.
+     */
+    public void minimize() {
+        Stage stage = (Stage) minus_btn.getScene().getWindow();
         stage.setIconified(true);
     }
 }

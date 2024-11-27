@@ -33,6 +33,10 @@ import java.util.Optional;
 import static Tools.AlertHelper.showConfirmationAlert;
 import static Animation.ColorTransitionExample.addColorTransition;
 
+/**
+ * Controller for the Dashboard view in the Library Management System.
+ * Manages navigation, user interactions, and data visualization elements such as PieChart and scrolling image display.
+ */
 public class DashBoardControl extends BaseDashBoardControl {
 
     @FXML
@@ -74,8 +78,13 @@ public class DashBoardControl extends BaseDashBoardControl {
     @FXML
     private ImageView myImageView6, myImageView7, myImageView8, myImageView9, myImageView10;
 
+    private final Connection connection = DataBase.getInstance().getConnection();
+
     BookDAO bookDAO = new BookDAO();
 
+    /**
+     * Initializes the dashboard, setting up initial UI states, loading data, and configuring animations.
+     */
     @FXML
     public void initialize() {
         setUpInit();
@@ -91,6 +100,9 @@ public class DashBoardControl extends BaseDashBoardControl {
         timeline.play();
     }
 
+    /**
+     * Sets the profile image and loads a list of images into image views using data fetched from the database.
+     */
     private void setImageView() {
         // Set the profile image in the circle profile
         Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
@@ -117,6 +129,11 @@ public class DashBoardControl extends BaseDashBoardControl {
         new Thread(loadImagesTask).start();
     }
 
+    /**
+     * Loads a list of images into the provided ImageView elements.
+     *
+     * @param imageViews List of ImageView elements to populate.
+     */
     public void loadImagesToImageViews(List<ImageView> imageViews) {
         // Fetch image URLs from the database
         List<String> imageLinks = getImageLinksFromDatabase();
@@ -133,19 +150,22 @@ public class DashBoardControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Fetches the top book image URLs from the database based on popularity.
+     *
+     * @return A list of book image URLs.
+     */
     private List<String> getImageLinksFromDatabase() {
-        // Create a list to store the image URLs fetched from the database
         List<String> imageLinks = new ArrayList<>();
-        Book book = new Book();
 
-        try (Connection connection = DataBase.getConnection()) {
+        try {
             String sql = "SELECT book_id FROM borrowers GROUP BY book_id ORDER BY COUNT(*) DESC";
             try (Statement statement = connection.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
 
                 while (resultSet.next()) {
-                    String bookId = resultSet.getString("book_id");
-                    book = bookDAO.getBookByID(Integer.parseInt(bookId));
+                    int bookId = resultSet.getInt("book_id");
+                    Book book = bookDAO.getBookByID(bookId);
                     String imageUrl = book.getImage();
                     if (imageUrl != null && !imageUrl.isEmpty()) {
                         imageLinks.add(imageUrl);
@@ -156,14 +176,16 @@ public class DashBoardControl extends BaseDashBoardControl {
             e.printStackTrace();
         }
 
-        return imageLinks;  // Return the list of image links
+        return imageLinks;
     }
 
+    /**
+     * Implements a smooth scrolling effect for the image display in the ScrollPane.
+     */
     private void scroll() {
         // Get the current horizontal scroll position of the ScrollPane
         double hValue = scrollPane.getHvalue();
         double increment = 0.001;  // Scroll increment for smooth scrolling
-
         // If the scroll is not at the end, scroll by a small increment
         if (hValue < 1) {
             scrollPane.setHvalue(hValue + increment);
@@ -173,6 +195,9 @@ public class DashBoardControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Configures the initial UI state and populates the PieChart with sample data.
+     */
     private void setUpInit() {
         // Set up initial pie chart data for different categories
         ObservableList<PieChart.Data> pieChartData =
@@ -197,6 +222,11 @@ public class DashBoardControl extends BaseDashBoardControl {
         arrow_btn.setVisible(false);
     }
 
+    /**
+     * Handles navigation between different pages in the application.
+     *
+     * @param event The triggered ActionEvent.
+     */
     @FXML
     public void DownloadPages(ActionEvent event) {
         try {
@@ -219,65 +249,53 @@ public class DashBoardControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Exits the application with a fade-out animation.
+     */
     public void exit() {
         Stage primaryStage = (Stage) close_btn.getScene().getWindow();
-
         FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
-
-        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
-        scaleDown.setFromX(1.0);
-        scaleDown.setToX(0.5);
-        scaleDown.setFromY(1.0);
-        scaleDown.setToY(0.5);
-
         fadeOut.setOnFinished(event -> Platform.exit());
-
         fadeOut.play();
-        scaleDown.play();
     }
 
-    public void minimize(){
-        Stage stage = (Stage)minus_btn.getScene().getWindow();
+    /**
+     * Minimizes the current application window.
+     */
+    public void minimize() {
+        Stage stage = (Stage) minus_btn.getScene().getWindow();
         stage.setIconified(true);
     }
 
+    /**
+     * Animates and hides the navigation bar.
+     */
     public void sliderArrow() {
-
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(.5));
-        slide.setNode(nav_from);
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), nav_from);
         slide.setToX(-320);
-
-        slide.setOnFinished((ActionEvent event) -> {
+        slide.setOnFinished(event -> {
             bars_btn.setVisible(true);
             arrow_btn.setVisible(false);
         });
-
         slide.play();
     }
 
     public void sliderBars() {
-
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(.5));
-        slide.setNode(nav_from);
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), nav_from);
         slide.setToX(0);
-
-
-        slide.setOnFinished((ActionEvent event) -> {
+        slide.setOnFinished(event -> {
             arrow_btn.setVisible(true);
             bars_btn.setVisible(false);
         });
-
         slide.play();
     }
 
     public void updateCounts() {
-        int bookCount = DataBase.getCount("books");
-        int userCount = DataBase.getCount("users");
-        int borrowerCount = DataBase.getCount("borrowers");
+        int bookCount = DataBase.getInstance().getCount("books");
+        int userCount = DataBase.getInstance().getCount("users");
+        int borrowerCount = DataBase.getInstance().getCount("borrowers");
 
         bookCountLabel.setText("" + bookCount);
         userCountLabel.setText("" + userCount);

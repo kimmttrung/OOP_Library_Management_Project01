@@ -36,7 +36,20 @@ import static Tools.AlertHelper.showAlert;
 import static Tools.AlertHelper.showConfirmationAlert;
 import static Animation.ColorTransitionExample.addColorTransition;
 
-
+/**
+ * BookControl is a controller class for managing the book-related functionality in the library
+ * management application. It integrates with the JavaFX framework and handles UI events,
+ * database interactions, and QR code generation for books.
+ * <p>
+ * This class provides functionality to:
+ *     <li>Display books in a table with details such as ID, title, author, publisher, and published date.</li>
+ *     <li>Insert, update, and delete books from the database.</li>
+ *     <li>Search books by title.</li>
+ *     <li>Generate QR codes for selected books.</li>
+ * It interacts with {@link BookDAO} and {@link BorrowerDAO} for database operations and uses a background
+ * thread for tasks to ensure a responsive UI.
+ * </p>
+ */
 public class BookControl extends BaseDashBoardControl {
     @FXML
     private Button borrowerBook_btn;
@@ -85,11 +98,21 @@ public class BookControl extends BaseDashBoardControl {
     @FXML
     private AnchorPane main_from;
 
+    // DAO classes for database operations
     private final BookDAO bookDAO = new BookDAO();
     private final BorrowerDAO borrowerDAO = new BorrowerDAO();
+
+    // Observable list to hold book data
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
+
+    // Formatter for date strings
     private final DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
 
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * This method sets up the UI, initializes table columns, loads books into the table,
+     * and sets up listeners for user interactions.
+     */
     @FXML
     public void initialize() {
         // Set initial translation for the navigation pane and visibility for buttons
@@ -105,6 +128,10 @@ public class BookControl extends BaseDashBoardControl {
         addColorTransition(main_from);
     }
 
+    /**
+     * Loads books from the database and populates the table.
+     * This operation is performed on a background thread to ensure a responsive UI.
+     */
     @FXML
     private void loadBooks() {
         // Load books in a background thread to keep the UI responsive
@@ -135,6 +162,9 @@ public class BookControl extends BaseDashBoardControl {
         loadBooksThread.start();
     }
 
+    /**
+     * Configures the columns of the table to display book attributes.
+     */
     private void setUpTableColumns() {
         // Define how each column will fetch data from the Book object
         idColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
@@ -148,6 +178,10 @@ public class BookControl extends BaseDashBoardControl {
         circleProfile.setFill(new ImagePattern(image));
     }
 
+    /**
+     * Sets a listener for book selection in the table to update UI components
+     * with the selected book's details.
+     */
     private void setUpBookSelectionListener() {
         // Set a listener for book selection in the table
         bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -178,6 +212,11 @@ public class BookControl extends BaseDashBoardControl {
         });
     }
 
+    /**
+     * Updates the image displayed for a selected book.
+     *
+     * @param book The selected book whose image is to be updated.
+     */
     private void updateBookImage(Book book) {
         // Update the image of the selected book
         String imageLink = book.getImage();
@@ -187,6 +226,9 @@ public class BookControl extends BaseDashBoardControl {
         bookImageView.setImage(image);
     }
 
+    /**
+     * Inserts a new book into the database based on user inputs from the UI.
+     */
     @FXML
     private void insertBook() {
         // Validate fields before proceeding with insertion
@@ -223,6 +265,9 @@ public class BookControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Updates the details of an existing book in the database based on user inputs.
+     */
     @FXML
     private void updateBook() {
         // Check if book ID field is empty
@@ -269,6 +314,9 @@ public class BookControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Deletes a book from the database after validating user input and confirming the action.
+     */
     @FXML
     private void deleteBook() {
         // Validate book ID before deletion
@@ -294,6 +342,9 @@ public class BookControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Searches for books by title and displays the results in the table.
+     */
     @FXML
     private void searchBookByName() {
         // Fetch books based on the search term
@@ -314,6 +365,10 @@ public class BookControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Generates a QR code for the selected book, containing its details as JSON.
+     * The QR code is saved as an image file and displayed in the UI.
+     */
     @FXML
     private void generateQRCode() {
         // Get selected book to generate QR Code
@@ -371,6 +426,9 @@ public class BookControl extends BaseDashBoardControl {
         qrCodeThread.start();
     }
 
+    /**
+     * Creates a directory for saving QR code images if it does not already exist.
+     */
     private void createQRCodeDirectory() {
         File directory = new File("src/main/resources/qr_codes");
         if (!directory.exists()) {
@@ -378,6 +436,12 @@ public class BookControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Checks if any of the provided text fields are empty.
+     *
+     * @param fields Text fields to check for emptiness.
+     * @return True if any field is empty, false otherwise.
+     */
     private boolean isAnyFieldEmpty(TextField... fields) {
         for (TextField field : fields) {
             if (field.getText().trim().isEmpty()) return true;
@@ -385,6 +449,11 @@ public class BookControl extends BaseDashBoardControl {
         return false;
     }
 
+    /**
+     * Handles navigation between different pages in the application.
+     *
+     * @param event The triggered ActionEvent.
+     */
     @FXML
     public void DownloadPages(ActionEvent event) {
         try {
@@ -407,58 +476,46 @@ public class BookControl extends BaseDashBoardControl {
         }
     }
 
+    /**
+     * Exits the application with a fade-out animation.
+     */
     public void exit() {
         Stage primaryStage = (Stage) close_btn.getScene().getWindow();
-
         FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
-
-        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(500), primaryStage.getScene().getRoot());
-        scaleDown.setFromX(1.0);
-        scaleDown.setToX(0.5);
-        scaleDown.setFromY(1.0);
-        scaleDown.setToY(0.5);
-
         fadeOut.setOnFinished(event -> Platform.exit());
-
         fadeOut.play();
-        scaleDown.play();
     }
 
+    /**
+     * Minimizes the current application window.
+     */
     public void minimize() {
         Stage stage = (Stage) minus_btn.getScene().getWindow();
         stage.setIconified(true);
     }
 
+    /**
+     * Animates and hides the navigation bar.
+     */
     public void sliderArrow() {
-
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(.5));
-        slide.setNode(nav_from);
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), nav_from);
         slide.setToX(-320);
-
-        slide.setOnFinished((ActionEvent event) -> {
+        slide.setOnFinished(event -> {
             bars_btn.setVisible(true);
             arrow_btn.setVisible(false);
         });
-
         slide.play();
     }
 
     public void sliderBars() {
-
-        TranslateTransition slide = new TranslateTransition();
-        slide.setDuration(Duration.seconds(.5));
-        slide.setNode(nav_from);
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), nav_from);
         slide.setToX(0);
-
-
-        slide.setOnFinished((ActionEvent event) -> {
+        slide.setOnFinished(event -> {
             arrow_btn.setVisible(true);
             bars_btn.setVisible(false);
         });
-
         slide.play();
     }
 }

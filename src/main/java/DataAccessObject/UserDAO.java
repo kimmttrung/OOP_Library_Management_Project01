@@ -15,6 +15,7 @@ import java.sql.SQLException;
  * Provides methods to fetch, add, update, and delete user records from the database.
  */
 public class UserDAO {
+    private final Connection connect = DataBase.getInstance().getConnection();
 
     /**
      * Retrieves all users from the database.
@@ -25,8 +26,7 @@ public class UserDAO {
         ObservableList<User> users = FXCollections.observableArrayList();
         String sql = "SELECT * FROM users";
 
-        try (Connection connect = DataBase.getConnection();
-             PreparedStatement pst = connect.prepareStatement(sql);
+        try (PreparedStatement pst = connect.prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
             while (rs.next()) {
                 User user = new User();
@@ -53,8 +53,7 @@ public class UserDAO {
         User user = null;
         String sql = "SELECT * FROM users WHERE username = ?";
 
-        try (Connection connect = DataBase.getConnection();
-             PreparedStatement pst = connect.prepareStatement(sql)) {
+        try (PreparedStatement pst = connect.prepareStatement(sql)) {
             pst.setString(1, username);
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
@@ -77,8 +76,7 @@ public class UserDAO {
         User user = null;
         String sql = "SELECT * FROM users WHERE id = ?";
 
-        try (Connection connect = DataBase.getConnection();
-             PreparedStatement pst = connect.prepareStatement(sql)) {
+        try (PreparedStatement pst = connect.prepareStatement(sql)) {
             pst.setInt(1, id);
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
@@ -99,8 +97,7 @@ public class UserDAO {
      */
     public boolean addUser(User user) {
         String sql = "INSERT INTO users(username, password, phoneNumber, registrationDate) VALUES(?,?,?,?)";
-        try (Connection connect = DataBase.getConnection();
-             PreparedStatement pst = connect.prepareStatement(sql)) {
+        try (PreparedStatement pst = connect.prepareStatement(sql)) {
             pst.setString(1, user.getUserName());
             pst.setString(2, user.getPassword());
             pst.setString(3, user.getPhoneNumber());
@@ -122,8 +119,7 @@ public class UserDAO {
      */
     public boolean deleteUser(int id) {
         String sql = "DELETE FROM users WHERE id = ?";
-        try (Connection connect = DataBase.getConnection();
-             PreparedStatement pst = connect.prepareStatement(sql)) {
+        try (PreparedStatement pst = connect.prepareStatement(sql)) {
             pst.setInt(1, id);
 
             int affectedRows = pst.executeUpdate();
@@ -142,8 +138,7 @@ public class UserDAO {
      */
     public boolean updateUser(User user) {
         String sql = "UPDATE users SET username = ?, password = ?, phoneNumber = ? WHERE id = ?";
-        try (Connection connect = DataBase.getConnection();
-             PreparedStatement pst = connect.prepareStatement(sql)) {
+        try (PreparedStatement pst = connect.prepareStatement(sql)) {
             pst.setString(1, user.getUserName());
             pst.setString(2, user.getPassword());
             pst.setString(3, user.getPhoneNumber());

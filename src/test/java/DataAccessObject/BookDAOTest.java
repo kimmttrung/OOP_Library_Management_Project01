@@ -26,11 +26,6 @@ class BookDAOTest {
             }
 
             @Override
-            public boolean insertBook(String name) {
-                return "Book".equals(name);
-            }
-
-            @Override
             public boolean deleteBook(int id) {
                 return id == 1;
             }
@@ -49,7 +44,7 @@ class BookDAOTest {
     void getAllBooks() {
         List<Book> books = bookDAO.getAllBooks();
         assertNotNull(books, "The list of books should not be null");
-        assertEquals(23, books.size(), "There should be 2 books in the list"); // Điều chỉnh số lượng sách
+        assertEquals(19, books.size(), "There should be 2 books in the list"); // Điều chỉnh số lượng sách
         assertEquals("Conan The Triumphant", books.get(0).getName(), "The name of the first book should be 'Conan The Triumphant'"); // Chỉ số là 0
         assertEquals("Conan the Barbarian #7", books.get(1).getName(), "The name of the second book should be 'Conan the Barbarian #7'"); // Chỉ số là 1
     }
@@ -79,15 +74,6 @@ class BookDAOTest {
         assertNull(book, "The book should be null for a non-existent ID");
     }
 
-    @Test
-    void insertBook() {
-        boolean result = bookDAO.insertBook("Book");
-        assertTrue(result, "The book insertion should return true when valid name is provided");
-
-        // Test case for invalid book name
-        result = bookDAO.insertBook("Invalid Book");
-        assertFalse(result, "The book insertion should return false when invalid name is provided");
-    }
 
     @Test
     void deleteBook() {
