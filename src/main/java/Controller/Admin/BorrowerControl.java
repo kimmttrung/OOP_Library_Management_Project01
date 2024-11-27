@@ -275,7 +275,8 @@ public class BorrowerControl extends BaseDashBoardControl {
 
             if (borrower != null && !borrower.isEmpty()) {
                 ObservableList<Borrower> foundBorrowers = FXCollections.observableArrayList(borrower);
-                borrowerTable.setItems(foundBorrowers);
+                filteredList = new FilteredList<>(foundBorrowers, p -> true); // Cập nhật danh sách đã lọc
+                borrowerTable.setItems(filteredList); // Đặt lại bảng
             } else {
                 showAlert(Alert.AlertType.INFORMATION, "Search Borrower", "No borrower found with the provided ID.");
             }
