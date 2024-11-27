@@ -111,4 +111,8 @@ public class Book {
     public String toString() {
         return "Book [Name=" + name + ", Author=" + author + ", Publisher=" + publisher + ", PublishedDate=" + publishedDate + "]";
     }
+
+    public int getId() {
+        return 1;
+    }
 }
