@@ -55,6 +55,7 @@ public class EditInfor extends BaseDashBoardControl {
         userNameField.setText(existingUser.getUserName());
         passField.setText(existingUser.getPassword());
         numberField.setText(existingUser.getPhoneNumber());
+        setUpNumberPhoneField();
     }
 
     /**
@@ -86,6 +87,19 @@ public class EditInfor extends BaseDashBoardControl {
         } else {
             showAlert(Alert.AlertType.ERROR, "Update User", "Failed to update user. Please try again.");
         }
+    }
+
+    /**
+     * Allow only number for phone number fields.
+     */
+    private void setUpNumberPhoneField() {
+        numberField.setTextFormatter(new TextFormatter<String>(change -> {
+            // Chỉ cho phép các ký tự là số hoặc là dấu "+" (dành cho mã quốc gia)
+            if (change.getText().matches("[0-9]*")) {
+                return change;
+            }
+            return null; // Bỏ qua thay đổi nếu không phải số
+        }));
     }
 
     /**

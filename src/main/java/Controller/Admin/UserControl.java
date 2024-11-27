@@ -97,6 +97,7 @@ public class UserControl extends BaseDashBoardControl {
         setUpSelectionUser();
         loadUsers();
         addColorTransition(userBook_from);
+        setUpNumberPhoneField();
     }
 
     /**
@@ -265,6 +266,18 @@ public class UserControl extends BaseDashBoardControl {
         } else {
             showAlert(Alert.AlertType.INFORMATION, "Search User", "No user found with username: " + username);
         }
+    }
+
+    /**
+     * Allow only number for phone number fields.
+     */
+    private void setUpNumberPhoneField() {
+        phoneNumberField.setTextFormatter(new TextFormatter<String>(change -> {
+            if (change.getText().matches("[0-9]*")) {
+                return change;
+            }
+            return null;
+        }));
     }
 
     /**
