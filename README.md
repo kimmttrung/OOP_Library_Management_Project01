@@ -31,7 +31,7 @@ This is a **Library Management System** developed in **JavaFX**, designed to str
 - **SQLite**: A lightweight, serverless database engine used to store the system data locally.
 - **Google Books API**: Fetches book details such as title, author, and description using ISBN or book title.
 - **Multithreading**: Handles operations like fetching API data in the background to improve system performance and avoid UI freezing.
-- **Singleton Pattern**: This ensures that there is only one instance of the database connection throughout the application's lifecycle, optimizing resource usage and providing a centralized point for database interactions.
+- **Design Pattern**: The project implements the **Singleton Design Pattern** for managing the database connection..
 
 ## Setup Instructions
 
@@ -141,6 +141,3 @@ We welcome contributions to improve the Library Management System. You can:
 - Write unit tests for new features or fixes.
 
 ---
-
-## License
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
