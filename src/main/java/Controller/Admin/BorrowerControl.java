@@ -89,6 +89,7 @@ public class BorrowerControl extends BaseDashBoardControl {
     @FXML
     private AnchorPane borrower_from_animation;
 
+    private final int DATE_EXTEND = 7;
     private final ObservableList<Borrower> borrowerList = FXCollections.observableArrayList();
     private final BorrowerDAO borrowerDAO = new BorrowerDAO();
     private final DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
@@ -252,7 +253,7 @@ public class BorrowerControl extends BaseDashBoardControl {
     @FXML
     private void renewBook() {
         String borrowerId = borrowID.getText();
-        int additionalDays = 7;
+        int additionalDays = DATE_EXTEND;
 
         if (borrowerId.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Renew Book", "Please enter Borrower ID.");

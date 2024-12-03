@@ -26,7 +26,6 @@ public class LibraryManagement extends Application {
         root.setOnMouseDragged((MouseEvent event) -> {
             stage.setX(event.getScreenX() - x);
             stage.setY(event.getScreenY() - y);
-
         });
 
         stage.initStyle(StageStyle.TRANSPARENT);

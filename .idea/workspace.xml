@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="56b3534e-f732-453e-9b71-afa9780db11d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/UserControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Users/UsersDashBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Users/UsersDashBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Admin/BookView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Admin/BookView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Admin/BorrowerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Admin/BorrowerView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Users/DashBoardUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Users/DashBoardUser.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/BorrowerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/DataAccessObject/BookDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DataAccessObject/BookDAOTest.java" afterDir="false" />
     </list>
@@ -22,14 +19,41 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;kimmttrung&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kimmttrung/OOP_Library_Management_Project01.git&quot;,
+    &quot;accountId&quot;: &quot;20d4a28f-ec06-4c74-8526-5cf1ad8a2292&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2pSIPmyLAUMcqiH6VxWRM9wcLse" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.LibraryManagement.executor": "Run",
     "JUnit.BookDAOTest.executor": "Run",
+    "JUnit.BookTest.executor": "Run",
+    "JUnit.BorrowerDAOTest.executor": "Run",
+    "JUnit.BorrowerTest.executor": "Run",
+    "JUnit.UserDAOTest.executor": "Run",
+    "JUnit.UserTest.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "MaiTrung",
+    "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01/src/main/resources/sqlite",
     "node.js.selected.package.tslint": "(autodetect)"
   }
@@ -39,7 +63,15 @@
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\sqlite" />
     </key>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="56b3534e-f732-453e-9b71-afa9780db11d" name="Changes" comment="" />
+      <created>1732753030167</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732753030167</updated>
+    </task>
     <servers />
   </component>
 </project>
