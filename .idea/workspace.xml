@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="">
+    <list default="true" id="56b3534e-f732-453e-9b71-afa9780db11d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BookControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/BorrowerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DashBoardControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/DateStringFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/DateStringFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/SearchAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/UserControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BookDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/BorrowerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccessObject/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/BorrowerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/BorrowerView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,44 +14,26 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="CSS File" />
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;ThePhapp&quot;
+    &quot;assignee&quot;: &quot;kimmttrung&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/kimmttrung/OOP_Library_Management_Project01.git&quot;,
-    &quot;accountId&quot;: &quot;ec4ca4ad-fa99-4f13-b6e8-042d4199200e&quot;
+    &quot;accountId&quot;: &quot;20d4a28f-ec06-4c74-8526-5cf1ad8a2292&quot;
   }
 }</component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 6
+  &quot;associatedIndex&quot;: 2
 }</component>
-  <component name="ProjectId" id="2mvbD3S73i5FvIHkw3x29psejs2" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectId" id="2pSIPmyLAUMcqiH6VxWRM9wcLse" />
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -70,153 +42,34 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Application.AnimateFXDemo.executor&quot;: &quot;Run&quot;,
-    &quot;Application.BookSearchApp.executor&quot;: &quot;Run&quot;,
-    &quot;Application.DataBase.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GoogleBooksAPI.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GoogleBooksToDB.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HoverEffectDemo.executor&quot;: &quot;Run&quot;,
-    &quot;Application.LibaryManagement.executor&quot;: &quot;Run&quot;,
-    &quot;Application.LibraryApp.executor&quot;: &quot;Run&quot;,
     &quot;Application.LibraryManagement.executor&quot;: &quot;Run&quot;,
-    &quot;Application.LoginRegisterForgotPass.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.MainApp.executor&quot;: &quot;Run&quot;,
-    &quot;Application.pLibraryManagement.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;JUnit.BookDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BorrowerDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BorrowerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserTest.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;MaiTrung&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/ChatApplication/OOP_Library_Management_Project01&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+    &quot;last_opened_file_path&quot;: &quot;D:/ChatApplication/OOP_Library_Management_Project01/src/main/resources/sqlite&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources" />
-      <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\image" />
+      <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\sqlite" />
     </key>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c83aa0fb-6c1a-40be-9bff-7cbb95ae6053" name="Changes" comment="" />
-      <created>1727959874617</created>
+      <changelist id="56b3534e-f732-453e-9b71-afa9780db11d" name="Changes" comment="" />
+      <created>1732753030167</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1727959874617</updated>
-      <workItem from="1727959875625" duration="1000" />
-      <workItem from="1727959905586" duration="28000" />
-      <workItem from="1727960017328" duration="307000" />
-      <workItem from="1727960519394" duration="17000" />
-      <workItem from="1728036166100" duration="21000" />
-      <workItem from="1728114156076" duration="7146000" />
-      <workItem from="1728191198950" duration="2336000" />
-      <workItem from="1728215865184" duration="144000" />
-      <workItem from="1728220609811" duration="41000" />
-      <workItem from="1728220928235" duration="2650000" />
-      <workItem from="1728303578758" duration="39000" />
-      <workItem from="1728549448228" duration="4686000" />
-      <workItem from="1728555599137" duration="455000" />
-      <workItem from="1728556195616" duration="163000" />
-      <workItem from="1728556812495" duration="42000" />
-      <workItem from="1728557803102" duration="7000" />
-      <workItem from="1728558054606" duration="1000" />
-      <workItem from="1728559366223" duration="1986000" />
-      <workItem from="1728561370243" duration="25000" />
-      <workItem from="1728561405611" duration="72000" />
-      <workItem from="1728561488295" duration="78000" />
-      <workItem from="1728561622651" duration="19000" />
-      <workItem from="1728571135930" duration="76000" />
-      <workItem from="1728571217764" duration="795000" />
-      <workItem from="1728572306809" duration="2572000" />
-      <workItem from="1728639677902" duration="1101000" />
-      <workItem from="1728819007576" duration="34000" />
-      <workItem from="1728819457240" duration="2469000" />
-      <workItem from="1728822360796" duration="1482000" />
-      <workItem from="1728892491198" duration="765000" />
-      <workItem from="1728908041969" duration="949000" />
-      <workItem from="1728983254804" duration="8277000" />
-      <workItem from="1729006793314" duration="1124000" />
-      <workItem from="1729050115692" duration="3364000" />
-      <workItem from="1729093289520" duration="1278000" />
-      <workItem from="1729253787916" duration="7011000" />
-      <workItem from="1729266190301" duration="5470000" />
-      <workItem from="1729272805388" duration="837000" />
-      <workItem from="1729309191088" duration="16920000" />
-      <workItem from="1729358078816" duration="5004000" />
-      <workItem from="1729859837655" duration="321000" />
-      <workItem from="1729868243819" duration="835000" />
-      <workItem from="1729869541739" duration="4307000" />
-      <workItem from="1729958894726" duration="3979000" />
-      <workItem from="1730019154907" duration="7071000" />
-      <workItem from="1730261334168" duration="3971000" />
-      <workItem from="1730296463795" duration="20000" />
-      <workItem from="1730729361804" duration="14619000" />
-      <workItem from="1730866630476" duration="3022000" />
-      <workItem from="1730902193130" duration="13000" />
-      <workItem from="1730903069384" duration="6341000" />
-      <workItem from="1731062804162" duration="1053000" />
-      <workItem from="1731150657831" duration="661000" />
-      <workItem from="1731249522828" duration="3836000" />
-      <workItem from="1731401136822" duration="42000" />
-      <workItem from="1731401286653" duration="423000" />
-      <workItem from="1731401717936" duration="640000" />
-      <workItem from="1731402954787" duration="930000" />
-      <workItem from="1731403896313" duration="1175000" />
-      <workItem from="1731506749817" duration="795000" />
-      <workItem from="1731507561960" duration="17222000" />
-      <workItem from="1731657819359" duration="3726000" />
-      <workItem from="1731664060730" duration="6150000" />
-      <workItem from="1731684147065" duration="18745000" />
-      <workItem from="1731775523838" duration="397000" />
-      <workItem from="1731776645478" duration="303000" />
-      <workItem from="1731777511712" duration="5000" />
-      <workItem from="1731814011107" duration="8182000" />
-      <workItem from="1731836655842" duration="25000" />
-      <workItem from="1731836948118" duration="65000" />
-      <workItem from="1731837549582" duration="116000" />
-      <workItem from="1731837770514" duration="15000" />
-      <workItem from="1731837825282" duration="19000" />
-      <workItem from="1731838932784" duration="1838000" />
-      <workItem from="1731858165285" duration="9000" />
-      <workItem from="1731917162496" duration="847000" />
-      <workItem from="1731923523267" duration="1000" />
-      <workItem from="1731930537675" duration="3576000" />
-      <workItem from="1731939608671" duration="769000" />
-      <workItem from="1731995856934" duration="3721000" />
-      <workItem from="1732002940382" duration="3411000" />
-      <workItem from="1732007340272" duration="5962000" />
-      <workItem from="1732014837353" duration="4451000" />
-      <workItem from="1732034521648" duration="1585000" />
-      <workItem from="1732075813992" duration="4126000" />
-      <workItem from="1732090457689" duration="8881000" />
+      <updated>1732753030167</updated>
     </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
 </project>

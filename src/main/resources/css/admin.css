@@ -1,0 +1,24 @@
+.profile-layout{
+    -fx-background-color: #EBC95E;
+    -fx-background-radius: 0 0 50 50;
+}
+.button_edit{
+    -fx-background-color: #EBC95E;
+    -fx-background-radius: 50;
+}
+.button_edit:hover{
+    -fx-background-color: #16a34c;
+    -fx-background-radius: 50;
+}
+.white_background{
+    -fx-background-color: #fff;
+}
+.transparent{
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+.most-contacted-layout{
+    -fx-background-radius: 0 50 50 50;
+}
+.light-gray-background{
+    -fx-background-color: #F3F3F3;
+}

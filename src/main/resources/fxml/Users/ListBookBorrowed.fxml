@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="656.0" prefWidth="948.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Users.UserReturnBook">
+    <children>
+        <AnchorPane layoutX="131.0" layoutY="31.0" prefHeight="750.0" prefWidth="1101.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0">
+            <children>
+                <VBox prefHeight="750.0" prefWidth="1101.0" styleClass="white_background" stylesheets="@../../css/admin.css">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="143.0" prefWidth="1101.0" styleClass="nav-form1" stylesheets="@../../css/Member.css">
+                            <children>
+                                <Pane prefHeight="151.0" prefWidth="1101.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <Label layoutX="174.0" layoutY="14.0" prefHeight="42.0" prefWidth="266.0" text="List of borrowed books." textFill="#2bb341">
+                                            <font>
+                                                <Font name="Corbel Bold" size="24.0" />
+                                            </font>
+                                        </Label>
+                                        <Button fx:id="Back_btn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#DownloadPages" prefHeight="42.0" prefWidth="79.0" styleClass="logout-btn" stylesheets="@../../css/DashBoard.css">
+                                            <graphic>
+                                                <FontAwesomeIconView glyphName="SHARE" size="30" />
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="minus_btn" layoutX="1015.0" layoutY="-1.0" mnemonicParsing="false" onAction="#minimize" styleClass="minimize-btn" stylesheets="@../../css/DashBoard.css">
+                                            <graphic>
+                                                <FontAwesomeIconView glyphName="MINUS" size="30" text="" />
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="close_btn" layoutX="1055.0" mnemonicParsing="false" onAction="#exit" styleClass="close-btn" stylesheets="@../../css/DashBoard.css">
+                                            <graphic>
+                                                <FontAwesomeIconView glyphName="CLOSE" size="30" />
+                                            </graphic>
+                                        </Button>
+                                        <ComboBox fx:id="filterComboBox" layoutX="708.0" layoutY="75.0" prefHeight="44.0" prefWidth="149.0" promptText="Select Status" />
+                                    </children>
+                                </Pane>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="605.0" prefWidth="1101.0">
+                            <children>
+                                <ScrollPane prefHeight="605.0" prefWidth="883.0" styleClass="transparent" stylesheets="@../../css/admin.css">
+                                    <content>
+                                        <TableView fx:id="borrowerTable" prefHeight="589.0" prefWidth="901.0">
+                                            <columns>
+                                                <TableColumn fx:id="idColumn" prefWidth="72.0" text="ID BOOK" />
+                                                <TableColumn fx:id="titleColumn" prefWidth="243.33334350585938" text="Title Book" />
+                                                <TableColumn fx:id="BorrowerColumn" minWidth="0.0" prefWidth="166.0" text="BorrowerID" />
+                                                <TableColumn fx:id="fromColumn" prefWidth="138.0" text="Borrow From" />
+                                                <TableColumn fx:id="toColumn" prefWidth="120.0" text="Borrow To" />
+                                                <TableColumn fx:id="statusColumn" prefWidth="141.0" text="Status" />
+                                            </columns>
+                                        </TableView>
+                                    </content>
+                                </ScrollPane>
+                                <AnchorPane prefHeight="605.0" prefWidth="217.0">
+                                    <children>
+                                        <AnchorPane layoutX="7.0" layoutY="73.0" prefHeight="246.0" prefWidth="200.0" styleClass="image-card" stylesheets="@../../css/DashBoard.css">
+                                            <children>
+                                                <ImageView fx:id="bookImageView" fitHeight="246.0" fitWidth="200.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
+                                            </children>
+                                        </AnchorPane>
+                                        <Label layoutX="73.0" layoutY="14.0" text="Image">
+                                            <font>
+                                                <Font name="System Bold" size="24.0" />
+                                            </font>
+                                        </Label>
+                                        <Button layoutX="40.0" layoutY="452.0" mnemonicParsing="false" onAction="#returnBook" prefHeight="48.0" prefWidth="56.0" styleClass="iconBookInfor" stylesheets="@../../css/Borrower.css">
+                                            <graphic>
+                                                <FontAwesomeIconView glyphName="ARROW_CIRCLE_RIGHT" size="40" text="" />
+                                            </graphic>
+                                        </Button>
+                                        <Button layoutX="128.0" layoutY="452.0" mnemonicParsing="false" onAction="#renewBook" styleClass="iconBookInfor" stylesheets="@../../css/Borrower.css">
+                                            <graphic>
+                                                <FontAwesomeIconView glyphName="EYE" size="40" />
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="signOut_btn" layoutX="96.0" layoutY="553.0" mnemonicParsing="false" onAction="#DownloadPages" styleClass="logout-btn" stylesheets="@../../css/DashBoard.css">
+                                            <graphic>
+                                                <FontAwesomeIconView glyphName="SIGN_OUT" size="30" />
+                                            </graphic>
+                                        </Button>
+                              <Label layoutX="136.0" layoutY="512.0" text="EXTEND" />
+                              <Label layoutX="46.0" layoutY="512.0" text="RETURN" />
+                              <Label fx:id="borrowerLabel" layoutX="140.0" layoutY="375.0" prefHeight="48.0" prefWidth="56.0" text="...">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="borrowerLabel1" layoutX="20.0" layoutY="375.0" prefHeight="48.0" prefWidth="96.0" text="Borrow ID:">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

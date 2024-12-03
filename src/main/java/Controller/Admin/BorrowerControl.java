@@ -1,0 +1,460 @@
+package Controller.Admin;
+
+import Controller.BaseDashBoardControl;
+import DataAccessObject.BookDAO;
+import DataAccessObject.BorrowerDAO;
+import DataAccessObject.UserDAO;
+import Entity.Book;
+import Entity.Borrower;
+import Entity.User;
+
+import Singleton.Session;
+import Tools.DateStringFormatter;
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Optional;
+
+import static Tools.AlertHelper.showAlert;
+import static Tools.AlertHelper.showConfirmationAlert;
+import static Animation.ColorTransitionExample.addColorTransition;
+
+/**
+ * BorrowerControl is a JavaFX controller class responsible for managing
+ * borrower-related actions in the library management system.
+ * It provides functionality to borrow, return, and renew books, as well as manage borrower data.
+ * <p>
+ * This controller interacts with the user interface components defined in the FXML file
+ * and uses DAO classes for database operations.
+ * </p>
+ */
+public class BorrowerControl extends BaseDashBoardControl {
+
+    @FXML
+    private TextField borrowerIDField, bookIDField, findBorrowerField, borrowID;
+    @FXML
+    private DatePicker toDatePicker;
+    @FXML
+    private TableView<Borrower> borrowerTable;
+    @FXML
+    private TableColumn<Borrower, Integer> idColumn, bookNameColumn;
+    @FXML
+    private TableColumn<Borrower, String> usernameColumn, statusColumn, fromColumn, toColumn;
+    @FXML
+    private TableColumn<Borrower, Integer> bookIdColumn;
+    @FXML
+    private ImageView bookImageView;
+    @FXML
+    private Button arrow_btn;
+    @FXML
+    private Button bars_btn;
+    @FXML
+    private Button bookAll_btn;
+    @FXML
+    private Button dashBoard_btn;
+    @FXML
+    private Button minus_btn;
+    @FXML
+    private Button close_btn;
+    @FXML
+    private AnchorPane nav_from;
+    @FXML
+    private Button searchAPI_btn;
+    @FXML
+    private Button signOut_btn;
+    @FXML
+    private Button userAll_btn;
+    @FXML
+    private Circle circleProfile;
+    @FXML
+    private ComboBox<String> filterComboBox;
+    @FXML
+    private AnchorPane borrower_from_animation;
+
+    private final int DATE_EXTEND = 7;
+    private final ObservableList<Borrower> borrowerList = FXCollections.observableArrayList();
+    private final BorrowerDAO borrowerDAO = new BorrowerDAO();
+    private final DateStringFormatter dateFormatter = new DateStringFormatter("yyyy-MM-dd");
+    private FilteredList<Borrower> filteredList;
+
+    /**
+     * Initializes the BorrowerControl class, sets up UI components, and loads data from the database.
+     */
+    @FXML
+    public void initialize() {
+        nav_from.setTranslateX(-320);
+        bars_btn.setVisible(true);
+        arrow_btn.setVisible(false);
+
+        setUpTableColumn();
+        setUpFilter();
+        markOverdueBorrowers();
+        setUpBookSelectionListener();
+        addColorTransition(borrower_from_animation);
+        loadBorrowers();
+    }
+
+    /**
+     * Loads borrower data from the database and updates the table view.
+     */
+    @FXML
+    private void loadBorrowers() {
+        borrowerList.setAll(borrowerDAO.getAllBorrowers());
+        filteredList = new FilteredList<>(borrowerList, p -> true); // Cập nhật danh sách đã lọc
+        borrowerTable.setItems(filteredList);
+    }
+
+    /**
+     * Sets up table columns to display borrower properties.
+     * Maps data fields to their respective table columns and applies custom styling.
+     */
+    private void setUpTableColumn() {
+        // Set up table columns with PropertyValueFactory to map fields to columns
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        bookIdColumn.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+        bookNameColumn.setCellValueFactory(new PropertyValueFactory<>("bookName"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        fromColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_from"));
+        toColumn.setCellValueFactory(new PropertyValueFactory<>("borrow_to"));
+
+        Image image = new Image(getClass().getResource("/image/profile.png").toExternalForm());
+        circleProfile.setFill(new ImagePattern(image));
+
+        // Set custom styling for the status column based on the status value
+        statusColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String status, boolean empty) {
+                super.updateItem(status, empty);
+                if (empty || status == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(status);
+                    setStyle("-fx-background-color: " +
+                            ("overdue".equals(status) ? "red" :
+                                    "processing".equals(status) ? "yellow" : "green"));
+                }
+            }
+        });
+    }
+
+    /**
+     * Handles the process of borrowing a book, validates input, and updates the database.
+     */
+    @FXML
+    private void borrowBook() {
+        String borrowerId = borrowerIDField.getText();
+        String bookId = bookIDField.getText();
+        LocalDate borrowToDate = toDatePicker.getValue();
+
+        // Validate input fields
+        if (borrowerId.isEmpty() || bookId.isEmpty() || borrowToDate == null) {
+            showAlert(Alert.AlertType.ERROR, "Borrow Book", "Please enter both user's ID, Book's ID and return Day.");
+            return;
+        }
+
+        // Ensure the return date is after today
+        LocalDate today = LocalDate.now();
+        if (!borrowToDate.isAfter(today)) {
+            showAlert(Alert.AlertType.ERROR, "Borrow Book", "Return date must be after today.");
+            return;
+        }
+
+        // Confirm borrowing action
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Borrow", "Do you want to borrow this book?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                BookDAO bookDAO = new BookDAO();
+                UserDAO userDAO = new UserDAO();
+
+                Book borrowBook = bookDAO.getBookByID(Integer.parseInt(bookId));
+                User borrower = userDAO.findUserById(Integer.parseInt(borrowerId));
+
+                if (borrower == null || borrowBook == null) {
+                    showAlert(Alert.AlertType.ERROR, "Borrow Book", borrower == null ? "User not found." : "Book not found.");
+                    return;
+                }
+
+                if (borrowerDAO.checkBookExists(borrowBook.getBookID())) {
+                    showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book is already borrowed.");
+                    return;
+                }
+
+                if (borrowerDAO.checkLimitStmt(borrower.getUserName())) {
+                    showAlert(Alert.AlertType.ERROR, "Borrow Book", "User has reached the borrowing limit.");
+                    return;
+                }
+
+                borrowerDAO.insertBorrower(Integer.parseInt(borrowerId), Integer.parseInt(bookId), borrowBook.getName(),
+                        dateFormatter.formatDate(today), dateFormatter.formatDate(borrowToDate));
+                loadBorrowers();
+                showAlert(Alert.AlertType.INFORMATION, "Borrow Book", "Book borrowed successfully.");
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "An error occurred: " + e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Handles the process of returning a book and updates the database.
+     */
+    @FXML
+    private void returnBook() {
+        String borrowerId = borrowID.getText();
+
+        if (borrowerId.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Return Book", "Please enter Borrower ID.");
+            return;
+        }
+
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Return", "Are you sure you want to return this book?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Update borrower's status to "returned"
+            Borrower borrower = borrowerDAO.getBorrowerById(Integer.parseInt(borrowerId));
+            if (borrower == null) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Borrower not found.");
+                return;
+            }
+
+            if ("returned".equalsIgnoreCase(borrower.getStatus())) {
+                showAlert(Alert.AlertType.INFORMATION, "Return Book", "This book has already been returned.");
+                return;
+            }
+
+            borrower.setStatus("returned");
+            borrowerDAO.updateBorrower(borrower);
+            loadBorrowers();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Book returned successfully.");
+        }
+    }
+
+    /**
+     * Handles the process of renewing a borrowed book, extending the due date.
+     */
+    @FXML
+    private void renewBook() {
+        String borrowerId = borrowID.getText();
+        int additionalDays = DATE_EXTEND;
+
+        if (borrowerId.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Renew Book", "Please enter Borrower ID.");
+            return;
+        }
+
+        Optional<ButtonType> result = showConfirmationAlert("Confirm Renewal", "Are you sure you want to renew this book?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Borrower borrower = borrowerDAO.getBorrowerById(Integer.parseInt(borrowerId));
+
+            if (borrower == null || !"processing".equalsIgnoreCase(borrower.getStatus())) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Borrower record not found or book not eligible for renewal.");
+                return;
+            }
+
+            try {
+                LocalDate currentDueDate = dateFormatter.parseDate(borrower.getBorrow_to());
+                LocalDate newDueDate = currentDueDate.plusDays(additionalDays);
+                borrower.setBorrow_to(dateFormatter.formatDate(newDueDate));
+                borrowerDAO.updateBorrower(borrower);
+                loadBorrowers();
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Book renewed successfully.");
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Unable to renew book: " + e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Searches for borrowers by username and updates the table view with the results.
+     */
+    @FXML
+    private void searchBorrowerByUserName() {
+        String borrowerName = findBorrowerField.getText().trim();
+
+        if (borrowerName.isEmpty()) {
+            loadBorrowers();
+            return;
+        }
+
+        try {
+            if (borrowerDAO == null) {
+                showAlert(Alert.AlertType.ERROR, "System Error", "The borrower data access object is not initialized.");
+                return;
+            }
+
+            ArrayList<Borrower> borrower = borrowerDAO.getBorrowerByUsername(borrowerName);
+            if (borrower != null && !borrower.isEmpty()) {
+                ObservableList<Borrower> foundBorrowers = FXCollections.observableArrayList(borrower);
+                filteredList = new FilteredList<>(foundBorrowers, p -> true); // Cập nhật danh sách đã lọc
+                borrowerTable.setItems(filteredList); // Đặt lại bảng
+            } else {
+                showAlert(Alert.AlertType.INFORMATION, "Search Borrower", "No borrower found with the provided ID.");
+            }
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please enter a valid numeric ID.");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "An unexpected error occurred: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Marks borrowers with overdue books and updates their status in the database.
+     */
+    @FXML
+    private void markOverdueBorrowers() {
+        try {
+            for (Borrower borrower : borrowerList) {
+                LocalDate dueDate = dateFormatter.parseDate(borrower.getBorrow_to());
+                if (dueDate != null && !dueDate.isAfter(LocalDate.now()) && borrower.getStatus().equals("processing")) {
+                    borrower.setStatus("overdue");
+                    borrowerDAO.updateBorrower(borrower);
+                }
+            }
+            loadBorrowers();
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to mark overdue borrowers: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Sets up a listener to update the book image when a borrower is selected in the table view.
+     */
+    private void setUpBookSelectionListener() {
+        // Set up a listener to change the book image when a borrower is selected
+        borrowerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection == null) {
+                bookImageView.setImage(new Image(getClass().getResource("/image/defaultBook.png").toExternalForm()));
+                return;
+            }
+            borrowID.setText(String.valueOf(newSelection.getId()));
+            borrowerIDField.setText(String.valueOf(newSelection.getUser_id()));
+            bookIDField.setText(String.valueOf(newSelection.getBookId()));
+            // Retrieve the selected book and set the image
+            int bookId = newSelection.getBookId();
+            BookDAO bookDAO = new BookDAO();
+            Book borrowBook = bookDAO.getBookByID(bookId);
+
+            if (borrowBook == null) {
+                showAlert(Alert.AlertType.ERROR, "Borrow Book", "Book not found.");
+                return;
+            }
+            String imageLink = borrowBook.getImage();
+            Image image = (imageLink != null && !imageLink.isEmpty())
+                    ? new Image(imageLink)
+                    : new Image(getClass().getResource("/image/defaultBook.png").toExternalForm());
+            bookImageView.setImage(image);
+        });
+    }
+
+    /**
+     * Sets up a filter for borrowers based on their status.
+     * Updates the table view dynamically based on the selected filter.
+     */
+    @FXML
+    private void setUpFilter() {
+        // Set up the filter combo box with statuses
+        filterComboBox.getItems().addAll("All", "Processing", "Returned", "Overdue");
+        filterComboBox.setValue("All");
+
+        // Initialize FilteredList based on borrowerList
+        filteredList = new FilteredList<>(borrowerList, p -> true);
+
+        // Listen for value changes in ComboBox to update filter
+        filterComboBox.valueProperty().addListener((obs, oldValue, newValue) -> {
+            if ("All".equals(newValue)) {
+                filteredList.setPredicate(p -> true);
+            } else {
+                filteredList.setPredicate(borrower -> newValue.equalsIgnoreCase(borrower.getStatus()));
+            }
+        });
+        borrowerTable.setItems(filteredList);
+    }
+
+    /**
+     * Handles navigation between different pages in the application.
+     *
+     * @param event The triggered ActionEvent.
+     */
+    @FXML
+    public void DownloadPages(ActionEvent event) {
+        try {
+            if (event.getSource() == signOut_btn) {
+                Optional<ButtonType> result = showConfirmationAlert("Confirm Exit", "Are you sure you want to exit?");
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    applySceneTransition(signOut_btn, "/fxml/LoginForm.fxml");
+                }
+            } else if (event.getSource() == searchAPI_btn) {
+                applySceneTransition(searchAPI_btn, "/fxml/Admin/SearchView.fxml");
+            } else if (event.getSource() == dashBoard_btn) {
+                applySceneTransition(dashBoard_btn, "/fxml/Admin/DashBoardView.fxml");
+            } else if (event.getSource() == bookAll_btn) {
+                applySceneTransition(bookAll_btn, "/fxml/Admin/BookView.fxml");
+            } else if (event.getSource() == userAll_btn) {
+                applySceneTransition(userAll_btn, "/fxml/Admin/UserView.fxml");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Exits the application with a fade-out animation.
+     */
+    public void exit() {
+        Stage primaryStage = (Stage) close_btn.getScene().getWindow();
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), primaryStage.getScene().getRoot());
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.setOnFinished(event -> Platform.exit());
+        fadeOut.play();
+    }
+
+    /**
+     * Minimizes the current application window.
+     */
+    public void minimize() {
+        Stage stage = (Stage) minus_btn.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    /**
+     * Animates and hides the navigation bar.
+     */
+    public void sliderArrow() {
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), nav_from);
+        slide.setToX(-320);
+        slide.setOnFinished(event -> {
+            bars_btn.setVisible(true);
+            arrow_btn.setVisible(false);
+        });
+        slide.play();
+    }
+
+    public void sliderBars() {
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.5), nav_from);
+        slide.setToX(0);
+        slide.setOnFinished(event -> {
+            arrow_btn.setVisible(true);
+            bars_btn.setVisible(false);
+        });
+        slide.play();
+    }
+}

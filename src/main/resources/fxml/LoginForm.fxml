@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" styleClass="login-from" stylesheets="@../css/LoginDesign.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginControl">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="750.0" styleClass="login-from" stylesheets="@../css/LoginDesign.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginControl">
    <children>
-      <AnchorPane fx:id="login_form" layoutX="106.0" layoutY="71.0" prefHeight="433.0" prefWidth="527.0" styleClass="card-from" stylesheets="@../css/LoginDesign.css">
+      <AnchorPane fx:id="login_form" layoutX="106.0" layoutY="71.0" prefHeight="446.0" prefWidth="527.0" styleClass="card-from" stylesheets="@../css/LoginDesign.css">
          <children>
             <Label layoutX="232.0" layoutY="104.0" prefHeight="36.0" prefWidth="72.0" text="Login" textFill="WHITE">
                <font>
@@ -67,11 +67,11 @@
             <Image url="@../image/logo1.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="signup_form" layoutX="106.0" layoutY="71.0" prefHeight="433.0" prefWidth="527.0" styleClass="card-from" stylesheets="@../css/LoginDesign.css" visible="false">
+      <AnchorPane fx:id="signup_form" layoutX="106.0" layoutY="69.0" prefHeight="446.0" prefWidth="527.0" styleClass="card-from" stylesheets="@../css/LoginDesign.css" visible="false">
          <children>
             <TextField fx:id="signup_username" layoutX="141.0" layoutY="90.0" prefHeight="35.0" prefWidth="253.0" promptText="Username" styleClass="textField" stylesheets="@../css/LoginDesign.css" />
             <PasswordField fx:id="signup_password" layoutX="141.0" layoutY="134.0" prefHeight="35.0" prefWidth="253.0" promptText="Password" styleClass="textField" />
-            <Button fx:id="signup_btn" layoutX="220.0" layoutY="273.0" mnemonicParsing="false" onAction="#register" prefHeight="47.0" prefWidth="87.0" styleClass="login-btn" stylesheets="@../css/LoginDesign.css" text="Sign Up" textFill="#100202">
+            <Button fx:id="signup_btn" layoutX="216.0" layoutY="279.0" mnemonicParsing="false" onAction="#register" prefHeight="47.0" prefWidth="87.0" styleClass="login-btn" stylesheets="@../css/LoginDesign.css" text="Sign Up" textFill="#100202">
                <font>
                   <Font size="14.0" />
                </font>
@@ -79,7 +79,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TextField fx:id="login_showPassword1" layoutX="141.0" layoutY="197.0" prefHeight="35.0" prefWidth="253.0" promptText="Password" styleClass="textField" stylesheets="@../css/LoginDesign.css" visible="false" />
+            <TextField fx:id="login_showPassword1" layoutX="141.0" layoutY="185.0" prefHeight="47.0" prefWidth="253.0" promptText="Password" styleClass="textField" stylesheets="@../css/LoginDesign.css" visible="false" />
             <Label layoutX="193.0" layoutY="33.0" prefHeight="36.0" prefWidth="142.0" text="Sign Up Account" textFill="#187778">
                <font>
                   <Font name="Gill Sans MT" size="20.0" />
@@ -87,8 +87,8 @@
             </Label>
             <PasswordField fx:id="signup_cPassword" layoutX="141.0" layoutY="180.0" prefHeight="35.0" prefWidth="253.0" promptText="Confirm Password" styleClass="textField" />
             <ComboBox fx:id="signup_selectQuestion" layoutX="141.0" layoutY="232.0" prefHeight="30.0" prefWidth="237.0" promptText="Select Role" />
-            <Button fx:id="signup_loginAccount" layoutX="200.0" layoutY="389.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="36.0" prefWidth="129.0" styleClass="login-btn" stylesheets="@../css/LoginDesign.css" text="Login Account" />
-            <Label layoutX="208.0" layoutY="356.0" prefHeight="30.0" prefWidth="119.0" text="Sign In Account">
+            <Button fx:id="signup_loginAccount" layoutX="203.0" layoutY="399.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="36.0" prefWidth="129.0" styleClass="login-btn" stylesheets="@../css/LoginDesign.css" text="Login Account" />
+            <Label layoutX="208.0" layoutY="369.0" prefHeight="30.0" prefWidth="119.0" text="Sign In Account">
                <font>
                   <Font name="Gill Sans MT" size="18.0" />
                </font>

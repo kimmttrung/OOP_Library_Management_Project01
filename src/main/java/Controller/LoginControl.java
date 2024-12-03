@@ -1,6 +1,8 @@
 package Controller;
 
-import animatefx.animation.*;
+import DataAccessObject.UserDAO;
+import Entity.User;
+import Singleton.Session;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -19,11 +21,17 @@ import Database.DataBase;
 import javafx.util.Duration;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Controller.AlertHelper.*;
+import static Tools.AlertHelper.showAlert;
 
+/**
+ * Controller for handling the login and registration functionality.
+ * Provides methods to authenticate users, switch between login and registration forms,
+ * and manage user roles (Admin/User).
+ */
 public class LoginControl {
 
     @FXML
@@ -42,79 +50,68 @@ public class LoginControl {
     private Button login_createAccount, signup_loginAccount;
     @FXML
     private AnchorPane login_form, signup_form;
-
     @FXML
     private Button minimizeBtn;
     @FXML
     private Button exitBtn;
 
-    private double x = 0;
-    private double y = 0;
+    private final String[] questionList = {"Admin", "User"};
 
-    private String[] questionList = {"Admin", "User"};
-
-    private Connection connect;
+    private final Connection connect = DataBase.getInstance().getConnection();
     private PreparedStatement pst;
-    private Statement statement;
     private ResultSet resultSet;
 
+    /**
+     * Initializes the controller.
+     * Populates the security questions in the registration form.
+     */
     public void initialize() {
-        questions();  // Gọi phương thức để nạp câu hỏi vào ComboBox
+        questions();
     }
 
+    /**
+     * Handles login functionality.
+     * Verifies the username and password, and redirects users to the appropriate dashboard based on their role.
+     */
     @FXML
     private void login() {
-        String sql = "SELECT * FROM accounts WHERE username = ? AND password= ?";
+        String username = login_username.getText();
+        String password = login_password.getText();
+
+        if (!isValidUsername(username)) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Username cannot be empty and must be valid.");
+            return;
+        }
+
+        String sqlAccounts = "SELECT role FROM accounts WHERE username = ? AND password = ?";
+        String sqlUsers = "SELECT id, phoneNumber, registrationDate FROM users WHERE username = ? AND password = ?";
 
         try {
-            connect = DataBase.getConnection();
-            pst = connect.prepareStatement(sql);
-            pst.setString(1, login_username.getText());
-            pst.setString(2, login_password.getText());
+            // Check accounts table
+            pst = connect.prepareStatement(sqlAccounts);
+            pst.setString(1, username);
+            pst.setString(2, password);
             resultSet = pst.executeQuery();
 
-            if (login_username.getText().isEmpty() || login_password.getText().isEmpty()) {
-
-                if (login_selectShowPassword.isSelected()) {
-                    login_password.setText(login_showPassword.getText());
+            if (resultSet.next()) {
+                String role = resultSet.getString("role");
+                if ("Admin".equalsIgnoreCase(role)) {
+                    openDashboard("/fxml/Admin/DashBoardView.fxml");
                 } else {
-                    login_showPassword.setText(login_password.getText());
+                    showAlert(Alert.AlertType.ERROR, "Error", "Unknown role");
                 }
-                showAlert(Alert.AlertType.ERROR, "Error", "Please enter all the fields");
             } else {
+                // Check users table
+                pst = connect.prepareStatement(sqlUsers);
+                pst.setString(1, username);
+                pst.setString(2, password);
+                resultSet = pst.executeQuery();
+
                 if (resultSet.next()) {
-                    Parent rootNode = (Parent) login_Btn.getScene().getRoot();
-                    ZoomOut zoomOut = new ZoomOut (rootNode);
-                    zoomOut.setOnFinished(event -> {
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DashBoardView.fxml"));
-                            Parent root = loader.load();
-
-                            Stage stage = new Stage();
-                            Scene scene = new Scene(root);
-
-                            root.setOnMousePressed(e -> {
-                                x = e.getSceneX();
-                                y = e.getSceneY();
-                            });
-                            root.setOnMouseDragged(e -> {
-                                stage.setX(e.getScreenX() - x);
-                                stage.setY(e.getScreenY() - y);
-                            });
-
-                            stage.initStyle(StageStyle.TRANSPARENT);
-                            stage.setScene(scene);
-
-                            new ZoomIn (root).play();
-
-                            stage.show();
-                            ((Stage) login_Btn.getScene().getWindow()).close();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    });
-                    zoomOut.play();
-
+                    String id = resultSet.getString("id");
+                    Session.getInstance().setUserID(Integer.parseInt(id));
+                    showAlert(Alert.AlertType.INFORMATION, "Welcome", "Login successful!\nID: " + id);
+                    openDashboard("/fxml/Users/DashBoardUser.fxml");
                 } else {
                     showAlert(Alert.AlertType.ERROR, "Error", "Username or Password is Incorrect");
                 }
@@ -125,59 +122,118 @@ public class LoginControl {
             try {
                 if (resultSet != null) resultSet.close();
                 if (pst != null) pst.close();
-                if (connect != null) connect.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
+    /**
+     * Handles user registration.
+     * Validates inputs and inserts user data into the appropriate table based on their role.
+     */
     @FXML
     private void register() {
-
         if (signup_username.getText().isEmpty()
                 || signup_password.getText().isEmpty() || signup_cPassword.getText().isEmpty()
                 || signup_selectQuestion.getSelectionModel().getSelectedItem() == null) {
             showAlert(Alert.AlertType.ERROR, "Error", "Please enter all the fields");
         } else if (!signup_password.getText().equals(signup_cPassword.getText())) {
             showAlert(Alert.AlertType.ERROR, "Error", "Passwords do not match");
-        } else if (signup_password.getText().length() < 4) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Passwords must be at least 4 characters");
+        } else if (!isValidPassword(signup_password.getText())) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Password must meet the required complexity.");
         } else {
-            String checkUsername = "SELECT * FROM accounts WHERE username = ?";
-            connect = DataBase.getConnection();
-            try {
-                pst = connect.prepareStatement(checkUsername);
-                pst.setString(1, signup_username.getText());
-                resultSet = pst.executeQuery();
-
-                if (resultSet.next()) {
-                    showAlert(Alert.AlertType.ERROR, "Error", signup_username.getText() + " is already taken");
-                } else {
-
-                    String insertData = "INSERT INTO accounts "
-                            + "(username, password, role) "
-                            + "VALUES(?,?,?)";
-
-                    pst = connect.prepareStatement(insertData);
-                    pst.setString(1, signup_username.getText());
-                    pst.setString(2, signup_password.getText());
-                    pst.setString(3, (String) signup_selectQuestion.getSelectionModel().getSelectedItem());
-
-                    int affectedRows = pst.executeUpdate();
-                    if (affectedRows > 0) {
-                        showAlert(Alert.AlertType.INFORMATION, "Info", "Account registered successfully");
-                    }
-
-                    registerClearFields();
-
-                    signup_form.setVisible(false);
-                    login_form.setVisible(true);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            String role = String.valueOf(signup_selectQuestion.getSelectionModel().getSelectedItem());
+            if (role.equals("Admin")) {
+                registerAdmin();
+            } else if (role.equals("User")) {
+                registerUser();
             }
         }
+    }
+
+    private void registerAdmin() {
+        String checkUsername = "SELECT * FROM accounts WHERE username = ?";
+        try {
+            pst = connect.prepareStatement(checkUsername);
+            pst.setString(1, signup_username.getText());
+            resultSet = pst.executeQuery();
+
+            if (resultSet.next()) {
+                showAlert(Alert.AlertType.ERROR, "Error", signup_username.getText() + " is already taken");
+            } else {
+                String insertData = "INSERT INTO accounts (username, password, role) VALUES(?,?,?)";
+                pst = connect.prepareStatement(insertData);
+                pst.setString(1, signup_username.getText());
+                pst.setString(2, signup_password.getText());
+                pst.setString(3, "Admin");
+
+                if (pst.executeUpdate() > 0) {
+                    showAlert(Alert.AlertType.INFORMATION, "Info", "Account registered successfully");
+                }
+
+                registerClearFields();
+                switchToLoginForm();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void registerUser() {
+        User user = new User(signup_username.getText(), signup_password.getText(), "Updating!!!", LocalDate.now().toString());
+        UserDAO userDAO = new UserDAO();
+        userDAO.addUser(user);
+        showAlert(Alert.AlertType.INFORMATION, "Info", "Account registered successfully");
+        registerClearFields();
+        switchToLoginForm();
+    }
+
+    private void switchToLoginForm() {
+        signup_form.setVisible(false);
+        login_form.setVisible(true);
+    }
+
+    /**
+     * Opens a new dashboard based on the specified FXML path.
+     *
+     * @param fxmlPath the FXML file path of the dashboard to load
+     */
+    private void openDashboard(String fxmlPath) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+
+            ((Stage) login_Btn.getScene().getWindow()).close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Validates the username.
+     *
+     * @param username the username to validate
+     * @return true if valid, false otherwise
+     */
+    private boolean isValidUsername(String username) {
+        return username != null && !username.trim().isEmpty();
+    }
+
+    /**
+     * Validates the password.
+     *
+     * @param password the password to validate
+     * @return true if valid, false otherwise
+     */
+    private boolean isValidPassword(String password) {
+        String passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
+        return password != null && password.matches(passwordRegex);
     }
 
     @FXML
@@ -192,6 +248,9 @@ public class LoginControl {
         login_showPassword.textProperty().bindBidirectional(login_password.textProperty());
     }
 
+    /**
+     * Clears the fields in the registration form.
+     */
     private void registerClearFields() {
         signup_username.setText("");
         signup_password.setText("");
@@ -201,25 +260,23 @@ public class LoginControl {
 
     @FXML
     private void switchForm(ActionEvent event) {
-
         if (event.getSource() == signup_loginAccount) {
             signup_form.setVisible(false);
             login_form.setVisible(true);
-            //forgot_form.setVisible(false);
-        } else if (event.getSource() == login_createAccount) { // THE LOGIN FORM WILL BE VISIBLE
+        } else if (event.getSource() == login_createAccount) {
             signup_form.setVisible(true);
             login_form.setVisible(false);
-            //forgot_form.setVisible(false);
         }
     }
 
+    /**
+     * Populates the ComboBox with predefined questions/roles.
+     */
     private void questions() {
         List<String> listQ = new ArrayList<>();
-
         for (String data : questionList) {
             listQ.add(data);
         }
-
         ObservableList listData = FXCollections.observableArrayList(listQ);
         signup_selectQuestion.setItems(listData);
     }
@@ -230,6 +287,9 @@ public class LoginControl {
         stage.setIconified(true);
     }
 
+    /**
+     * Exits the application with a fade and scale transition effect.
+     */
     public void exit() {
         Stage primaryStage = (Stage) exitBtn.getScene().getWindow();
 
