@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="56b3534e-f732-453e-9b71-afa9780db11d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Admin/BorrowerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Admin/BorrowerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/management/libarymanagement/LibraryManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlite/library.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/DataAccessObject/BookDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DataAccessObject/BookDAOTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,22 +40,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.LibraryManagement.executor": "Run",
-    "JUnit.BookDAOTest.executor": "Run",
-    "JUnit.BookTest.executor": "Run",
-    "JUnit.BorrowerDAOTest.executor": "Run",
-    "JUnit.BorrowerTest.executor": "Run",
-    "JUnit.UserDAOTest.executor": "Run",
-    "JUnit.UserTest.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "MaiTrung",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/ChatApplication/OOP_Library_Management_Project01/src/main/resources/sqlite",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.LibraryManagement.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BorrowerDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BorrowerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserTest.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;MaiTrung&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ChatApplication/OOP_Library_Management_Project01/src/main/resources/sqlite&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ChatApplication\OOP_Library_Management_Project01\src\main\resources\sqlite" />

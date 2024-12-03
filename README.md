@@ -23,9 +23,67 @@ This is a **Library Management System** developed in **JavaFX**, designed to str
 
 - **SQLite Database**:
   - An embedded **SQLite** database for storing information about documents, members, and transactions, making it lightweight and easy to distribute.
+## Login
+![Library Books Page](imageReadme/login.png)
+## Admin Section
+![Library Books Page](imageReadme/admin.png)
+- Library Books Page:
+
+  - Displays the list of books available in the library.
+  - Includes options to add, edit, or delete books and a search bar for quick lookups.
+Image Suggestion: A table with book details like title, author, and action buttons (edit/delete).
+  ![Library Books Page](imageReadme/book.png)
+
+- Library Members Page:
+
+  - Shows the list of library members with options to manage their profiles.
+  - Includes fields for name, contact info, and borrowing history.
+Image Suggestion: A table of member details with buttons for adding or managing members.
+
+![Library Members Page](imageReadme/userManagent.png)
+- Borrowing and Returning Management:
+
+  - Displays a dashboard for tracking ongoing borrow transactions and overdue returns.
+  - Includes fine calculation and transaction status updates.
+Image Suggestion: A transaction table showing member names, book titles, due dates, and actions (return/update).
+
+![Borrowing and Returning Management](imageReadme/BorrowAdmin.png)
+- Search Books via API:
+
+  - Allows fetching book details from the Google Books API by entering an ISBN or title.
+  - Image Suggestion: A form with input fields for ISBN/title and an auto-filled preview of book data retrieved.
+
+![Search Books via API](imageReadme/Screenshot%202024-12-03%20143257.png)
+
+## User Section
+- User Return Books Page:
+
+  - Lists available books for borrowing with filters (e.g., by genre, author, availability).
+  - Allows users to select and request to borrow a book.
+Image Suggestion: A grid layout of book covers with titles and "Borrow" buttons.
+
+![User Return Books Page](imageReadme/returnBorrowe.png)
+- User Borrow Books Page:
+
+- Displays the books currently available for borrowing by the user.
+- Includes options to search for books, filter by genre or author, and initiate a borrowing request.
+- Shows details like the book title, author, and availability.
+
+![User Return Books Page](imageReadme/Screenshot%202024-12-03%20143350.png)
+Book Comment Page:
+
+Allows users to write and view comments or reviews for books.
+Image Suggestion: A book detail page with a section for user reviews and a text box for adding comments.
+
+![Book Comment Page](imageReadme/Screenshot%202024-12-03%20143404.png)
+User Home Page:
+
+Displays a personalized homepage for users, including recommended books and quick access to borrow/return pages.
+Image Suggestion: A homepage with a banner, a list of recommended books, and navigation links.
+
+![User Home Page](imageReadme/dashBoardUser.png)
 
 ## Technologies Used
-
 - **JavaFX**: Used for building the graphical user interface (GUI).
 - **FXML**: XML-based language for defining the layout and structure of the JavaFX UI.
 - **SQLite**: A lightweight, serverless database engine used to store the system data locally.
